@@ -210,9 +210,16 @@
 		function gotoTileDestination(dest){
 			window.open(dest, '_blank');
 		}
+		
+		var alreadyOpenDialog = null;
 		function openHelpDialog(helpUrl){
 			event.stopPropagation(); 
+			
 			metroDialog.toggle(helpUrl);
+			if(alreadyOpenDialog!=null)
+				metroDialog.close(alreadyOpenDialog);
+			
+			alreadyOpenDialog = helpUrl;
 		}
 	</script>
 </head>
