@@ -242,6 +242,8 @@
 
             <div class="tile-container">
 
+			  <!-- Google Drive -->
+
                 <div class="tile bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://drive.google.com');">
 				  <div class="tile-content iconic slide-up">
 					<div class="slide-up-2">
@@ -255,6 +257,25 @@
 					</div>
 				  </div>
 				  <div data-role="dialog" id="GDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600">
+				  </div>
+			 </div>
+
+			 <!-- Coggle -->
+
+             <div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://coggle.it/');">
+				  <div class="tile-content iconic slide-up">
+					<div class="slide-up-2">
+						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#CoggleDialog');"></span>
+						<img class="tile-image icon" src="./images/pocket-code-allwhite.png"/>
+						<!--<span class="tile-image icon">S</span>-->
+						<span class="tile-label">
+						</span>
+					</div>
+					<div class="slide-over bg-ardu-pi text-small padding10">
+						Coggle
+					</div>
+				  </div>
+				  <div data-role="dialog" id="CoggleDialog" class="padding20" data-close-button="true" data-href="./about/coggle-help.html" data-width="600">
 					
 				  </div>
 			  </div>
@@ -266,6 +287,8 @@
             <span class="tile-group-title">Plan</span>
 
             <div class="tile-container">
+
+            <!-- Trello -->
             <div class="tile bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://trello.com/');">
 				  <div class="tile-content iconic slide-up">
 					<div class="slide-up-2">
