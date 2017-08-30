@@ -1,0 +1,54 @@
+.bg-ideation {
+	background-color: #8bc056;
+}
+.bg-ideation-light {
+	background-color: #8bc056;
+}
+.bg-plan {
+	background-color: #7cb841;
+}
+.bg-plan-light {
+	background-color: #7cb841;
+}
+.bg-create {
+	background-color: #6eb02c;
+}
+.bg-create-light {
+	background-color: #6eb02c;
+}
+.bg-raspberry {
+	background-color: #bc1142;
+}
+.bg-arduino {
+	background-color: #19989d;
+}
+.bg-ardu-pi {
+	background-color: #60a917;
+}
+.bg-arud-pi-light {
+	background-color: #60a917;
+}
+.bg-share {
+	background-color: #4f8b13;
+}
+.bg-projects {
+	background-color: #4298ce;
+}
+.bg-info-videos {
+	background-color: #CE352C;
+}
+.bg-info-guides {
+	background-color: #2d8dc9;
+}
+.bg-tools-messages {
+	background-color: #1982c4;
+}
+.bg-tools-messages-badge {
+	background-color: #10537d;
+}
+.bg-tools-shares {
+	background-color: #1777b3;
+}
+h2 {
+	margin-bottom: 20px;
+}
