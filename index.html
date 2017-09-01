@@ -63,10 +63,15 @@
             }
 
         }
+		
+		.dialog.dialog-minimize-button {
+			content: '_';
+		}
     </style>
 	
 	<!-- This links to the css file that we use for coloring of the tiles. The themes are stored in the "themes" folder. Change this to see other themes-->
-	<link rel="stylesheet" type="text/css" href="themes/theme-4.css" />
+	<link rel="stylesheet" type="text/css" href="themes/theme-3.css" />
+	<link rel="stylesheet" type="text/css" href="extra-btn.css" />
 	
 	
 	<script>
@@ -214,12 +219,32 @@
 			
 			alreadyOpenDialog = helpUrl;
 		}
+		
+		function closeWindow(closeBtn){
+			var winDiv = $(closeBtn).parent().closest('[data-role], .dialog');
+			metroDialog.close(winDiv);
+		}
+		function openIframeWindow(toolUrl) {
+			docWidth = $(window).width()-100;
+			docHeight = $(window).height()-100;
+			
+			$.Dialog({
+				title: "<span>TinkerCad</span><span class='btn-min'></span> <span class='btn-max'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
+				content: "<iframe src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='"+(docWidth-20)+"' height='"+(docHeight-60)+"'  />",
+				padding: 0,
+				
+				options: {	
+					modal: false,
+					closeButton: false,
+					width: docWidth,
+					height: docHeight,
+				}
+			});
+		}
 	</script>
 </head>
 
 <body>
-	
-	
 	<div class="tile-area clear-float tile-area-scheme-dark fg-white">
 <!--         <h1 class="tile-area-title"><span class="fg-green">eCraft</span><span class="fg-blue">2Learn</span></h1> -->
         <h1 class="tile-area-title"><img src="images/eCraft2Learn-icon.png"> Digital Fabrication and Maker Movement in Education</h1>
@@ -325,7 +350,8 @@
             <div class="tile-container">
 			
 				<!-- TinkerCad -->
-				<div class="tile bg-create fg-white" data-role="tile" onclick="gotoTileDestination('https://www.tinkercad.com/');">
+				<!--<div class="tile bg-create fg-white" data-role="tile" onclick="gotoTileDestination('https://www.tinkercad.com/');">-->
+				<div class="tile bg-create fg-white" data-role="tile" onclick="openIframeWindow('https://www.tinkercad.com')">
 				  <div class="tile-content iconic slide-up">
 					<div class="slide-up-2">
 						<span class="mif-question place-right margin5" onclick="openHelpDialog('#TCadDialog');"></span>
@@ -337,9 +363,16 @@
 						TinkerCad is a 3D modelling application
 					</div>
 				  </div>
-				  <div data-role="dialog" id="TCadDialog" class="padding20" data-close-button="true" data-href="./about/tinkercad-help.html" data-width="600">
-					
-				  </div>
+				  <div data-role="dialog" id="TCadDialog" class="padding20" data-close-button="true" data-href="./about/tinkercad-help.html" data-width="600"></div>
+				  <div data-role="dialog" id="winloc" data-width="1000" data-height="500"></div>
+				  <!--<div data-role="dialog" 
+						id="TCadWindow" 
+						style="padding-top:20px;" 
+						data-close-button="true" 
+						data-content='<iframe id="TCadIFrame" src="https://www.tinkercad.com" frameborder="0"  allowfullscreen></iframe>' 
+						
+						data-onshow="alert();">
+				   </div>-->
 				</div>  
 			
 				<!-- Beetle Blocks -->
