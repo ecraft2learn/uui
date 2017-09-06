@@ -19,6 +19,12 @@
 
     <link rel="icon" type="image/png" href="images/eCraft2Learn-Favicon.png" />
 	
+		
+	<!-- This links to the css file that we use for coloring of the tiles. The themes are stored in the "themes" folder. Change this to see other themes-->
+	<link rel="stylesheet" type="text/css" href="themes/theme-3.css" />
+	<link rel="stylesheet" type="text/css" href="extra-btn.css" />
+	<script src="js/window-management.js" />
+	
 	<style>
         .tile-area-controls {
             position: fixed;
@@ -38,10 +44,6 @@
 
         #charmSettings .button {
             margin: 5px;
-        }
-
-        .schemeButtons {
-            /*width: 300px;*/
         }
 
         @media screen and (max-width: 640px) {
@@ -67,54 +69,12 @@
 		.dialog.dialog-minimize-button {
 			content: '_';
 		}
+		
     </style>
 	
-	<!-- This links to the css file that we use for coloring of the tiles. The themes are stored in the "themes" folder. Change this to see other themes-->
-	<link rel="stylesheet" type="text/css" href="themes/theme-3.css" />
-	<link rel="stylesheet" type="text/css" href="extra-btn.css" />
-	
-	
 	<script>
-        (function($) {
-            $.StartScreen = function(){
-                var plugin = this;
-                var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-
-                plugin.init = function(){
-                    setTilesAreaSize();
-                    if (width > 640) addMouseWheel();
-                };
-
-                var setTilesAreaSize = function(){
-                    var groups = $(".tile-group");
-                    var tileAreaWidth = 80;
-                    $.each(groups, function(i, t){
-                        if (width <= 640) {
-                            tileAreaWidth = width;
-                        } else {
-                            tileAreaWidth += $(t).outerWidth() + 80;
-                        }
-                    });
-                    $(".tile-area").css({
-                        width: tileAreaWidth
-                    });
-                };
-
-                var addMouseWheel = function (){
-                    $("body").mousewheel(function(event, delta, deltaX, deltaY){
-                        var page = $(document);
-                        var scroll_value = delta * 50;
-                        page.scrollLeft(page.scrollLeft() - scroll_value);
-                        return false;
-                    });
-                };
-
-                plugin.init();
-            }
-        })(jQuery);
-
-        $(function(){
-            $.StartScreen();
+	$(function(){
+            //$.StartScreen();
 
             var tiles = $(".tile, .tile-small, .tile-sqaure, .tile-wide, .tile-large, .tile-big, .tile-super");
 
@@ -135,623 +95,297 @@
                 left: 0
             });
         });
-
-        function showCharms(id){
-            var  charm = $(id).data("charm");
-            if (charm.element.data("opened") === true) {
-                charm.close();
-            } else {
-                charm.open();
-            }
-        }
-
-        function setSearchPlace(el){
-            var a = $(el);
-            var text = a.text();
-            var toggle = a.parents('label').children('.dropdown-toggle');
-
-            toggle.text(text);
-        }
-
-        $(function(){
-            var current_tile_area_scheme = localStorage.getItem('tile-area-scheme') || "tile-area-scheme-dark";
-            $(".tile-area").removeClass (function (index, css) {
-                return (css.match (/(^|\s)tile-area-scheme-\S+/g) || []).join(' ');
-            }).addClass(current_tile_area_scheme);
-
-            $(".schemeButtons .button").hover(
-                    function(){
-                        var b = $(this);
-                        var scheme = "tile-area-scheme-" +  b.data('scheme');
-                        $(".tile-area").removeClass (function (index, css) {
-                            return (css.match (/(^|\s)tile-area-scheme-\S+/g) || []).join(' ');
-                        }).addClass(scheme);
-                    },
-                    function(){
-                        $(".tile-area").removeClass (function (index, css) {
-                            return (css.match (/(^|\s)tile-area-scheme-\S+/g) || []).join(' ');
-                        }).addClass(current_tile_area_scheme);
-                    }
-            );
-
-            $(".schemeButtons .button").on("click", function(){
-                var b = $(this);
-                var scheme = "tile-area-scheme-" +  b.data('scheme');
-
-                $(".tile-area").removeClass (function (index, css) {
-                    return (css.match (/(^|\s)tile-area-scheme-\S+/g) || []).join(' ');
-                }).addClass(scheme);
-
-                current_tile_area_scheme = scheme;
-                localStorage.setItem('tile-area-scheme', scheme);
-
-                showSettings();
-            });
-        });
-
-        var weather_icons = {
-            'clear-day': 'mif-sun',
-            'clear-night': 'mif-moon2',
-            'rain': 'mif-rainy',
-            'snow': 'mif-snowy3',
-            'sleet': 'mif-weather4',
-            'wind': 'mif-wind',
-            'fog': 'mif-cloudy2',
-            'cloudy': 'mif-cloudy',
-            'partly-cloudy-day': 'mif-cloudy3',
-            'partly-cloudy-night': 'mif-cloud5'
-        };
-    </script>
-	
-	<!-- My Scripts -->
-	<script>
-		function gotoTileDestination(dest){
-			window.open(dest, '_blank');
-		}
-		
-		var alreadyOpenDialog = null;
-		function openHelpDialog(helpUrl){
-			event.stopPropagation(); 
-			
-			metroDialog.toggle(helpUrl);
-			if(alreadyOpenDialog!=null)
-				metroDialog.close(alreadyOpenDialog);
-			
-			alreadyOpenDialog = helpUrl;
-		}
-		
-		function closeWindow(closeBtn){
-			var winDiv = $(closeBtn).parent().closest('[data-role], .dialog');
-			metroDialog.close(winDiv);
-		}
-		function openIframeWindow(toolUrl) {
-			docWidth = $(window).width()-100;
-			docHeight = $(window).height()-100;
-			
-			$.Dialog({
-				title: "<span>TinkerCad</span><span class='btn-min'></span> <span class='btn-max'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
-				content: "<iframe src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='"+(docWidth-20)+"' height='"+(docHeight-60)+"'  />",
-				padding: 0,
-				
-				options: {	
-					modal: false,
-					closeButton: false,
-					width: docWidth,
-					height: docHeight,
-				}
-			});
-		}
 	</script>
+	
 </head>
 
-<body>
-	<div class="tile-area clear-float tile-area-scheme-dark fg-white">
-<!--         <h1 class="tile-area-title"><span class="fg-green">eCraft</span><span class="fg-blue">2Learn</span></h1> -->
-        <h1 class="tile-area-title"><img src="images/eCraft2Learn-icon.png"> Digital Fabrication and Maker Movement in Education</h1>
-		<div class="tile-group">
-		<!-- IMAGINE -->
-		<div class="tile-group one">
-            <span class="tile-group-title">Imagine</span>
-
-            <div class="tile-container">
-
-			  <!-- Google Drive -->
-
-                <div class="tile bg-ideation fg-white" data-role="tile" onclick="gotoTileDestination('https://drive.google.com');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5" onclick="openHelpDialog('#GDriveDialog');"></span>
-						<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
-						<span class="tile-label">Google Drive
-						</span>
-					</div>
-					<div class="slide-over bg-ideation text-small padding10">
-						Google Drive drives you crazy
-					</div>
-				  </div>
-				  <div data-role="dialog" id="GDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600">
-				  </div>
-			 </div>
-
-			 <!-- Coggle -->
-
-             <div class="tile-small bg-ideation-light fg-white" data-role="tile" onclick="gotoTileDestination('https://coggle.it/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#CoggleDialog');"></span>
-						<img class="tile-image icon" src="./images/coggle-logo.png"/>
-						<!--<span class="tile-image icon">S</span>-->
-						<span class="tile-label">
-						</span>
-					</div>
-					<div class="slide-over bg-ideation-light text-small padding10">
-						Coggle
-					</div>
-				  </div>
-				  <div data-role="dialog" id="CoggleDialog" class="padding20" data-close-button="true" data-href="./about/coggle-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-
-			 <!-- Sketchboard -->
-
-             <div class="tile-small bg-ideation-light fg-white" data-role="tile" onclick="gotoTileDestination('https://sketchboard.me');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#SketchboardDialog');"></span>
-						<img class="tile-image icon" src="./images/sketch-board-logo.png"/>
-						<!--<span class="tile-image icon">S</span>-->
-						<span class="tile-label">
-						</span>
-					</div>
-					<div class="slide-over bg-ideation-light text-small padding10">
-						Sketchboard
-					</div>
-				  </div>
-				  <div data-role="dialog" id="SketchboardDialog" class="padding20" data-close-button="true" data-href="./about/sketchboard-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-
-            </div>
-        </div>
-		
-		<!-- PLAN -->
-		<div class="tile-group one">
-            <span class="tile-group-title">Plan</span>
-
-            <div class="tile-container">
-
-            <!-- Trello -->
-            <div class="tile bg-plan fg-white" data-role="tile" onclick="gotoTileDestination('https://trello.com/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5" onclick="openHelpDialog('#TrelloDialog');"></span>
-						<img class="tile-image icon" src="./images/trello-logo.png"/>
-						<span class="tile-label">Trello
-						</span>
-					</div>
-					<div class="slide-over bg-plan text-small padding10">
-						Trello helps you plan and work together
-					</div>
-				  </div>
-				  <div data-role="dialog" id="TrelloDialog" class="padding20" data-close-button="true" data-href="./about/trello-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			
+<body class="tile-area-scheme-dark fg-white">
+	<div class="container-float">
+		<!-- HEADER -->
+		<header>
+			<div class="margin30 no-margin-bottom">
+				<img id="eCraftLogo" src="images/eCraft2Learn-icon.png" />
 			</div>
-		</div>
-		
-		<!-- CREATE -->
-		<div class="tile-group double">
-            <span class="tile-group-title">Create</span>
-
-            <div class="tile-container">
-			
-				<!-- TinkerCad -->
-				<!--<div class="tile bg-create fg-white" data-role="tile" onclick="gotoTileDestination('https://www.tinkercad.com/');">-->
-				<div class="tile bg-create fg-white" data-role="tile" onclick="openIframeWindow('https://www.tinkercad.com')">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5" onclick="openHelpDialog('#TCadDialog');"></span>
-						<img class="tile-image icon" src="./images/tinkercad-logo.png"/>
-						<span class="tile-label">TinkerCad
-						</span>
-					</div>
-					<div class="slide-over bg-create text-small padding10">
-						TinkerCad is a 3D modelling application
-					</div>
-				  </div>
-				  <div data-role="dialog" id="TCadDialog" class="padding20" data-close-button="true" data-href="./about/tinkercad-help.html" data-width="600"></div>
-				  <div data-role="dialog" id="winloc" data-width="1000" data-height="500"></div>
-				  <!--<div data-role="dialog" 
-						id="TCadWindow" 
-						style="padding-top:20px;" 
-						data-close-button="true" 
-						data-content='<iframe id="TCadIFrame" src="https://www.tinkercad.com" frameborder="0"  allowfullscreen></iframe>' 
-						
-						data-onshow="alert();">
-				   </div>-->
-				</div>  
-			
-				<!-- Beetle Blocks -->
-				<div class="tile bg-create fg-white" data-role="tile" onclick="gotoTileDestination('http://beetleblocks.com/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5" onclick="openHelpDialog('#BBloxDialog');"></span>
-						<img class="tile-image icon" src="./images/beetle-blocks.png"/>
-						<span class="tile-label">Beetle Blocks
-						</span>
-					</div>
-					<div class="slide-over bg-create text-small padding10">
-						Design a 3D model through programming
-					</div>
-				  </div>
-				  <div data-role="dialog" id="BBloxDialog" class="padding20" data-close-button="true" data-href="./about/beetleblocks-help.html" data-width="600">
-					
-				  </div>
-				</div>
-			
+			<div id="eCraftMotto" class="no-margin-top">
+				Digital Fabrication and Maker Movement in Education
 			</div>
-		</div>
-		
-		<!-- PROGRAM -->
-		<div class="tile-group triple">
-            <span class="tile-group-title">Program</span>
-
-            <div class="tile-container">
+		</header>
+	
+		<!-- TILE AREA -->
+		<div id="mainTileArea" class="tile-area">
 			
-				<!-- SNAP -->
-			  <div class="tile bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('http://snap.berkeley.edu/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5" onclick="openHelpDialog('#SnapDialog');"></span>
-						<img class="tile-image icon" src="./images/snap_logo-110.png"/>
-						<span class="tile-label">Snap!
-						</span>
-					</div>
-					<div class="slide-over bg-ardu-pi text-small padding10">
-						Snap! is awesome!
-					</div>
-				  </div>
-
-				  <div data-role="dialog" id="SnapDialog" class="padding20" data-close-button="true" data-href="./about/snap-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			  
-			  <!-- SNAP4ARDU -->
-			  <div class="tile bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('http://snap4arduino.org/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#S4ADialog');"></span>
-						<img class="tile-image icon" src="./images/ardu-logo.png"/>
-						<span class="tile-label">Snap4Arduino
-						</span>
-					</div>
-					<div class="slide-over bg-arduino text-small padding10">
-						Some text and some even more text.
-					</div>
-				  </div>
-				  <div data-role="dialog" id="S4ADialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			  
-			  <!-- ARDUBLOCK -->
-			  <div class="tile bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('http://blog.ardublock.com/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ArdublockDialog');"></span>
-						<!--<img class="tile-image icon" src="./images/ardu-logo.png"/>-->
-						<span class="tile-image icon">A</span>
-						<span class="tile-label">Ardublock
-						</span>
-					</div>
-					<div class="slide-over bg-arduino text-small padding10">
-						Some text and some even more text.
-					</div>
-				  </div>
-				  <div data-role="dialog" id="ArdublockDialog" class="padding20" data-close-button="true" data-href="./about/ardublock-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			  
-			  <!-- SCRATCH 4 RPi -->
-			  <div class="tile-small bg-raspberry fg-white" data-role="tile" onclick="gotoTileDestination('https://scratch.mit.edu/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#S4RPiDialog');"></span>
-						<img class="tile-image icon" src="./images/scratch-logo-small.png"/>
-						<!--<span class="tile-image icon">S</span>-->
-						<span class="tile-label">
-						</span>
-					</div>
-					<div class="slide-over bg-raspberry text-small padding10">
-						Scratch for Raspberry Pi.
-					</div>
-				  </div>
-				  <div data-role="dialog" id="S4RPiDialog" class="padding20" data-close-button="true" data-href="./about/scratch-4-raspberry-pi.html" data-width="600">
-					
-				  </div>
-			  </div>
-			  
-			  <!-- SCRATCH 4 ARDUINO -->
-			  <div class="tile-small bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('http://s4a.cat/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#Scratch4ArduDialog');"></span>
-						<img class="tile-image icon" src="./images/scratch-logo-small.png"/>
-						<!--<span class="tile-image icon">S</span>-->
-						<span class="tile-label">
-						</span>
-					</div>
-					<div class="slide-over bg-arduino text-small padding10">
-						Scratch for Arduino.
-					</div>
-				  </div>
-				  <div data-role="dialog" id="Scratch4ArduDialog" class="padding20" data-close-button="true" data-href="./about/scratch-4-arduino.html" data-width="600">
-					
-				  </div>
-			  </div>
-			  
-			  <!-- APP INVENTOR -->
-			  <div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('http://appinventor.mit.edu/explore/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#AppInventorDialog');"></span>
-						<img class="tile-image icon" src="./images/app-inventor-allwhite.png"/>
-						<!--<span class="tile-image icon">S</span>-->
-						<span class="tile-label">
-						</span>
-					</div>
-					<div class="slide-over bg-ardu-pi text-small padding10">
-						MIT App Inventor
-					</div>
-				  </div>
-				  <div data-role="dialog" id="AppInventorDialog" class="padding20" data-close-button="true" data-href="./about/app-inventor-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			  
-			  <!-- POCKET CODE -->
-			  <div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://www.catrobat.org/intro/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#PocketCodeDialog');"></span>
-						<img class="tile-image icon" src="./images/pocket-code-allwhite.png"/>
-						<!--<span class="tile-image icon">S</span>-->
-						<span class="tile-label">
-						</span>
-					</div>
-					<div class="slide-over bg-ardu-pi text-small padding10">
-						Pocket Code
-					</div>
-				  </div>
-				  <div data-role="dialog" id="PocketCodeDialog" class="padding20" data-close-button="true" data-href="./about/pocket-code-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			  
-			  <!-- NETSBLOX -->
-			  <div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://netsblox.org/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#NetBloxDialog');"></span>
-						<img class="tile-image icon" src="./images/netsblox.png"/>
-						<!--<span class="tile-image icon">S</span>-->
-						<span class="tile-label">
-						</span>
-					</div>
-					<div class="slide-over bg-ardu-pi text-small padding10">
-						NetsBlox
-					</div>
-				  </div>
-				  <div data-role="dialog" id="NetBloxDialog" class="padding20" data-close-button="true" data-href="./about/netsblox-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			  
-			  <!-- ARDUINO IDE -->
-			  <div class="tile-small bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('https://www.arduino.cc/en/Main/Software');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ArduinoIdeDialog');"></span>
-						<img class="tile-image icon" src="./images/arduino-ide.png"/>
-						<!--<span class="tile-image icon">S</span>-->
-						<span class="tile-label">
-						</span>
-					</div>
-					<div class="slide-over bg-arduino text-small padding10">
-						Arduino IDE
-					</div>
-				  </div>
-				  <div data-role="dialog" id="ArduinoIdeDialog" class="padding20" data-close-button="true" data-href="./about/arduino-ide-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			
-			</div>
-		</div>
-		
-		<!-- SHARE -->
-		<div class="tile-group double">
-            <span class="tile-group-title">Share</span>
-
-            <div class="tile-container">
-				<div class="tile bg-share fg-white" data-role="tile" onclick="gotoTileDestination('https://www.thingiverse.com/');">
-				  <div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ThingiDialog');"></span>
-						<img class="tile-image icon" src="./images/thingiverse-logo.png"/>
-						<!--<span class="tile-image icon">T</span>-->
-						<span class="tile-label">Thingiverse
-						</span>
-					</div>
-					<div class="slide-over bg-share text-small padding10">
-						Share you 3D models here
-					</div>
-				  </div>
-				  <div data-role="dialog" id="ThingiDialog" class="padding20" data-close-button="true" data-href="./about/thingiverse-help.html" data-width="600">
-					
-				  </div>
-			  </div>
-			</div>
-		</div>
-		</div>
-		
-		<div class="clearfix"></div>
-		
-		<div class="tile-group">
-			<div class="tile-group">
-			<span class="tile-group-title">Projects</span>
-				<div class="tile-large bg-projects fg-white" data-role="tile" data-on-click="document.location.href='http://forecast.io'">
-					<div class="tile-content" id="weather_bg" style="background: top left no-repeat; background-size: cover">
-						<div class="padding10">
-							<h1 id="weather_icon" style="font-size: 6em;position: absolute; top: 10px; right: 10px;"></h1>
-							<h1 id="city_temp"></h1>
-							<h2 id="city_name" class="text-light"></h2>
-							<h4 id="city_weather"></h4>
-							<p id="city_weather_daily"></p>
-
-							<p class="no-margin text-shadow">Pressure: <span class="text-bold" id="pressure"></span> mm</p>
-							<p class="no-margin text-shadow">Ozone: <span class="text-bold" id="ozone"></span></p>
-							<p class="no-margin text-shadow">Wind bearing: <span class="text-bold" id="wind_bearing"></span></p>
-							<p class="no-margin text-shadow">Wind speed: <span class="text-bold" id="wind_speed">0</span> m/s</p>
+			<!-- IDEATION GROUP -->
+			<div class="tile-group one">
+				<span class="tile-group-title">Imagine</span>
+				<div class="tile-container">
+					<!--Google Drive-->
+					<div class="tile bg-ideation" data-role="tile" onclick="gotoTileDestination('https://drive.google.com');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="openHelpDialog('#GDriveDialog');"></span>
+								<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+								<span class="tile-label">Google Drive</span>
+							</div>
+							<div class="slide-over bg-ideation text-small padding10">
+								Google Drive drives you crazy
+							</div>
 						</div>
+						<div data-role="dialog" id="GDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600"></div>
 					</div>
-					<span class="tile-label">Projects</span>
-				</div>
-			</div>
+					<!-- Coggle -->
+
+					<div class="tile-small bg-ideation-light" data-role="tile" onclick="openIframeWindow('https://coggle.it/','Coggle');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#CoggleDialog');"></span>
+								<img class="tile-image icon" src="./images/coggle-logo.png"/>
+							</div>
+							<div class="slide-over bg-ideation-light text-small padding10">
+								Coggle
+							</div>
+						</div>
+						<div data-role="dialog" id="CoggleDialog" class="padding20" data-close-button="true" data-href="./about/coggle-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- Sketchboard -->
+					<div class="tile-small bg-ideation-light" data-role="tile" onclick="gotoTileDestination('https://sketchboard.me');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#SketchboardDialog');"></span>
+								<img class="tile-image icon" src="./images/sketch-board-logo.png"/>
+							</div>
+							<div class="slide-over bg-ideation-light text-small padding10">
+								Sketchboard
+							</div>
+						  </div>
+						  <div data-role="dialog" id="SketchboardDialog" class="padding20" data-close-button="true" data-href="./about/sketchboard-help.html" data-width="600"></div>
+					  </div>
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Ideation Group-->
+			
+			<!-- PLAN GROUP -->
+			<div class="tile-group one">
+				<span class="tile-group-title">Plan</span>
+				<div class="tile-container">
+					<!-- Trello -->
+					<div class="tile bg-plan fg-white" data-role="tile" onclick="gotoTileDestination('https://trello.com/');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="openHelpDialog('#TrelloDialog');"></span>
+								<img class="tile-image icon" src="./images/trello-logo.png"/>
+								<span class="tile-label">Trello</span>
+							</div>
+							<div class="slide-over bg-plan text-small padding10">
+								Trello helps you plan and work together
+							</div>
+						</div>
+						<div data-role="dialog" id="TrelloDialog" class="padding20" data-close-button="true" data-href="./about/trello-help.html" data-width="600"></div>
+					</div>
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Plan Group-->
+			
+			<!-- CREATE GROUP -->
 			<div class="tile-group double">
-			<span class="tile-group-title">Info Center</span>
-				<!--<div class="tile-large bg-steel fg-white" data-role="tile" data-on-click="document.location.href='http://forecast.io'">
-					<div class="tile-content" id="weather_bg" style="background: top left no-repeat; background-size: cover">
-						<div class="padding10">
-							<h1 id="weather_icon" style="font-size: 6em;position: absolute; top: 10px; right: 10px;"></h1>
-							<h1 id="city_temp"></h1>
-							<h2 id="city_name" class="text-light"></h2>
-							<h4 id="city_weather"></h4>
-							<p id="city_weather_daily"></p>
-
-							<p class="no-margin text-shadow">Pressure: <span class="text-bold" id="pressure"></span> mm</p>
-							<p class="no-margin text-shadow">Ozone: <span class="text-bold" id="ozone"></span></p>
-							<p class="no-margin text-shadow">Wind bearing: <span class="text-bold" id="wind_bearing"></span></p>
-							<p class="no-margin text-shadow">Wind speed: <span class="text-bold" id="wind_speed">0</span> m/s</p>
-						</div>
-					</div>
-					<span class="tile-label">Projects</span>
-				</div>-->
-				<!--<div class="tile-wide bg-red" data-role="tile">
-					<div class="tile-content image-set">
-						<img src="./images/youtube-logo.png" onclick="event.stopPropagation(); alert();">
-						<img src="https://img.youtube.com/vi/4Hw5Qs_OnBI/hqdefault.jpg">
-						<img src="https://img.youtube.com/vi/Vdo8UdkgDD8/hqdefault.jpg">
-						<img src="https://img.youtube.com/vi/evz3Dlo7zFc/hqdefault.jpg">
-						<img src="https://img.youtube.com/vi/DugPJBVbjSI/hqdefault.jpg">
-					</div>
-					<span class="tile-label">Videos</span>
-				</div>-->
-				<!--<div class="tile bg-black" data-role="tile">
-					<div class="tile-content">
-						<div class="carousel" data-role="carousel">
-							<div class="slide"><span>Snap4Arduino</span><img src="https://img.youtube.com/vi/Ltzlzk_zkys/hqdefault.jpg"></div>
-							<div class="slide"><img src="https://img.youtube.com/vi/4Hw5Qs_OnBI/hqdefault.jpg"><span class="tile-label">Tinkercad</span></div>
-							<div class="slide" onclick="event.stopPropagation(); alert();"><img src="https://img.youtube.com/vi/Vdo8UdkgDD8/hqdefault.jpg"><span class="tile-label">App Inventor</span></div>
-						</div>
-					</div>
-				</div>-->
-				<!-- VIDEOS MAIN TILE -->
-				<div class="tile bg-info-videos" data-role="tile">
-					<div class="tile-content iconic slide-up">
-						<div class="slide-up-2">
-							<img class="tile-image icon" src="./images/youtube-logo.png"/>
-							<span class="tile-label">Videos
-							</span>
-						</div>
-					<div class="slide-over bg-videos text-small padding10">
-						A list of useful videos. 
-					</div>
-				  </div>
-				</div>
+				<span class="tile-group-title">Create</span>
+				<div class="tile-container">
 				
-				<!-- RECENT VIDEOS TILES - MAX 4-->
-				<div class="tile-small bg-black" data-role="tile">
-					<div class="tile-content zooming">
-						<div class="slide"><img data-role="fitImage" data-format="square" src="https://img.youtube.com/vi/4Hw5Qs_OnBI/hqdefault.jpg"></div>
-					</div>
-				</div>
-				<div class="tile-small bg-black" data-role="tile">
-					<div class="tile-content zooming">
-						<div class="slide"><img data-role="fitImage" data-format="square" src="https://img.youtube.com/vi/Vdo8UdkgDD8/hqdefault.jpg"></div>
-					</div>
-				</div>
-				<div class="tile-small bg-black" data-role="tile">
-					<div class="tile-content zooming">
-						<div class="slide"><img data-role="fitImage" data-format="square" src="https://img.youtube.com/vi/evz3Dlo7zFc/hqdefault.jpg"></div>
-					</div>
-				</div>
-				<div class="tile-small bg-black" data-role="tile">
-					<div class="tile-content zooming">
-						<div class="slide"><img data-role="fitImage" data-format="square" src="https://img.youtube.com/vi/DugPJBVbjSI/hqdefault.jpg"></div>
-					</div>
-				</div>
-				<!-- HOWTO TILE-->
-				<div class="tile bg-info-guides" data-role="tile">
-					<div class="tile-content iconic slide-up">
-						<div class="slide-up-2">
-							<img class="tile-image icon" src="./images/user-manual-icon.png"/>
-							<span class="tile-label">How to Guides
-							</span>
+					<!-- TinkerCad -->
+					<div class="tile bg-create" data-role="tile" onclick="openIframeWindow('https://www.tinkercad.com','TinkerCad');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="openHelpDialog('#TCadDialog');"></span>
+								<img class="tile-image icon" src="./images/tinkercad-logo.png"/>
+								<span class="tile-label">TinkerCad</span>
+							</div>
+							<div class="slide-over bg-create text-small padding10">
+								TinkerCad is a 3D modelling application
+							</div>
 						</div>
-					<div class="slide-over bg-info-guides text-small padding10">
-						A list of useful links and documents. 
+						<div data-role="dialog" id="TCadDialog" class="padding20" data-close-button="true" data-href="./about/tinkercad-help.html" data-width="600"></div>
 					</div>
-				  </div>
-				</div>
-			</div>
+					
+					<!-- Beetle Blocks -->
+					<div class="tile bg-create" data-role="tile" onclick="openIframeWindow('http://beetleblocks.com/','Beetle Blocks');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="openHelpDialog('#BBloxDialog');"></span>
+								<img class="tile-image icon" src="./images/beetle-blocks.png"/>
+								<span class="tile-label">Beetle Blocks</span>
+							</div>
+							<div class="slide-over bg-create text-small padding10">
+								Design a 3D model through programming
+							</div>
+						</div>
+						<div data-role="dialog" id="BBloxDialog" class="padding20" data-close-button="true" data-href="./about/beetleblocks-help.html" data-width="600"></div>
+					</div>
+					
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Create Group-->
 			
-			<!-- TOOLS GROUP -->
-			<div class="tile-group">
-				<span class="tile-group-title">Tools</span>
-				
-				<!-- MESSAGES TILE -->
-				<div class="tile-large bg-tools-messages fg-white" data-role="tile" data-on-click="document.location.href='http://forecast.io'">
-					<div class="tile-content" id="weather_bg" style="background: top left no-repeat; background-size: cover">
-						<div class="padding10">
-							<h4>Andrea</h4> <p>New videos are added.</p><br/>
-							<h4>Ken</h4> <p>Check our new project called 'RoboTick'.</p><br/>
-							<h4>Afshin</h4> <p>The print job is done. Come get your artefact.</p><br/>
+			<!-- PROGRAM GROUP -->
+			<div class="tile-group triple">
+				<span class="tile-group-title">Program</span>
+				<div class="tile-container">
+					
+					<!-- SNAP -->
+					<div class="tile bg-ardu-pi" data-role="tile" onclick="openIframeWindow('http://snap.berkeley.edu/','Snap!');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="openHelpDialog('#SnapDialog');"></span>
+								<img class="tile-image icon" src="./images/snap_logo-110.png"/>
+								<span class="tile-label">Snap!</span>
+							</div>
+							<div class="slide-over bg-ardu-pi text-small padding10">
+								Snap! is awesome!
+							</div>
 						</div>
-						<span class="tile-badge bg-tools-messages-badge">4</span>
+						<div data-role="dialog" id="SnapDialog" class="padding20" data-close-button="true" data-href="./about/snap-help.html" data-width="600"></div>
 					</div>
-					<span class="tile-label">Messages</span>
-				</div>
-				
-				<!-- SHARES TILE -->
-				<div class="tile-large bg-tools-shares fg-white" data-role="tile" data-on-click="document.location.href='http://forecast.io'">
-					<div class="tile-content" id="weather_bg" style="background: top left no-repeat; background-size: cover">
-						<div class="padding10">
-							<h1 id="weather_icon" style="font-size: 6em;position: absolute; top: 10px; right: 10px;"></h1>
-							<h1 id="city_temp"></h1>
-							<h2 id="city_name" class="text-light"></h2>
-							<h4 id="city_weather"></h4>
-							<p id="city_weather_daily"></p>
-
-							<p class="no-margin text-shadow">Pressure: <span class="text-bold" id="pressure"></span> mm</p>
-							<p class="no-margin text-shadow">Ozone: <span class="text-bold" id="ozone"></span></p>
-							<p class="no-margin text-shadow">Wind bearing: <span class="text-bold" id="wind_bearing"></span></p>
-							<p class="no-margin text-shadow">Wind speed: <span class="text-bold" id="wind_speed">0</span> m/s</p>
+					
+					<!-- SNAP4ARDU -->
+					<div class="tile bg-arduino" data-role="tile" onclick="openIframeWindow('http://snap4arduino.org/','Snap4Arduino');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#S4ADialog');"></span>
+								<img class="tile-image icon" src="./images/ardu-logo.png"/>
+								<span class="tile-label">Snap4Arduino</span>
+							</div>
+							<div class="slide-over bg-arduino text-small padding10">
+								Some text and some even more text.
+							</div>
 						</div>
+						<div data-role="dialog" id="S4ADialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600"></div>
 					</div>
-					<span class="tile-label">Shared from Others</span>
-				</div>
-			</div>
-		</div>
-	</div>
+					
+					<!-- ARDUBLOCK -->
+					<div class="tile bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('http://blog.ardublock.com/');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ArdublockDialog');"></span>
+								<span class="tile-image icon">A</span>
+								<span class="tile-label">Ardublock</span>
+							</div>
+							<div class="slide-over bg-arduino text-small padding10">
+								Some text and some even more text.
+							</div>
+						</div>
+						<div data-role="dialog" id="ArdublockDialog" class="padding20" data-close-button="true" data-href="./about/ardublock-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- SCRATCH 4 RPi -->
+					<div class="tile-small bg-raspberry" data-role="tile" onclick="gotoTileDestination('https://scratch.mit.edu/');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#S4RPiDialog');"></span>
+								<img class="tile-image icon" src="./images/scratch-logo-small.png"/>
+							</div>
+							<div class="slide-over bg-raspberry text-small padding10">
+								Scratch for Raspberry Pi.
+							</div>
+						</div>
+						<div data-role="dialog" id="S4RPiDialog" class="padding20" data-close-button="true" data-href="./about/scratch-4-raspberry-pi.html" data-width="600"></div>
+					</div>
+					
+					<!-- SCRATCH 4 ARDUINO -->
+					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('http://s4a.cat/');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#Scratch4ArduDialog');"></span>
+								<img class="tile-image icon" src="./images/scratch-logo-small.png"/>
+							</div>
+							<div class="slide-over bg-arduino text-small padding10">
+								Scratch for Arduino.
+							</div>
+						</div>
+						<div data-role="dialog" id="Scratch4ArduDialog" class="padding20" data-close-button="true" data-href="./about/scratch-4-arduino.html" data-width="600"></div>
+					</div>
+					
+					<!-- APP INVENTOR -->
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('http://appinventor.mit.edu/explore/');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#AppInventorDialog');"></span>
+								<img class="tile-image icon" src="./images/app-inventor-allwhite.png"/>
+							</div>
+							<div class="slide-over bg-ardu-pi text-small padding10">
+								MIT App Inventor
+							</div>
+						</div>
+						<div data-role="dialog" id="AppInventorDialog" class="padding20" data-close-button="true" data-href="./about/app-inventor-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- POCKET CODE -->
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://www.catrobat.org/intro/');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#PocketCodeDialog');"></span>
+								<img class="tile-image icon" src="./images/pocket-code-allwhite.png"/>
+							</div>
+							<div class="slide-over bg-ardu-pi text-small padding10">
+								Pocket Code
+							</div>
+						</div>
+						<div data-role="dialog" id="PocketCodeDialog" class="padding20" data-close-button="true" data-href="./about/pocket-code-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- NETSBLOX -->
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://netsblox.org/');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#NetBloxDialog');"></span>
+								<img class="tile-image icon" src="./images/netsblox.png"/>
+							</div>
+							<div class="slide-over bg-ardu-pi text-small padding10">
+								NetsBlox
+							</div>
+						</div>
+						<div data-role="dialog" id="NetBloxDialog" class="padding20" data-close-button="true" data-href="./about/netsblox-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- ARDUINO IDE -->
+					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('https://www.arduino.cc/en/Main/Software');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ArduinoIdeDialog');"></span>
+								<img class="tile-image icon" src="./images/arduino-ide.png"/>
+							</div>
+							<div class="slide-over bg-arduino text-small padding10">
+								Arduino IDE
+							</div>
+						</div>
+						<div data-role="dialog" id="ArduinoIdeDialog" class="padding20" data-close-button="true" data-href="./about/arduino-ide-help.html" data-width="600"></div>
+					</div>
+					
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Program Group-->
+			
+			<!-- SHARE GROUP -->
+			<div class="tile-group one">
+				<span class="tile-group-title">Share</span>
+				<div class="tile-container">
+				
+					<!--Thingiverse-->
+					<div class="tile bg-share fg-white" data-role="tile" onclick="gotoTileDestination('https://www.thingiverse.com/');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ThingiDialog');"></span>
+								<img class="tile-image icon" src="./images/thingiverse-logo.png"/>
+								<span class="tile-label">Thingiverse
+								</span>
+							</div>
+							<div class="slide-over bg-share text-small padding10">
+								Share you 3D models here
+							</div>
+						  </div>
+						  <div data-role="dialog" id="ThingiDialog" class="padding20" data-close-button="true" data-href="./about/thingiverse-help.html" data-width="600"></div>
+					</div>
+			  
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Share Group-->
+			
+		</div> <!--End of Main Tile Area-->
+	</div> <!--End of Main Content Container-->
 
-	
-	
-	
+	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-order:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
+	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"></div>
 </body>
