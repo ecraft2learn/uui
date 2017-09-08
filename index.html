@@ -23,7 +23,9 @@
 	<!-- This links to the css file that we use for coloring of the tiles. The themes are stored in the "themes" folder. Change this to see other themes-->
 	<link rel="stylesheet" type="text/css" href="themes/theme-3.css" />
 	<link rel="stylesheet" type="text/css" href="extra-btn.css" />
-	<script src="js/window-management.js" />
+	
+	<script src="js/window-management.js"></script>
+	<script src="js/helper-functions.js"></script>
 	
 	<style>
         .tile-area-controls {
@@ -63,16 +65,27 @@
             .tile-area-controls {
                 display: none;
             }
-
         }
 		
-		.dialog.dialog-minimize-button {
-			content: '_';
+		.login-form {
+			width: 30rem;
+			height: 19rem;
+			background-color: #404436;
+
+			position: absolute;
+			top:0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			opacity: 0;
+
+			margin: auto;
 		}
-		
     </style>
 	
 	<script>
+	params={};location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){params[k]=v})
+	
 	$(function(){
             //$.StartScreen();
 
@@ -95,12 +108,49 @@
                 left: 0
             });
         });
+		
+	$(function(){
+		if(params['username']!="" && params['pilotsite']!="" && params['username']!=undefined && params['pilotsite']!=undefined){
+			$("#loginForm").hide();
+			//alert(hashFnv32a(params['username']));
+		}
+		else{
+			$("#loginForm").animate({opacity:1},1000);
+		}
+	});
+	</script>
+	
+	<script>
+		function helpClick(helpDialogId){
+			var analyticField = getAnalyticFieldName(helpDialogId, true);
+			openHelpDialog(helpDialogId);
+			sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
+		}
+		
+		function tileClick(toolUrl, winTitle){
+			var analyticField;
+			
+			if(winTitle==undefined) {
+				analyticField = getAnalyticFieldName(toolUrl);
+				gotoTileDestination(toolUrl);
+			}
+			else{
+				analyticField = getAnalyticFieldName(toolUrl);
+				openIframeWindow(toolUrl, winTitle);
+			}
+			
+			sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
+		}
+		
 	</script>
 	
 </head>
 
 <body class="tile-area-scheme-dark fg-white">
+	
 	<div class="container-float">
+		
+	
 		<!-- HEADER -->
 		<header>
 			<div class="margin30 no-margin-bottom">
@@ -119,10 +169,10 @@
 				<span class="tile-group-title">Imagine</span>
 				<div class="tile-container">
 					<!--Google Drive-->
-					<div class="tile bg-ideation" data-role="tile" onclick="gotoTileDestination('https://drive.google.com');">
+					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('https://drive.google.com');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5" onclick="openHelpDialog('#GDriveDialog');"></span>
+								<span class="mif-question place-right margin5" onclick="helpClick('#GoogleDriveDialog');"></span>
 								<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
 								<span class="tile-label">Google Drive</span>
 							</div>
@@ -130,14 +180,14 @@
 								Google Drive drives you crazy
 							</div>
 						</div>
-						<div data-role="dialog" id="GDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600"></div>
+						<div data-role="dialog" id="GoogleDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600"></div>
 					</div>
 					<!-- Coggle -->
 
-					<div class="tile-small bg-ideation-light" data-role="tile" onclick="openIframeWindow('https://coggle.it/','Coggle');">
+					<div class="tile-small bg-ideation-light" data-role="tile" onclick="tileClick('https://coggle.it/','Coggle');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#CoggleDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#CoggleDialog');"></span>
 								<img class="tile-image icon" src="./images/coggle-logo.png"/>
 							</div>
 							<div class="slide-over bg-ideation-light text-small padding10">
@@ -148,10 +198,10 @@
 					</div>
 					
 					<!-- Sketchboard -->
-					<div class="tile-small bg-ideation-light" data-role="tile" onclick="gotoTileDestination('https://sketchboard.me');">
+					<div class="tile-small bg-ideation-light" data-role="tile" onclick="tileClick('https://sketchboard.me');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#SketchboardDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#SketchboardDialog');"></span>
 								<img class="tile-image icon" src="./images/sketch-board-logo.png"/>
 							</div>
 							<div class="slide-over bg-ideation-light text-small padding10">
@@ -168,10 +218,10 @@
 				<span class="tile-group-title">Plan</span>
 				<div class="tile-container">
 					<!-- Trello -->
-					<div class="tile bg-plan fg-white" data-role="tile" onclick="gotoTileDestination('https://trello.com/');">
+					<div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('https://trello.com/');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5" onclick="openHelpDialog('#TrelloDialog');"></span>
+								<span class="mif-question place-right margin5" onclick="helpClick('#TrelloDialog');"></span>
 								<img class="tile-image icon" src="./images/trello-logo.png"/>
 								<span class="tile-label">Trello</span>
 							</div>
@@ -190,10 +240,10 @@
 				<div class="tile-container">
 				
 					<!-- TinkerCad -->
-					<div class="tile bg-create" data-role="tile" onclick="openIframeWindow('https://www.tinkercad.com','TinkerCad');">
+					<div class="tile bg-create" data-role="tile" onclick="tileClick('https://www.tinkercad.com','TinkerCad');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5" onclick="openHelpDialog('#TCadDialog');"></span>
+								<span class="mif-question place-right margin5" onclick="helpClick('#TinkerCadDialog');"></span>
 								<img class="tile-image icon" src="./images/tinkercad-logo.png"/>
 								<span class="tile-label">TinkerCad</span>
 							</div>
@@ -201,14 +251,14 @@
 								TinkerCad is a 3D modelling application
 							</div>
 						</div>
-						<div data-role="dialog" id="TCadDialog" class="padding20" data-close-button="true" data-href="./about/tinkercad-help.html" data-width="600"></div>
+						<div data-role="dialog" id="TinkerCadDialog" class="padding20" data-close-button="true" data-href="./about/tinkercad-help.html" data-width="600"></div>
 					</div>
 					
 					<!-- Beetle Blocks -->
-					<div class="tile bg-create" data-role="tile" onclick="openIframeWindow('http://beetleblocks.com/','Beetle Blocks');">
+					<div class="tile bg-create" data-role="tile" onclick="tileClick('http://beetleblocks.com/','Beetle Blocks');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5" onclick="openHelpDialog('#BBloxDialog');"></span>
+								<span class="mif-question place-right margin5" onclick="helpClick('#BeetleBloxDialog');"></span>
 								<img class="tile-image icon" src="./images/beetle-blocks.png"/>
 								<span class="tile-label">Beetle Blocks</span>
 							</div>
@@ -216,7 +266,7 @@
 								Design a 3D model through programming
 							</div>
 						</div>
-						<div data-role="dialog" id="BBloxDialog" class="padding20" data-close-button="true" data-href="./about/beetleblocks-help.html" data-width="600"></div>
+						<div data-role="dialog" id="BeetleBloxDialog" class="padding20" data-close-button="true" data-href="./about/beetleblocks-help.html" data-width="600"></div>
 					</div>
 					
 				</div> <!--End of group tiles-->
@@ -228,10 +278,10 @@
 				<div class="tile-container">
 					
 					<!-- SNAP -->
-					<div class="tile bg-ardu-pi" data-role="tile" onclick="openIframeWindow('https://snap.berkeley.edu/snapsource/snap.html','Snap!');">
+					<div class="tile bg-ardu-pi" data-role="tile" onclick="tileClick('https://snap.berkeley.edu/snapsource/snap.html','Snap!');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5" onclick="openHelpDialog('#SnapDialog');"></span>
+								<span class="mif-question place-right margin5" onclick="helpClick('#SnapDialog');"></span>
 								<img class="tile-image icon" src="./images/snap_logo-110.png"/>
 								<span class="tile-label">Snap!</span>
 							</div>
@@ -243,10 +293,10 @@
 					</div>
 					
 					<!-- SNAP4ARDU -->
-					<div class="tile bg-arduino" data-role="tile" onclick="openIframeWindow('http://snap4arduino.org/','Snap4Arduino');">
+					<div class="tile bg-arduino" data-role="tile" onclick="tileClick('http://snap4arduino.org/','Snap4Arduino');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#S4ADialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#Snap4ArduinoDialog');"></span>
 								<img class="tile-image icon" src="./images/ardu-logo.png"/>
 								<span class="tile-label">Snap4Arduino</span>
 							</div>
@@ -254,14 +304,14 @@
 								Some text and some even more text.
 							</div>
 						</div>
-						<div data-role="dialog" id="S4ADialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600"></div>
+						<div data-role="dialog" id="Snap4ArduinoDialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600"></div>
 					</div>
 					
 					<!-- ARDUBLOCK -->
-					<div class="tile bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('http://blog.ardublock.com/');">
+					<div class="tile bg-arduino fg-white" data-role="tile" onclick="tileClick('http://blog.ardublock.com/');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ArdublockDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#ArdublockDialog');"></span>
 								<span class="tile-image icon">A</span>
 								<span class="tile-label">Ardublock</span>
 							</div>
@@ -273,24 +323,24 @@
 					</div>
 					
 					<!-- SCRATCH 4 RPi -->
-					<div class="tile-small bg-raspberry" data-role="tile" onclick="gotoTileDestination('https://scratch.mit.edu/');">
+					<div class="tile-small bg-raspberry" data-role="tile" onclick="tileClick('https://scratch.mit.edu/');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#S4RPiDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#Scratch4RPiDialog');"></span>
 								<img class="tile-image icon" src="./images/scratch-logo-small.png"/>
 							</div>
 							<div class="slide-over bg-raspberry text-small padding10">
 								Scratch for Raspberry Pi.
 							</div>
 						</div>
-						<div data-role="dialog" id="S4RPiDialog" class="padding20" data-close-button="true" data-href="./about/scratch-4-raspberry-pi.html" data-width="600"></div>
+						<div data-role="dialog" id="Scratch4RPiDialog" class="padding20" data-close-button="true" data-href="./about/scratch-4-raspberry-pi.html" data-width="600"></div>
 					</div>
 					
 					<!-- SCRATCH 4 ARDUINO -->
-					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('http://s4a.cat/');">
+					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="tileClick('http://s4a.cat/');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#Scratch4ArduDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#Scratch4ArduDialog');"></span>
 								<img class="tile-image icon" src="./images/scratch-logo-small.png"/>
 							</div>
 							<div class="slide-over bg-arduino text-small padding10">
@@ -301,10 +351,10 @@
 					</div>
 					
 					<!-- APP INVENTOR -->
-					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('http://appinventor.mit.edu/explore/');">
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="tileClick('http://ai2.appinventor.mit.edu/','App Inventor');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#AppInventorDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#AppInventorDialog');"></span>
 								<img class="tile-image icon" src="./images/app-inventor-allwhite.png"/>
 							</div>
 							<div class="slide-over bg-ardu-pi text-small padding10">
@@ -315,10 +365,10 @@
 					</div>
 					
 					<!-- POCKET CODE -->
-					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://www.catrobat.org/intro/');">
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="tileClick('https://www.catrobat.org/intro/');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#PocketCodeDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#PocketCodeDialog');"></span>
 								<img class="tile-image icon" src="./images/pocket-code-allwhite.png"/>
 							</div>
 							<div class="slide-over bg-ardu-pi text-small padding10">
@@ -329,24 +379,24 @@
 					</div>
 					
 					<!-- NETSBLOX -->
-					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://netsblox.org/');">
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="tileClick('https://editor.netsblox.org/','NetsBlox');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#NetBloxDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#NetsBloxDialog');"></span>
 								<img class="tile-image icon" src="./images/netsblox.png"/>
 							</div>
 							<div class="slide-over bg-ardu-pi text-small padding10">
 								NetsBlox
 							</div>
 						</div>
-						<div data-role="dialog" id="NetBloxDialog" class="padding20" data-close-button="true" data-href="./about/netsblox-help.html" data-width="600"></div>
+						<div data-role="dialog" id="NetsBloxDialog" class="padding20" data-close-button="true" data-href="./about/netsblox-help.html" data-width="600"></div>
 					</div>
 					
 					<!-- ARDUINO IDE -->
-					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('https://www.arduino.cc/en/Main/Software');">
+					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="tileClick('https://create.arduino.cc/editor');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ArduinoIdeDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#ArduinoIdeDialog');"></span>
 								<img class="tile-image icon" src="./images/arduino-ide.png"/>
 							</div>
 							<div class="slide-over bg-arduino text-small padding10">
@@ -365,10 +415,10 @@
 				<div class="tile-container">
 				
 					<!--Thingiverse-->
-					<div class="tile bg-share fg-white" data-role="tile" onclick="gotoTileDestination('https://www.thingiverse.com/');">
+					<div class="tile bg-share fg-white" data-role="tile" onclick="tileClick('https://www.thingiverse.com/','Thingiverse');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
-								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ThingiDialog');"></span>
+								<span class="mif-question place-right margin5"  onclick="helpClick('#ThingiverseDialog');"></span>
 								<img class="tile-image icon" src="./images/thingiverse-logo.png"/>
 								<span class="tile-label">Thingiverse
 								</span>
@@ -377,7 +427,7 @@
 								Share you 3D models here
 							</div>
 						  </div>
-						  <div data-role="dialog" id="ThingiDialog" class="padding20" data-close-button="true" data-href="./about/thingiverse-help.html" data-width="600"></div>
+						  <div data-role="dialog" id="ThingiverseDialog" class="padding20" data-close-button="true" data-href="./about/thingiverse-help.html" data-width="600"></div>
 					</div>
 			  
 				</div> <!--End of group tiles-->
@@ -386,6 +436,43 @@
 		</div> <!--End of Main Tile Area-->
 	</div> <!--End of Main Content Container-->
 
+	<!--Login Box and Hidden Data-->
+	
+	<div  id="loginForm" class="login-form padding20 block-shadow" style="z-index:2;">
+		
+        <form>
+            <h1 class="text-light">Login to eCraft2Learn</h1>
+            <hr class="thin"/>
+            <br />
+            <div class="input-control text full-size" data-role="input">
+                <label for="user_login">Username:</label>
+                <input type="text" name="username" id="username" class="fg-black">
+                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <br />
+            <br />
+            <div class="input-control select full-size fg-black" data-role="input">
+                <label for="user_password">Pilot Site:</label>
+                <!--<input type="password" name="user_password" id="user_password">
+                <button class="button helper-button reveal"><span class="mif-looks"></span></button>-->
+				<select class="fg-black" name="pilotsite" id="pilotsite">
+					<option>Pilot site 1</option>
+					<option>Pilot site 2</option>
+					<option>Pilot site 3</option>
+					<option>Pilot site 4</option>
+				</select>
+            </div>
+            <br />
+            <br />
+            <div class="form-actions">
+                <button type="submit" class="button primary">Login</button>
+                <!--<button type="button" class="button link">Cancel</button>-->
+            </div>
+        </form>
+	</div>
+	
 	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-order:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
 	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"></div>
+	
+	
 </body>
