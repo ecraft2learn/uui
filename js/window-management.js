@@ -17,6 +17,60 @@ class WinIFrame {
 	}
 }
 
+function getAnalyticFieldName(toolName, isHelp) {
+	
+	/*$clientId = $_POST['clientId'];
+	$sessionId = $_POST['sessionId'];
+	$users = $_POST['users'];
+	$sketch = isset($_POST['sketch']) ? $_POST['sketch'] : 0;
+	$tinkercad = isset($_POST['tinkercad']) ? $_POST['tinkercad'] : 0;
+	$snap = isset($_POST['snap']) ? $_POST['snap'] : 0;
+	$share = isset($_POST['share']) ? $_POST['share'] : 0;
+	>>$project = isset($_POST['project']) ? $_POST['project'] : 0;
+	>>$info = isset($_POST['info']) ? $_POST['info'] : 0;
+	>>$tools = isset($_POST['tools']) ? $_POST['tools'] : 0;
+	$others = isset($_POST['others']) ? $_POST['others'] : 0;
+	>>$focus = isset($_POST['focus']) ? $_POST['focus'] : 0;
+	$helpSketch = isset($_POST['helpSketch']) ? $_POST['helpSketch'] : 0;
+	$helpTinkercad = isset($_POST['helpTinkercad']) ? $_POST['helpTinkercad'] : 0;
+	$helpSnap = isset($_POST['helpSnap']) ? $_POST['helpSnap'] : 0;
+	$helpShare = isset($_POST['helpShare']) ? $_POST['helpShare'] : 0;
+	$helpProject = isset($_POST['helpProject']) ? $_POST['helpProject'] : 0;
+	$helpInfo = isset($_POST['helpInfo']) ? $_POST['helpInfo'] : 0;
+	$helpTools = isset($_POST['helpTools']) ? $_POST['helpTools'] : 0;
+	$helpOthers */
+
+	var fieldName="";
+	if(toolName.toLowerCase().indexOf('sketch')>=0) fieldName="Sketch";
+	else if(toolName.toLowerCase().indexOf('tinker')>=0) fieldName = "Tinkercad";
+	else if(toolName.toLowerCase().indexOf('snap')>=0) fieldName = "Snap";
+	else if(toolName.toLowerCase().indexOf('thingiverse')>=0) fieldName = "Share";
+	else fieldName = "Others";
+	
+	if(isHelp)
+		fieldName = "help"+fieldName;
+	else
+		fieldName = fieldName.toLowerCase();
+	return fieldName;
+}
+
+function sendAnalyticsData(clientId, sessionId, toolName) {
+	
+
+	$.ajax({
+
+		type: 'POST',
+		url: 'http://cs.uef.fi/~tapanit/put_uui_vectors_pilot_1.php',
+		data: 'clientId=1&sessionId=0&users=thisIsAString&snap=1',
+		success: function(data) {
+			alert("oolalal"+data);
+		},
+		error: function(error) {
+			alert("Shit!");
+		}
+	});
+}
+
 
 //Opens the destination link in a new tab. This is depricated since we are using the iframe solution now.
 function gotoTileDestination(dest){
