@@ -23,7 +23,7 @@
 	<!-- This links to the css file that we use for coloring of the tiles. The themes are stored in the "themes" folder. Change this to see other themes-->
 	<link rel="stylesheet" type="text/css" href="themes/theme-3.css" />
 	<link rel="stylesheet" type="text/css" href="extra-btn.css" />
-	<script src="js/window-management.js" />
+	<script src="js/window-management.js"></script>
 	
 	<style>
         .tile-area-controls {
@@ -63,16 +63,27 @@
             .tile-area-controls {
                 display: none;
             }
-
         }
 		
-		.dialog.dialog-minimize-button {
-			content: '_';
+		.login-form {
+			width: 30rem;
+			height: 19rem;
+			background-color: #404436;
+
+			position: absolute;
+			top:0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			opacity: 0;
+
+			margin: auto;
 		}
-		
     </style>
 	
 	<script>
+	params={};location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){params[k]=v})
+	
 	$(function(){
             //$.StartScreen();
 
@@ -95,12 +106,24 @@
                 left: 0
             });
         });
+		
+	$(function(){
+		if(params['username']!="" && params['pilotsite']!="" && params['username']!=undefined && params['pilotsite']!=undefined){
+			$("#loginForm").hide();
+		}
+		else{
+			$("#loginForm").animate({opacity:1},1000);
+		}
+	});
 	</script>
 	
 </head>
 
 <body class="tile-area-scheme-dark fg-white">
+	
 	<div class="container-float">
+		
+	
 		<!-- HEADER -->
 		<header>
 			<div class="margin30 no-margin-bottom">
@@ -301,7 +324,7 @@
 					</div>
 					
 					<!-- APP INVENTOR -->
-					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('http://appinventor.mit.edu/explore/');">
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="openIframeWindow('http://ai2.appinventor.mit.edu/','App Inventor');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#AppInventorDialog');"></span>
@@ -329,7 +352,7 @@
 					</div>
 					
 					<!-- NETSBLOX -->
-					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="gotoTileDestination('https://netsblox.org/');">
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="openIframeWindow('https://editor.netsblox.org/','NetsBlox');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#NetBloxDialog');"></span>
@@ -343,7 +366,7 @@
 					</div>
 					
 					<!-- ARDUINO IDE -->
-					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('https://www.arduino.cc/en/Main/Software');">
+					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="gotoTileDestination('https://create.arduino.cc/editor');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ArduinoIdeDialog');"></span>
@@ -365,7 +388,7 @@
 				<div class="tile-container">
 				
 					<!--Thingiverse-->
-					<div class="tile bg-share fg-white" data-role="tile" onclick="gotoTileDestination('https://www.thingiverse.com/');">
+					<div class="tile bg-share fg-white" data-role="tile" onclick="openIframeWindow('https://www.thingiverse.com/','Thingiverse');">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="openHelpDialog('#ThingiDialog');"></span>
@@ -386,6 +409,43 @@
 		</div> <!--End of Main Tile Area-->
 	</div> <!--End of Main Content Container-->
 
+	<!--Login Box and Hidden Data-->
+	
+	<div  id="loginForm" class="login-form padding20 block-shadow" style="z-index:2;">
+		
+        <form>
+            <h1 class="text-light">Login to eCraft2Learn</h1>
+            <hr class="thin"/>
+            <br />
+            <div class="input-control text full-size" data-role="input">
+                <label for="user_login">Username:</label>
+                <input type="text" name="username" id="username" class="fg-black">
+                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <br />
+            <br />
+            <div class="input-control select full-size fg-black" data-role="input">
+                <label for="user_password">Pilot Site:</label>
+                <!--<input type="password" name="user_password" id="user_password">
+                <button class="button helper-button reveal"><span class="mif-looks"></span></button>-->
+				<select class="fg-black" name="pilotsite" id="pilotsite">
+					<option>Pilot site 1</option>
+					<option>Pilot site 2</option>
+					<option>Pilot site 3</option>
+					<option>Pilot site 4</option>
+				</select>
+            </div>
+            <br />
+            <br />
+            <div class="form-actions">
+                <button type="submit" class="button primary">Login</button>
+                <!--<button type="button" class="button link">Cancel</button>-->
+            </div>
+        </form>
+	</div>
+	
 	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-order:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
 	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"></div>
+	
+	
 </body>
