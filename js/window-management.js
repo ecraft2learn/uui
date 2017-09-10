@@ -63,10 +63,10 @@ function sendAnalyticsData(clientId, sessionId, toolName) {
 		url: 'https://cs.uef.fi/~tapanit/put_uui_vectors_pilot_1.php',
 		data: 'clientId=1&sessionId=0&users=thisIsAString&snap=1',
 		success: function(data) {
-			alert("oolalala "+data);
+			//alert("oolalala "+data);
 		},
 		error: function(error) {
-			alert("Shit!");
+			//alert("Shit!");
 		}
 	});
 }
