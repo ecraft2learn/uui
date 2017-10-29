@@ -36,6 +36,7 @@ modules.cloud = '2015-December-15';
 
 var Cloud;
 var SnapCloud = new Cloud(
+    // Ken Kahn added 'Local' to make this work from github.io
     'https://snap.apps.miosoft.com/SnapCloudLocal'
 );
 
