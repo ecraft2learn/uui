@@ -79,8 +79,8 @@ function gotoTileDestination(dest){
 
 //This function is responsible for opening a new HELP DIALOG.
 var alreadyOpenDialog = null;		
-function openHelpDialog(helpUrl){
-	event.stopPropagation(); 
+function openHelpDialog(helpUrl, event){
+    event.stopPropagation();
 	
 	metroDialog.open(helpUrl);
 	if(alreadyOpenDialog!=null && alreadyOpenDialog!=helpUrl)
@@ -92,7 +92,7 @@ function openHelpDialog(helpUrl){
 // this is because, a student might want to open two different files in the same tool. .
 
 //Given a url and a title for the window, this function creates a window (uses Metro UI dialog classes) and opens the url as an iframe in it.
-function openIframeWindow(toolUrl, toolName) {
+function openIframeWindow(toolUrl, toolName, event) {
 	docWidth = $(window).width()-100;
 	docHeight = $(window).height()-100;
 	
@@ -191,7 +191,11 @@ function minimizeWindow(minBtn){
 
 //When a minimized tab button is pressed, this function finds the related WinDiv and Data and restores the window. Notice that the window is not actually removed when minimized, so this function just makes it visible again.
 function unminimizeWindow() {
-	var $buttonElem = $(event.srcElement).closest('button');
+	// event is not bound in FireFox
+	if (typeof event === 'undefined') {
+		return; // needs to be fixed
+	}
+	var $buttonElem = typeof event !== 'undefined' && $(event.srcElement).closest('button');
 	var $winData = $buttonElem.data('winData');
 	var $winDiv = $buttonElem.data('winDiv');
 	 
