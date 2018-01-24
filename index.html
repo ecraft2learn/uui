@@ -448,6 +448,31 @@
 			  
 				</div> <!--End of group tiles-->
 			</div> <!-- End of Share Group-->
+
+			<!-- HELP GROUP -->
+			<div class="tile-group one" id="help-group">
+				<span class="tile-group-title">Help</span>
+				<div class="tile-container">
+				
+					<!--Electronics help-->
+					<div class="tile bg-info-guides fg-white" data-role="tile" onclick="tileClick('./help/electronics/index.html','Electronics help', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#ElectronicsHelpDialog', event);"></span>
+								<img class="tile-image icon" src="./images/electronics-help-icon.png"/>
+								<span class="tile-label">Electronics help
+								</span>
+							</div>
+							<div class="slide-over bg-help text-small padding10">
+								Get help with sensors, wires, resistors, actuators, LEDs, batteries, and more
+							</div>
+						  </div>
+						  <div data-role="dialog" id="ElectronicsHelpDialog" class="padding20" data-close-button="true" data-href="./about/electronics-help.html" data-width="600"></div>
+					</div>
+					<!--Other help to come-->
+			  
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Help Group-->
 			
 		</div> <!--End of Main Tile Area-->
 	</div> <!--End of Main Content Container-->
@@ -490,6 +515,12 @@
 	
 	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-order:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
 	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
-	
+
+<script>
+// THIS SHOULD BE REMOVED ONCE WE HAVE A PUBLIC VERSION OF THE HELP GROUP
+if (window.location.search.indexOf('&beta') < 0) {
+	$("#help-group").hide();
+}
+</script>	
 	
 </body>
