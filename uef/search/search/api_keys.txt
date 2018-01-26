@@ -1,0 +1,21 @@
+Thingiverse:
+
+client secret:
+786ee0fdd0029032845777b3d77be12e
+
+app token:
+9f74fc94d71fb63c07f3a46d9077fba3
+
+client id:
+7b17bb5e32f9ef69ba6a
+
+access token:
+a39e491adb77b584e4417b1d55d66eb5
+
+flickr:
+
+key:
+953e7b18fcc1b07d2eceec8e051ecde1
+
+secret:
+de43e1f05629c9ea
