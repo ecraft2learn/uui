@@ -1,0 +1,55 @@
+<html>
+<head>
+    <link href="libraries/css/metro.css" rel="stylesheet">
+	<link href="libraries/css/metro-icons.css" rel="stylesheet">
+<style>
+figure {
+  display: inline-block;
+  text-align: center;
+  left-margin: 20px;
+}
+figure img {
+  display:      block;
+  margin-left:  auto;
+  margin-right: auto;
+}
+figcaption {
+  font-style: italic; 
+}
+</style>
+</head>
+<body>
+<h2>This is an early draft of a trouble shooting guide</h2>
+<h3>Trouble shooting advice</h3>
+<p>
+The eCraft2Larn Unified User Interface (the UUI) works best in Chrome.
+If you encounter problems with other browsers please report it and switch to Chrome (or Chromium on Raspberry Pis).
+</p>
+<p>
+If you are reading this on a Raspberry Pi that was configured by eCraft2Larn project members
+then report any problems to them since all the following should have been done.
+Click on one of the following links if you are having problems with:
+<ul>
+<li><a href="#snap4arduino">Snap4Ardunio</a></li>
+<li><a href="https://ecraft2learn.github.io/ai/AI-Teacher-Guide/troubleshooting.html">AI Snap! Programming blocks</a></li>
+<li>More to come</li>
+</ul>
+</p>
+<h4 id="snap4arduino">Snap4Ardunio trouble shooting</h4>
+<p>
+If you get a security warning about not trusting the certificate for snap4arduino.rocks, then you should be able
+to click on Advanced Settings and click to visit the site anyway.
+You should only need to do this once since the browser should remember it.
+The Snap4Ardunio team is aware of the problem and is fixing it.
+</p>
+<p>
+If Snap4Ardunio launches but cannot connect to the Arduino,
+then first ensure that <a href="http://snap4arduino.rocks/#plugin">the Snap4Ardunio browser extension is installed</a>.
+If the extension is installed and Snap4Ardunio still cannot connect to the Arduino on a USB port then sometimes
+disconnecting and then reconnecting the USB cable resets the connection.
+Remember it is always a good idea when finished running Snap4Ardunio to disconnect from the Arduino.
+</p>
+<figure>
+<img src="../../images/disconnect-arduino.png" class="center">
+<figcaption>To avoid problems next time you connect, disconnect before leaving Snap4Ardunio</figcaption>
+</figure>
