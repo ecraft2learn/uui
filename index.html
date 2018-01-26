@@ -168,8 +168,38 @@
 			<div class="tile-group one">
 				<span class="tile-group-title">Imagine</span>
 				<div class="tile-container">
+					<!-- UEF Tools -->
+					<!--UEF Ideation-->
+					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('./uef/ideation/ideation/index.html', 'eCraft Idea');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#GoogleDriveDialog');"></span>
+								<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+								<span class="tile-label">eCraft Idea</span>
+							</div>
+							<div class="slide-over bg-ideation text-small padding10">
+								Use this to note down your ideas
+							</div>
+						</div>
+						<div data-role="dialog" id="GoogleDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600"></div>
+					</div>
+					
+					<!--UEF Ideation-->
+					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('./uef/search/search/index.html', 'eCraft Search');">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#GoogleDriveDialog');"></span>
+								<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+								<span class="tile-label">eCraft Search</span>
+							</div>
+							<div class="slide-over bg-ideation text-small padding10">
+								Use this to note down your ideas
+							</div>
+						</div>
+						<div data-role="dialog" id="GoogleDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600"></div>
+					</div>
 					<!--Google Drive-->
-					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('https://drive.google.com', undefined, event);">
+					<!--<div class="tile bg-ideation" data-role="tile" onclick="tileClick('https://drive.google.com', undefined, event);">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5" onclick="helpClick('#GoogleDriveDialog', event);"></span>
@@ -183,7 +213,7 @@
 						<div data-role="dialog" id="GoogleDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600"></div>
 					</div>
 					<!-- Coggle -->
-
+					<!--
 					<div class="tile-small bg-ideation-light" data-role="tile" onclick="tileClick('https://coggle.it/','Coggle', event);">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
@@ -198,6 +228,7 @@
 					</div>
 					
 					<!-- Sketchboard -->
+					<!--
 					<div class="tile-small bg-ideation-light" data-role="tile" onclick="tileClick('https://sketchboard.me', undefined, event);">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
@@ -210,7 +241,9 @@
 						  </div>
 						  <div data-role="dialog" id="SketchboardDialog" class="padding20" data-close-button="true" data-href="./about/sketchboard-help.html" data-width="600"></div>
 					  </div>
+					  -->
 				</div> <!--End of group tiles-->
+				
 			</div> <!-- End of Ideation Group-->
 			
 			<!-- PLAN GROUP -->
