@@ -33,7 +33,7 @@ var ApiCall = function() {
     	return found;
 	};
 
-	this.url = 'http://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_search_vectors_pilot_2.php';
+	this.url = 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_search_vectors_pilot_2.php';
 	this.method = 'POST';
 	
 	this.sessionId = getQueryParam('sessionId');
@@ -64,7 +64,7 @@ ApiCall.prototype.post = function() {
         },
         error: (error) => {
         
-        	alert(error);
+        	console.log(error);
         
         }
     });
@@ -90,6 +90,9 @@ $('#search').on('click keyup', (event) => {
         $('#pictures').html('');
 
         var val = $('#search-input').val();
+
+	if (val.trim() === '')
+		return;
                                         
         function getRequest(searchTerm) {
                                 
