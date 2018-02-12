@@ -300,9 +300,9 @@ ApiCall.prototype.setData = function(key, data) {
 	var ctx = canvas.getContext('2d');
 	
 	var sketch = document.querySelector('#canvases');
-	var sketch_style = getComputedStyle(sketch);
-	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
-	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+	//var sketch_style = getComputedStyle(sketch);
+	//canvas.width = parseInt(sketch_style.getPropertyValue('width'));
+	//canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 	
 	
 	// Creating a tmp canvas
@@ -314,7 +314,7 @@ ApiCall.prototype.setData = function(key, data) {
 	
 //	sketch.appendChild(tmp_canvas);
 
-	tmp_cavas = canvas;
+	tmp_canvas = canvas;
 	tmp_ctx = canvas.getContext('2d');
 
 	var mouse = {x: 0, y: 0};
