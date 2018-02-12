@@ -417,11 +417,12 @@ ApiCall.prototype.setData = function(key, data) {
 				parseInt(textarea.style.left),
 				parseInt(textarea.style.top) + n*parseInt(fs)
 			);
+			
 		}
 		
 		// Writing down to real canvas now
-		//ctx.drawImage(tmp_canvas, 0, 0);
-		ui.getCanvas().fromDataURL(tmp_canvas, () => { console.log('jaa'); } );
+		ctx.drawImage(tmp_canvas, 0, 0);
+		//ui.getCanvas().fromDataURL(tmp_ctx, () => { console.log('jaa'); } );
 		// Clearing tmp canvas
 		tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
 		
