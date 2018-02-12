@@ -141,7 +141,7 @@ ApiCall.prototype.post = function() {
 	
 	var data = 'users=' + self.users + '&sessionId=' + self.sessionId + '&data=' + encodeURIComponent(JSON.stringify(self.data));
 	
-	console.log(data);
+	//console.log(data);
 	
 	$.ajax({
         url: self.url,
