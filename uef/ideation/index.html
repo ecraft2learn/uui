@@ -306,13 +306,16 @@ ApiCall.prototype.setData = function(key, data) {
 	
 	
 	// Creating a tmp canvas
-	tmp_canvas = document.createElement('canvas');
-	var tmp_ctx = tmp_canvas.getContext('2d');
-	tmp_canvas.id = 'tmp_canvas';
-	tmp_canvas.width = canvas.width;
-	tmp_canvas.height = canvas.height;
+//	tmp_canvas = document.createElement('canvas');
+//	var tmp_ctx = tmp_canvas.getContext('2d');
+//	tmp_canvas.id = 'tmp_canvas';
+//	tmp_canvas.width = canvas.width;
+//	tmp_canvas.height = canvas.height;
 	
-	sketch.appendChild(tmp_canvas);
+//	sketch.appendChild(tmp_canvas);
+
+	tmp_cavas = canvas;
+	tmp_ctx = canvas.getContext('2d');
 
 	var mouse = {x: 0, y: 0};
 	var start_mouse = {x: 0, y: 0};
@@ -424,7 +427,7 @@ ApiCall.prototype.setData = function(key, data) {
 		//ctx.drawImage(tmp_canvas, 0, 0);
 		//ui.getCanvas().fromDataURL(tmp_ctx, () => { console.log('jaa'); } );
 		// Clearing tmp canvas
-		tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+		//tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
 		
 		// clearInterval(sprayIntervalID);
 		textarea.style.display = 'none';
@@ -434,7 +437,7 @@ ApiCall.prototype.setData = function(key, data) {
 	var onPaint = function() {
 		
 		// Tmp canvas is always cleared up before drawing.
-		tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+		//tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
 		
 		var x = Math.min(mouse.x, start_mouse.x);
 		var y = Math.min(mouse.y, start_mouse.y);
