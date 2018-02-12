@@ -142,6 +142,13 @@
 			}
 			else{
 				analyticField = getAnalyticFieldName(toolUrl);
+				
+				//var url = toolUrl + '&username=' + params['username'] + '&sessionId=' + params['pilotsite'];
+				//console.log(url);
+				
+				window.sessionStorage.setItem('username', params['username']);
+				window.sessionStorage.setItem('pilotsite', params['pilotsite']);
+				
 				openIframeWindow(toolUrl, winTitle, event);
 			}
 			
@@ -551,11 +558,11 @@
                 <!--<input type="password" name="user_password" id="user_password">
                 <button class="button helper-button reveal"><span class="mif-looks"></span></button>-->
 				<select class="fg-black" name="pilotsite" id="pilotsite">
-					<option>Not at a pilot site</option>
-					<option>Pataluoto School</option>
-					<option>Lyseo High School</option>
-					<option>Athens Informal pilot site</option>
-					<option>Athens formal pilot site</option>
+					<option value='10'>Not at a pilot site</option>
+					<option value='11'>Pataluoto School</option>
+					<option value='12'>Lyseo High School</option>
+					<option value='13'>Athens Informal pilot site</option>
+					<option value='14'>Athens formal pilot site</option>
 				</select>
             </div>
             <br />
