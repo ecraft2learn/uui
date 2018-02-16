@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  
+body{
+	background-color: white;
+	padding-left:30px;
+	padding-top:20px;
+	padding-bottom:20px;
+	
+	font-family: "Segoe UI Light", "Segoe UI", "Segoe WP", "Helvetica Neue", sans-serif;
+	font-size: 14px;
+	line-height: 1.428571429;
+	color: #333333;
+}
+td{
+	padding-right: 30px;
+}
+tr{
+	padding-bottom: 20px;
+}
+#img1{
+    float: left;
+	padding-right:30px;
+}
+</style>
+</head>
+<div>
+<p><a href="https://project.ecraft2learn.eu" target="_blank" rel="noopener"><strong><img src="https://github.com/ecraft2learn/OER/blob/master/Logos/Logo_eCraft2Learn.png?raw=true" alt="" width="590" height="112" /></strong></a></p>
+</div>
+<h1><strong>EXTRUDING A 3D MODEL FROM A 2D IMAGE</strong></h1>
+<div>
+<p>A 3D model can be created from a 2D image using the image import feature in Cura. Cura can import .JPG .PNG .BMP and .GIF file types.</p>
+</div>
+<div>
+<p>The minimum and maximum heights of the image can be set by the user, then Cura uses the grayscale of the image to set the height of different areas of the image (within the minimum and maximum dimensions).</p>
+</div>
+<div>
+<h1>Importing an image into Cura</h1>
+</div>
+<div>
+<p>Open Cura and in the top menu, select File, then Open File(s). Browse to the image you wish to import, select it then click the Open button. The Convert Image window is then shown.</p>
+</div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image004.png?raw=true" width="295" height="227" />Set the required Height, this is the maximum extruded height of the print in millimetres.</p>
+</div>
+<div>
+<p>Set the required Base, this is the base height of the print in millimetres, set this to 0.0 if you do not want to print a base.</p>
+</div>
+<div>
+<p>Set the required Width or Depth of the print in millimetres. When one of these dimensions is entered, the other is calculated in proportion to the size of the original image.</p>
+</div>
+<div>
+<p>Select Darker is higher or Lighter is higher. This selection will make either the darker areas of the image print higher or the lighter areas of the image to print higher. For the settings shown in the example above, the black areas of the image will print 10mm high and the white areas of the image will print at 1mm high.</p>
+</div>
+<div>
+<p>&nbsp;Greyscale will print in between these heights dependent upon the percentage of greyscale, so 50% grey would print at a height of 5.5mm. Set the required Width or Depth of the print in millimetres. When one of these dimensions is entered, the other is calculated in proportion to the size of the original image.</p>
+</div>
+<div>
+<p>&nbsp;Drag the Smoothing slider to select how much smoothing to apply between the colour transitions.</p>
+</div>
+<div>
+<p>Click OK, this will import the image into Cura and convert it into a 3D model with the selected settings. The 3D model can then be manipulated in Cura and prepared for 3D printing in the same way as standard 3D models.</p>
+</div>
+<div>
+<h1>2 D to 3D Examples</h1>
+</div>
+<div>
+<p>The following examples show some of the ways this feature of Cura can be used along with the import settings to convert the images.</p>
+</div>
+<div>
+<ol>
+<li>Nozzle Size</li>
+</ol>
+</div>
+<div>
+<p><img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image006.png?raw=true" alt="" width="243" height="151" />&nbsp;&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image008.jpg?raw=true" alt="" width="205" height="162" />&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image010.png?raw=true" alt="" width="266" height="206" />&nbsp;</p>
+</div>
+<div>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Image&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3D print&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cura import settings&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</div>
+<div>
+<ol start="2">
+<li>Bookmark</li>
+</ol>
+</div>
+<div>
+<p>In this example as darker is higher, the text will at 2mm thick, the bookmark shape is 50% grey so it will print at 1mm thick (so the bookmark is flexible) and the white areas don&rsquo;t print at all, creating holes as the base is set to 0.0mm.</p>
+</div>
+<div>
+<p><img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image012.jpg?raw=true" alt="" width="129" height="243" />&nbsp; &nbsp;&nbsp;&nbsp; <img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image013.png?raw=true" alt="" width="309" height="239" />&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image014.jpg?raw=true" alt="" width="137" height="250" /></p>
+</div>
+<div>
+<ol start="3">
+<li>Lithophane</li>
+</ol>
+</div>
+<div>
+<p>A lithophane is a 3D print of a photograph or image, that allows various amounts of light to pass through the different thicknesses of the print. When illuminated from behind it gives the appearance of a 3 dimensional photo. The import settings below give good transparency when printing with</p>
+</div>
+<div>
+<p><img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image016.jpg?raw=true" alt="" width="255" height="170" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image017.jpg?raw=true" alt="" width="257" height="205" />&nbsp; &nbsp; <img src="https://github.com/ecraft2learn/OER/blob/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image_images/image019.png?raw=true" alt="" width="361" height="222" /></p>
+</div>
+<div>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Image&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Cura import settings&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 D print</p>
+</div>
+<p><a href="https://github.com/ecraft2learn/OER/raw/master/Extruding%20a%203D%20model%20from%20a%202D%20Image/Extruding%20a%203D%20model%20from%20a%202D%20Image.pdf"><button type="button">Click here</button></a>&nbsp;to download this file.</p>

@@ -1,0 +1,37 @@
+body {
+  font-family: "Tahoma", "Trebuchet MS";
+  font-size: 1.1em;
+}
+figure {
+  display: block;
+  text-align: center;
+  left-margin: 20px;
+}
+figure img {
+  display:      block;
+  margin-left:  auto;
+  margin-right: auto;
+}
+figcaption {
+  font-style: italic; 
+}
+.iframe-container {
+  border: 1px solid rgb(201, 0, 1);
+  overflow: hidden;
+  margin: 15px auto;
+  width: 480px;
+  height: 70px;
+}
+.iframe-clipped {
+  border: 0px none;
+  margin-left: -10px;
+  height: 800px;
+  margin-top: 30px;
+  width: 1300px;
+  
+  -ms-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+}
