@@ -153,6 +153,18 @@
 </head>
 
 <body class="tile-area-scheme-dark fg-white">
+
+<!-- Google Translate -->
+
+<!-- Conditionally activated if translate is in the hash term of the URL -- after the # -->
+
+<div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  if (window.location.hash.indexOf('translate') >= 0) {
+     new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+  }
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 	
 	<div class="container-float">
 		
@@ -314,7 +326,7 @@
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5" onclick="helpClick('#BeetleBloxDialog', event);"></span>
 								<img class="tile-image icon" src="./images/beetle-blocks.png"/>
-								<span class="tile-label">Beetle Blocks</span>
+								<span class="tile-label"><span class='notranslate' translate='no'>Beetle Blocks</span></span>
 							</div>
 							<div class="slide-over bg-create text-small padding10">
 								Design a 3D model through programming
@@ -352,16 +364,16 @@
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5" onclick="helpClick('#SnapDialog', event);"></span>
 								<img class="tile-image icon" src="./images/snap_logo-110.png"/>
-								<span class="tile-label">Snap!</span>
+								<span class="tile-label"><span class='notranslate' translate='no'>Snap!</span></span>
 							</div>
 							<div class="slide-over bg-ardu-pi text-small padding10">
-								Snap! is awesome!
+								<span class='notranslate' translate='no'>Snap!</span> might have been called Snap! Senior</span>
 							</div>
 						</div>
 						<div data-role="dialog" id="SnapDialog" class="padding20" data-close-button="true" data-href="./about/snap-help.html" data-width="600"></div>
 					</div>
 					
-					<!-- SNAP4ARDU -->
+					<!-- SNAP4ARDUINO -->
                     <!-- We should launch with './snap4arduino/' but until the CRX security problem is fixed we need to use the cloud version -->
 					<div class="tile bg-arduino" data-role="tile" onclick="tileClick('https://snap4arduino.rocks/run/','Snap4Arduino', event);">
 						<div class="tile-content iconic slide-up">
@@ -371,7 +383,7 @@
 								<span class="tile-label">Snap4Arduino</span>
 							</div>
 							<div class="slide-over bg-arduino text-small padding10">
-								Some text and some even more text.
+								A version of Snap! for controlling Arduinos.
 							</div>
 						</div>
 						<div data-role="dialog" id="Snap4ArduinoDialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600"></div>
@@ -382,11 +394,11 @@
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="helpClick('#ArdublockDialog', event);"></span>
-								<span class="tile-image icon">A</span>
+								<span class="tile-image icon"><span class='notranslate' translate='no'>A</span></span>
 								<span class="tile-label">Ardublock</span>
 							</div>
 							<div class="slide-over bg-arduino text-small padding10">
-								Some text and some even more text.
+								A blocks-based language for programming Arduinos.
 							</div>
 						</div>
 						<div data-role="dialog" id="ArdublockDialog" class="padding20" data-close-button="true" data-href="./about/ardublock-help.html" data-width="600"></div>
@@ -442,7 +454,7 @@
 								<img class="tile-image icon" src="./images/pocket-code-allwhite.png"/>
 							</div>
 							<div class="slide-over bg-ardu-pi text-small padding10">
-								Pocket Code
+								<span class='notranslate' translate='no'>Pocket Code</span>
 							</div>
 						</div>
 						<div data-role="dialog" id="PocketCodeDialog" class="padding20" data-close-button="true" data-href="./about/pocket-code-help.html" data-width="600"></div>
@@ -529,7 +541,7 @@
 					<option>Not at a pilot site</option>
 					<option>Pataluoto School</option>
 					<option>Lyseo High School</option>
-					<option>Athens Informal pilot site</option>
+					<option>Athens informal pilot site</option>
 					<option>Athens formal pilot site</option>
 				</select>
             </div>
@@ -545,5 +557,8 @@
 	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-order:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
 	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
 
+
+
+}
 	
 </body>

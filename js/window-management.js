@@ -100,7 +100,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 	var bgColor = toolTile.css("background-color");
 	
 	activeWindow = $.Dialog({
-		title: "<span class='text-medium fg-white'>"+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
+		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
 		content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='"+(docWidth-20)+"' height='"+(docHeight-60)+"'  />",
 		padding: 0,
 		
