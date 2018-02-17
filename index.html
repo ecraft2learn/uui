@@ -20,7 +20,9 @@
 <!-- Sentry will report bugs to us -->
     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
     <script>
-    Raven.config('https://b7d953376d3b43eb8db89579d1b714ed@sentry.io/279764').install();
+    Raven.config('https://b7d953376d3b43eb8db89579d1b714ed@sentry.io/279764',
+                 {whitelistUrls: [/ecraft2learn\.github\.io/]})
+         .install();
     </script>
 
     <link rel="icon" type="image/png" href="images/eCraft2Learn-Favicon.png" />
