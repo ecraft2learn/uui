@@ -22,6 +22,7 @@
 				<input type='image' src='images/clear.png' id='clear' class='navbar-btn'>
 				<input type='image' src='images/redo.png' id='redo' class='navbar-btn'>
 				<input type='image' src='images/undo.png' id='undo' class='navbar-btn'>
+				<input type='image' src='images/text.png' id='text' class='navbar-btn'>
 				<input type='image' src='images/calculator.png' id='calculate' class='navbar-btn'>
 				<input type='image' src='images/download.png' id='save' class='navbar-btn'>
 				<form class='navbar-form navbar-right' role='search'>
@@ -46,20 +47,57 @@
 				padding: .5em 1em;
 
 			}
+
+			#canvases {
+				position: relative;
+}
+
+#tmp_canvas {
+	position: absolute;
+	left: 0px; right: 0;
+	bottom: 0; top: 0;
+	cursor: crosshair;
+}
+
+#text_tool {
+	position: absolute;
+	outline: 0;
+	display: none;
+	background-color: transparent;	
+	font: 10px Verdana;
+	overflow: hidden;
+	white-space: nowrap;
+}
 			
 		</style>
 		<script src='src/js/ui.js'></script>
 		<script>
+		
+			function removeTextTool() {
+			
+				
+			
+				$('#text_tool').remove();
+				$('#tmp_canvas').remove();
+				$('#tmp_text_ctn').remove();
+				
+				//var ui = new UI();
+				//ui.addCanvas('canvas-1');
+			
+			}
 
 			var ApiCall = function() {
 
 	var getQueryParam = function(param) {
     
     	var found;
+    	
+    	console.log(window.sessionStorage);
+    	
     
-    	window.location.search.substr(1).split("&").forEach(function(item) {
+    	document.referrer.search.substr(1).split("&").forEach(function(item) {
         
-        	if (param ==  item.split("=")[0]) {
+        	if (param == item.split("=")[0]) {
             
             	found = item.split("=")[1];
         
@@ -73,8 +111,8 @@
 	this.url = 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_ideation_vectors_pilot_2.php';
 	this.method = 'POST';
 	
-	this.sessionId = getQueryParam('sessionId');
-	this.users = getQueryParam('users');
+	this.sessionId = window.sessionStorage.getItem('pilotsite');
+	this.users = window.sessionStorage.getItem('username');
 
 	this.data = {
 	
@@ -90,7 +128,8 @@
 		undo: 0,
 		calculator: 0,
 		download: 0,
-		color: 0
+		color: 0,
+		text: 0
 	
 	};
 	
@@ -100,13 +139,17 @@ ApiCall.prototype.post = function() {
 
 	var self = this;
 	
+	var data = 'users=' + self.users + '&sessionId=' + self.sessionId + '&data=' + encodeURIComponent(JSON.stringify(self.data));
+	
+	//console.log(data);
+	
 	$.ajax({
         url: self.url,
         type: self.method,
-        data: 'sessionId=' + self.sessionId + '&data=' + encodeURIComponent(JSON.stringify(self.data)),
+        data: data,
         success: (data) => {
         
-        	
+        	console.log(data);
         
         },
         error: (error) => {
@@ -123,6 +166,8 @@ ApiCall.prototype.setData = function(key, data) {
 	this.data[key] = data;
 
 };
+			var tmp_canvas;
+			
 
 			$(document).ready(() => {
 
@@ -168,6 +213,7 @@ ApiCall.prototype.setData = function(key, data) {
 					$('#clear').removeClass('active-img');
 					$('#redo').removeClass('active-img');
 					$('#undo').removeClass('active-img');
+					$('#text').removeClass('active-img');
 
 				};
 
@@ -252,13 +298,15 @@ ApiCall.prototype.setData = function(key, data) {
 				}, false);  
 
 				$('#pen').on('click', (e) => {
+					
+					removeTextTool();
 
 					var request = new ApiCall();
                                         request.setData('pen', 1);
                                         request.post();
+					
 
-
-					ui.getCanvas().setTool('pencil');
+					//ui.getCanvas().setTool('pencil');
 
 					removeClasses();
 					$('#pen').addClass('active-img');
@@ -266,8 +314,181 @@ ApiCall.prototype.setData = function(key, data) {
 
 				});
 
+				$('#text').on('click', (e) => {
+
+					
+
+					var canvas = document.querySelector('#canvas-1');
+	var ctx = canvas.getContext('2d');
+	
+	var sketch = document.querySelector('#canvases');
+	var sketch_style = getComputedStyle(sketch);
+	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
+	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+	
+	
+	// Creating a tmp canvas
+	tmp_canvas = document.createElement('canvas');
+	var tmp_ctx = tmp_canvas.getContext('2d');
+	tmp_canvas.id = 'tmp_canvas';
+	tmp_canvas.width = canvas.width;
+	tmp_canvas.height = canvas.height;
+	
+	
+	
+	sketch.appendChild(tmp_canvas);
+
+	tmp_ctx.drawImage(ui.getCanvas().canvas(), 0, 0);
+
+	//tmp_canvas = ui.getCanvas().canvas();
+	//console.log(tmp_canvas);
+	
+	//var tmp_ctx = ui.getCanvas().ctx();
+
+	var mouse = {x: 0, y: 0};
+	var start_mouse = {x: 0, y: 0};
+	var last_mouse = {x: 0, y: 0};
+	
+	var sprayIntervalID;
+	
+	var textarea = document.createElement('textarea');
+	textarea.id = 'text_tool';
+	sketch.appendChild(textarea);
+	
+	// Text tool's text container for calculating
+	// lines/chars
+	var tmp_txt_ctn = document.createElement('div');
+	tmp_txt_ctn.style.display = 'none';
+	tmp_txt_ctn.id = 'tmp_text_ctn';
+	sketch.appendChild(tmp_txt_ctn);
+	
+	
+	textarea.addEventListener('mouseup', function(e) {
+		tmp_canvas.removeEventListener('mousemove', onPaint, false);
+	}, false);
+	
+	
+	/* Mouse Capturing Work */
+	tmp_canvas.addEventListener('mousemove', function(e) {
+		mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
+		mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
+	}, false);
+	
+	
+	/* Drawing on Paint App */
+	tmp_ctx.lineWidth = 5;
+	tmp_ctx.lineJoin = 'round';
+	tmp_ctx.lineCap = 'round';
+	tmp_ctx.strokeStyle = 'blue';
+	tmp_ctx.fillStyle = 'blue';
+	
+	tmp_canvas.addEventListener('mousedown', function(e) {
+		tmp_canvas.addEventListener('mousemove', onPaint, false);
+		
+		mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
+		mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
+		
+		start_mouse.x = mouse.x;
+		start_mouse.y = mouse.y;
+		
+		// onPaint();
+		// sprayIntervalID = setInterval(onPaint, 50);
+	}, false);
+	
+	tmp_canvas.addEventListener('mouseup', function() {
+		tmp_canvas.removeEventListener('mousemove', onPaint, false);
+		
+		var lines = textarea.value.split('\n');
+		var processed_lines = [];
+		
+		for (var i = 0; i < lines.length; i++) {
+			var chars = lines[i].length;
+			
+			for (var j = 0; j < chars; j++) {
+				var text_node = document.createTextNode(lines[i][j]);
+				tmp_txt_ctn.appendChild(text_node);
+				
+				// Since tmp_txt_ctn is not taking any space
+				// in layout due to display: none, we gotta
+				// make it take some space, while keeping it
+				// hidden/invisible and then get dimensions
+				tmp_txt_ctn.style.position   = 'absolute';
+				tmp_txt_ctn.style.visibility = 'hidden';
+				tmp_txt_ctn.style.display    = 'block';
+				
+				var width = tmp_txt_ctn.offsetWidth;
+				var height = tmp_txt_ctn.offsetHeight;
+				
+				tmp_txt_ctn.style.position   = '';
+				tmp_txt_ctn.style.visibility = '';
+				tmp_txt_ctn.style.display    = 'none';
+				
+				// Logix
+				// console.log(width, parseInt(textarea.style.width));
+				if (width > parseInt(textarea.style.width)) {
+					break;
+				}
+			}
+			
+			processed_lines.push(tmp_txt_ctn.textContent);
+			tmp_txt_ctn.innerHTML = '';
+		}
+		
+		var ta_comp_style = getComputedStyle(textarea);
+		var fs = ta_comp_style.getPropertyValue('font-size');
+		var ff = ta_comp_style.getPropertyValue('font-family');
+		
+		tmp_ctx.font = fs + ' ' + ff;
+		tmp_ctx.textBaseline = 'top';
+		
+		for (var n = 0; n < processed_lines.length; n++) {
+			var processed_line = processed_lines[n];
+			
+			tmp_ctx.fillText(
+				processed_line,
+				parseInt(textarea.style.left),
+				parseInt(textarea.style.top) + n*parseInt(fs)
+			);
+			
+		}
+		
+		// Writing down to real canvas now
+		//ctx.drawImage(tmp_canvas, 0, 0);
+		ctx.drawImage(tmp_canvas, 0, 0);
+		//ui.getCanvas().fromDataURL(tmp_ctx, () => { console.log('jaa'); } );
+		// Clearing tmp canvas
+		tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+		
+		// clearInterval(sprayIntervalID);
+		textarea.style.display = 'none';
+		textarea.value = '';
+	}, false);
+	
+	var onPaint = function() {
+		
+		// Tmp canvas is always cleared up before drawing.
+		//tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+		
+		//console.log('jaa');
+		
+		var x = Math.min(mouse.x, start_mouse.x);
+		var y = Math.min(mouse.y, start_mouse.y);
+		var width = Math.abs(mouse.x - start_mouse.x);
+		var height = Math.abs(mouse.y - start_mouse.y);
+		
+		textarea.style.left = x + 'px';
+		textarea.style.top = y + 'px';
+		textarea.style.width = width + 'px';
+		textarea.style.height = height + 'px';
+		
+		textarea.style.display = 'block';
+	};
+
+				});
 
 				$('#save').on('click', (e) => {
+				
+					removeTextTool();
 
 					var request = new ApiCall();
                                         request.setData('download', 1);
@@ -281,6 +502,8 @@ ApiCall.prototype.setData = function(key, data) {
 				});
 
 				$('#eraser').on('click', (e) => {
+					
+					removeTextTool();
 
 					var request = new ApiCall();
                                         request.setData('eraser', 1);
@@ -294,6 +517,8 @@ ApiCall.prototype.setData = function(key, data) {
 				});
 
 				$('#rect').on('click', (e) => {
+				
+					removeTextTool();
 
 					var request = new ApiCall();
                                         request.setData('rectangle', 1);
@@ -307,6 +532,8 @@ ApiCall.prototype.setData = function(key, data) {
 				});
 
 				$('#ellipse').on('click', (e) => {
+				
+					removeTextTool();
 
 					var request = new ApiCall();
                                         request.setData('circle', 1);
@@ -321,6 +548,8 @@ ApiCall.prototype.setData = function(key, data) {
 
 				$('#color').change((e) => {
 				
+					removeTextTool();
+				
 					var request = new ApiCall();
                                         request.setData('color', 1);
                                         request.post();
@@ -330,6 +559,8 @@ ApiCall.prototype.setData = function(key, data) {
 				});
 
 				$('#increase').on('click', (e) => {
+				
+					removeTextTool();
 
 					var request = new ApiCall();
                                         request.setData('add', 1);
@@ -343,6 +574,8 @@ ApiCall.prototype.setData = function(key, data) {
 				});
 
 				$('#decrease').on('click', (e) => {
+				
+					removeTextTool();
 
 					var request = new ApiCall();
                                         request.setData('remove', 1);
@@ -356,6 +589,8 @@ ApiCall.prototype.setData = function(key, data) {
 				});
 
 				$('#clear').on('click', (e) => {
+				
+					
 
 					var request = new ApiCall();
                                         request.setData('clear', 1);

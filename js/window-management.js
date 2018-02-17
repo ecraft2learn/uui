@@ -93,11 +93,14 @@ function openHelpDialog(helpUrl, event){
 
 //Given a url and a title for the window, this function creates a window (uses Metro UI dialog classes) and opens the url as an iframe in it.
 function openIframeWindow(toolUrl, toolName, event) {
-	docWidth = $(window).width()-100;
+	docWidth = $(window).width()-500;
 	docHeight = $(window).height()-100;
 	
 	var toolTile = $(event.srcElement).closest('[data-role], tile');
 	var bgColor = toolTile.css("background-color");
+	
+	if(bgColor=="rgb(255, 255, 255)")
+		bgColor="rgb(64,64,64)";
 	
 	activeWindow = $.Dialog({
 		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
@@ -116,6 +119,8 @@ function openIframeWindow(toolUrl, toolName, event) {
 	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, toolIcon, bgColor, toolName);
 	
 	activeWindow.data('winData', frame);
+	
+	return activeWindow;
 }
 
 //Given a window button (close, maximize, minimize) this function, finds the related window and closes it.
@@ -175,6 +180,7 @@ function minimizeWindow(minBtn){
 	
 	var $button = createMinimizedTab(winData);
 	$button.data('winDiv', winDiv);
+	$button.attr('id', $(winDiv).attr('id')+"_btn");
 	$('#bottomCharm').append($button);
 	
 	showMetroCharm('#bottomCharm');
@@ -195,13 +201,32 @@ function unminimizeWindow() {
 	if (typeof event === 'undefined') {
 		return; // needs to be fixed
 	}
+	
 	var $buttonElem = typeof event !== 'undefined' && $(event.srcElement).closest('button');
 	var $winData = $buttonElem.data('winData');
 	var $winDiv = $buttonElem.data('winDiv');
-	 
+	
+	
+	
 	resizeWindow2Normal($winDiv, $winData);
 	
 	$($buttonElem).remove();
+	
+	 if($('#bottomCharm').find('button').length==0){
+		hideMetroCharm('#bottomCharm');
+	} 
+}
+//Does as the unminimizeWindow function, except that this one is trigerred from JS code
+function unminimizeWindowFromJS(minButton){
+	if(typeof minButton === 'undefined') 
+		return;
+	
+	var $winData = $(minButton).data('winData');
+	var $winDiv = $(minButton).data('winDiv');
+	
+	resizeWindow2Normal($winDiv, $winData);
+	
+	$(minButton).remove();
 	
 	 if($('#bottomCharm').find('button').length==0){
 		hideMetroCharm('#bottomCharm');

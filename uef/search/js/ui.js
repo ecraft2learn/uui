@@ -36,8 +36,8 @@ var ApiCall = function() {
 	this.url = 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_search_vectors_pilot_2.php';
 	this.method = 'POST';
 	
-	this.sessionId = getQueryParam('sessionId');
-	this.users = getQueryParam('users');
+	this.sessionId = window.sessionStorage.getItem('pilotsite');
+	this.users = window.sessionStorage.getItem('username');
 
 	this.data = {
 	
@@ -56,7 +56,7 @@ ApiCall.prototype.post = function() {
 	$.ajax({
         url: self.url,
         type: self.method,
-        data: 'sessionId=' + self.sessionId + '&data=' + encodeURIComponent(JSON.stringify(self.data)),
+        data: 'sessionId=' + self.sessionId + '&users=' + self.users + '&data=' + encodeURIComponent(JSON.stringify(self.data)),
         success: (data) => {
         
         	

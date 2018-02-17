@@ -52,6 +52,34 @@
 .bg-tools-shares {
 	background-color: #e85156;
 }
+.bg-help-charm{
+	background-color: #3c3f41;
+}
+.bg-helpbutton-image{
+	background-color: #111111;
+}
+.bg-transparent{
+	background-color: rgba(0,0,0,0);
+}
+.color-help-button:hover{
+	background-color: rgb(48,48,48);
+	color: white;
+}
+.vertical-text{
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform: rotate(90deg);
+    white-space:nowrap;
+    display:block;
+    bottom:0;
+	width: 20px;
+	height: 20px;
+	transform-origin: left top 0;
+	float: left;
+}
+
 h2 {
 	margin-bottom: 20px;
 }

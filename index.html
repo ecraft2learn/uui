@@ -13,6 +13,7 @@
 
 
     <link href="libraries/css/metro.css" rel="stylesheet">
+	<link href="libraries/css/metro-schemes.css" rel="stylesheet">
 	<link href="libraries/css/metro-icons.css" rel="stylesheet">
 	
     <script src="libraries/js/metro.js"></script>
@@ -144,12 +145,60 @@
 			}
 			else{
 				analyticField = getAnalyticFieldName(toolUrl);
+				
+				//var url = toolUrl + '&username=' + params['username'] + '&sessionId=' + params['pilotsite'];
+				//console.log(url);
+				
+				window.sessionStorage.setItem('username', params['username']);
+				window.sessionStorage.setItem('pilotsite', params['pilotsite']);
+				
 				openIframeWindow(toolUrl, winTitle, event);
 			}
 			
 			sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
 		}
-		
+		function showInOERWindow(event){
+			//allWin = $("div").find('[class], bg-red');
+			allWin = $("*").find("div[data-role*='dialog']");
+			oerWin = $("#oerWin");	
+			
+			var oerMainFolder = "help/oer/";
+			var eventNode = $(event.srcElement);
+			var oerText = $(eventNode).html();
+			var oerAddress = (oerMainFolder + oerText + "/" + oerText + ".html").toLowerCase().replace(/ /g,'_');
+			
+			if ($(oerWin).html() == undefined)
+			{
+				var dialog = openIframeWindow(oerAddress, "Open Educational Resources", event);
+				$(dialog).attr('id', 'oerWin');
+				/*var iframe = $(dialog).find("[id|='iframeWindow']")[0];
+				var dcmnt = (iframe.contentDocument || iframe.contentWindow.document);
+				var otherhead = dcmnt.getElementsByTagName("head")[0];
+				var link = dcmnt.createElement("link");
+				link.setAttribute("rel", "stylesheet");
+				link.setAttribute("type", "text/css");
+				link.setAttribute("href", "../../libraries/css/metro.css");
+				otherhead.appendChild(link);
+				
+				alert(otherhead.innerHTML);
+				curHead = document.getElementByTagName("head");
+				//iframe = $(dialog).getElementById("iframeWindow");
+				iframe.reload();
+				alert(curHead);
+				if($(iframe).find("head").length == 0)
+					$(iframe).append("<head></head>");
+				alert($(iframe).find("td").length);*/
+			}
+			else{
+				var iframe = $(oerWin).find("[id|='iframeWindow']")[0];
+				$(iframe).attr('src', oerAddress);
+				
+				var oerMinimizedBtn = $("#oerWin_btn");
+				if($(oerMinimizedBtn).attr('id') == 'oerWin_btn'){
+					unminimizeWindowFromJS(oerMinimizedBtn);
+				}
+			}
+		}
 	</script>
 	
 </head>
@@ -521,7 +570,6 @@ function googleTranslateElementInit() {
 	</div> <!--End of Main Content Container-->
 
 	<!--Login Box and Hidden Data-->
-	
 	<div  id="loginForm" class="login-form padding20 block-shadow" style="z-index:2;">
 		
         <form>
@@ -540,11 +588,11 @@ function googleTranslateElementInit() {
                 <!--<input type="password" name="user_password" id="user_password">
                 <button class="button helper-button reveal"><span class="mif-looks"></span></button>-->
 				<select class="fg-black" name="pilotsite" id="pilotsite">
-					<option>Not at a pilot site</option>
-					<option>Pataluoto School</option>
-					<option>Lyseo High School</option>
-					<option>Athens informal pilot site</option>
-					<option>Athens formal pilot site</option>
+					<option value='10'>Not at a pilot site</option>
+					<option value='11'>Pataluoto School</option>
+					<option value='12'>Lyseo High School</option>
+					<option value='13'>Athens informal pilot site</option>
+					<option value='14'>Athens formal pilot site</option>
 				</select>
             </div>
             <br />
@@ -556,11 +604,106 @@ function googleTranslateElementInit() {
         </form>
 	</div>
 	
+	<!-- The Task Bar at the bottom of the page-->
 	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-order:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
 	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
 
-
-
-}
+	<!-- OER Panel to the Right-->
+	<div class="vertical-text pull-right" style="position: absolute; right:0; top:50px; "  onclick="toggleMetroCharm('#rightCharm');">
+		<button class="image-button large-button fg-white bg-transparent">Educational Resources  |  Tutorials  |  FAQ</button>
+    </div>
+	<div id="rightCharm" data-role="charm" data-position="right"  class="bg-help-charm"><span>&nbsp;</span>
+		
+		<br/><br/><br/>
+		
+		<ul class="v-menu subdown min-size-required darcula">
+			<!--<li><a href="#"><img src="./images/electronics.png">Electronic Devices</a></li>-->
+			<li onclick="showInOERWindow(event);"><a class="dropdown-toggle"><img src="./images/electronics.png" class="mif-ani-hover-spanner"></img>Electronic Devices</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" class="dropdown-toggle">Basics</a>
+						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#">Batteries</a></li>
+							<li><a href="#">Breadboard</a></li>
+							<li><a href="#">DC Motor</a></li>
+							<li><a href="#">Digital and Analog Signals</a></li>
+							<li><a href="#">Input and Output Devices</a></li>
+							<li><a href="#">Jumper Wires</a></li>
+							<li><a href="#">LED</a></li>
+							<li><a href="#">Magnetic Switch</a></li>
+							<li><a href="#">Resistor</a></li>
+							<li><a href="#">Servo Motor</a></li>
+							<li><a href="#">Switch</a></li>
+						</ul>
+					</li>
+					<li><a href="#" class="dropdown-toggle">Sensors</a>
+						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#">Accelerometer</a></li>
+							<li><a href="#">Color Sensor</a></li>
+							<li><a href="#">Flex Sensor</a></li>
+							<li><a href="#">Gas Sensor</a></li>
+							<li><a href="#">Gyroscope</a></li>
+							<li><a href="#">LDR Sensor</a></li>
+							<li><a href="#">Microphone</a></li>
+							<li><a href="#">Piezo Sensor</a></li>
+							<li><a href="#">PIR sensor</a></li>
+							<li><a href="#">Potentiometer Sensor</a></li>
+							<li><a href="#">Pressure Sensor</a></li>
+							<li><a href="#">Sensors</a></li>
+							<li><a href="#">Tilt Sensor</a></li>
+							<li><a href="#">Ultrasonic Sensor</a></li>
+						</ul>
+					</li>
+					<li><a href="#" class="dropdown-toggle">More ...</a>
+						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#">Conductive Paint</a></li>
+							<li><a href="#">Conductive Thread</a></li>
+							<li><a href="#">Copper Tape</a></li>
+							<li><a href="#">IR Array</a></li>
+						</ul>
+					</li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+			
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-film mif-ani-hover-spanner"></span>
+					<span class="title">Tutorials</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/education/getting-started-with-an-ultimaker','3D Print Tutorials', event);">3D Printing</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+			
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-users mif-ani-hover-spanner"></span>
+					<span class="title">Communities</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" onclick="tileClick('https://community.ultimaker.com/','Ultimaker Community', event);">3D Printing</a></li>
+					<!--The following 2 links cannot be opened in a window because of XFrame limitation and HTTP/HTTPS, for now I am opening them in a new tab, until the issue is fixed-->
+					<li><a href="https://forum.arduino.cc/" target="_blank" onclick_oldold="tileClick('https://forum.arduino.cc/','Arduino Forum', event);">Arduino Forum</a></li>
+					<li><a href="http://playground.arduino.cc/" target="_blank" onclick_old="tileClick('http://playground.arduino.cc/','Arduino Playground', event);">Arduino Wiki</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+			
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-wrench mif-ani-hover-spanner"></span>
+					<span class="title">Troubleshooting</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/troubleshooting','Ultimaker Troubleshooting', event);">3D Printing</a></li>
+					<li><a href="#" onclick="tileClick('./help/troubleshooting/index_new','eCraft2Learn UUI Troubleshooting', event);">UUI</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+		</ul>
+		<br/><br/><br/>
+	</div>
 	
 </body>
