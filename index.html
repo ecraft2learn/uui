@@ -226,7 +226,7 @@ function googleTranslateElementInit() {
 				<img id="eCraftLogo" src="images/eCraft2Learn-icon.png" />
 			</div>
 			<div id="eCraftMotto" class="no-margin-top">
-				Digital Fabrication and Maker Movement in Education (<a href="./help/troubleshooting/" target="_blank">Trouble shooting help</a>)
+				Digital Fabrication and Maker Movement in Education <!--(<a href="./help/troubleshooting/" target="_blank">Trouble shooting help</a>)-->
 			</div>
 		</header>
 	
@@ -660,6 +660,7 @@ function googleTranslateElementInit() {
 							<li><a href="#">Conductive Thread</a></li>
 							<li><a href="#">Copper Tape</a></li>
 							<li><a href="#">IR Array</a></li>
+							<li><a href="#">3D Printing</a></li>
 						</ul>
 					</li>
 					<li class="divider"></li>
@@ -672,7 +673,11 @@ function googleTranslateElementInit() {
 				</a>
 				<ul class="d-menu" data-role="dropdown">
 					<li class="divider"></li>
-					<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/education/getting-started-with-an-ultimaker','3D Print Tutorials', event);">3D Printing</a></li>
+					<!--<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/education/getting-started-with-an-ultimaker','3D Print Tutorials', event);">3D Printing</a></li>-->
+					<li><a href="#" onclick="tileClick('./help/oer/introduction_to_3d_printing/introduction_to_3d_printing.html', '3D Printing', event)">Introduction to 3D Printing</a></li>
+					<li><a href="#" onclick="tileClick('./help/oer/3d_cad_modelling_in_tinkercad/3d_cad_modelling_in_tinkercad.html', '3D Modelling', event)">3D Modelling in TinkerCad</a></li>
+					<li><a href="#" onclick="tileClick('./help/oer/cura_quick_start_guide/cura_quick_start_guide.pdf', '3D Print Troubleshooting', event)">Cura Quickstart</a></li>
+					<li><a href="#" onclick="tileClick('./help/oer/extruding_a_3d_model_from_a_2d_image/extruding_a_3d_model_from_a_2d_image.html', '3D Print Troubleshooting', event)">Extruding 3D Model from 2D Image</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
@@ -697,8 +702,14 @@ function googleTranslateElementInit() {
 				</a>
 				<ul class="d-menu" data-role="dropdown">
 					<li class="divider"></li>
-					<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/troubleshooting','Ultimaker Troubleshooting', event);">3D Printing</a></li>
-					<li><a href="#" onclick="tileClick('./help/troubleshooting/index_new','eCraft2Learn UUI Troubleshooting', event);">UUI</a></li>
+					<!--<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/troubleshooting','Ultimaker Troubleshooting', event);">3D Printing</a></li>-->
+					<li><a href="#" class="dropdown-toggle">3D Printing</a>
+						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#" onclick="tileClick('./help/oer/3d_print_not_sticking_to_the_build_plate_long_version/3d_print_not_sticking_to_the_build_plate_long_version.html','3D Print Troubleshooting',event)">3D Print Not Sticking to Build Plate</a></li>
+							<li><a href="#" onclick="tileClick('./help/oer/3d_printing_troubleshooting_guide/3d_printing_troubleshooting_guide.pdf', '3D Print Troubleshooting', event)">Other 3D Printing Problems</a></li>
+						</ul>
+					</li>
+					<li><a href="#" onclick="tileClick('./help/troubleshooting/index_new.html','eCraft2Learn UUI Troubleshooting', event);">eCraft2Learn Components</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
