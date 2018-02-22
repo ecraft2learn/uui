@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  
+body{
+	background-color: white;
+	padding-left:30px;
+	padding-top:20px;
+	padding-bottom:20px;
+	
+	font-family: "Segoe UI Light", "Segoe UI", "Segoe WP", "Helvetica Neue", sans-serif;
+	font-size: 14px;
+	line-height: 1.428571429;
+	color: #333333;
+}
+td{
+	padding-right: 30px;
+}
+tr{
+	padding-bottom: 20px;
+}
+#img1{
+    float: left;
+	padding-right:30px;
+}
+</style>
+</head>
+<p><a href="https://project.ecraft2learn.eu" target="_blank" rel="noopener"><strong><img src="https://github.com/ecraft2learn/OER/blob/master/Logos/Logo_eCraft2Learn.png?raw=true" alt="" width="590" height="112" /></strong></a></p>
+<div>
+<div>
+<div>
+<p><a href="https://github.com/ecraft2learn/uui/raw/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual.pdf"><button type="button">Click here</button></a>&nbsp;to download this file.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<h1>Ultimaker 3&nbsp;Installation and user manual&nbsp;</h1>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<h2>Disclaimer</h2>
+</div>
+</div>
+</div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="43" height="43" /></p>
+</div>
+<div>
+<div>
+<div>
+<p>Please read and understand the contents of this installation and user manual carefully. Failure to read the manual&nbsp;may lead to personal injury, inferior results or damage to the Ultimaker 3. Always make sure that anyone who&nbsp;uses the 3D printer knows and understand the contents of the manual and makes the most out of the Ultimaker 3&nbsp;or Ultimaker 3 Extended.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>The conditions or methods used for assembling, handling, storage, use or disposal* of the device are beyond our control&nbsp;and may be beyond our knowledge. For this and other reasons, we do not assume responsibility and expressly disclaim&nbsp;liability for loss, injuries, damage, or expense arising out of or in any way connected with the assembly, handling, storage,&nbsp;use or disposal of the product.*</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>The information in this document was obtained from sources which we believe are reliable. However, the information is&nbsp;provided without any warranty, express or implied, regarding its correctness.&nbsp;</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p><strong>Intended use Ultimaker 3</strong><br />Ultimaker 3D printers are designed and built for fused deposition modeling with Ultimaker engineering thermoplastics&nbsp;within a commercial/business environment. The mixture of precision and speed makes the Ultimaker 3D printers the&nbsp;perfect machine for concept models, functional prototypes and the production of small series. Although we achieved a&nbsp;very high standard in the reproduction of 3D models with the usage of Cura, the user remains responsible to qualify and&nbsp;validate the application of the printed object for its intended use, especially critical for applications in strictly regulated&nbsp;areas like medical devices and aeronautics. While being an open material platform the best results will be achieved with&nbsp;Ultimaker certified material, while effort has been made in order to match material properties with machine settings.&nbsp;<br />* We comply to the WEEE-directive.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<h2>Preface</h2>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>This is the installation and user manual for your Ultimaker 3 or Ultimaker 3 Extended. This manual contains chapters about&nbsp;the installation and use of the 3D printer.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>The manual contains important information and instructions on safety, installation and use. Please read all information and&nbsp;follow the instructions and guidelines in this manual carefully. This ensures that you will obtain great quality prints and&nbsp;that possible accidents and injuries will be prevented.<br />Make sure that everyone who uses the Ultimaker 3 or Ultimaker 3 Extended has access to this manual.&nbsp;</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>Every effort has been made to make this manual as accurate and complete as possible. The information is believed to be&nbsp;correct but does not aim to be all inclusive and shall be used only as a guide. Should you discover any errors or omissions,&nbsp;please bring this to our attention, so that we can make amendments. This will enable us to improve our documentation and&nbsp;service to you.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<h2>1 Safety and&nbsp;compliance</h2>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<h3>It is very important to work safely with your&nbsp;Ultimaker 3 or Ultimaker 3 Extended.&nbsp;This chapter is about safety and hazards.&nbsp;Please read all information carefully to prevent&nbsp;possible accidents and injuries.</h3>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<h3>Safety messages</h3>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>This manual contains warnings and safety notices.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image017.gif?raw=true" alt="" width="40" height="78" /></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>Provides additional information that is helpful to do a task or to avoid problems.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>&nbsp;</p>
+<p>Warns of a situation that may cause material damage or injuries if one does not follow the safety instructions.</p>
+</div>
+</div>
+</div>
+<div>
+<p>&nbsp;</p>
+</div>
+<div>
+<div>
+<div>
+<p><strong>General Safety Information</strong><br />The Ultimaker 3 or Ultimaker 3 Extended generates high temperatures and has hot moving parts that can cause injury.&nbsp;Never reach inside of the Ultimaker 3 or Ultimaker 3 Extended while it is in operation. Always control the printer with&nbsp;the button at the front or the power switch at the back. Allow the Ultimaker 3 or Ultimaker 3 Extended to cool down for 5&nbsp;minutes before reaching inside.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>Do not change or adjust anything on the Ultimaker 3 unless the change is authorized by the manufacturer.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>Do not store items in the Ultimaker 3.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>The Ultimaker 3 or Ultimaker 3 Extended is not intended for use by persons with reduced physical and/or mental&nbsp;capabilities, or lack of experience and knowledge, unless they have been given supervision or instruction concerning the&nbsp;use of the appliance by a person responsible for their safety.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>Children should be under constant supervision when using the printer.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p><strong>Intentional radio</strong></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>This device may not cause harmful interference, and this device must accept any interference received, including&nbsp;interference that may cause undesired operation.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<h3>Hazards</h3>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p><strong>Electromagnetic Compatibility (EMC)</strong></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>This equipment has been tested and found to comply with the limits for a Class A digital device, pursuant to part 15 of the&nbsp;FCC Rules. These limits are designed to provide reasonable protection against harmful interference when the equipment is&nbsp;operated in a commercial environment. This equipment generates, uses, and can radiate radio frequency energy and, if not&nbsp;installed and used in accordance with the instruction manual, may cause harmful interference to radio communications. Operation of this equipment in a residential area is likely to cause harmful interference in which case the user will be&nbsp;required to correct the interference at his own expense.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>The EMC test report of the Ultimaker 3 or Ultimaker 3 Extended is available on request at info@ultimaker.com.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p><strong>Electrical Safety</strong></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p><strong><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image018.gif?raw=true" alt="" width="40" height="90" /></strong></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>The Ultimaker 3 has been tested according to the IEC 60950-1, which falls under the low voltage directive.&nbsp;The Ultimaker 3 must be used in conjunction with the Meanwell power supply GST220AX and delivered&nbsp;power cord. In combination they guarantee safe use in relation to short-circuit, overload, over-voltage and over&nbsp;temperature. For more information, please look at our website for the CB-report.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>Always unplug the printer before doing maintenance or modifications.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>&nbsp;</p>
+<p><strong>Mechanical Safety</strong></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p><strong><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image019.gif?raw=true" alt="" width="38" height="80" /></strong></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>The Ultimaker 3 contains moving parts. No damage to the user will be expected from the drive belts. The force&nbsp;of the build plate is big enough to give some damage, so keep hands out of the reach of the build plate during&nbsp;operation.</p>
+<p>Always unplug the printer before doing maintenance or modifications.</p>
+<p><strong>Health and Safety</strong></p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image021.gif?raw=true" alt="" width="43" height="41" /></p>
+<p>The Ultimaker 3 is designed for Ultimaker PLA, Ultimaker ABS, Ultimaker CPE, Ultimaker Nylon and Ultimaker&nbsp;PVA. Our materials can be printed safely if the recommended temperatures and settings are used. We recommend&nbsp;to print all Ultimaker materials in a well-ventilated area. Please check the SDS of each specific material for more&nbsp;information.</p>
+<p>Non-Ultimaker materials could release VOC&rsquo;s (volatile organic compounds) while processed in Ultimaker 3D printers&nbsp;(not covered by warranty). These can cause headaches, fatigue, dizziness, confusion, drowsiness, malaise, difficulty in&nbsp;concentration and feeling of intoxication. Usage of a fume hood is recommended. Take a look the SDS of these materials&nbsp;for more information.</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<p>&nbsp;</p>
+<h2>2 Introduction&nbsp;</h2>
+<h3>Meet your Ultimaker 3 and learn what&nbsp;the possibilities of this 3D printer are.</h3>
+</div>
+</div>
+</div>
+<div>
+<div>
+<h3>Main components Ultimaker 3 or Ultimaker 3 Extended.&nbsp;</h3>
+</div>
+</div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image023.png?raw=true" alt="" width="626" height="604" /></p>
+</div>
+<div>
+<p>The model exposed is the Ultimaker 3. The main components of the Ultimaker 3 Extended are the same and on the&nbsp;exact same position. The only difference between the two printers is the height of the housing. See Specifications&nbsp;for the different dimensions.</p>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Specifications</h3>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image027.png?raw=true" alt="" width="966" height="586" /></p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image028.png?raw=true" alt="" width="966" height="593" />&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h2>3 Unpack and install&nbsp;the hardware</h2>
+</div>
+</div>
+<div>
+<div>
+<h3>Carefully unpack your Ultimaker 3 or&nbsp;Ultimaker 3 Extended and set up the hardware&nbsp;according to the instructions in this chapter.&nbsp;&nbsp;</h3>
+</div>
+</div>
+<div>
+<div>
+<h3>Unboxing</h3>
+</div>
+</div>
+<div>
+<div>
+<p>The Ultimaker comes in reusable, durable packaging, specially designed to protect your Ultimaker 3.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Unpacking</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Follow the steps below properly to unpack your Ultimaker 3.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Take the Ultimaker 3 out of the cardboard box.<br />2. Loosen the strap by opening the buckle.<br />3. Remove the top part of the styrofoam packaging with the two spools of filament and factory test print in it.<br />4. Take out the accessory box.<br />5. Remove the styrofoam part that is placed at the front bottom side of the Ultimaker 3.<br />6. Take the Ultimaker 3, remove the bottom styrofoam part and place the Ultimaker 3 on a flat surface.<br />7. Cut the zip tie that secures the print head.<br />8. Remove the piece of tape from the print head.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image029.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image030.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image031.png?raw=true" alt="" width="340" height="230" />&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image032.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image033.png?raw=true" alt="" width="340" height="230" />&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image034.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>This in the box</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Besides the spools of PLA (350 g) and PLA (350 g), test print and a quick start guide, the Ultimaker 3 is supplied with&nbsp;several hardware accessories. Check if all these accessories are included before continuing.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Power cable (under the printer)<br />2. Power adapter<br />3. Ethernet cable<br />4. Spool holder with NFC cable<br />5. Material guide<br />6. Cable cover<br />7. Glass plate<br />8. Calibration card<br />9. Print core AA 0.4 and print core BB 0.4</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.gif?raw=true" alt="" width="30" height="31" />&nbsp;Another print core AA 0.4 is placed in print head slot 1 of the Ultimaker 3.</p>
+</div>
+</div>
+<div>
+<div>
+<p>10. Hex screwdriver<br />11. USB stick<br />12. XY calibration sheet<br />13. Glue stick<br />14. Magnalube grease (for Z trapezoidal leadscrew)<br />15. Machine oil (for X/Y/Z axles)</p>
+</div>
+</div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image038.png?raw=true" alt="" width="793" height="516" /></p>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Installing the hardware accessories</h3>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Placing and connecting the NFC spool holder</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Gently place the printer on its left side.<br />2. Insert the spool holder into the back panel. First place the top part in the hole and push until it snaps into place.<br />3. Connect the NFC cable to the NFC socket. The flat side of the connector faces away from the bottom panel.<br />4. Guide the NFC cable through the notch in the back panel.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" /></p>
+<p>If you have an Ultimaker 3 you should coil the remaining cable up against the back panel, so that it fits behind the&nbsp;cable cover properly. This is not necessary for the Ultimaker 3 Extended.</p>
+</div>
+</div>
+<div>
+<div>
+<p>5. Insert the cable cover into the back panel to keep the cable in place.<br />6. Gently place the Ultimaker 3 upright.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image040.png?raw=true" alt="" width="340" height="230" />&nbsp;&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image041.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image042.png?raw=true" alt="" width="340" height="230" />&nbsp;&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image043.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Placing the glass plate</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Open the two build plate clamps at the front of the build plate.<br />2. Gently slide the glass plate onto the build plate and ensure that it snaps into the build plate clamps at the back.<br />3. Close the two build plate clamps at the front to secure the glass plate.&nbsp;</p>
+</div>
+</div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" /></p>
+</div>
+<div>
+<div>
+<p>Leaving the build plate clamps open may damage your Ultimaker 3 when the build plate is raised.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image045.png?raw=true" alt="" width="340" height="230" />&nbsp;&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image046.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Connecting the power supply</strong><br />1. Connect the power cable to the power adapter.<br />2. Plug the power cable into the wall socket.<br />3. Connect the other side of the power adapter to the Ultimaker 3. The flat side of the connector needs to face&nbsp;downwards. Before you push the cable firmly into the port, you have to pull the sliding mechanism back. When the&nbsp;cord is in the printer you can let go to lock it into place.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image048.png?raw=true" alt="" width="547" height="363" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h2>4 Set up for first use</h2>
+</div>
+</div>
+<div>
+<div>
+<h3>After installing the accessories, you have to set&nbsp;up the printer for the first use. In this chapter you&nbsp;find the steps to be taken for print core installation,&nbsp;loading the materials, setting up WiFi, updating the&nbsp;firmware and installing Cura software.</h3>
+</div>
+</div>
+<div>
+<div>
+<h3>Print core installation</h3>
+</div>
+</div>
+<div>
+<div>
+<p>To perform the setup steps, turn on the printer with the power switch at the back. The welcome setup appears on the&nbsp;display. Rotate the button to navigate through the menus and press the button to confirm your selection.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.gif?raw=true" alt="" width="45" height="46" />&nbsp;The welcome setup won&rsquo;t show up right away after turning on the Ultimaker 3. This will take approximately seconds.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Print cores</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>The Ultimaker 3 uses two print cores in the print head, which are interchangeable.</p>
+</div>
+</div>
+<div>
+<div>
+<p>There are two types of print cores:<br />&bull; Type AA: for printing build material<br />&bull; Type BB: for printing support material</p>
+</div>
+</div>
+<div>
+<div>
+<p>Each Ultimaker 3 comes with two AA print cores - of which one is already installed in print head slot 1 - and one BB print&nbsp;core. This means that it is possible to make prints with two build materials or with a build and support material.</p>
+</div>
+</div>
+<div>
+<div>
+<p>The print cores contain information so that the printer always knows which print cores are installed and which materials&nbsp;can be used with this print core.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Installing the second print core</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>During the welcome setup the second print core must be installed. To do this, follow the steps on the display of the&nbsp;Ultimaker 3:<br />1. Open the print head fan bracket and press Continue.<br />2. The Ultimaker 3 will now automatically detect the print core (AA) that is placed in print head slot 1.&nbsp;Confirm to continue.<br />3. Install the BB print core in print head slot 2 by squeezing the levers of the print core and sliding it into the print head.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image051.gif?raw=true" alt="" width="32" height="61" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>Do not touch the chip on the back side of the print core with your hands.&nbsp;</p>
+</div>
+</div>
+<div>
+<p>Make sure you keep the print core completely vertical while installing it so it will smoothly slide into the print&nbsp;head.</p>
+</div>
+<div>
+<div>
+<p>4. The Ultimaker 3 should now automatically detect the print core (BB) that is placed in print head slot 2.&nbsp;Confirm to continue.<br />5. Close the print head fan bracket and confirm to proceed with the setup procedure.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image052.png?raw=true" alt="" width="340" height="230" />&nbsp;&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image053.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Loading materials</h3>
+</div>
+</div>
+<div>
+<div>
+<p>Before you can start printing on the Ultimaker 3, you need to load materials into the printer. For the first use it is&nbsp;recommended to use the spools of PLA and PVA that came with the Ultimaker 3.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Loading material 2</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Material 2 will be loaded first, because this is the material that must be placed closest to the back side of the printer. Take&nbsp;the following steps to load the material.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Place the spool with the material 2 (PVA) on the spool holder. Make sure to put it with the material in clockwise&nbsp;direction, so that the material can enter feeder 2 from the bottom.<br />2. Wait until the Ultimaker 3 has detected the material.<br />3. Insert the end of the material into feeder 2 and gently push it until the material is grabbed by the feeder and is visible&nbsp;in the bowden tube. Select confirm to continue.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="26" height="26" /></p>
+<p>Straighten the end of the material a bit so it can easily enter the feeder.</p>
+</div>
+</div>
+<div>
+<div>
+<p>4. Wait for the Ultimaker 3 to heat up print core 2 and to load the material into the print head.<br />5. Confirm when the new material extrudes from the print head.<br />6. Wait a moment for print core 2 to cool down.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image055.jpg?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image056.png?raw=true" alt="" width="340" height="230" />&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Loading material 1</strong><br />Material 1 will be put on the material guide first before placing it on the spool holder to avoid tangling of the 2 materials&nbsp;during printing. Follow the below steps to load material 1.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Take the material guide and hold it with the outer part towards you.<br />2. Place the material spool with material 1 (PLA) on the material guide with the material in counter-clockwise direction.<br />3. Guide the end of the material through the hole in the material guide. When you have done this, select continue.<br />4. Place the material guide - with material 1 on it - on the spool holder, behind material 2 and wait until it is detected&nbsp;by the printer.<br />5. Insert the end of the material into feeder 1 and gently push it until the material is grabbed by the feeder and is visible&nbsp;in the bowden tube. Select confirm to continue.<br />6. Wait for the Ultimaker 3 to heat up print core 1 and to load the material into the print head.<br />7. Confirm when the new material extrudes from the print head.<br />8. Wait a moment for print core 1 to cool down.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image058.png?raw=true" alt="" width="340" height="230" />&nbsp;&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image059.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image060.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image061.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Installing WiFi and firmware</h3>
+</div>
+</div>
+<div>
+<div>
+<p>The Ultimaker 3 allows for printing wireless over a network. Therefore the next step is to connect your Ultimaker 3 to a&nbsp;network.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Setting up WiFi</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Wait until your Ultimaker 3 has created a WiFi hotspot. This can take a minute.<br />2. Move to your computer or smartphone and connect it to the wireless network of the printer. The name of the network&nbsp;is shown on the display of the Ultimaker 3.<br />3. A pop-up will appear on the display of your computer. Follow the steps to connect the Ultimaker 3 to your local WiFi&nbsp;network. The pop-up will disappear when you have completed these steps.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="28" height="28" /></p>
+<p>When the pop-up does not appear, open a browser and type &ldquo;Ultimaker.com&rdquo;.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image063.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image064.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>4. Go back to the Ultimaker 3 to continue with the setup for first use.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image066.gif?raw=true" alt="" width="23" height="56" /></p>
+<p>Within some network environments the Ultimaker 3 may experience difficulties connecting wireless. When this&nbsp;happens, re-run the WiFi setup from another computer or smartphone.</p>
+</div>
+</div>
+<div>
+<div>
+<p>If you skip this process you can always re-do the WiFi setup after completing the welcome setup by going to&nbsp;System g Network g Run WiFi setup.</p>
+</div>
+</div>
+<div>
+<p><strong>Updating the firmware</strong></p>
+</div>
+<div>
+<div>
+<p>As a last step the Ultimaker 3 will check if the latest firmware is installed. If not, it will get the latest firmware from the&nbsp;network and install it. This will take several minutes.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Installing Cura</h3>
+</div>
+</div>
+<div>
+<div>
+<p>For the Ultimaker 3, we recommend our free slicer software Cura to prepare your 3D print files. Cura can accurately convert&nbsp;3D models into 3D print files, preview the objects you want to print and send them to your Ultimaker 3.</p>
+</div>
+</div>
+<div>
+<div>
+<p>For the Ultimaker 3 you must use Cura 2.3 or higher.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>System requirements</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Accepted platforms<br />&bull; Windows Vista or higher (64 bit)<br />&bull; Mac OSX 10.7 or higher (64 bit)<br />&bull; Linux Ubuntu 14.04, Fedora 23, OpenSuse 13.2, ArchLinux or higher (64 bit)</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="29" height="29" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>For Windows 32 bit is supported until Cura 2.3.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+<p><strong>System requirements</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>&bull; OpenGL 2 compatible graphics chip<br />&bull; Intel Core 2 or AMD Athlon 64 or newer<br />&bull; At least 4Gb of RAM (8Gb or more is recommended)</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Compatible file types</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>&bull; STL<br />&bull; OBJ<br />&bull; 3MF</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Installation</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>The Cura software can be found at www.ultimaker.com/software. After downloading, open the installer and run the&nbsp;installation wizard to complete the installation. When opening Cura for the first time, you will be asked to select your&nbsp;3D printer, the Ultimaker 3. No other configuration is required and you can directly start using Cura.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image067.png?raw=true" alt="" width="699" height="405" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h2>5 Operation</h2>
+</div>
+</div>
+<div>
+<div>
+<h3>After installation, it is time to start printing&nbsp;with your Ultimaker 3. This chapter provides&nbsp;information about the control and display,&nbsp;materials, Cura, starting and monitoring your&nbsp;print, removing the print and support material, and&nbsp;changing materials and print cores.</h3>
+</div>
+</div>
+<div>
+<div>
+<h3>Control and display</h3>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Control</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>After switching the Ultimaker 3 on with the power switch at the back, the printer can easily be controlled with the&nbsp;push/rotate button at the right side of the display. The button allows the following actions:<br />&bull; Rotate to scroll through a menu or to select an option.<br />&bull; Push to confirm a selection or action.</p>
+</div>
+</div>
+<div>
+<div>
+<p>When pushing the button you will hear a &ldquo;beeping&rdquo; sound to confirm the action. A blinking button means the Ultimaker 3&nbsp;is waiting for user input.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Display and menus</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>The display at the front side of the Ultimaker 3 shows all the necessary information for setting up and using your&nbsp;Ultimaker 3. When turning on the Ultimaker 3 for the first time you will be guided through the welcome setup. When&nbsp;turning on your Ultimaker 3 after the first use, you will always see the Ultimaker logo first after which the main menu&nbsp;appears. The main menu offers three options: Print, Material/PrintCore and System.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Print</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>The Print menu allows you to select a print, when using a USB stick. While printing, the menu also allows you to tune the&nbsp;print, and change the settings for instance.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Material/PrintCore</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>With the Material/PrintCore menu you can change, load and unload materials and print cores. Furthermore, you can move&nbsp;the material and manually set the temperature of each print core.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">System&nbsp;</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>The System menu offers various options to control the network, build plate, print head and frame light, and to perform&nbsp;maintenance and diagnostics tests. These options in the menu are especially useful when performing maintenance or&nbsp;troubleshooting your printer.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image069.png?raw=true" alt="" width="691" height="460" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Materials</h3>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Material combinations</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>As explained in chapter 4, the Ultimaker 3 comes with two print cores for build material (AA) and one print core for support&nbsp;material (BB). The AA print cores can be used for printing PLA, ABS, CPE and Nylon. The BB print core can be used for PVA.</p>
+</div>
+</div>
+<div>
+<div>
+<p>If you want to print with two materials, the following combinations of Ultimaker materials are officially supported:<br />&bull; PLA - PVA<br />&bull; Nylon - PVA<br />&bull; PLA - PLA<br />&bull; ABS - ABS<br />&bull; CPE - CPE</p>
+</div>
+</div>
+<div>
+<div>
+<p>Although the Ultimaker 3 has an open material system, the use of Ultimaker material on the printer is recommended. All&nbsp;Ultimaker materials have been tested extensively and have optimized profiles in Cura to ensure the best print result.&nbsp;Using Ultimaker materials will also allow you to benefit from the NFC detection system. Ultimaker spools will&nbsp;automatically be recognized by the Ultimaker 3 and this information can be directly transferred to Cura when connected<br />via the network. This allows for a seamless connection between the printer and Cura software.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Material settings&nbsp;</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Each material requires different settings for optimal results. Here you can find an overview of the recommendations for&nbsp;printing with Ultimaker materials.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Temperature and cooling</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>The below table gives overview of the recommended temperature and cooling settings per material. These settings are&nbsp;automatically set correctly in Cura when selecting one of the material profiles.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image077.png?raw=true" alt="" width="685" height="220" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Build plate adhesion</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>For all materials that are supported on the Ultimaker 3 (PLA, ABS, CPE, Nylon and PVA) it is recommended to apply a thin&nbsp;layer of glue to the glass plate before starting a print. This will not only enhance good adhesion, but specifically for ABS&nbsp;and CPE it will also work as a protective layer for the glass plate. You can use the glue stick from the accessory box for this.</p>
+</div>
+</div>
+<div>
+<div>
+<p>Furthermore, it is advised to print all materials with a &lsquo;brim&rsquo; as platform adhesion type. A brim will print some extra lines&nbsp;of plastic around the object on the first layer to let the model adhere well and to minimize warping. This setting is selected&nbsp;by default in all the Cura profiles for these materials on the Ultimaker 3. Please note that if you are printing PLA or Nylon in&nbsp;combination with PVA, it is recommended to print the adhesion type in PVA.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image071.png?raw=true" alt="" width="531" height="354" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Preparing a print with Cura</h3>
+</div>
+</div>
+<div>
+<div>
+<p>After you have added the Ultimaker 3 in Cura, the main interface will become visible. Here is an overview of the interface.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image073.png?raw=true" alt="" width="698" height="426" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>When preparing a model, you always need to make sure that the print core and material configuration match with&nbsp;the configuration on your Ultimaker 3. If you are using the network you can allow Cura to automatically transfer the&nbsp;configuration from your Ultimaker 3 to Cura.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Printing with PVA support</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>To slice a model with PVA support, take the steps described below.<br />1. Load the model into Cura by clicking the &ldquo;Open File&rdquo; folder icon (top left corner).<br />2. Use the Adjustment Tools to position, scale and rotate the object if desired.<br />3. In the Sidebar, check if the print cores and materials are correct. Print core 1 should be AA and print core 2 BB.<br />4. Select a profile quality (Draft Print, Fast Print, Normal Quality or High Quality) on the Sidebar.<br />5. Select &ldquo;Helper Parts&rdquo; on the Sidebar. Set the desired strength and choose the print core for support.<br />6. To view the result of the selected profile and support settings, go to the &ldquo;View mode&rdquo; and select &ldquo;Layers&rdquo;.<br />7. In the bottom right corner, select &ldquo;Save file&rdquo;, &ldquo;Save to USB&rdquo; or &ldquo;Print over network&rdquo; depending on the printing method.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image075.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image076.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Printing with two colors</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>To create a dual color print, two model files (exported to fit together) are required. This is necessary to assign the two&nbsp;colors to the objects. Follow the below steps to create a dual color print with Cura.<br />1. Load both model files into Cura by clicking the &ldquo;Open File&rdquo; folder icon (top left corner).<br />2. In the Sidebar, check if the print cores and materials are correct. Both print cores should be AA.<br />3. Select the object that you want to print with print core two, go to &ldquo;Per model settings&rdquo; (left side of the screen) and&nbsp;select &ldquo;Print model with print core 2&rdquo;.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="30" height="30" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>All loaded objects are printed with print core 1 by default. Therefore it is only necessary to manually set the print&nbsp;core for the object that you want to print with print core 2.</p>
+</div>
+</div>
+<div>
+<div>
+<p>4. Select all models (shift + left click) and merge them by a right click on one of the models and select &ldquo;Merge models&rdquo;.<br />5. Use the Adjustment Tools to position, scale and rotate the object if desired.<br />6. Select a profile quality (Draft Print, Fast Print, Normal Quality or High Quality) on the Sidebar.<br />7. To view the result of the selected profile settings, go to the &ldquo;View mode&rdquo; and select &ldquo;Layers&rdquo;.<br />8. In the bottom right corner, select &ldquo;Save file&rdquo;, &ldquo;Save to USB&rdquo; or &ldquo;Print over network&rdquo; depending on the printing method.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image079.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image080.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Printing with one material</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Although the Ultimaker 3 allows printing with two materials at the same time, it is also possible to make single extrusion&nbsp;prints. The workflow for this is described below.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Load the model into Cura by clicking the &ldquo;Open File&rdquo; folder icon (top left corner).<br />2. Use the Adjustment Tools to position, scale and rotate the object if desired.<br />3. In the Sidebar, check if the print core and material are correct. Print core 1 should be set to AA.<br />4. Select a profile quality (Draft Print, Fast Print, Normal Quality or High Quality) on the Sidebar.<br />5. Select &ldquo;Helper Parts&rdquo; on the Sidebar and set the desired strength.<br />6. To view the result of the selected profile, go to the &ldquo;View mode&rdquo; and select &ldquo;Layers&rdquo;.<br />7. In the bottom right corner, select &ldquo;Save file&rdquo;, &ldquo;Save to USB&rdquo; or &ldquo;Print over network&rdquo; depending on the printing method.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p>For more instructions on how to use Cura take a look at the Cura manual on our website.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Starting a print</h3>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Printing from Cura</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>The Ultimaker 3 offers the possibility to print over a network, either via WiFi or Ethernet. This can be done when your&nbsp;Ultimaker 3 and computer are connected to the same network.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">WiFi</span><br />To start a print over WiFi via Cura, take the following steps:<br />1. Install WiFi (if not done yet) by going to System g Network g Run WiFi setup and follow the steps on the display.<br />2. Enable WiFi in the network menu.<br />3. In Cura go to Settings g Printers g Manage printers.<br />4. Click on the &ldquo;Connect via network&rdquo; button.<br />5. Select your Ultimaker from the list of printers that are shown and click &ldquo;Connect&rdquo;.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image082.gif?raw=true" alt="" width="20" height="82" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>Select &ldquo;Add&rdquo; in this screen to configure an Ultimaker 3 by IP address manually.</p>
+</div>
+</div>
+<div>
+<div>
+<p>Cura will ask if you want to transfer configuration from your Ultimaker 3 to Cura. Select &ldquo;yes&rdquo; to automatically&nbsp;transfer them. When selecting &ldquo;no&rdquo;, make sure you select the correct settings manually.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p>If you connect to a printer for the first time you need to authorize the connection on the printer.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+<p>6. Slice your 3D model in Cura.<br />7. Press &ldquo;Print over network&rdquo; to start the print.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Ethernet</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>To print via an Ethernet connection, the following steps must be taken:<br />1. Connect the LAN cable to socket on the back side of the Ultimaker 3.<br />2. Enable Ethernet in the network menu.<br />3. In Cura go to Settings g Printers g Manage printers.<br />4. Click on the &ldquo;Connect via network&rdquo; button.<br />5. Select your Ultimaker from the list of printers that are shown and click &ldquo;Connect&rdquo;</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image083.gif?raw=true" alt="" width="22" height="49" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>Cura will ask if you want to transfer configuration from your Ultimaker 3 to Cura. Select &ldquo;yes&rdquo; to automatically transfer them. When selecting &ldquo;no&rdquo;, make sure you select the correct settings manually.</p>
+</div>
+</div>
+<div>
+<div>
+<p>If you connect to a printer for the first time you need to authorize the connection on the printer.</p>
+</div>
+</div>
+<div>
+<div>
+<p>6. Slice your 3D model in Cura.<br />7. Press &ldquo;Print over network&rdquo; to start the print.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image084.png?raw=true" alt="" width="522" height="348" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Printing with USB</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>When it is not possible to print via a network, 3D print files can still be transferred to your Ultimaker 3 with a USB stick.<br />1. Place the USB stick in your computer.<br />2. Slice your 3D model in Cura. Ensure that the print core and material configuration in Cura match the configuration on&nbsp;your Ultimaker 3 or change the configuration on your printer to match the settings in Cura.<br />3. Save the print file (.gcode) via the &ldquo;Save to removable drive&rdquo; button to the USB stick.<br />4. Eject the USB stick in Cura and remove it from your computer.<br />5. Place the USB stick in the Ultimaker 3 (front side, next to the display).<br />6. Go to Print and select the file you want to print.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image086.png?raw=true" alt="" width="537" height="357" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Ultimaker 3 App</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Besides using Cura or the USB stick, the Ultimaker 3 allows you to print directly from your phone or tablet using the&nbsp;Ultimaker 3 App. The Ultimaker 3 App can be downloaded from the App Store or Google Play. More information can be&nbsp;found on www.ultimaker.com/en/products/ultimaker-3-app.</p>
+</div>
+</div>
+<div>
+<div>
+<p>To print a model through the Ultimaker 3 App, follow these steps:<br />1. Connect to your Ultimaker 3 by selecting the model from the list of discovered printers, or manually add a printer with&nbsp;the IP address.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="27" height="27" />&nbsp;If you connect to a printer for the first time you need to authorize the connection on the printer.</p>
+</div>
+</div>
+<div>
+<div>
+<p>2. Select &lsquo;Start a new print&rsquo;.<br />3. Load a 3D model from your device or YouMagine, or print the Ultimaker Robot.<br />4. Use the 3D preview function to check the model on the build plate and select &lsquo;Print&rsquo;.<br />5. Check the materials configuration and select &lsquo;Next&rsquo;.<br />6. Select a print quality profile, choose your support material and toggle your option for the brim function.<br />7. Slice the model by selecting the &lsquo;Slice&rsquo; button.<br />8. Start the print by selecting &lsquo;Start print&rsquo;.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image088.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image089.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Monitoring your print</h3>
+</div>
+</div>
+<div>
+<div>
+<p>Once the print is running via network or if you connect to your Ultimaker 3 from Cura, you can monitor the print.&nbsp;This allows you to view the progress of your prints and spot failures, and to control your Ultimaker 3 from a distance.</p>
+</div>
+</div>
+<div>
+<div>
+<p>To open the print monitor, click on the printer icon in the top right corner. The printer icon should have a green checkmark&nbsp;next to it when it is ready to start a print. While the Ultimaker 3 is printing blue dots will be displayed next to the printer&nbsp;icon.</p>
+</div>
+</div>
+<div>
+<div>
+<p>You will find:<br />&bull; A live camera connection to your Ultimaker 3<br />&bull; Print information (temperatures, job name, printing time and estimated time left)<br />&bull; A &ldquo;pause&rdquo; and &ldquo;abort&rdquo; button to control the printer from a distance</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Removing the print</h3>
+</div>
+</div>
+<div>
+<div>
+<p>Once your 3D print is finished it must be removed from the build plate. There are several methods to use, depending on&nbsp;how the print is adhered to the build plate.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Wait for cool down</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>If you printed directly on the glass plate without using an adhesive and if the build plate was not leveled too tight, the print&nbsp;may easily be removed once it is cool. Simply allow the build plate and the print to cool down after printing. The material&nbsp;will contract as it cools and you can easily remove the print from the build plate.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Use a spatula</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>If your print doesn&rsquo;t remove from the build plate after cooling, you can use a spatula to remove the print. Place the spatula&nbsp;under the print and apply a small amount of force to remove the print.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="28" height="28" />&nbsp;Take the glass plate out of the printer to avoid damage on the build plate clamps.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image091.png?raw=true" alt="" width="696" height="462" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Use water</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>If neither of these methods works, remove your print using water. Remove the glass plate and print from the Ultimaker 3.&nbsp;Be careful not to burn your fingers if the glass plate is still warm. Run cool tap water on the back side of the plate to cool&nbsp;quickly. The print material will contract more than with normal cool down. Once cool, the print can be popped off.</p>
+</div>
+</div>
+<div>
+<div>
+<p>If glue was used on the glass plate, run lukewarm water over the print side of the plate to dissolve the glue. Once the glue&nbsp;is dissolved, it is easier to remove the print. If PVA was used, lace the glass plate and print in water to dissolve the PVA.&nbsp;This makes print removal easier.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Removing support material</h3>
+</div>
+</div>
+<div>
+<div>
+<p>Prints for which PVA has been used as support material require some post-processing to remove the PVA support material.&nbsp;This can be done by dissolving the PVA in water.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Submerge the print in water</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>By putting a print with PVA in water the PVA will slowly dissolve. You can however speed up this process in&nbsp;a few ways:<br />&bull; By using warmer water a slight decrease in dissolving time can be reached. When you do this, make sure you use a&nbsp;maximum temperature of 35 &deg;C if your build material is PLA to avoid deformation of the PLA. Do not go above&nbsp;50 &deg;C for Nylon to prevent burns.<br />&bull; Use stirring/running water to decrease the dissolving time significantly. When the water moves PVA will dissolve much&nbsp;faster, which means that it can be dissolved in under three hours.<br />&bull; Additionally you make it even easier for the PVA to dissolve, by putting the print in water for approximately&nbsp;10 minutes first, after which you can remove most of the support by using pliers. When you now put the print back in&nbsp;the water, it only has to dissolve the remaining parts of PVA.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image093.jpg?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image094.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Rinse with water</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>After PVA supports are totally dissolved, rinse the print with water to remove any excess PVA.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Let the print dry&nbsp;</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>Let the print dry completely and apply additional post-processing to the build material if necessary.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Disposal of waste water</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>Since PVA is biodegradable it is quite easy to dispose the water afterwards. The water can be disposed through the drain&nbsp;when the waste water distribution network is connected to a wastewater treatment plant. After disposing the water, run hot&nbsp;water from the tap for approximately 30 seconds to remove any excess of the saturated PVA water from the drain and to&nbsp;avoid clogging on a long term.</p>
+</div>
+</div>
+<div>
+<div>
+<p>It is possible to use the water for more than one print, but this might extend the dissolving time. The water will get&nbsp;saturated by previously dissolved PVA, so for the quickest result it is always recommended to use new water.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Changing materials and print cores</h3>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Changing materials</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Materials can be changed easily on the Ultimaker 3 by using the procedure from the menu. Besides changing a material&nbsp;you also have the option to only load or unload a material.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="27" height="27" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>Make sure compatible print cores are installed before you insert materials.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Go to the menu Material/PrintCore g Material 1 or 2 g Change.<br />2. Wait for the print core to heat up and reverse the material.<br />3. Remove the material from the feeder and spool holder.<br />4. Place the new material on the spool holder and wait until the Ultimaker 3 detects it.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="25" height="25" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>When using non-Ultimaker material, you can select a material manually.</p>
+</div>
+</div>
+<div>
+<div>
+<p>5. Insert the material into the feeder and push it until the feeder grabs it.<br />6. Confirm that you have inserted the material into the feeder by pushing the button at the front side of the Ultimaker 3.<br />7. After the material has been forwarded, wait until it extrudes from the print head and then push on the button.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Changing print cores</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Print cores can be changed easily on the Ultimaker 3 by using the procedure from the menu. Besides changing a print core&nbsp;you also have the option to only load or unload a print core.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Go to the menu Material/PrintCore g PrintCore 1 or 2 g Change.<br />2. Wait for the print core to heat up, reverse material and cool down again.<br />3. Open the print head fan bracket.<br />4. Remove the print core carefully by squeezing the levers and sliding the print core out of the print head.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" />&nbsp;Do not touch the chip on the back side of the print core with your hands.</p>
+</div>
+</div>
+<div>
+<div>
+<p>5. Insert the new print core in the print head.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="28" height="28" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>Make sure you keep the print core completely vertical while removing or installing it so it will smoothly slide out&nbsp;of/into the print head.</p>
+</div>
+</div>
+<div>
+<div>
+<p>6. Close the print head fan bracket.<br />7. Wait for the Ultimaker 3 to load the material into the print core and cool down again.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="30" height="30" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>It is not possible to change a material and print core at the same time. If you want to change both, you must first&nbsp;unload the material, then change the print core and after that load the new material.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image097.png?raw=true" alt="" width="554" height="369" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h2>6 Maintenance</h2>
+</div>
+</div>
+<div>
+<div>
+<h3>In order to have a smoothly working&nbsp;Ultimaker 3 it is important to maintain it correctly.&nbsp;In this chapter the most important maintenance&nbsp;tips are described. Read them carefully in order&nbsp;to achieve the best results with your Ultimaker 3.</h3>
+</div>
+</div>
+<div>
+<div>
+<h3>Updating the firmware</h3>
+</div>
+</div>
+<div>
+<div>
+<p>Periodically, a new version of the Ultimaker 3 firmware is released. To ensure that your Ultimaker 3 is equipped with the&nbsp;latest features it is recommended to update the firmware regularly. This can be done on the Ultimaker 3 (when connected&nbsp;to the network) or via USB.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Updating on the printer</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>To update the firmware via the network, take the following steps:<br />1. Connect the printer to the network via WiFi or Ethernet.<br />2. Go to System g Maintenance g Update firmware.<br />3. Choose the &ldquo;Stable&rdquo; version.</p>
+</div>
+</div>
+<div>
+<div>
+<p>The Ultimaker 3 will now get the latest firmware from the network and install it. This will take several minutes.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Updating via USB</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Firmware can also be updated without an active network connection by taking the following the steps:<br />1. Download the new firmware files from www.ultimaker.com/firmware.<br />2. Put the firmware files on the USB stick.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="26" height="26" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>Do not extract the files after downloading, but place them on the USB stick directly.</p>
+</div>
+</div>
+<div>
+<div>
+<p>3. Place the USB stick in the Ultimaker 3.<br />4. Go to System g Maintenance g Update firmware.<br />5. The Ultimaker 3 will detect it if there is a firmware file on the USB stick. Select the file to start the firmware update.</p>
+</div>
+</div>
+<div>
+<div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<h3>Calibrations</h3>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Build plate leveling</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>While using your Ultimaker it is necessary to periodically calibrate the build plate for good adhesion of the print to the&nbsp;build plate. If the distance between the nozzles and build plate is too big, your print won&rsquo;t stick properly to the glass plate.&nbsp;On the other hand, if the nozzles are too close to the build plate, it can prevent the material extruding from the nozzles.</p>
+</div>
+</div>
+<div>
+<div>
+<p>The Ultimaker 3 offers two ways of calibration the build plate: active leveling and manual leveling. Active leveling is the&nbsp;preferred choice, as there&rsquo;s no chance for human inaccuracies.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="26" height="26" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>Make sure there is no plastic on the nozzles and the glass plate is clean when you want to calibrate the build plate,&nbsp;as this can lead to inaccurate leveling.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Active leveling</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>During active leveling, the Ultimaker 3 will measure the distance between the tip of the nozzle and the build plate in&nbsp;several locations. These positions are stored in the printer, so it can compensate for inaccuracies of the build plate level&nbsp;during the first layers of the print. It will do this by slightly moving the build plate up or down while printing.</p>
+</div>
+</div>
+<div>
+<div>
+<p>To start active leveling:<br />1. Go to System g Build plate g Active leveling.<br />2. Wait for the printer to finish the leveling procedure. This will take a couple of minutes.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" />&nbsp;Do not touch the Ultimaker 3 during the active leveling procedure. This could affect the measurements.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Manual leveling</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>If the level of the build plate is off too much (and active leveling cannot compensate for this), manual leveling can be done.<br />1. Go to System g Build plate g Manual leveling.<br />2. Wait for the Ultimaker 3 to do its homing procedure and continue when the print head is in the center at the back of&nbsp;the build plate.<br />3. Rotate the button at the front until there is approximately 1 mm distance between the first nozzle and the build plate.&nbsp;Make sure that the nozzle is close to the build plate without touching it.<br />4. Adjust the front right and front left build plate screw to roughly level the build plate at the front side. Again there&nbsp;should be a distance of approximately 1 mm between the nozzle and build plate.<br />5. Place the calibration card in between the nozzle and build plate when the print head is in the center back of the build&nbsp;plate.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" />&nbsp;&nbsp;Do not push on the build plate while fine-tuning with the calibration card. This will lead to inaccuracies.</p>
+</div>
+</div>
+<div>
+<div>
+<p>6. Adjust the build plate screw in the middle back until you feel slight friction when moving the card.<br />7. Press &ldquo;Continue&rdquo;. The print head moves to the second point.<br />8. Repeat step 5 &ldquo;place the calibration card&rdquo; and step 6 &ldquo;adjust the build plate&rdquo;.<br />9. Press &ldquo;Continue&rdquo; again. The print head moves to the third point.<br />10. Repeat step 5 &ldquo;place the calibration card&rdquo; and step 6 &ldquo;adjust the build plate&rdquo;.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image103.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image104.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>After calibrating the build plate with the first nozzle, the second nozzle needs to be aligned as well, to ensure the heights of&nbsp;both nozzles are set correctly. For this it is only necessary to set the correct height by using the calibration card.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Place the calibration card between the second nozzle and build plate.<br />2. Rotate the button at the front of the Ultimaker 3 until it touches the calibration card and fine-tune it until you feel slight&nbsp;friction/resistance when moving the card.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="31" height="31" /></p>
+<p>There should always be a distance of 14 mm between the bottom of the heated bed and base plate to prevent&nbsp;errors during active leveling.</p>
+</div>
+</div>
+<div>
+<div>
+<p><span style="text-decoration: underline;">Leveling frequency</span></p>
+</div>
+</div>
+<div>
+<div>
+<p>The Ultimaker 3 will ask how often you want to level your build plate, once you have leveled it.</p>
+</div>
+</div>
+<div>
+<div>
+<p>These are the options:<br />&bull; Every day<br />&bull; Every week<br />&bull; After startup<br />&bull; Never<br />&bull; Automatic (the leveling frequency is determined by the printer, based on the amount of printing hours since the last&nbsp;time the build plate was leveled).</p>
+</div>
+</div>
+<div>
+<div>
+<p>You can always change the leveling frequency by going to System g Build plate g Frequency in the menu.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Z offset calibration</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>The last part of the manual leveling procedure is the Z offset calibration. This ensures that the correct vertical distance&nbsp;between the two nozzles is stored. This procedure can also be done separately.</p>
+</div>
+</div>
+<div>
+<div>
+<p>1. Go to System g Maintenance g Calibration g Calibrate XY offset.<br />2. Place the calibration card between the second nozzle and build plate.<br />3. Rotate the button at the front of the Ultimaker 3 until it touches the calibration card and fine-tune it until you feel slight&nbsp;friction/resistance when moving the card.</p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>XY offset calibration</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>Besides the vertical offset, the horizontal distance between the nozzles, in the X and Y direction, also needs to be&nbsp;stored. The print cores that are supplied with the Ultimaker 3 are already calibrated, but when the printer detects a&nbsp;new combination you have to do an XY offset calibration first. This calibration must only be done once; after this, the&nbsp;information is stored on the printer.</p>
+</div>
+</div>
+<div>
+<div>
+<p>A correct XY calibration will ensure that the two colors or materials align well.</p>
+</div>
+</div>
+<div>
+<div>
+<p>The AA print core that was installed on receipt of the Ultimaker 3 has already been calibrated with the other AA and BB&nbsp;print core and does not require calibration.</p>
+</div>
+</div>
+<div>
+<div>
+<p>To do the calibration you will need the XY calibration sheet, which you can find in the accessory box or download here.If you need to print it, make sure you print it on an A4 paper at 100% scale.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="27" height="27" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>Ensure 2 print cores and materials are installed before starting the calibration.</p>
+</div>
+</div>
+<div>
+<div>
+<p>To start the calibration:<br />1. Go to System g Maintenance g Calibration g Calibrate XY offset.<br />2. The Ultimaker 3 will now print a grid structure on the build plate. Wait until it is finished.<br />3. Once the Ultimaker 3 has cooled down, remove the glass plate from the printer and place it on the XY calibration&nbsp;sheet. Ensure the printed grid it is exactly placed on the two rectangles on the sheet.<br />4. Find the aligned lines on the printed X grid and look which number belongs to these lines. Enter this number as&nbsp;the X offset value on your Ultimaker 3.<br />5. Find the aligned lines on the printed Y grid and look which number belongs to these lines. Enter this number as&nbsp;the Y offset value on your Ultimaker 3.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="29" height="29" /></p>
+</div>
+</div>
+<div>
+<div>
+<p>It is important that the printed XY offset print adheres well to the build plate and shows no signs of under&nbsp;extrusion. If it does, it is recommended to re-do the calibration print.&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image106.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image107.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<p><strong>Lift switch calibration</strong></p>
+</div>
+</div>
+<div>
+<div>
+<p>The switch bay is what enables the lifting and lowering of the second print core. For successful dual extrusion prints, it is&nbsp;important that the switching functions well. The lift switch is already calibrated when the Ultimaker 3 is shipped, but the&nbsp;calibration can also be done manually.</p>
+</div>
+</div>
+<div>
+<div>
+<p>To perform the swith bay calibration:<br />1. Go to System g Maintenance g Calibration g Calibrate lift switch.<br />2. Move the lift switch on the side of the print head to point towards you.<br />3. Move the print head so that the lift switch fits in the switching bay.<br />4. Wait for the print head to go to the home position and test the lift switch.<br />5. Did the lift switch lower and raise the print core? If so, press &ldquo;yes&rdquo; to complete the calibration. If not, select &ldquo;no&rdquo; to&nbsp;perform the calibration again.</p>
+</div>
+</div>
+<div>
+<div>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image109.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image110.png?raw=true" alt="" width="340" height="230" /></p>
+</div>
+</div>
+<div>
+<div>
+<h3>&nbsp;</h3>
+</div>
+</div>
+<div>
+<h3>Lubricating the axles</h3>
+<p>To maintain your Ultimaker 3 correctly and keep it running smoothly, it is advised to lubricate the axles periodically. In the&nbsp;accessory box of your Ultimaker 3 you can find Unilube for the X and Y axles and Magnalube for the Z axle.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="24" height="24" /></p>
+<p>Especially in countries with a high humidity or in very dry countries the axles must be lubricated regularly.</p>
+<p><strong>X and Y axles</strong></p>
+<p>When you notice small ridges on the surfaces of your 3D printed objects or feel that the X and Y axles are dry, it is advised&nbsp;to apply some Unilube to the X and Y axles. Apply a small drop of Unilube to each of the X and Y axles and both the print&nbsp;head shafts. Manually move the print head around to equally distribute the oil.<br />Do this approximately once a month, or when the axles feel dry.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="23" height="23" /></p>
+<p>Remove the glass plate before applying Unilube to avoid drops of oil on the glass plate.</p>
+<p><strong>Z axles</strong></p>
+<p>Unilube can also be applied to the Z axles. Put a single small drop on each of the axles. In the Ultimaker menu, go to&nbsp;System g Build plate. Select Raise and then Lower to move the build plate up and down to equally distribute the oil.<br />Do this approximately once every six months, or when the axles feel dry.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="31" height="28" />&nbsp;Only use Unilube on the X, Y and Z axles. Using other oils or Magnalube may affect the coating of the axles.</p>
+<p><strong><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image112.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image113.png?raw=true" alt="" width="340" height="230" /></strong></p>
+<p><strong>Z trapezoidal leadscrew</strong></p>
+<p>Magnalube can be used for lubricating the Z trapezoidal leadscrew. Spread about ten drops of grease over the entire lead&nbsp;screw. Raise and lower the build plate through the menu again to equally distribute the grease.<br />Do this approximately once every six months.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" />&nbsp;Do not&nbsp;use Magnalube on the smooth axles, this will affect the working of your Ultimaker 3.&nbsp;</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image115.png?raw=true" alt="" width="603" height="402" /></p>
+<p>&nbsp;</p>
+<h3>Keeping the printer clean</h3>
+<p>For the best print results it is important to keep the Ultimaker 3 clean while using it. Therefore it is advised to not use the&nbsp;Ultimaker 3 in a room where it can easily be covered with dust and to remove small pieces of material that might be in the&nbsp;printer. Besides this, there are a few parts in the Ultimaker 3 that might require more regular cleaning.</p>
+<p><strong>Cleaning the glass plate</strong></p>
+<p>After a lot of printing, there might be too much excess glue stuck to the glass plate. This can cause an uneven print surface&nbsp;and it is therefore recommended to clean the glass plate once in a while. When doing this, always make sure that the&nbsp;Ultimaker 3 is turned off and build plate has cooled down.</p>
+<p>To clean the glass plate, take the following steps:<br />1. Move the build plate manually to the bottom of the Ultimaker 3.<br />2. Open the build plate clamps at the front side.<br />3. Remove the glass plate from the build plate by sliding it to the front and taking it out.<br />4. Clean the glass plate with lukewarm water and dry it with a cloth. If necessary, you can also use some soap to clean it.<br />5. Place the glass plate back onto the build plate and close the build plate clamps at the front side to secure it.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="30" height="30" /></p>
+<p>In order to be sure about a successful next print it is recommended to re-level the build plate after having&nbsp;repositioned the glass plate.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image117.png?raw=true" alt="" width="340" height="230" />&nbsp;&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image118.png?raw=true" alt="" width="340" height="230" /></p>
+<p>&nbsp;</p>
+<p><strong>Cleaning the nozzles</strong></p>
+<p>While using the Ultimaker 3 it can happen that the nozzles get dirty by material that sticks to nozzles. Although this will not&nbsp;damage your printer, it is recommended to try keeping the nozzles clean, in order to achieve the best print results.</p>
+<p>To remove plastic from the outside of a nozzle, it is advised to take the following steps:<br />1. Heat up the nozzle to 150 &deg;C so that the plastic on the outside gets soft. You can do this by navigating to&nbsp;Material/Print core g Print core [x] g Set temperature and using the scroll wheel to change the temperature.<br />2. When the nozzle is hot, carefully remove the material with tweezers.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" />&nbsp;Do not touch the nozzle and be careful while cleaning it as it will become hot.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image120.png?raw=true" alt="" width="615" height="410" /></p>
+<p>&nbsp;</p>
+<p><strong>Cleaning the feeders and bowden tubes</strong></p>
+<p>After many hours of printing, or when material has been ground down, there is a chance that there are small filament&nbsp;particles in the feeders. These can end up in the bowden tubes or print cores, so it is important to clean the feeders. This&nbsp;can be done by blowing the particles out of the feeders or by using a vacuum cleaner.</p>
+<p>If the particles are already stuck in the bowden tubes, clean these as well. To do so, the bowden tubes have to be removed&nbsp;from the printer.<br />1. Unload the material via the menu Material/PrintCore g Material 1 or 2 g Unload.<br />2. Remove the white clamp clips from the print head and feeders.<br />3. Press down on the tube coupling collet in the print head and pull the bowden tube out. Do the same for the feeders.<br />4. Cut off a small piece from a clean, dry sponge or use a piece of tissue.<br />5. Insert this in the feeder end of the bowden tube.<br />6. Push it through with a length of filament (at least 80 cm).<br />7. Re-install the bowden tubes and secure with the white clamp clips.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="26" height="26" /></p>
+<p>The bowden tube has one conical end; this should be placed in the feeder.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image122.png?raw=true" alt="" width="430" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image123.png?raw=true" alt="" width="430" height="230" /></p>
+<p><strong>Inside of the printer</strong></p>
+<p>Small pieces of material can gather inside the printer, including the initial extrusions. Remove these from the inside of the&nbsp;printer with a cloth or vacuum cleaner.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" />&nbsp;Leaving larger objects on the bottom panel can lead to errors, as they prevent the build plate from homing&nbsp;properly.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image125.png?raw=true" alt="" width="496" height="332" /></p>
+<p>&nbsp;</p>
+<h3>Tensioning the belts</h3>
+<p>Maintaining proper tension on the short belts is important to ensure good print quality. If the belts are too loose, the&nbsp;movement of the print head may not be accurate. In turn, the dimensions of the print can be different from what you&nbsp;expect.</p>
+<p>Over time, the belts may get slightly slack. To restore the tension, perform the following steps:<br />1. Loosen the four bolts of the X motor, but do not take them out completely.<br />2. Firmly push down on the motor.<br />3. One by one, in a crosswise pattern, tighten the bolts again while still pushing down.<br />4. Repeat these steps for the Y motor, so that the tension is the same for both short belts.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image127.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image128.png?raw=true" alt="" width="340" height="230" /></p>
+<h3>&nbsp;</h3>
+<h3>Storage and handling of materials</h3>
+<p>When you have multiple spools of material in use or do not print with a material, it is very important that you store them&nbsp;properly. When stored incorrectly this may affect the quality and process-ability of the material.</p>
+<p>To keep your materials in optimal condition it is important that you keep them:<br />&bull; Dry and cool<br />&bull; Out of direct sunlight<br />&bull; In a resealable bag</p>
+<p>The optimal storage temperature for PLA, CPE, CPE+, Nylon, PC and TPU 95A is between -20 to +30&deg; C. For ABS the&nbsp;advised temperature is between 15 and 25&deg; C and for PVA 0 to 30 &deg;C. Furthermore a relative humidity of below 50% is&nbsp;recommended for PVA and TPU 95A. If these materials are exposed to a higher humidity the quality of the material can be&nbsp;affected.</p>
+<p>You can store the material in a resealable bag, including the supplied desiccant (silica gel). For PVA it is advised to store&nbsp;the spool in a resealable bag with the supplied desiccant directly after printing to minimize moisture uptake.</p>
+<p>&nbsp;</p>
+<h2>7 Help &amp; support</h2>
+<h3>There are a few printer specific issues that&nbsp;could occur while using your Ultimaker 3.&nbsp;In you run into one of these issues, you can&nbsp;troubleshoot the issue yourself with the help&nbsp;of the information on the next pages.</h3>
+<h3>Error messages</h3>
+<p>This is the complete list of error messages that can show up on the Ultimaker 3. For more information on troubleshooting&nbsp;these error messages please go to the error specific page on the Ultimaker website.</p>
+<p>&bull; An unspecified error has occurred. Restart the printer or go to ultimaker.com/ER11.<br />&bull; Max temp. error on PrintCore {display_hotend_nr}. Go to ultimaker.com/ER12.<br />&bull; Min temp. error on PrintCore {display_hotend_nr}. Go to ultimaker.com/ER13.<br />&bull; Max temp. error on the build plate sensor. Go to ultimaker.com/ER14.<br />&bull; Heater error on PrintCore {display_hotend_nr}. Go to ultimaker.com/ER15.<br />&bull; The Z axis is stuck or the limit switch is broken. Go to ultimaker.com/ER16.<br />&bull; The X or Y axis is stuck or the limit switch is broken. Go to ultimaker.com/ER17.<br />&bull; There is a communication error with the print head. Go to ultimaker.com/ER18.<br />&bull; There is an I2C communication error. Go to ultimaker.com/ER19.<br />&bull; There was an error with the safety circuit. Go to ultimaker.com/ER20.<br />&bull; There was a sensor error within the print head. Go to ultimaker.com/ER21.<br />&bull; Active leveling correction failed. Manual level the build plate or go to ultimaker.com/ER22.<br />&bull; An incorrect print temperature is specified. Go to ultimaker.com/ER23.<br />&bull; An incorrect build plate temperature is specified. Go to ultimaker.com/ER24.<br />&bull; The motion controller failed to be updated. Go to ultimaker.com/ER25.<br />&bull; This print job is not suitable for this printer. Go to ultimaker.com/ER26.</p>
+<h3>Clogged print core</h3>
+<p>If there is no material flowing from the print core for at least 10 minutes it could suggest that there is some burnt material&nbsp;in the nozzle, leading to a nozzle clog. In this case, the print core should be cleaned by performing the below described&nbsp;method. These instructions are specifically written for cleaning a BB print core with PLA material, since PVA is more likely&nbsp;to cause clogs. The method can however also be applied to AA print cores if necessary. Please note that you have to unclog&nbsp;the print core with the last used material (except for flexible materials) and at other temperatures in this case.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="32" height="32" /></p>
+<p>Make sure there is no material in the print core when you start this procedure.</p>
+<p>&nbsp;</p>
+<p><strong>Preparing</strong></p>
+<p>1. Place the print head in the front right corner to avoid bending of the XY axles when applying pressure to the material&nbsp;during a hot pull or cold pull.<br />2. Go to Material/PrintCore g PrintCore 2 (BB print core) g Set temperature and set the temperature to 230 &deg;C.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="32" height="32" /></p>
+<p>For AA print cores use a temperature that is slightly higher than the printing temperature of the material.&nbsp;</p>
+<p>3. Remove the clamp clip from the top of the print head.<br />4. Loosen the bowden tube by pressing on the tube coupling collet and pulling the bowden tube out while doing this.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image130.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image131.jpg?raw=true" alt="" width="340" height="230" /></p>
+<p><strong>Hot pull</strong></p>
+<p>1. Cut off approximately 20 cm of PLA with a straight cut and try to straighten the material as much as possible.<br />2. When the nozzle reaches the target temperature of 230 &deg;C gently insert the piece of PLA into the print head until you&nbsp;feel some resistance.<br />3. Hold the piece of PLA with pliers and gently apply pressure to the material for &plusmn;2 seconds so that it extrudes from the&nbsp;nozzle or until it cannot be pushed any further.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image101.gif?raw=true" alt="" width="38" height="34" />&nbsp;The use of pliers is required to prevent injuries on your hands in case the material breaks.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="31" height="31" />&nbsp;Applying too much pressure to the material is almost impossible when the print head is located in the corner. If&nbsp;there is no extrusion, apply more pressure.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image133.png?raw=true" alt="" width="340" height="230" />&nbsp;&nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image134.png?raw=true" alt="" width="340" height="230" /></p>
+<p>4. Pull the material out with a quick, firm pull once the 2 seconds have passed.<br />5. Check the color and the shape of the tip of the material that you have pulled out. Compare it with the pictures below to&nbsp;see if it looks as clean as the picture on the right.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image135.png?raw=true" alt="" width="292" height="197" /><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image136.png?raw=true" alt="" width="305" height="206" /></p>
+<p>6. Repeat this hot pull process at least once and until the tip of the material is completely clean. This could mean that you&nbsp;have to do the hot pulls more often. After completing the hot pull process, manually flush some material through the&nbsp;print core with pliers and take it out again.</p>
+<p><strong>Cold pull</strong></p>
+<p>1. Take a new piece of PLA and insert it into the print head by hand until you feel some resistance.<br />2. Hold the piece of PLA with pliers and gently apply pressure to extrude some material.<br />3. Lower the temperature of the print core to 75 &deg;C. Keep pressure on the material with the pliers until the print core&nbsp;reaches a temperature of 150 &deg;C.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="27" height="27" /></p>
+<p>The slight pressure on the material while cooling down is required to prevent air from entering the nozzle.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image003.png?raw=true" alt="" width="28" height="28" /></p>
+<p>For AA print cores lower the temperature to a temperature of 15 - 20 &deg;C above the build plate temperature.</p>
+<p>4. Wait until the target temperature of 75 &deg;C is reached.<br />5. Grab the material with pliers and pull it out with a quick, firm pull. The material should now look as on the right picture.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image139.png?raw=true" alt="" width="340" height="230" />&nbsp; &nbsp;<img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image140.png?raw=true" alt="" width="340&quot;" height="230" /></p>
+<p>&nbsp;</p>
+<p><strong>Re-assembly</strong></p>
+<p>1. Insert bowden tube into the print head.<br />2. Re-attach the clamp clip and keep pressure on the bowden tube while doing this.</p>
+<p>&nbsp;</p>
+<h3>Grinding PVA</h3>
+<p>There could be several reasons for grinding material, but specifically for PVA incorrect handling or storage of the material&nbsp;can lead to grinding. PVA should be printed and stored at a low humidity to avoid problems while printing. We advise&nbsp;a humidity below 50% for storage and below 55% while printing. It is also recommended to keep the environmental&nbsp;temperature below 28 &deg;C while printing. In a standard air conditioned office room this humidity and temperature should be&nbsp;easy to reach.</p>
+<p>When PVA is ground down by the feeder, there are three main causes.</p>
+<p><strong>Incorrect storage</strong></p>
+<p>PVA is a material that absorbs moisture relatively easily and therefore storing it correctly (resealable bag, humidity below&nbsp;50%) is important. If PVA absorbs too much moisture it will get soft and malleable/pliable and in some cases even sticky. This can cause problems in the feeder as it might not be able to forward the PVA properly anymore.</p>
+<p><strong>Coated bowden tube</strong></p>
+<p>The bowden tube can get coated on the inside due to incorrect printing conditions (mainly a too high humidity). If the&nbsp;humidity of the printing environment is too high (above 55%) and temperature is too high (above 28 &deg;C) PVA might not be&nbsp;able to move easily through the bowden tube. A solution for this is to clean the bowden tube and dry it very well.</p>
+<p><strong>Clogged print core</strong></p>
+<p>Due to a too high humidity PVA can lose quality over time and lead to clogs in the print core. As a consequence filament&nbsp;might not be forwarded anymore, causing grinding in the feeder. When this happens, the print core should be cleaned by&nbsp;following the procedure described on page 46 and 47.&nbsp;</p>
+<p>For more information on how to resolve grinding issues, you can take a look at this <a href="https://ultimaker.com/en/resources/36111-material-is-ground-down-by-the-feeder">page</a>.</p>
+<p>&nbsp;</p>
+<h3>Print core not recognized</h3>
+<p>If a print core is not recognized by the Ultimaker 3, the printer will inform you about this. The main reason for this are dirty&nbsp;contact points on the chip at the back side of the print core. When this happens, clean the contact points with a cotton swab&nbsp;and some alcohol.</p>
+<p><img src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image142.png?raw=true" alt="" width="548" height="365" /></p>
+<p>&nbsp;</p>
+<h3>Print quality issues</h3>
+<p><strong>Print not sticking to the build plate</strong></p>
+<p>When you experience problems with the adhesion of a print to the build plate, the following things can be done:<br />&bull; Ensure that the correct material settings and adhesion method were used (see chapter 5 Operation).<br />&bull; Re-calibrate the build plate manually and then do the active leveling (see chapter 5 Operation).<br />&bull; Check the Cura settings that were used and try printing with one of the default Cura profiles.</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image144.png?raw=true" alt="" width="264" height="264" /></p>
+<p><strong>Under extrusion</strong></p>
+<p>In its simplest form, under extrusion is when the printer is unable to supply the&nbsp;right amount of material. Your Ultimaker 3 is under extruding when you see&nbsp;missing layers, very thin layers, or layers that have random dots and holes in&nbsp;them.</p>
+<p>Under extrusion can have several causes:<br />&bull; Use of low quality material or wrong material settings<br />&bull; Feeder tension not set correctly<br />&bull; Friction in the bowden tube<br />&bull; Small particles of material in the feeder or bowden tube<br />&bull; A partial clog in the print core<br />When your Ultimaker 3 is suffering from under extrusion, it is advised to take a&nbsp;look at this <a href="https://ultimaker.com/en/resources/21477-how-to-fix-under-extrusion">page</a> for detailed troubleshooting instructions.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img id="img1" src="https://github.com/ecraft2learn/uui/blob/master/help/oer/ultimaker_3_user_manual/ultimaker_3_user_manual_images/image145.png?raw=true" alt="" width="261" height="261" /></p>
+<p><strong>Warping</strong></p>
+<p>Warping occurs due to material shrinkage whilst 3D printing, which causes the&nbsp;corners of the print to lift and detach from the build plate. When plastics are&nbsp;printed, they firstly expand slightly but contract as they cool down. If material&nbsp;contracts too much, this causes the print to bend up from the build plate.</p>
+<p>When your print is warping, make sure you have done the following:<br />&bull; Level the build plate correctly (preferably active leveling)<br />&bull; Apply a thin layer of glue to the glass plate<br />&bull; Use the correct temperature settings<br />&bull; Use one of the default Cura profiles</p>
+<p>To troubleshoot this issue in more detail, take a look at the <a href="https://ultimaker.com/en/resources/19537-how-to-fix-warping">Ultimaker website</a>.</p>
+</div>
