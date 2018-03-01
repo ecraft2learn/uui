@@ -436,7 +436,6 @@
         <canvas id="temp-canvas"></canvas>
         <canvas id="main-canvas"></canvas>
     </section>
-
     <!-- toolbox -->
 
     <section id="tool-box" class="tool-box">
@@ -456,7 +455,7 @@
         <canvas id="zoom-up" width="40" height="40" title="Zoon-In"></canvas>
         <canvas id="zoom-down" width="40" height="40" title="Zoom-Out"></canvas>
 
-        <canvas id="arc" width="40" height="40" title="Arc"></canvas>
+        <canvas style='display:none;' id="arc" width="40" height="40" title="Arc"></canvas>
         <canvas id="rectangle" width="40" height="40" title="Rectangle"></canvas>
         <canvas style='display: none;' id="quadratic-curve" width="40" height="40" title="Quadratic curve"></canvas>
         <canvas id="bezier-curve" width="40" height="40" title="Bezier curve"></canvas>
@@ -464,6 +463,7 @@
         <canvas style='display: none;' id="line-width" width="40" height="40" title="Set line-width"></canvas>
         <canvas style='display: none;' id="colors" width="40" height="40" title="Set foreground and background colors"></canvas>
         <canvas style='display: none;' id="additional" width="40" height="40" title="Extra options"></canvas>
+    	
     </section>
 
     <script>
@@ -833,7 +833,7 @@
         </div>
 
         <div>
-            <label for="globalAlpha-select">globalAlpha:</label>
+            <label for="globalAlpha-select">Alpha:</label>
             <select id="globalAlpha-select">
                 <option>1.0</option>
                 <option>0.9</option>
@@ -850,7 +850,7 @@
         </div>
 
         <div>
-            <label for="globalCompositeOperation-select">globalCompositeOperation:</label>
+            <label for="globalCompositeOperation-select">Composite Operation:</label>
             <select id="globalCompositeOperation-select">
                 <option>source-atop</option>
                 <option>source-in</option>
@@ -865,7 +865,20 @@
                 <option>xor</option>
             </select>
         </div>
+	<!--
+	<div>
+		<label for='save'>Save</label>
+		<button id='save'>Download image</button>
+        </div>
 
+	<div>
+		<label for='undo'>Undo</label>
+		<button id='undo'>Undo last</button>
+		<br>
+		<label for='redo'>Redo</label>
+		<button id='redo'>Redo last</button>
+	</div>
+	-->
         <div id="additional-close" class="btn-007">Done</div>
     </section>
 

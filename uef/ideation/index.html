@@ -2,7 +2,9 @@
 	<head>
 		<script src='canvas-designer-widget.js'></script>
 	</head>
-	<body>	
+	<body>
+		<input type='image' id='save' src='data:image/png;base64,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
+' style='width: 40px; height: auto;'>
 		<script>
 			var designer = new CanvasDesigner();
 			designer.widgetHtmlURL = 'widget.html'; 
@@ -10,6 +12,17 @@
 		</script>
 		<script>
 			designer.appendTo(document.body || document.documentElement);
+
+			document.getElementById('save').onclick = (event) => {
+
+				designer.toDataURL('image/png', function(dataURL) {
+    
+					window.open(dataURL);
+
+				});		
+
+			};
+
 		</script>
 	</body>
 </html>

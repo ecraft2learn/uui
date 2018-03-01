@@ -1,13 +1,3 @@
-// _______________
-// Canvas-Designer
-
-// Open-Sourced: https://github.com/muaz-khan/Canvas-Designer
-
-// --------------------------------------------------
-// Muaz Khan     - www.MuazKhan.com
-// MIT License   - www.WebRTC-Experiment.com/licence
-// --------------------------------------------------
-
 function CanvasDesigner() {
     var designer = this;
     designer.iframe = null;
@@ -90,6 +80,7 @@ function CanvasDesigner() {
         designer.iframe.style.width = '100%';
         designer.iframe.style.height = '100%';
         designer.iframe.style.border = 0;
+	designer.iframe.id = 'designer-iframe';
 
         window.removeEventListener('message', onMessage);
         window.addEventListener('message', onMessage, false);
