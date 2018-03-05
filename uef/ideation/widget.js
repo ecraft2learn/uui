@@ -2549,37 +2549,13 @@
         function decorateDragLastPath() {
             var context = getContext('drag-last-path');
 
-            var x = 10,
-                y = 6,
-                line = "line",
-                points = [
-                    [line, x, y, x + 5, y + 27],
-                    [line, x, y, x + 18, y + 19],
-                    [line, x + 17, y + 19, x + 9, y + 20],
-                    [line, x + 9, y + 20, x + 5, y + 27],
-                    [line, x + 16, y + 22, x + 16, y + 31],
-                    [line, x + 12, y + 27, x + 20, y + 27]
-                ],
-                length = points.length,
-                point, i;
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32); 
+                bindEvent(context, 'DragLastPath');
+            };   
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAADdAAAA3QFwU6IHAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAApFQTFRF////VdXVK6q//203/8ikRMzd/2Yz/3Aw/2ktxtXVl66un6qqma2tnaenm6SkI7DBp9PBhJSUzdXV/7iUgI+VhZWVgJSUfZaWgpWVlKyUm6ittMHBnKmtmaqqm6urnKmtmqqqk6Ojm6urs76+rM++oZqGnKmsgJOTfpGUgJKVgJKVfpOTsLu9gJKUlKenqKKSfpCS/6+Dr7u79Uo4mKqK/9Ko4W1eSs7Zm6urlJKDzNXVS87a/9GoiZqdnJyPm6qrm6qqiIqA/9CpSs/Z/Gsz/Goy/Go0GKa5/WozKbbF/Wozx9C3zdTVd4yO7Y9rgc/Lm6qrm6qrFqa3m6qs/9GpipCJzNTVSc/Z/9Gp/8uj9s6nm6qrD6Cym6qr4NGxm6qrm6qrqra3VpqNcIaJb4WHb4WIboWHvJdaCZuvoK6v+c6o/nVAxJV1zdPUzdTU79Gt/s+naoKFa4KFbIOGn5mIvKNwydDR05FF7o5o81JP/c+o/9GpApWqEqK0HJqsJLHANKKrNlVYQV5hRWJlRszWR2NmSWVoSmZpSs/ZTGdqTWlsT2ptT5KDUGtuUWtuUm1wVG5xVW9yV3F0WHJ1WXJ1W3R3W8zQXquiZbC5Zn2AZ36BZ3+CaH+CaYCDaoCDaoGDcau0dtHXgdDKjZ6fjZ6gjp+gj6CilpOFm6qrnKusnaytnqytpbKzpbO0prO0qre4rpZ8r7u7sLy9sby9sb29sb2+sr2+sr6+t8LDucPEwZ5mwaFsxaVyxbGayNDRytHSytLTzH6DzdTV09na1Nrb3UBJ4ubn5Vxb6Y016ezt8DU98DY98fPz9fb29vj49/j4+Pn5+Yws+9Gq/Woz/4wp/9Gp/9Gq/9y+/+rY//Xs//bu+BCCBwAAAHx0Uk5TAAYMDg4PDxAREhYYGRocHR0fJCswMDIzNTc4Ojs8PT4/QEBDSkxQXF1eYGFhYmJwc3l8fH6BiI2RlpydpbG0t7i8vsjJysvMzM3Nzs7Q0NbX2NnZ2ePj5efo7vLz8/P09fb4+Pn5+vr8/Pz8/f39/f3+/v7+/v7+/v7+/iu8250AAAIUSURBVDhPdc8FVxRRFAfwa1EWomA3JogK2LV2B66BCmJid+vYwbqIYgfXxLirYicGOigGFuyMqJ/GFzPDLLt7z5kz777/b96dB80iQFS/6YO71wSzqvWZOaCWXA6ZUlu8h+47/2bHtIE9a/Cm+liXyzVcCgdJ0WHvLV3XZ60YEcKa0cpuJiZHSmCIjSyfvdLr5WKpwsS18rmRElAKF6m6vvyM64HXOzIEpiqKcra8QueCA0qpAzBM375n5wEhQuunKUfKCv/+4YKBLy+46LX20y7FEgvKNO31vwp9PAePf3DRcNvXj6YYFdp0i6Zpr36viRUjngiRVOonNsUa/+AvxoQx8TnZuAXR058BxJJksAA9Y8LpI8aFAVig7zx6HkwI0LEdF4/IWdcuJoVXAmiTQQ/vk4/YumpCeCWA1hlEJffIWc8UV1erKhcmgFbp9PbbnesLG0lxbvOHX8VcWABaptPLm5dwsRBXPHeLSr6ran8bgBZzblxGxEXRSaXvPUQFRcXqjCg7gLYbEIXofZvvFrxjuQ+AbusMkejh2/OjoAqAuPU2saw9+AHoaoiYRI/MqwLoYor45hAQQGdTQBAAnaTIjLGBhAb26iHvktnYAvkXMVBJwUA+7y7Ynrw8uRDCwb4/dBox6xSi+wRi9nHEo8cQc3OMMxzs/P0nEQ+yICsX8TAL3dmIOW4xpQkMYvODA5z4H87Vo+rw8/rVAAAAAElFTkSuQmCC';
 
-            for (i = 0; i < length; i++) {
-                point = points[i];
-
-                if (point[0] === "line") {
-                    context.beginPath();
-                    context.moveTo(point[1], point[2]);
-                    context.lineTo(point[3], point[4]);
-                    context.closePath();
-                    context.stroke();
-                }
-            }
-
-            context.fillStyle = 'Gray';
-            context.font = '9px Verdana';
-            context.fillText('Last', 18, 12);
-
-            bindEvent(context, 'DragLastPath');
         }
 
         if (tools.dragSingle === true) {
@@ -2589,37 +2565,13 @@
         function decorateDragAllPaths() {
             var context = getContext('drag-all-paths');
 
-            var x = 10,
-                y = 6,
-                line = "line",
-                points = [
-                    [line, x, y, x + 5, y + 27],
-                    [line, x, y, x + 18, y + 19],
-                    [line, x + 17, y + 19, x + 9, y + 20],
-                    [line, x + 9, y + 20, x + 5, y + 27],
-                    [line, x + 16, y + 22, x + 16, y + 31],
-                    [line, x + 12, y + 27, x + 20, y + 27]
-                ],
-                length = points.length,
-                point, i;
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32); 
+                bindEvent(context, 'DragAllPaths');
+            };   
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAGnAAABpwGoj3xfAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAG9QTFRF////SbaSOaqqRLuZQK+fObicPbaePbiZOrWcQLGcQLOfPrSbPbCeO7KgQLScPrWfPbGhOrWfPrGcPbOeP7KfPrOfPbSfPbOfPrOdPLOfPLSfPbSfPbOePbOePbOdPbOePbOePbOePbOePbOePbOeunc6sAAAACR0Uk5TAAcJDxASFRkfJCgpKissLS4wMTI1Slhla3J3n8zN0dba7e79+do8WgAAANdJREFUOMudk+kOgjAQhMslBUGKIIecwrz/M0q5DT0S59fCfGm621lCfsSayiIKJQNQO2ofaG9qH+hcsW+uPtAbQoCOG4BQfISXF9wts1h6S5sDvqLNvwGTigBqHv2P3hXwxiE55pNfgRz4PPf5FfYsyoF0qXnL/Ay2z0+kgZEGSjWkUgMVsWqVX0/xcVo+f39Wyn++lrrk0ZjDc+uA7NTmfamzKRhrdNwe8QkIljpCvwfHCM+j3j4CQ/JYD91rRjqASe01cm9Z5LSh1cZeuzj61dMvr2j9v6/FL1/M1lxUAAAAAElFTkSuQmCC';
 
-            for (i = 0; i < length; i++) {
-                point = points[i];
-
-                if (point[0] === "line") {
-                    context.beginPath();
-                    context.moveTo(point[1], point[2]);
-                    context.lineTo(point[3], point[4]);
-                    context.closePath();
-                    context.stroke();
-                }
-            }
-
-            context.fillStyle = 'Gray';
-            context.font = '10px Verdana';
-            context.fillText('All', 20, 12);
-
-            bindEvent(context, 'DragAllPaths');
         }
 
         if (tools.dragMultiple === true) {
@@ -2629,15 +2581,13 @@
         function decorateLine() {
             var context = getContext('line');
 
-            context.moveTo(10, 15);
-            context.lineTo(30, 35);
-            context.stroke();
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32);
+                bindEvent(context, 'Line');
+            };
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAqMAAAKjAG9xs/YAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAAZQTFRF////7IoZUD0iuwAAAAJ0Uk5TAMDt9w+IAAAAEklEQVQIW2NgoB74DwQQgnoAAH4+B/l0RZ/LAAAAAElFTkSuQmCC';
 
-            context.fillStyle = 'Gray';
-            context.font = '9px Verdana';
-            context.fillText('Line', 16, 12);
-
-            bindEvent(context, 'Line');
         }
 
         if (tools.line === true) {
@@ -2646,31 +2596,15 @@
 
         function decorateArrow() {
             var context = getContext('arrow');
-
-            var x = 10;
-            var y = 35;
-
-            context.beginPath();
-            context.moveTo(x, y);
-            context.lineTo(x + 20, y - 20);
-            context.stroke();
-
-            context.beginPath();
-            context.moveTo(x + 15, y - 5);
-            context.lineTo(x + 20, y - 20);
-            context.stroke();
-
-            context.beginPath();
-            context.moveTo(x + 5, y - 15);
-            context.lineTo(x + 20, y - 20);
-            context.stroke();
-
-            context.fillStyle = 'Gray';
-            context.font = '9px Verdana';
-            context.fillText('Arrow', 5, 12);
-
-            bindEvent(context, 'Arrow');
-        }
+		
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32);
+                bindEvent(context, 'Arrow');
+            };
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAlsAAAJbAHGUoNyAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAACFQTFRF////VbXfWK/iV7HjVq/jWLDjV7DjVrDjV7DjV7DjV7DjZMKDhQAAAAp0Uk5TABhgdXZ3eKu/+DcXh54AAABuSURBVChTzcq7DYNQEETRG20BSDTgxBIluBRHG28Jjl3LSlAlwfvAbAVMNkcXAPgefXv7LK+294EufvottxK4giUK4QqWKIQrWKIQrmCJQrhCC27Qggt6cEEPJoxgwggGzIC1BNSA5wSfEvAv/wSI4yCG3psvKQAAAABJRU5ErkJggg==';       
+ 
+	}
 
         if (tools.arrow === true) {
             decorateArrow();
@@ -2716,19 +2650,12 @@
 
             var context = getContext('pencil-icon');
 
-            context.lineWidth = 5;
-            context.lineCap = 'round';
-            context.moveTo(35, 20);
-            context.lineTo(5, 35);
-            context.stroke();
-
-            context.fillStyle = 'Gray';
-            context.font = '9px Verdana';
-            context.fillText('Pencil', 6, 12);
-
-            bindEvent(context, 'Pencil');
-
-            var pencilContainer = find('pencil-container'),
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32);
+                bindEvent(context, 'Pencil');
+            
+		var pencilContainer = find('pencil-container'),
                 pencilColorContainer = find('pencil-fill-colors'),
                 strokeStyleText = find('pencil-stroke-style'),
                 pencilColorsList = find("pencil-colors-list"),
@@ -2740,25 +2667,25 @@
                 alpha = 0.2;
 
             // START INIT PENCIL
+                
 
-
-
+                
             pencilStrokeStyle = hexToRGBA(fillStyleText.value, alpha)
-
+                
             pencilSelectedColor.style.backgroundColor =
                 pencilSelectedColor2.style.backgroundColor = '#' + fillStyleText.value;
-
+                
             colors.forEach(function(colorRow) {
                 var row = '<tr>';
-
+            
                 colorRow.forEach(function(color) {
                     row += '<td style="background-color:#' + color + '" data-color="' + color + '"></td>';
-                })
+                })  
                 row += '</tr>';
-
+                    
                 pencilColorsList.innerHTML += row;
             })
-
+                
             // console.log(pencilColorsList.getElementsByTagName('td'))
             Array.prototype.slice.call(pencilColorsList.getElementsByTagName('td')).forEach(function(td) {
                 addEvent(td, 'mouseover', function() {
@@ -2766,26 +2693,27 @@
                     pencilSelectedColor2.style.backgroundColor = '#' + elColor;
                     fillStyleText.value = elColor
                 });
-
+                    
                 addEvent(td, 'click', function() {
                     var elColor = td.getAttribute('data-color');
                     pencilSelectedColor.style.backgroundColor =
                         pencilSelectedColor2.style.backgroundColor = '#' + elColor;
-
+            
                     fillStyleText.value = elColor;
 
 
                     pencilColorContainer.style.display = 'none';
                 });
-            })
+            });
 
-            // END INIT PENCIL
-
-            addEvent(canvas, 'click', function() {
+		addEvent(canvas, 'click', function() {
                 hideContainers();
+
+
 
                 pencilContainer.style.display = 'block';
                 pencilContainer.style.top = (canvas.offsetTop + 1) + 'px';
+                console.log(pencilContainer);
                 pencilContainer.style.left = (canvas.offsetLeft + canvas.clientWidth) + 'px';
 
                 fillStyleText.focus();
@@ -2802,6 +2730,9 @@
             addEvent(pencilSelectedColor, 'click', function() {
                 pencilColorContainer.style.display = 'block';
             });
+
+	    };
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAhRAAAIUQGz6748AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAQtQTFRF/////////6qq1lpK+dGc+s6d1dXE19fDx8G+64ka7Isa7LgX7Ika7IsZ7+nA11pL7IkZ7YoZ7YkY+s+c+86deHNq1lpL11pK+86c774v7KgX11pK66YY778888NQ3dzD3NvD66AX6rQWOEVP8uKt7LUX67UX7LYX67UX7LUX8eav8uOw8eKvv6SE6rYWyMXC67sc67kW8evA11pK67kW67oZ6rgW6roZ7LkW67gW3LmQ67kW1mJT1mNTy83F7JAY7I8Y7Y8ZzM7G67oW7Y8Z+86d1mJT2FpK7o8f67oW8+zA+86Z7IsZ7I0e7LoX7YsZOEVQx8rH7Yoa8uy/7YoZx8rH11pK7YoZ+86dTDBw9gAAAFV0Uk5TAAEDHyw0SU1OTk9PUFFRUlJTVGpyjJalsL2/wMDAwMPExMXHyMnKysvLy8vM0NPY2N3d3t7e39/f4OHh4uLm5+jo6enp7e/v8PX19/j4+fn6+vr6+48WBt0AAAEhSURBVDjLjczZUsIwAIXhsO/IKpugIBSKgqwFRFmkyBZEYjV5/yexaYvjTBKGc/v9cwAQzJHqrnJXQDjvyw/dtcjdx6d3oxB8eLZ332aR43p4cvtlFSuex8qdt1PR5XhUW9f/ihTPodx6sIpXB9fb6v7RKI5exiMarPVUjPf0Y+vm+xxjrLbqnYmHdXTytrwuhxkPIVhVqM97MtRi57wGtSjjQXSQlNklrgh9SH2mVKEWYdz/35HAp4ZLAq+YPpQOKMS4T/cR9eklHmQ8UGouxmfcnskX+lnqowrPgYsQMiha7mcdJPRgc1PMjgUO0oTsPjaD/kLgtqX+sCOk0EQ+ngMnMZcv8R3EG89GkAnwHSQ/G2SZTrjsAgf3ybjTBsT7BdW2XmkPG9s5AAAAAElFTkSuQmCC';
         }
 
         if (tools.pencil === true) {
@@ -2823,19 +2754,86 @@
 
             var context = getContext('marker-icon');
 
-            context.lineWidth = 9;
-            context.lineCap = 'round';
-            context.strokeStyle = 'green';
-            context.moveTo(35, 20);
-            context.lineTo(5, 25);
-            context.stroke();
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32);
+                bindEvent(context, 'Marker');
+        	
+		 var markerContainer = find('marker-container'),
+                markerColorContainer = find('marker-fill-colors'),
+                strokeStyleText = find('marker-stroke-style'),
+                markerColorsList = find("marker-colors-list"),
+                fillStyleText = find('marker-fill-style'),
+                markerSelectedColor = find('marker-selected-color'),
+                markerSelectedColor2 = find('marker-selected-color-2'),
+                btnMarkerDone = find('marker-done'),
+                canvas = context.canvas,
+                alpha = 0.2;
 
-            context.fillStyle = 'Gray';
-            context.font = '9px Verdana';
-            context.fillText('Marker', 6, 12);
+            // START INIT MARKER
 
-            bindEvent(context, 'Marker');
 
+
+            markerStrokeStyle = hexToRGBA(fillStyleText.value, alpha)
+
+            markerSelectedColor.style.backgroundColor =
+                markerSelectedColor2.style.backgroundColor = '#' + fillStyleText.value;
+
+            colors.forEach(function(colorRow) {
+                var row = '<tr>';
+
+                colorRow.forEach(function(color) {
+                    row += '<td style="background-color:#' + color + '" data-color="' + color + '"></td>';
+                })
+                row += '</tr>';
+
+                markerColorsList.innerHTML += row;
+            })
+
+            // console.log(markerColorsList.getElementsByTagName('td'))
+            Array.prototype.slice.call(markerColorsList.getElementsByTagName('td')).forEach(function(td) {
+                addEvent(td, 'mouseover', function() {
+                    var elColor = td.getAttribute('data-color');
+                    markerSelectedColor2.style.backgroundColor = '#' + elColor;
+                    fillStyleText.value = elColor
+                });
+
+                addEvent(td, 'click', function() {
+                    var elColor = td.getAttribute('data-color');
+                    markerSelectedColor.style.backgroundColor =
+                        markerSelectedColor2.style.backgroundColor = '#' + elColor;
+
+                    fillStyleText.value = elColor;
+
+
+                    markerColorContainer.style.display = 'none';
+                });
+            });
+		addEvent(canvas, 'click', function() {
+                hideContainers();
+
+                markerContainer.style.display = 'block';
+                markerContainer.style.top = (canvas.offsetTop + 1) + 'px';
+                markerContainer.style.left = (canvas.offsetLeft + canvas.clientWidth) + 'px';
+
+                fillStyleText.focus();
+            });
+
+            addEvent(btnMarkerDone, 'click', function() {
+                markerContainer.style.display = 'none';
+                markerColorContainer.style.display = 'none';
+
+                markerLineWidth = strokeStyleText.value;
+                markerStrokeStyle = hexToRGBA(fillStyleText.value, alpha);
+            });
+
+            addEvent(markerSelectedColor, 'click', function() {
+                markerColorContainer.style.display = 'block';
+            });    
+	};
+            
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAADdAAAA3QFwU6IHAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAZhQTFRF/////6pV/4BA/7+AJEltJG2SHFVxHFWO/5lE/8x3/59Q/89w/5ZL/9J4/6BJ/8x1/5xH/814/59M/891/51I/8t2/7Zj/55H/8x1DzFOJ1NxFTFKMVJv/5tI/8t0/55J/810/5xI/852GGCNJ0ts/55J/812/51K/8x2/5xI/8x2/810+stz+8p3/8x1JklrGF+M/811/8x1/8x2/51K/8x2/55J/810GGCMJ0tu/51K/8x0/5xJ/8x1F1+NJ0tuF1+NKEts/51J/8x0/55J/8x1/51J/8t1TW18QHKJTmNv/51J/8x1z4ZJ1LJzGF+NJktt/7lk/51K/8x1/51J/8x1/51J/8x197VjFThX/7hiuX1IIVR7/51J/8x1/51J/7Zh/8x1GF+NJ0tt/55J/8x1vaVzCClHJ0tt/7Vg/7Vf/51J/8x1r3dI/51J/8x1FDVW/ct1GF+OHlN6J0tt/7VfCClHCypHDCtHFDZWGDpaGF+NH1V9IVN5J0ttKk1tnoNfrXZItqByt6Fy/51J/7Rf/7Vf/8x106f9PQAAAHZ0Uk5TAAMEBAcHCQkPDxAQEREjIyQkJSUnJzEyMjQ0Pj5AQEJCQ0NVVWZmaGhqanBxeHiIiYmLjZGRk5OVlZWVlpajo66uuLi6ury8vcLExMTO0NTU1NfX2Nja2uLl6Onr7Ozt7e3u7u7u8PPz9vn6+vv7+/39/v7+/ivWIygAAAE6SURBVDhPfdBVVwMxEIbhFHd3d3d3d3d3WpyWIhWWpkhg/jbZ7O45m2za7/Z5b2YQki91KS+EaCs5AUe4ouYBIExh6wY2R47c4yc1h3V7rszTN3U/IERWlJ3rfkuIrKhz6f5G2BZ5tvXqDH+aH6dwnjgt+H0x55nbgpNqziscondx3uASfcJm4shBEH0jzuTJsxY/TTN59q7FnaUmR8MWJ7VmR0Uruv8a3sN5wU3wivmd4VPmAxBqO8LBb+pnhm8lcI7GngM4+AN7htszeI++UBRafBruLOcdVSp0gXfflx7UCx67qgYvfo/vkfmA4KhP9Q+M/R7vIfWZCDEY0Ry/Pnm8y2QnSXTUPM+cFvvXhUNZFm8B9xzzy/HWfIuqDuBewHitKkqidO3qi5tG+2PkTNcB0BgS2TrD+j9tN8/9J6o93QAAAABJRU5ErkJggg==';
+/*
             var markerContainer = find('marker-container'),
                 markerColorContainer = find('marker-fill-colors'),
                 strokeStyleText = find('marker-stroke-style'),
@@ -2910,6 +2908,7 @@
             addEvent(markerSelectedColor, 'click', function() {
                 markerColorContainer.style.display = 'block';
             });
+	*/
         }
 
         if (tools.marker === true) {
@@ -2919,18 +2918,14 @@
         function decorateEraser() {
             var context = getContext('eraser-icon');
 
-            context.lineWidth = 9;
-            context.lineCap = 'round';
-            context.moveTo(35, 20);
-            context.lineTo(5, 25);
-            context.stroke();
-
-            context.fillStyle = 'Gray';
-            context.font = '9px Verdana';
-            context.fillText('Eraser', 6, 12);
-
-            bindEvent(context, 'Eraser');
-        }
+ 	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32);
+                bindEvent(context, 'Eraser');
+            };
+       	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAGVAAABlQEMTY6IAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAFdQTFRF////JKTRoG1wJ6bRJqbSJqfRknmEqW51qm51qm50tmBfJqfQuV9eJqbRvltYxHBs1aSixFZPy1BHJqbRL6LLtmpry05Ey1BH0FBG03Vt4VdM4ldM6d/em/5rBAAAABN0Uk5TABxLcIetucnJytLb3+Dm6fL3/oSKuq0AAACiSURBVDhPfcpJAoIwEETRVmZkNBrE5v7nVEiApAdqWf8BsCVtduPvudQY87gQa78Sruti75o4uyzCLom4c0E7FfmLgUhU+L4UJaIoMt8LRFm0YZdEsvXmi4pIt97ZjyJc761VhOvDMivC9XpeFOE6TFYRvsNoZbF3uD9FcXRF5BBMEBVEY6IEMiIK2okQeiQaqQeik/sheq17Mej9L8ap5u8PGqgsxCZCXgQAAAAASUVORK5CYII=';
+	 
+	}
 
         if (tools.eraser === true) {
             decorateEraser();
@@ -2939,10 +2934,13 @@
         function decorateText() {
             var context = getContext('text-icon');
 
-            context.font = '22px Verdana';
-            context.strokeText('T', 15, 30);
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32);
+                bindEvent(context, 'Text');
+            };
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA3QAAAN0BcFOiBwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMTSURBVFiF7ZZLSFRhFMd/584tEwqjrIy01whWYJFFbypaRGBED6II6WHWNDM9KAiCAg2UaBOUaZFhuGjTphZFq5IgaWHmJsJinIzoAfZaRGU697SY6/TNeKdaxEjhgW+493/+95zf98135xtRVQYzrEHtPgQwBPBHANHwMjpD13m6e9TgAKieAtZjD9+ReYDogWJgWfxGgpkHcGJm01lEQisyB/AkPBKhLEkTCWUOYISWASkbTzfQFc7LDIASBF65oz+GEdOKvwkgnodRZ3gJaAuiVXEYqTKyL/G/mwbXYmmr7gmuBDkAzAdyAAWNItzD6a3m8uUP/VbvFRANAn302g302g1An5EtIDJ+7S+aHwO5C2wEJoM8Ab6AlKByGBn+mEBgRnqAZ4FclM2I3qCo9jVFta8RvZEM6Hi/khXBBSDVgLjKRRrqlvDdmg28cbWJOL4mTp60vAF8djmQhVr1Cc28jsdqOsOFA54V2Q74DKUp/nn+PXDL0BfwqnumB4AIaACVDvx1zQnZX9eMSodpBPYNAFAKjLuX5E94+DOnD5K9Og9SN2FneA3obZTj2FnJs+7rCSHUGM0+YH+dxNQr3xJa+cFx2H2bAIjRDM4oRBYhshh0OUi+MYUgl+ovpqyABt1kDbGej0nDbB73jCGWvSVJazzXzad3jahMwaIdy2pFpBbYBpI7YMUA25h9AVAK3Edp8TIjLCVxNriz6P+eAY4cySYntwV0rrFS90FqQMcgXE0PgO4FfKh1iMLzjzwBIvtLEKfNKL6QyP6ShP9zzy7AbH6GgglHqax02BvcikpqRXcTtgWGARVAa9rmgJtrTdLMV1IxDytFe6qorHTS1ksA5PjWA3kIF35ljjcc4NlG1+HR7nU0yenLngzArnAeDos8y2lkXwA4AZKPsJbp9be8jImIhkpRbqaorYhvN9XyFl/vHZBiV/8MRIA5/Pxx6o/nqJ62QPwgMaALx7L5XcQ9XcALY4wFHU/juW4sZxVwHOU20A0ocBaVdSg7gXb3GQsRv/dhlMH4B/4VDwH87wA/ADQQBEtSK8JoAAAAAElFTkSuQmCC';
 
-            bindEvent(context, 'Text');
         }
 
         if (tools.text === true) {
@@ -2957,8 +2955,8 @@
                 context.drawImage(image, 4, 4, 32, 32);
                 bindEvent(context, 'Image');
             };
-            image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAADFBMVEVYWFhVVVUAAABUVFTqqlXjAAAAA3RSTlMxdACUjPeLAAAATElEQVR42u3SQQrAMAwDQSn7/z+XFExTcOxroN3zgC4STecApy1gpP2gBgZXQMwKwJ23QITYACLlQBC9gAFNwJMXoJhVc7lBA/gsuAArEgqPcT12VgAAAABJRU5ErkJggg==';
-        }
+            image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAiEAAAIhAENVwL6AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAP9QTFRF5+zsydXW09jbtc3L19zf2uLi3+Xl4+jq5OnrGpFyHJByIIZvIYRvIoNuJIBuJX5tJa2IJa6IJnxtJqyHJ3psJ6mGKKOEKXZrKnRrKpqAKpyBK5h/LHBqLJZ/LZJ9LZR+Lm5pL4p6MGtoM351NGNmNnJwOG5uOWhsOmRrPVNiPVxnPlFiP05hP1BhP1VkQE5hQFBiQUtgQUxgQUxhQU1hQU9iQkpgQktgR05fSlBfTFJfUFVeU1deVVheYWJcZm5/dnJZenRZfnhYgHlYnpBUnr27oMO/ocPAosC+u6dRvqlQzLNO07lO4cRM5sdL5+zt7MtK7MxK7cxK7s1K785KI8L16AAAAAl0Uk5TYPf3+Pj8/P396IWxEwAAAOFJREFUOMu902lPwkAQgOG1XB0BdQTkFi+UU85yeYC3IIfA/v/fwkLbFGg7xoTwftgv+2SS3WQYm5AxxpxdIqcAUoNI2iFovz2R4HXMp+8UGHLOfx/twcNcAP5CTBiI+1GLAM/92U+PfmbnX/+QvaFB0QtXFCj5ASBhD6rHsCxcMYG7c0WczSConda3QPoEk0JEQO+osAGuUZRULsDIlzdA7RJXxQ/XAHgPdFBOoVZ0Qzg0cB9DtBQayJ0hWgsVZEKINmIFbgOIdmIJ3F+fpr4/tFwCeKjF8uwHyBSQBfhj/Rd7MLagMv2ogAAAAABJRU5ErkJggg==';
+	}
 
         if (tools.image === true) {
             decorateImage();
@@ -2984,13 +2982,13 @@
         function decorateRect() {
             var context = getContext('rectangle');
 
-            context.strokeRect(5, 5, 30, 30);
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32);
+                bindEvent(context, 'Rectangle');
+            };
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA3QAAAN0BcFOiBwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFdSURBVFiF7dY/S0JxFMbx73O9agZdJCoiaIhCuEKUW+ALCIy2cGpya3TOqUYbi4YCNwmChoboFYQgLUG0tCQIDRZF2j/p/losIlrvdeie8SzPB845cGSMoZ9l9TU9BAB2kGGSosAaMNhrXSvIJZS0mITqKpHLAct2try3ORljkLQAVPF/JIlZ9LBPNHUXTbzluo/xrxHMZzKZ+3w+P+RnerPZvDne3plqYc47npcEpr93wHGc91gs9iSp5Beg3W5bDUxpia4bty1Gh0drv5ewVSwWT/0CAFQqlRNJB9lsdiKXy530/QxDQAgIASEgBIQAS9IhsF6v19PlcnlM0mSQABtYOSJas17N8OZLa/wWliWd+Zyb/AlgAqU7ijgj8hqW8TaAV58BXiqVepRkbIA9Pi5GvPf4leW5hUJBrusG8S13gVMBK8BMr/kM7BpjugEAAAj0Lf+r+n+G/x7wCQyUYpk3b0cQAAAAAElFTkSuQmCC';
 
-            context.fillStyle = 'Gray';
-            context.font = '9px Verdana';
-            context.fillText('Rect', 8, 24);
-
-            bindEvent(context, 'Rectangle');
         }
 
         if (tools.rectangle === true) {
@@ -3018,19 +3016,13 @@
         function decorateBezier() {
             var context = getContext('bezier-curve');
 
-            var x = 0,
-                y = 4;
+	    var image = new Image();
+            image.onload = function() {
+                context.drawImage(image, 4, 4, 32, 32);
+                bindEvent(context, 'BezierCurve');
+            };
+	    image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA3QAAAN0BcFOiBwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKrSURBVFiF7ZdPSBRRHMe/v7ezo4PmUmvrMm9MibSDQSBF6kW6FUgXoUP3JATr0CmkU1GR0CUC1714kw5BnYwKAosgjOiQYOjiOrOroWWYyjLsOr8OrbUuzs76p90OPngwvze/33w/7/d9DDPEzCjnEGVV3wf4HwAUABgcHAwJIeyenp7lHT2FSIk3NioAkFEUPjY1ZRdbKqLRaK8QwgSQjEajF3ein9D12750OuVLp1MVqdS2NkGRSCQOoCEbrwKY8CxyHDoci1UfNM0DFSsr6qHZ2YC2vFwJAOzzOc/7+8eLBVCY+SMRbQC8EEIMuCU3j462hCcnuytXV9szijJn19S8TmvaglhfPw2g88rSEpr9fv40MjLc1dX1ORAIZDw3E4lEaonoMjOv2bY93NfX9zM/KVFf3wTmOwy0MdGAAJ4YlpXMud/pAO2n5uauLTpOOLu8BuANgLvMPOZKwMwFp6nrvaaU32alvGEZhlYoF8BLAJwzh7Jddq1R3HtDiiXlQxB1QogzR0wz5tVOAAt58TgzF7Rh6/cAEVlSPgbQYKdSbfXFiW8ArAB4lY0fEdHZghVbtl3KW6aUbydaWlQvi/IsuATgBAAVwBh+2/AdQJNrTf6CZRjdlpTx6bq60HbEt4AJApjOQkwCCHgCWIahmVJacV3v2I14DsRxAD8AROByGDcdQge4BuB9QzL5rkjPvez9QkQnmdl0y/kDsBgKVZOqXieijr0Qz4FwFd8EkFLVc8T8wUgkpvYSwGuInIsLTPS0lOJ/AYiIgfOO3/+sLADzuh4EsN44M/O15ADzUtamhbgJIDMdDNaUHCADDBHzVQCyQtPulRyAiFpz4lbXzH8FwMz3AdgA1hh4UGoAYmbEwuEQVVXZR2OxnX2U7hagnKPs/wX7AGUH+AWcv/7YtcTXigAAAABJRU5ErkJggg==';
 
-            context.moveTo(x, y);
-            context.bezierCurveTo(x + 86, y + 16, x - 45, y + 24, x + 48, y + 34);
-
-            context.stroke();
-
-            context.fillStyle = 'Gray';
-            context.font = '9px Verdana';
-            context.fillText('Bezier', 10, 8);
-
-            bindEvent(context, 'BezierCurve');
         }
 
         if (tools.bezier === true) {
