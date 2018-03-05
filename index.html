@@ -239,21 +239,6 @@ function googleTranslateElementInit() {
 				<div class="tile-container">
 					<!-- UEF Tools -->
 					<!--UEF Ideation-->
-					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('./uef/ideation/index.html', 'eCraft Idea', event);">
-						<div class="tile-content iconic slide-up">
-							<div class="slide-up-2">
-								<span class="mif-question place-right margin5" onclick="helpClick('#eCraftIdeaDialog', event);"></span>
-								<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
-								<span class="tile-label">eCraft Idea</span>
-							</div>
-							<div class="slide-over bg-ideation text-small padding10">
-								Use this to note down your ideas
-							</div>
-						</div>
-						<div data-role="dialog" id="eCraftIdeaDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-idea-help.html" data-width="600"></div>
-					</div>
-					
-					<!--UEF Ideation-->
 					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('./uef/search/index.html', 'eCraft Search', event);">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
@@ -319,6 +304,20 @@ function googleTranslateElementInit() {
 			<div class="tile-group one">
 				<span class="tile-group-title">Plan</span>
 				<div class="tile-container">
+					<!--UEF Ideation-->
+                                        <div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('./uef/ideation/index.html', 'eCraft Idea', event);">
+                                                <div class="tile-content iconic slide-up">
+                                                        <div class="slide-up-2">
+                                                                <span class="mif-question place-right margin5" onclick="helpClick('#eCraftIdeaDialog', event);"></span>
+                                                                <img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+                                                                <span class="tile-label">eCraft Plan</span>
+                                                        </div>
+                                                        <div class="slide-over bg-ideation text-small padding10">
+                                                                Use this to note down your ideas
+                                                        </div>
+                                                </div>
+                                                <div data-role="dialog" id="eCraftIdeaDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-idea-help.html" data-width="600"></div>
+                                        </div>
 					<!-- Trello -->
 					<div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('https://trello.com/', undefined, event);">
 						<div class="tile-content iconic slide-up">
