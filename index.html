@@ -447,15 +447,14 @@ if (window.location.hash.indexOf('translate') >= 0) {
 								<span class="tile-label"><span class='notranslate' translate='no'>Snap!</span></span>
 							</div>
 							<div class="slide-over bg-ardu-pi text-small padding10">
-								<span class='notranslate' translate='no'>Snap!</span> might have been called Snap! Senior</span>
+								<span class='notranslate' translate='no'>Snap!</span> might have been called Scratch Senior</span>
 							</div>
 						</div>
 						<div data-role="dialog" id="SnapDialog" class="padding20" data-close-button="true" data-href="./about/snap-help.html" data-width="600"></div>
 					</div>
 					
 					<!-- SNAP4ARDUINO -->
-                    <!-- We should launch with './snap4arduino/' but until the CRX security problem is fixed we need to use the cloud version -->
-					<div class="tile bg-arduino" data-role="tile" onclick="tileClick('http://snap4arduino.rocks/run/','Snap4Arduino', event);">
+					<div class="tile bg-arduino" data-role="tile" onclick="tileClick('./snap4arduino/','Snap4Arduino', event);">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="helpClick('#Snap4ArduinoDialog', event);"></span>
@@ -463,7 +462,7 @@ if (window.location.hash.indexOf('translate') >= 0) {
 								<span class="tile-label">Snap4Arduino</span>
 							</div>
 							<div class="slide-over bg-arduino text-small padding10">
-								A version of Snap! for controlling Arduinos.
+								A version of Snap! for controlling Arduinos. Click the ? for help if this is the first time.
 							</div>
 						</div>
 						<div data-role="dialog" id="Snap4ArduinoDialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600"></div>
