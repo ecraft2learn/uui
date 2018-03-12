@@ -638,7 +638,7 @@ if (window.location.hash.indexOf('translate') >= 0) {
 	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
 
 	<!-- OER Panel to the Right-->
-	<div class="vertical-text pull-right" style="position: absolute; right:0; top:50px; "  onclick="toggleMetroCharm('#rightCharm');">
+	<div class="pull-right" style="position: absolute; right:0; top:50px; "  onclick="toggleMetroCharm('#rightCharm');">
 		<button class="image-button large-button fg-white bg-transparent">Educational Resources  |  Tutorials  |  FAQ</button>
     </div>
 	<div id="rightCharm" data-role="charm" data-position="right"  class="bg-help-charm"><span>&nbsp;</span>
@@ -744,7 +744,13 @@ if (window.location.hash.indexOf('translate') >= 0) {
 				</ul>
 			</li>
 		</ul>
-		<br/><br/><br/>
+		
+		<br/>
+
+		<div class="input-control text margin30" style="width: 240px; bottom:0; right:0;">
+			<input type="text" id="oerSearch" placeholder="Search...">
+			<button class="button"><span class="mif-search"></span></button>
+		</div>
 	</div>
 	
 </body>
