@@ -208,14 +208,30 @@
 <!-- Google Translate -->
 
 <!-- Conditionally activated if translate is in the hash term of the URL -- after the # -->
-
-<div id="google_translate_element"></div><script type="text/javascript">
+<script>
 function googleTranslateElementInit() {
-  if (window.location.hash.indexOf('translate') >= 0) {
-     new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-  }
+     new google.translate.TranslateElement({pageLanguage: 'en',
+                                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
+                                           'google_translate_element');
 }
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+if (window.location.hash.indexOf('translate') >= 0) {
+    var div = document.createElement('div');
+    var add_div_and_script = function () {
+        document.body.appendChild(div);
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.body.appendChild(script);
+    }
+    div.id = "google_translate_element";
+    if (document.body) {
+        add_div_and_script();
+    } else {
+        // wait for the document to load
+        document.addEventListener('DOMContentLoaded', add_div_and_script);
+    }
+}
+</script>
 	
 	<div class="container-float">
 		
@@ -238,21 +254,6 @@ function googleTranslateElementInit() {
 				<span class="tile-group-title">Imagine</span>
 				<div class="tile-container">
 					<!-- UEF Tools -->
-					<!--UEF Ideation-->
-					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('./uef/ideation/index.html', 'eCraft Idea', event);">
-						<div class="tile-content iconic slide-up">
-							<div class="slide-up-2">
-								<span class="mif-question place-right margin5" onclick="helpClick('#eCraftIdeaDialog', event);"></span>
-								<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
-								<span class="tile-label">eCraft Idea</span>
-							</div>
-							<div class="slide-over bg-ideation text-small padding10">
-								Use this to note down your ideas
-							</div>
-						</div>
-						<div data-role="dialog" id="eCraftIdeaDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-idea-help.html" data-width="600"></div>
-					</div>
-					
 					<!--UEF Ideation-->
 					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('./uef/search/index.html', 'eCraft Search', event);">
 						<div class="tile-content iconic slide-up">
@@ -319,6 +320,20 @@ function googleTranslateElementInit() {
 			<div class="tile-group one">
 				<span class="tile-group-title">Plan</span>
 				<div class="tile-container">
+					<!--UEF Ideation-->
+                                        <div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('./uef/ideation/index.html', 'eCraft Idea', event);">
+                                                <div class="tile-content iconic slide-up">
+                                                        <div class="slide-up-2">
+                                                                <span class="mif-question place-right margin5" onclick="helpClick('#eCraftIdeaDialog', event);"></span>
+                                                                <img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+                                                                <span class="tile-label">eCraft Plan</span>
+                                                        </div>
+                                                        <div class="slide-over bg-ideation text-small padding10">
+                                                                Use this to note down your ideas
+                                                        </div>
+                                                </div>
+                                                <div data-role="dialog" id="eCraftIdeaDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-idea-help.html" data-width="600"></div>
+                                        </div>
 					<!-- Trello -->
 					<div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('https://trello.com/', undefined, event);">
 						<div class="tile-content iconic slide-up">
@@ -394,7 +409,7 @@ function googleTranslateElementInit() {
 								<img class="tile-image icon" src="./images/3d-slash-logo.png"/>
 							</div>
 							<div class="slide-over bg-create text-small padding10">
-								An easy and fun way to make 3D models
+								Easy way to make 3D models
 							</div>
 						</div>
 						<div data-role="dialog" id="3DSlashDialog" class="padding20" data-close-button="true" data-href="./about/3d-slash-help.html" data-width="600"></div>
@@ -432,15 +447,15 @@ function googleTranslateElementInit() {
 								<span class="tile-label"><span class='notranslate' translate='no'>Snap!</span></span>
 							</div>
 							<div class="slide-over bg-ardu-pi text-small padding10">
-								<span class='notranslate' translate='no'>Snap!</span> might have been called Snap! Senior</span>
+								<span class='notranslate' translate='no'>Snap!</span> might have been called Scratch Senior</span>
 							</div>
 						</div>
 						<div data-role="dialog" id="SnapDialog" class="padding20" data-close-button="true" data-href="./about/snap-help.html" data-width="600"></div>
 					</div>
 					
 					<!-- SNAP4ARDUINO -->
-                    <!-- We should launch with './snap4arduino/' but until the CRX security problem is fixed we need to use the cloud version -->
-					<div class="tile bg-arduino" data-role="tile" onclick="tileClick('https://snap4arduino.rocks/run/','Snap4Arduino', event);">
+					<div class="tile bg-arduino" data-role="tile" onclick="var win = window.open('http://snap4arduino.rocks/run/'); win.focus();">
+					<!-- <div class="tile bg-arduino" data-role="tile" onclick="tileClick('./snap4arduino/','Snap4Arduino', event);">-->
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="helpClick('#Snap4ArduinoDialog', event);"></span>
@@ -448,7 +463,7 @@ function googleTranslateElementInit() {
 								<span class="tile-label">Snap4Arduino</span>
 							</div>
 							<div class="slide-over bg-arduino text-small padding10">
-								A version of Snap! for controlling Arduinos.
+								A version of Snap! for controlling Arduinos. Click the ? for help if this is the first time.
 							</div>
 						</div>
 						<div data-role="dialog" id="Snap4ArduinoDialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600"></div>
@@ -692,6 +707,7 @@ function googleTranslateElementInit() {
 					<li><a href="#" onclick="tileClick('./help/oer/3d_cad_modelling_in_tinkercad/3d_cad_modelling_in_tinkercad.html', '3D Modelling', event)">3D Modelling in TinkerCad</a></li>
 					<li><a href="#" onclick="tileClick('./help/oer/cura_quick_start_guide/cura_quick_start_guide.pdf', '3D Print Troubleshooting', event)">Cura Quickstart</a></li>
 					<li><a href="#" onclick="tileClick('./help/oer/extruding_a_3d_model_from_a_2d_image/extruding_a_3d_model_from_a_2d_image.html', '3D Print Troubleshooting', event)">Extruding 3D Model from 2D Image</a></li>
+					<li><a href="#" onclick="tileClick('/ai/', 'AI programming guide in Snap and Snap4Arduino', event)">AI programming in Snap</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
