@@ -65,6 +65,10 @@
 	background-color: rgb(48,48,48);
 	color: white;
 }
+.oerSearchResult:hover, visited, link, active{
+	color: whitesmoke;
+	padding: 4px;
+}
 .vertical-text{
     -webkit-transform:rotate(90deg);
     -moz-transform:rotate(90deg);
