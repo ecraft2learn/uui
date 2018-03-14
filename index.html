@@ -18,13 +18,13 @@
 	
     <script src="libraries/js/metro.js"></script>
 
-<!-- Sentry will report bugs to us -->
+<!-- Sentry will report bugs to us 
     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
     <script>
     Raven.config('https://b7d953376d3b43eb8db89579d1b714ed@sentry.io/279764',
                  {whitelistUrls: [/ecraft2learn\.github\.io/]})
          .install();
-    </script>
+    </script>-->
 
     <link rel="icon" type="image/png" href="images/eCraft2Learn-Favicon.png" />
 	
@@ -157,7 +157,7 @@
 			
 			sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
 		}
-		function showInOERWindow(event){
+		function showInOERWindow(event, addr){
 			//allWin = $("div").find('[class], bg-red');
 			allWin = $("*").find("div[data-role*='dialog']");
 			oerWin = $("#oerWin");	
@@ -165,8 +165,8 @@
 			var oerMainFolder = "help/oer/";
 			var eventNode = $(event.srcElement);
 			var oerText = $(eventNode).html();
-			var oerAddress = (oerMainFolder + oerText + "/" + oerText + ".html").toLowerCase().replace(/ /g,'_');
-			
+			var oerAddress = addr==undefined ? (oerMainFolder + oerText + "/" + oerText + ".html").toLowerCase().replace(/ /g,'_') : addr.toLowerCase();
+
 			if ($(oerWin).html() == undefined)
 			{
 				var dialog = openIframeWindow(oerAddress, "Open Educational Resources", event);
@@ -208,14 +208,30 @@
 <!-- Google Translate -->
 
 <!-- Conditionally activated if translate is in the hash term of the URL -- after the # -->
-
-<div id="google_translate_element"></div><script type="text/javascript">
+<script>
 function googleTranslateElementInit() {
-  if (window.location.hash.indexOf('translate') >= 0) {
-     new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-  }
+     new google.translate.TranslateElement({pageLanguage: 'en',
+                                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
+                                           'google_translate_element');
 }
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+if (window.location.hash.indexOf('translate') >= 0) {
+    var div = document.createElement('div');
+    var add_div_and_script = function () {
+        document.body.appendChild(div);
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.body.appendChild(script);
+    }
+    div.id = "google_translate_element";
+    if (document.body) {
+        add_div_and_script();
+    } else {
+        // wait for the document to load
+        document.addEventListener('DOMContentLoaded', add_div_and_script);
+    }
+}
+</script>
 	
 	<div class="container-float">
 		
@@ -386,14 +402,14 @@ function googleTranslateElementInit() {
 					</div>
 
 					<!-- 3D Slah -->
-					<div class="tile-small bg-create" data-role="tile" onclick="tileClick('https://www.3dslash.net/slash.php', "3D Slash", event);">
+					<div class="tile-small bg-create" data-role="tile" onclick="tileClick('https://www.3dslash.net/slash.php', '3D Slash', event);">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="helpClick('#3DSlashDialog', event);"></span>
 								<img class="tile-image icon" src="./images/3d-slash-logo.png"/>
 							</div>
 							<div class="slide-over bg-create text-small padding10">
-								An easy and fun way to make 3D models
+								Easy way to make 3D models
 							</div>
 						</div>
 						<div data-role="dialog" id="3DSlashDialog" class="padding20" data-close-button="true" data-href="./about/3d-slash-help.html" data-width="600"></div>
@@ -431,15 +447,20 @@ function googleTranslateElementInit() {
 								<span class="tile-label"><span class='notranslate' translate='no'>Snap!</span></span>
 							</div>
 							<div class="slide-over bg-ardu-pi text-small padding10">
-								<span class='notranslate' translate='no'>Snap!</span> might have been called Snap! Senior</span>
+								<span class='notranslate' translate='no'>Snap!</span> might have been called Scratch Senior</span>
 							</div>
 						</div>
 						<div data-role="dialog" id="SnapDialog" class="padding20" data-close-button="true" data-href="./about/snap-help.html" data-width="600"></div>
 					</div>
 					
 					<!-- SNAP4ARDUINO -->
+<<<<<<< HEAD
                     <!-- We should launch with './snap4arduino/' but until the CRX security problem is fixed we need to use the cloud version -->
 					<div class="tile bg-arduino" data-role="tile" onclick="tileClick('http://snap4arduino.rocks/run/','Snap4Arduino', event);">
+=======
+					<div class="tile bg-arduino" data-role="tile" onclick="var win = window.open('http://snap4arduino.rocks/run/'); win.focus();">
+					<!-- <div class="tile bg-arduino" data-role="tile" onclick="tileClick('./snap4arduino/','Snap4Arduino', event);">-->
+>>>>>>> de3a0d54f70dce3ab9bf87e59132f670b19b04a8
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="helpClick('#Snap4ArduinoDialog', event);"></span>
@@ -447,7 +468,7 @@ function googleTranslateElementInit() {
 								<span class="tile-label">Snap4Arduino</span>
 							</div>
 							<div class="slide-over bg-arduino text-small padding10">
-								A version of Snap! for controlling Arduinos.
+								A version of Snap! for controlling Arduinos. Click the ? for help if this is the first time.
 							</div>
 						</div>
 						<div data-role="dialog" id="Snap4ArduinoDialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600"></div>
@@ -622,58 +643,58 @@ function googleTranslateElementInit() {
 	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
 
 	<!-- OER Panel to the Right-->
-	<div class="vertical-text pull-right" style="position: absolute; right:0; top:50px; "  onclick="toggleMetroCharm('#rightCharm');">
+	<div class="pull-right" style="position: absolute; right:0; top:50px; "  onclick="toggleMetroCharm('#rightCharm');">
 		<button class="image-button large-button fg-white bg-transparent">Educational Resources  |  Tutorials  |  FAQ</button>
     </div>
 	<div id="rightCharm" data-role="charm" data-position="right"  class="bg-help-charm"><span>&nbsp;</span>
 		
 		<br/><br/><br/>
 		
-		<ul class="v-menu subdown min-size-required darcula  notranslate" translate="no">
+		<ul id="oerElementsUL" class="v-menu subdown min-size-required darcula  notranslate" translate="no">
 			<!--<li><a href="#"><img src="./images/electronics.png">Electronic Devices</a></li>-->
-			<li onclick="showInOERWindow(event);"><a class="dropdown-toggle"><img src="./images/electronics.png" class="mif-ani-hover-spanner"></img>Electronic Devices</a>
+			<li><a class="dropdown-toggle"><img src="./images/electronics.png" class="mif-ani-hover-spanner"></img>Electronic Devices</a>
 				<ul class="d-menu" data-role="dropdown">
 					<li class="divider"></li>
 					<li><a href="#" class="dropdown-toggle">Basics</a>
 						<ul class="d-menu" data-role="dropdown">
-							<li><a href="#">Batteries</a></li>
-							<li><a href="#">Breadboard</a></li>
-							<li><a href="#">DC Motor</a></li>
-							<li><a href="#">Digital and Analog Signals</a></li>
-							<li><a href="#">Input and Output Devices</a></li>
-							<li><a href="#">Jumper Wires</a></li>
-							<li><a href="#">LED</a></li>
-							<li><a href="#">Magnetic Switch</a></li>
-							<li><a href="#">Resistor</a></li>
-							<li><a href="#">Servo Motor</a></li>
-							<li><a href="#">Switch</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/batteries/batteries.html');">Batteries</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/breadboard/breadboard.html');">Breadboard</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/DC_Motor/DC_Motor.html');">DC Motor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Digital_and_Analog_Signals/Digital_and_Analog_Signals.html');">Digital and Analog Signals</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Input_and_Output_Devices/Input_and_Output_Devices.html');">Input and Output Devices</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Jumper_Wires/Jumper_Wires.html');">Jumper Wires</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/led/led.html');">LED</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Magnetic_Switch/Magnetic_Switch.html');">Magnetic Switch</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Resistor/Resistor.html');">Resistor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Servo_Motor/Servo_Motor.html');">Servo Motor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Switch/Switch.html');">Switch</a></li>
 						</ul>
 					</li>
 					<li><a href="#" class="dropdown-toggle">Sensors</a>
 						<ul class="d-menu" data-role="dropdown">
-							<li><a href="#">Accelerometer</a></li>
-							<li><a href="#">Color Sensor</a></li>
-							<li><a href="#">Flex Sensor</a></li>
-							<li><a href="#">Gas Sensor</a></li>
-							<li><a href="#">Gyroscope</a></li>
-							<li><a href="#">LDR Sensor</a></li>
-							<li><a href="#">Microphone</a></li>
-							<li><a href="#">Piezo Sensor</a></li>
-							<li><a href="#">PIR sensor</a></li>
-							<li><a href="#">Potentiometer Sensor</a></li>
-							<li><a href="#">Pressure Sensor</a></li>
-							<li><a href="#">Sensors</a></li>
-							<li><a href="#">Tilt Sensor</a></li>
-							<li><a href="#">Ultrasonic Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Accelerometer/Accelerometer.html');">Accelerometer</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Color_Sensor/Color_Sensor.html');">Color Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Flex_Sensor/Flex_Sensor.html');">Flex Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Gas_Sensor/Gas_Sensor.html');">Gas Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Gyroscope/Gyroscope.html');">Gyroscope</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/LDR_Sensor/LDR_Sensor.html');">LDR Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Microphone/Microphone.html');">Microphone</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Piezo_Sensor/Piezo_Sensor.html');">Piezo Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/PIR_sensor/PIR_sensor.html');">PIR sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Potentiometer_Sensor/Potentiometer_Sensor.html');">Potentiometer Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Pressure_Sensor/Pressure_Sensor.html');">Pressure Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Sensors/Sensors.html');">Sensors</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Tilt_Sensor/Tilt_Sensor.html');">Tilt Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Ultrasonic_Sensor/Ultrasonic_Sensor.html');">Ultrasonic Sensor</a></li>
 						</ul>
 					</li>
 					<li><a href="#" class="dropdown-toggle">More ...</a>
 						<ul class="d-menu" data-role="dropdown">
-							<li><a href="#">Conductive Paint</a></li>
-							<li><a href="#">Conductive Thread</a></li>
-							<li><a href="#">Copper Tape</a></li>
-							<li><a href="#">IR Array</a></li>
-							<li><a href="#">3D Printing</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Conductive_Paint/Conductive_Paint.html');">Conductive Paint</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Conductive_Thread/Conductive_Thread.html');">Conductive Thread</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Copper_Tape/Copper_Tape.html');">Copper Tape</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/IR_Array/IR_Array.html');">IR Array</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/3D_Printing/3D_Printing.html');">3D Printing</a></li>
 						</ul>
 					</li>
 					<li class="divider"></li>
@@ -691,6 +712,7 @@ function googleTranslateElementInit() {
 					<li><a href="#" onclick="tileClick('./help/oer/3d_cad_modelling_in_tinkercad/3d_cad_modelling_in_tinkercad.html', '3D Modelling', event)">3D Modelling in TinkerCad</a></li>
 					<li><a href="#" onclick="tileClick('./help/oer/cura_quick_start_guide/cura_quick_start_guide.pdf', '3D Print Troubleshooting', event)">Cura Quickstart</a></li>
 					<li><a href="#" onclick="tileClick('./help/oer/extruding_a_3d_model_from_a_2d_image/extruding_a_3d_model_from_a_2d_image.html', '3D Print Troubleshooting', event)">Extruding 3D Model from 2D Image</a></li>
+					<li><a href="#" onclick="tileClick('/ai/', 'AI programming guide in Snap and Snap4Arduino', event)">AI programming in Snap</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
@@ -727,7 +749,41 @@ function googleTranslateElementInit() {
 				</ul>
 			</li>
 		</ul>
-		<br/><br/><br/>
+		
+		<br/>
+
+		<div class="input-control text margin40" style="width: 240px; right:0;">
+			<input type="text" id="oerSearch" placeholder="Search..." onkeypress="searchOER();">
+			<button class="button" onclick="searchOER();"><span class="mif-search"></span></button>
+			<script>
+				function searchOER(){
+					var text2search = $("#oerSearch").val().toLowerCase();
+					var elemsList = $("#oerElementsUL").find("li");//.find('[data-role], searchable');
+					var resultsDiv = $("#oerResults");
+					var aElem;
+					var aText;
+
+					$(resultsDiv).empty();
+
+					$.each(elemsList, function(i, liElem){
+						aElem = $(liElem).children("a");
+					
+						if($(aElem).attr('data-role')=="searchable"){
+							aText = $(aElem).text();
+							//alert(aText+", "+text2search);
+							if(aText.toLowerCase().indexOf(text2search)>=0)
+								$(resultsDiv).append($(aElem).clone().addClass('oerSearchResult')).append("<br>");
+						}
+					});
+
+					
+				}	
+			</script>
+		</div>
+
+		<div id="oerResults">
+
+		</div>
 	</div>
 	
 </body>

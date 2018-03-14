@@ -65,6 +65,10 @@
 	background-color: rgb(48,48,48);
 	color: white;
 }
+.oerSearchResult:hover, visited, link, active{
+	color: whitesmoke;
+	padding: 4px;
+}
 .vertical-text{
     -webkit-transform:rotate(90deg);
     -moz-transform:rotate(90deg);
@@ -84,6 +88,10 @@ h2 {
 	margin-bottom: 20px;
 }
 
+
+#oerSearch {
+	background-color: #3c3f41;
+}
 
 #eCraftLogo {
 	width:20%;
