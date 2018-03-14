@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<script src='lib/jquery/jquery.js'></script>
 		<script src='canvas-designer-widget.js'></script>
 	</head>
 	<body>
@@ -15,8 +16,29 @@
 			document.getElementById('save').onclick = (event) => {
 
 				designer.toDataURL('image/png', function(dataURL) {
-    
-					window.open(dataURL);
+  
+					fetch(dataURL).then(res => res.blob()).then(blob => {
+
+						var formData = new FormData();
+						formData.append('file', blob);
+						formData.append('users', window.sessionStorage.getItem('username'));
+						formData.append('sessionId', window.sessionStorage.getItem('pilotsite'));
+					
+						$.ajax({
+
+							type: 'POST',
+							url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_plans_pilot_2.php',
+							data: formData,
+							success: function(data) { console.log(data); },
+							error: function(error) { console.log(error); },
+							contentType: false,
+							processData: false
+
+						});
+
+						window.open(dataURL);
+
+					});
 
 				});		
 
