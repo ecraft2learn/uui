@@ -84,6 +84,7 @@
 
 				var parsed = JSON.parse(data);
 
+
 				var students = JSON.parse(parsed[0].data);
 
 				for (var i = 0; i < students.students.length; i++) {
@@ -105,47 +106,21 @@
 
 				}
 
+				var completed = parsed[0].completed;
+				var incompleted = parsed[0].incompleted;
 
-				$.ajax({
+				$('#completed-tasks').load(completed, function(response, status, xhr) {
+
+					console.log(status);
+
+				});
+				$('#incomplete-tasks').load(incompleted, function(response, status, xhr) {
+
+					console.log(status);
+
+				});
+
                 
-                        type: 'POST',
-                        url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_todo_incomplete_pilot_2.php',
-                        data: 'users=' + window.sessionStorage.getItem('username') + '&sessionId=' + window.sessionStorage.getItem('pilotsite'),
-                        success: function(data) {
-
-				console.log(data);
-                                
-				$.ajax({
-                
-                        type: 'POST',
-                        url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_todo_complete_pilot_2.php',
-                        data: 'users=' + window.sessionStorage.getItem('username') + '&sessionId=' + window.sessionStorage.getItem('pilotsite'),
-                        success: function(data) {
-
-                                console.log(data);
-                                
-                                
-
-
-                        },
-                        error: function(error) {
-
-
-                        }
-
-
-                });
-
-
-                        },
-                        error: function(error) {
-
-
-                        }
-
-
-                });
-
 			},
 			error: function(error) {
 
@@ -184,21 +159,29 @@
 
 		var json = JSON.stringify(obj);
 
-		console.log(incompletes);
-		console.log(completes);
+		var incompleteFile = new Blob([incompletes], { type: 'text/html' });
+		var completeFile = new Blob([completes], { type: 'text/html' });
+
+		var formData = new FormData();
+		formData.append('data', json);
+		formData.append('incomplete', incompleteFile);
+		formData.append('completeData', completeFile);
 
 		window.sessionStorage.setItem('username', 'tapanit');
 		window.sessionStorage.setItem('pilotsite', 11);
 
-		var data = 'users=' + window.sessionStorage.getItem('username') + '&sessionId=' + window.sessionStorage.getItem('pilotsite') + '&data=' + json + '&incomplete=' + incompletes + '&complete=' + completes;
+		formData.append('users', window.sessionStorage.getItem('username'));
+                formData.append('sessionId', window.sessionStorage.getItem('pilotsite'));
 
 		$.ajax({
 
 			type: 'POST',
 			url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/save_todo_pilot_2.php',
-			data: data,
+			data: formData,
 			success: function(data) { console.log(data) },
-			error: function(error) { console.log(error) }
+			error: function(error) { console.log(error) },
+			processData: false,
+			contentType: false
 
 		});
 
