@@ -34,30 +34,6 @@
         <td class="edit"><button class="edit-item-btn">Edit</button></td>
         <td class="remove"><button id='remove-empty' class="remove-item-btn">Remove</button></td>
       </tr>
-     <!-- <tr>
-        <td class="id" style="display:none;">2</td>
-        <td class="name">Jonas</td>
-        <td class="age">-132</td>
-        <td class="city">Berlin</td>
-        <td class="edit"><button class="edit-item-btn">Edit</button></td>
-        <td class="remove"><button class="remove-item-btn">Remove</button></td>
-      </tr>
-      <tr>
-        <td class="id" style="display:none;">3</td>
-        <td class="name">Gustaf</td>
-        <td class="age">-23</td>
-        <td class="city">Sundsvall</td>
-        <td class="edit"><button class="edit-item-btn">Edit</button></td>
-        <td class="remove"><button class="remove-item-btn">Remove</button></td>
-      </tr>
-      <tr>
-        <td class="id" style="display:none;">4</td>
-        <td class="name">Fredrik</td>
-        <td class="age">26</td>
-        <td class="city">Goteborg</td>
-        <td class="edit"><button class="edit-item-btn">Edit</button></td>
-        <td class="remove"><button class="remove-item-btn">Remove</button></td>
-      </tr>-->
     </tbody>
   </table>
   <table>
@@ -90,8 +66,144 @@
       <ul id="completed-tasks">
       </ul>
     </div>
+    <button class='btn btn-block btn-info' id='save-contents'>Save</button>
     <script type="text/javascript" src="js/ui.js"></script>
     <script>
+
+	$(document).ready(function() {
+
+		window.sessionStorage.setItem('username', 'tapanit');
+		window.sessionStorage.setItem('pilotsite', 11);
+
+		$.ajax({
+		
+			type: 'POST',
+			url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_todo_pilot_2.php',
+			data: 'users=' + window.sessionStorage.getItem('username') + '&sessionId=' + window.sessionStorage.getItem('pilotsite'),
+			success: function(data) {
+
+				var parsed = JSON.parse(data);
+
+				var students = JSON.parse(parsed[0].data);
+
+				for (var i = 0; i < students.students.length; i++) {
+
+					var id = students.students[i].id;
+					var name = students.students[i].name;
+					var age = students.students[i].age;
+					var city = students.students[i].city;
+
+
+					contactList.add({
+    						id: id,
+    						name: name,
+    						age: age,
+    						city: city
+  					});
+  					clearFields();
+  					refreshCallbacks();
+
+				}
+
+
+				$.ajax({
+                
+                        type: 'POST',
+                        url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_todo_incomplete_pilot_2.php',
+                        data: 'users=' + window.sessionStorage.getItem('username') + '&sessionId=' + window.sessionStorage.getItem('pilotsite'),
+                        success: function(data) {
+
+				console.log(data);
+                                
+				$.ajax({
+                
+                        type: 'POST',
+                        url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_todo_complete_pilot_2.php',
+                        data: 'users=' + window.sessionStorage.getItem('username') + '&sessionId=' + window.sessionStorage.getItem('pilotsite'),
+                        success: function(data) {
+
+                                console.log(data);
+                                
+                                
+
+
+                        },
+                        error: function(error) {
+
+
+                        }
+
+
+                });
+
+
+                        },
+                        error: function(error) {
+
+
+                        }
+
+
+                });
+
+			},
+			error: function(error) {
+
+
+			}
+
+
+		});
+
+	});
+
+	$('#save-contents').on('click', (event) => {
+
+		var obj = {};
+
+		var people = [];
+		
+		for (var i = 0; i < contactList.items.length; i++) {
+                                        var student = {};
+                                        var name = contactList.items[i]._values.name;
+                                        var id = contactList.items[i]._values.id;
+					var city = contactList.items[i]._values.city;
+					var age = contactList.items[i]._values.age;
+					student.name = name;
+					student.id = id;
+					student.city = city;
+					student.age = age;
+                                        people.push(student);
+		}
+
+		obj.students = people;
+
+		
+		var incompletes = $('#incomplete-tasks').html();
+		var completes = $('#completed-tasks').html();
+
+		var json = JSON.stringify(obj);
+
+		console.log(incompletes);
+		console.log(completes);
+
+		window.sessionStorage.setItem('username', 'tapanit');
+		window.sessionStorage.setItem('pilotsite', 11);
+
+		var data = 'users=' + window.sessionStorage.getItem('username') + '&sessionId=' + window.sessionStorage.getItem('pilotsite') + '&data=' + json + '&incomplete=' + incompletes + '&complete=' + completes;
+
+		$.ajax({
+
+			type: 'POST',
+			url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/save_todo_pilot_2.php',
+			data: data,
+			success: function(data) { console.log(data) },
+			error: function(error) { console.log(error) }
+
+		});
+
+	});
+
 	var options = {
   valueNames: [ 'id', 'name', 'age', 'city' ]
 };
@@ -140,7 +252,6 @@ function refreshCallbacks() {
   removeBtns = $('.remove-item-btn');
   editBtns = $('.edit-item-btn');
   
-  console.log(removeBtns);
   removeBtns.click(function() {
     var itemId = $(this).closest('tr').find('.id').text();
     contactList.remove('id', itemId);
