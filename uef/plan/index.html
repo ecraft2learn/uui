@@ -108,13 +108,11 @@
 
 				var completed = parsed[0].completed;
 				var incompleted = parsed[0].incompleted;
-				/*
 				$('#completed-tasks').load(completed, function(response, status, xhr) {
 
 					console.log(status);
 
 				});
-				*/
 				$('#incomplete-tasks').load(incompleted, function(response, status, xhr) {
 
 					console.log(status);
@@ -294,7 +292,7 @@ function clearFields() {
     input.click();
   }
 	, selector:'textarea', plugins: 'image media insertdatetime', external_plugins: {
-				'mention' : 'http://stevendevooght.github.io/tinyMCE-mention/javascripts/tinymce/plugins/mention/plugin.js' }, 
+				'mention' : '../mention/mention.js' }, 
 		mentions: {
 			source: function(query, process, delimeter) {
 
