@@ -18,13 +18,13 @@
 	
     <script src="libraries/js/metro.js"></script>
 
-<!-- Sentry will report bugs to us 
+<!-- Sentry will report bugs to us -->
     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
     <script>
-    Raven.config('https://b7d953376d3b43eb8db89579d1b714ed@sentry.io/279764',
+    Raven.config('https://7780e314f7d64cc88db0fab885c9ca9b@sentry.io/305194',
                  {whitelistUrls: [/ecraft2learn\.github\.io/]})
          .install();
-    </script>-->
+    </script>
 
     <link rel="icon" type="image/png" href="images/eCraft2Learn-Favicon.png" />
 	
@@ -160,7 +160,7 @@
 		function showInOERWindow(event, addr){
 			//allWin = $("div").find('[class], bg-red');
 			allWin = $("*").find("div[data-role*='dialog']");
-			oerWin = $("#oerWin");	
+			oerWin = $("#oerWin").hm();	
 			
 			var oerMainFolder = "help/oer/";
 			var eventNode = $(event.srcElement);
@@ -328,7 +328,7 @@ if (window.location.hash.indexOf('translate') >= 0) {
                                                                 <img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
                                                                 <span class="tile-label">eCraft Plan</span>
                                                         </div>
-                                                        <div class="slide-over bg-ideation text-small padding10">
+                                                        <div class="slide-over bg-plan text-small padding10">
                                                                 Use this to note down your ideas
                                                         </div>
                                                 </div>
@@ -739,7 +739,7 @@ if (window.location.hash.indexOf('translate') >= 0) {
 							<li><a href="#" onclick="tileClick('./help/oer/3d_printing_troubleshooting_guide/3d_printing_troubleshooting_guide.pdf', '3D Print Troubleshooting', event)">Other 3D Printing Problems</a></li>
 						</ul>
 					</li>
-					<li><a href="#" onclick="tileClick('./help/troubleshooting/index_new.html','eCraft2Learn UUI Troubleshooting', event);">eCraft2Learn Components</a></li>
+					<li><a href="#" onclick="tileClick('./help/troubleshooting/index.html','eCraft2Learn UUI Troubleshooting', event);">eCraft2Learn Components</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
