@@ -99,7 +99,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 	var toolTile = $(event.srcElement).closest('[data-role], tile');
 	var bgColor = toolTile.css("background-color");
 	
-	if(bgColor=="rgb(255, 255, 255)")
+	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
 		bgColor="rgb(64,64,64)";
 	
 	activeWindow = $.Dialog({
