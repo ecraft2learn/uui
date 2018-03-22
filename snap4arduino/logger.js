@@ -32,7 +32,7 @@ setInterval(function() {
 	var code = window.localStorage.getItem('-snap-project-' + fileName);
 
 	var http = new XMLHttpRequest();
-	var url = 'http://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_programming_vectors_pilot_1.php';
+	var url = 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_programming_vectors_pilot_1.php';
 	var params = "script=" + encodeURIComponent(code) +
 		'&currentTab=' + currentTab + '&currentCategory=' + currentCategory +
 		'&sessionId=' + sessionId +
