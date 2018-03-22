@@ -19,56 +19,74 @@ class WinIFrame {
 
 function getAnalyticFieldName(toolName, isHelp) {
 	
-	/*$clientId = $_POST['clientId'];
-	$sessionId = $_POST['sessionId'];
-	$users = $_POST['users'];
-	$sketch = isset($_POST['sketch']) ? $_POST['sketch'] : 0;
-	$tinkercad = isset($_POST['tinkercad']) ? $_POST['tinkercad'] : 0;
-	$snap = isset($_POST['snap']) ? $_POST['snap'] : 0;
-	$share = isset($_POST['share']) ? $_POST['share'] : 0;
-	>>$project = isset($_POST['project']) ? $_POST['project'] : 0;
-	>>$info = isset($_POST['info']) ? $_POST['info'] : 0;
-	>>$tools = isset($_POST['tools']) ? $_POST['tools'] : 0;
-	$others = isset($_POST['others']) ? $_POST['others'] : 0;
-	>>$focus = isset($_POST['focus']) ? $_POST['focus'] : 0;
-	$helpSketch = isset($_POST['helpSketch']) ? $_POST['helpSketch'] : 0;
-	$helpTinkercad = isset($_POST['helpTinkercad']) ? $_POST['helpTinkercad'] : 0;
-	$helpSnap = isset($_POST['helpSnap']) ? $_POST['helpSnap'] : 0;
-	$helpShare = isset($_POST['helpShare']) ? $_POST['helpShare'] : 0;
-	$helpProject = isset($_POST['helpProject']) ? $_POST['helpProject'] : 0;
-	$helpInfo = isset($_POST['helpInfo']) ? $_POST['helpInfo'] : 0;
-	$helpTools = isset($_POST['helpTools']) ? $_POST['helpTools'] : 0;
-	$helpOthers */
+	switch (toolName) {
 
-	var fieldName="";
-	if(toolName.toLowerCase().indexOf('sketch')>=0) fieldName="Sketch";
-	else if(toolName.toLowerCase().indexOf('tinker')>=0) fieldName = "Tinkercad";
-	else if(toolName.toLowerCase().indexOf('snap')>=0) fieldName = "Snap";
-	else if(toolName.toLowerCase().indexOf('thingiverse')>=0) fieldName = "Share";
-	else fieldName = "Others";
-	
-	if(isHelp)
-		fieldName = "help"+fieldName;
-	else
-		fieldName = fieldName.toLowerCase();
-	return fieldName;
+		case './uef/search/index.html':
+			return 'search';
+		case './uef/ideation/index.html':
+			return 'sketch';
+		case 'https://trello.com/':
+			return 'trello';
+		case 'https://www.tinkercad.com/#/?type=tinkercad&collection=designs':
+			return 'tinkercard';
+		case 'http://beetleblocks.com/':
+			return 'beetleblocks';
+		case 'https://www.3dslash.net/slash.php':
+			return 'slash';
+		case '#CuraDialog':
+			return 'cura';
+		case './snap/snap.html':
+			return 'snap';
+		case './snap4arduino/index.html':
+			return 'snap4arduino';
+		case 'https://www.thingiverse.com/':
+			return 'thingiverse';
+		default:
+			return 'help';
+
+
+	}
+
 }
 
 function sendAnalyticsData(clientId, sessionId, toolName) {
-	
 
+	var obj = {
+	
+		search: 0,
+		sketch: 0,
+		trello: 0,
+		tinkercard: 0,
+		beetleblocks: 0,
+		slash: 0,
+		cura: 0,
+		snap: 0,
+		s4a: 0,
+		thingiverse: 0,
+		help: 0
+
+	};
+
+	obj[toolName]++;
+
+	var data = JSON.stringify(obj);
+
+	var users = window.sessionStorage.getItem('username');
+	var sessionId = window.sessionStorage.getItem('pilotsite');
+	
 	$.ajax({
 
 		type: 'POST',
-		url: 'https://cs.uef.fi/~tapanit/put_uui_vectors_pilot_1.php',
-		data: 'clientId=1&sessionId=0&users=thisIsAString&snap=1',
+		url: 'https://cs.uef.fi/~tapanit/put_uui_vectors_pilot_2.php',
+		data: 'data=' + data + '&users=' + users + '&sessionId=' + sessionId,
 		success: function(data) {
-			//alert("oolalala "+data);
+			console.log(data);
 		},
 		error: function(error) {
-			//alert("Shit!");
+			console.log(error);
 		}
 	});
+	
 }
 
 
