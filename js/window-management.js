@@ -61,7 +61,7 @@ function sendAnalyticsData(clientId, sessionId, toolName) {
 		slash: 0,
 		cura: 0,
 		snap: 0,
-		s4a: 0,
+		snap4arduino: 0,
 		thingiverse: 0,
 		help: 0,
 		users: ''
