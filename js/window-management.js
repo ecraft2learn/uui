@@ -63,21 +63,25 @@ function sendAnalyticsData(clientId, sessionId, toolName) {
 		snap: 0,
 		s4a: 0,
 		thingiverse: 0,
-		help: 0
+		help: 0,
+		users: ''
 
 	};
 
 	obj[toolName]++;
 
-	var data = JSON.stringify(obj);
-
 	var users = window.sessionStorage.getItem('username');
 	var sessionId = window.sessionStorage.getItem('pilotsite');
 	
+	obj['users'] = users;
+
+		
+	var data = JSON.stringify(obj);
+
 	$.ajax({
 
 		type: 'POST',
-		url: 'https://cs.uef.fi/~tapanit/put_uui_vectors_pilot_2.php',
+		url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_uui_vectors_pilot_2.php',
 		data: 'data=' + data + '&users=' + users + '&sessionId=' + sessionId,
 		success: function(data) {
 			console.log(data);
