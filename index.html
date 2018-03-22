@@ -18,13 +18,13 @@
 	
     <script src="libraries/js/metro.js"></script>
 
-<!-- Sentry will report bugs to us 
+<!-- Sentry will report bugs to us -->
     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
     <script>
-    Raven.config('https://b7d953376d3b43eb8db89579d1b714ed@sentry.io/279764',
+    Raven.config('https://7780e314f7d64cc88db0fab885c9ca9b@sentry.io/305194',
                  {whitelistUrls: [/ecraft2learn\.github\.io/]})
          .install();
-    </script>-->
+    </script>
 
     <link rel="icon" type="image/png" href="images/eCraft2Learn-Favicon.png" />
 	
@@ -328,7 +328,7 @@ if (window.location.hash.indexOf('translate') >= 0) {
                                                                 <img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
                                                                 <span class="tile-label">eCraft Plan</span>
                                                         </div>
-                                                        <div class="slide-over bg-ideation text-small padding10">
+                                                        <div class="slide-over bg-plan text-small padding10">
                                                                 Use this to note down your ideas
                                                         </div>
                                                 </div>
@@ -416,7 +416,7 @@ if (window.location.hash.indexOf('translate') >= 0) {
 					</div>
 
 					<!-- Cura -->
-					<div class="tile-small bg-create" data-role="tile" onclick="tileClick('./about/cura-not-web-app.html', undefined, event);">
+					<div class="tile-small bg-create" data-role="tile" onclick="helpClick('#CuraDialog', event);">
 						<div class="tile-content iconic slide-up">
 							<div class="slide-up-2">
 								<span class="mif-question place-right margin5"  onclick="helpClick('#CuraDialog', event);"></span>
@@ -639,29 +639,34 @@ if (window.location.hash.indexOf('translate') >= 0) {
 
 	<!-- OER Panel to the Right-->
 	<div class="pull-right" style="position: absolute; right:0; top:50px; "  onclick="toggleMetroCharm('#rightCharm');">
-		<button class="image-button large-button fg-white bg-transparent">Educational Resources  |  Tutorials  |  FAQ</button>
+		<button class="image-button large-button fg-white bg-transparent">Educational Resources</button>
     </div>
-	<div id="rightCharm" data-role="charm" data-position="right"  class="bg-help-charm"><span>&nbsp;</span>
+	<div id="rightCharm" data-role="charm" data-position="right"  class="bg-help-charm" style="overflow-y:auto;"><span>&nbsp;</span>
 		
 		<br/><br/><br/>
 		
-		<ul id="oerElementsUL" class="v-menu subdown min-size-required darcula  notranslate" translate="no">
+		<ul id="oerElementsUL" class="v-menu subdown darcula notranslate" translate="no" style="width:100%;">
 			<!--<li><a href="#"><img src="./images/electronics.png">Electronic Devices</a></li>-->
+
+			<!-- Electronic Devices -->
 			<li><a class="dropdown-toggle"><img src="./images/electronics.png" class="mif-ani-hover-spanner"></img>Electronic Devices</a>
 				<ul class="d-menu" data-role="dropdown">
 					<li class="divider"></li>
 					<li><a href="#" class="dropdown-toggle">Basics</a>
 						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/.html');"></a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/arduino/arduino.html');">Arduino</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/arduino_prototyping_shield/arduino_prototyping_shield.html');">Arduino Prototyping Shield</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/batteries/batteries.html');">Batteries</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/breadboard/breadboard.html');">Breadboard</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/DC_Motor/DC_Motor.html');">DC Motor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Digital_and_Analog_Signals/Digital_and_Analog_Signals.html');">Digital and Analog Signals</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/general_purpose_transistor/general_purpose_transistor.html');">General Purpose Transistor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Input_and_Output_Devices/Input_and_Output_Devices.html');">Input and Output Devices</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Jumper_Wires/Jumper_Wires.html');">Jumper Wires</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/led/led.html');">LED</a></li>
-							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Magnetic_Switch/Magnetic_Switch.html');">Magnetic Switch</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/raspberry_pi/raspberry_pi.html');">Raspberry Pi</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Resistor/Resistor.html');">Resistor</a></li>
-							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Servo_Motor/Servo_Motor.html');">Servo Motor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Switch/Switch.html');">Switch</a></li>
 						</ul>
 					</li>
@@ -669,10 +674,15 @@ if (window.location.hash.indexOf('translate') >= 0) {
 						<ul class="d-menu" data-role="dropdown">
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Accelerometer/Accelerometer.html');">Accelerometer</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Color_Sensor/Color_Sensor.html');">Color Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/flame_sensor/flame_sensor.html');">Flame Sensor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Flex_Sensor/Flex_Sensor.html');">Flex Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/force_sensor/force_sensor.html');">Force Sensor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Gas_Sensor/Gas_Sensor.html');">Gas Sensor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Gyroscope/Gyroscope.html');">Gyroscope</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/imu/imu.html');">IMU</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ir_proximity_sensor/ir_proximity_sensor.html');">IR Proximity Sensor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/LDR_Sensor/LDR_Sensor.html');">LDR Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/line_tracking_sensor/line_tracking_sensor.html');">Line Tracking Sensor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Microphone/Microphone.html');">Microphone</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Piezo_Sensor/Piezo_Sensor.html');">Piezo Sensor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/PIR_sensor/PIR_sensor.html');">PIR sensor</a></li>
@@ -681,37 +691,62 @@ if (window.location.hash.indexOf('translate') >= 0) {
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Sensors/Sensors.html');">Sensors</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Tilt_Sensor/Tilt_Sensor.html');">Tilt Sensor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Ultrasonic_Sensor/Ultrasonic_Sensor.html');">Ultrasonic Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/visible_light_sensor/visible_light_sensor.html');">Visible Light Sensor</a></li>
 						</ul>
 					</li>
 					<li><a href="#" class="dropdown-toggle">More ...</a>
 						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/IR_Array/IR_Array.html');">IR Array</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Conductive_Paint/Conductive_Paint.html');">Conductive Paint</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Conductive_Thread/Conductive_Thread.html');">Conductive Thread</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Copper_Tape/Copper_Tape.html');">Copper Tape</a></li>
-							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/IR_Array/IR_Array.html');">IR Array</a></li>
-							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/3D_Printing/3D_Printing.html');">3D Printing</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/l293d_h_bridge/l293d_h_bridge.html');">L293D Bridge</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Magnetic_Switch/Magnetic_Switch.html');">Magnetic Switch</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/motor_controller/motor_controller.html');">Motor Controller</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/piezo_speaker/piezo_speaker.html');">Piezo Speaker</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/relay_board/relay_board.html');">Relay Board</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Servo_Motor/Servo_Motor.html');">Servo Motor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/step_up_voltage_regulator/step_up_voltage_regulator.html');">Step-up Voltage Regulator</a></li>
 						</ul>
 					</li>
 					<li class="divider"></li>
 				</ul>
 			</li>
 			
+			<!-- 3D Printing -->
 			<li><a href="#" class="dropdown-toggle">
-					<span class="icon mif-film mif-ani-hover-spanner"></span>
-					<span class="title">Tutorials</span>
+					<span class="icon mif-rocket mif-ani-hover-spanner"></span>
+					<span class="title">3D Printing</span>
 				</a>
 				<ul class="d-menu" data-role="dropdown">
 					<li class="divider"></li>
-					<!--<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/education/getting-started-with-an-ultimaker','3D Print Tutorials', event);">3D Printing</a></li>-->
-					<li><a href="#" onclick="tileClick('./help/oer/introduction_to_3d_printing/introduction_to_3d_printing.html', '3D Printing', event)">Introduction to 3D Printing</a></li>
-					<li><a href="#" onclick="tileClick('./help/oer/3d_cad_modelling_in_tinkercad/3d_cad_modelling_in_tinkercad.html', '3D Modelling', event)">3D Modelling in TinkerCad</a></li>
-					<li><a href="#" onclick="tileClick('./help/oer/cura_quick_start_guide/cura_quick_start_guide.pdf', '3D Print Troubleshooting', event)">Cura Quickstart</a></li>
-					<li><a href="#" onclick="tileClick('./help/oer/extruding_a_3d_model_from_a_2d_image/extruding_a_3d_model_from_a_2d_image.html', '3D Print Troubleshooting', event)">Extruding 3D Model from 2D Image</a></li>
-					<li><a href="#" onclick="tileClick('/ai/', 'AI programming guide in Snap and Snap4Arduino', event)">AI programming in Snap</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/3d_printing/3d_printing.html');">3D Printing</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/introduction_to_3d_printing/introduction_to_3d_printing.html');">3D Printing Introduction</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/3d_cad_modelling_in_tinkercad/3d_cad_modelling_in_tinkercad.html');">3D Modelling in Tinkercad</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/getting_started_guide_for_schools/getting_started_guide_for_schools.html');">Getting Started</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/extruding_a_3d_model_from_a_2d_image/extruding_a_3d_model_from_a_2d_image.html');">3D Model from 2D Image</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/cura_quick_start_guide/cura_quick_start_guide.pdf');">Cura Quickstart</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/cura_videos_3/cura_videos_3.html');">Cura Videos</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ultimaker_2plus_manual/ultimaker_2plus_manual.html');">UM2+ User Manual</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ultimaker_3_quick_start_guide/ultimaker_3_quick_start_guide.html');">UM3 Quick Start</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ultimaker_3_manual/ultimaker_3_manual.html');">UM3 Manual</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
-			
+				
+			<!-- A.I. Section -->
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-squirrel mif-ani-hover-spanner"></span>
+					<span class="title">A.I.</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" data-role="searchable" onclick="tileClick('/ai/', 'AI programming guide in Snap and Snap4Arduino', event)">AI programming in Snap</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+
+			<!-- Communities Section -->
 			<li><a href="#" class="dropdown-toggle">
 					<span class="icon mif-users mif-ani-hover-spanner"></span>
 					<span class="title">Communities</span>
@@ -720,12 +755,13 @@ if (window.location.hash.indexOf('translate') >= 0) {
 					<li class="divider"></li>
 					<li><a href="#" onclick="tileClick('https://community.ultimaker.com/','Ultimaker Community', event);">3D Printing</a></li>
 					<!--The following 2 links cannot be opened in a window because of XFrame limitation and HTTP/HTTPS, for now I am opening them in a new tab, until the issue is fixed-->
-					<li><a href="https://forum.arduino.cc/" target="_blank" onclick_oldold="tileClick('https://forum.arduino.cc/','Arduino Forum', event);">Arduino Forum</a></li>
+					<li><a href="https://forum.arduino.cc/"  target="_blank" onclick_oldold="tileClick('https://forum.arduino.cc/','Arduino Forum', event);">Arduino Forum</a></li>
 					<li><a href="http://playground.arduino.cc/" target="_blank" onclick_old="tileClick('http://playground.arduino.cc/','Arduino Playground', event);">Arduino Wiki</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
 			
+			<!-- Troubleshooting Section -->
 			<li><a href="#" class="dropdown-toggle">
 					<span class="icon mif-wrench mif-ani-hover-spanner"></span>
 					<span class="title">Troubleshooting</span>
@@ -735,11 +771,12 @@ if (window.location.hash.indexOf('translate') >= 0) {
 					<!--<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/troubleshooting','Ultimaker Troubleshooting', event);">3D Printing</a></li>-->
 					<li><a href="#" class="dropdown-toggle">3D Printing</a>
 						<ul class="d-menu" data-role="dropdown">
-							<li><a href="#" onclick="tileClick('./help/oer/3d_print_not_sticking_to_the_build_plate_long_version/3d_print_not_sticking_to_the_build_plate_long_version.html','3D Print Troubleshooting',event)">3D Print Not Sticking to Build Plate</a></li>
-							<li><a href="#" onclick="tileClick('./help/oer/3d_printing_troubleshooting_guide/3d_printing_troubleshooting_guide.pdf', '3D Print Troubleshooting', event)">Other 3D Printing Problems</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/3d_print_not_sticking_to_the_build_plate_long_version/3d_print_not_sticking_to_the_build_plate_long_version.html')">3D Print Not Sticking to Plate</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/3d_printing_troubleshooting_guide/3d_printing_troubleshooting_guide.pdf')">Other 3D Printing Problems</a></li>
+							<li class="divider"></li>
 						</ul>
 					</li>
-					<li><a href="#" onclick="tileClick('./help/troubleshooting/index_new.html','eCraft2Learn UUI Troubleshooting', event);">eCraft2Learn Components</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/troubleshooting/index.html');">eCraft2Learn Components</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
@@ -747,7 +784,7 @@ if (window.location.hash.indexOf('translate') >= 0) {
 		
 		<br/>
 
-		<div class="input-control text margin40" style="width: 240px; right:0;">
+		<div class="input-control text margin40" style="width: 250px; right:0;">
 			<input type="text" id="oerSearch" placeholder="Search..." onkeypress="searchOER();">
 			<button class="button" onclick="searchOER();"><span class="mif-search"></span></button>
 			<script>
