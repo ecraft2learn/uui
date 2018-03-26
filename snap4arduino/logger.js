@@ -38,8 +38,6 @@ setInterval(function() {
 		'&sessionId=' + sessionId +
 		'&users=' + users;
 
-	console.log(params);
-
 	http.open("POST", url, true);
 
 	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -52,4 +50,4 @@ setInterval(function() {
 
 	http.send(params);
 
-}, 60 * 1000);
+}, 60 * 10000);
