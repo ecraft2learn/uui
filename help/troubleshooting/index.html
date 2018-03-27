@@ -37,22 +37,15 @@ Click on one of the following links if you are having problems with:
 <li>More to come</li>
 </ul>
 </p>
-<h4 id="snap4arduino">Snap4Ardunio trouble shooting</h4>
+<h4 id="snap4arduino">Snap4Ardunio troubleshooting</h4>
 <p>
-    Note that the web version runs only in Chrome and requires the installation of a Chrome extension.
-    To do so unzip <a href="https://ecraft2learn.github.io/uui/snap4arduino/crx.zip" download>this file</a>,
-    go to chrome://extensions and drag and drop the folder there.
-    This has already been performed if you are using an eCraft2Learn SD card on a Raspberry Pi.
+If Snap4Ardunio launches but cannot connect to the Arduino this is because the web version runs only in Chrome
+and requires the installation of a Chrome extension.
+To do so unzip <a href="https://ecraft2learn.github.io/uui/snap4arduino/crx.zip" download>this file</a>,
+go to chrome://extensions and drag and drop the folder there.
+This has already been performed if you are using an eCraft2Learn SD card on a Raspberry Pi.
 </p>
 <p>
-If you get a security warning about not trusting the certificate for snap4arduino.rocks, then you should be able
-to click on Advanced Settings and click to visit the site anyway.
-You should only need to do this once since the browser should remember it.
-The Snap4Ardunio team is aware of the problem and is fixing it.
-</p>
-<p>
-If Snap4Ardunio launches but cannot connect to the Arduino,
-then first ensure that <a href="http://snap4arduino.rocks/#plugin">the Snap4Ardunio browser extension is installed</a>.
 If the extension is installed and Snap4Ardunio still cannot connect to the Arduino on a USB port then sometimes
 disconnecting and then reconnecting the USB cable resets the connection.
 Remember it is always a good idea when finished running Snap4Ardunio to disconnect from the Arduino.
@@ -61,6 +54,13 @@ Remember it is always a good idea when finished running Snap4Ardunio to disconne
 <img src="../../images/disconnect-arduino.png" class="center">
 <figcaption>To avoid problems next time you connect, disconnect before leaving Snap4Ardunio</figcaption>
 </figure>
+<p>
+The version of Snap4Ardunio launched by the UUI currently cannot connect to the Snap! cloud.
+Projects can be saved to the browser's local storage or exported to the local file system.
+The version of Snap4Ardunio that runs at snap4arduino.rocks does not support HTTPS which is required for the educational extensions.
+The Snap4Ardunio team is aware of the problem and has plans to fix it.
+Once they do the UUI will be changed to launch that version.
+</p>
 <h4 id="tinkercad-cura-on-raspberry-pi">Tinkercad and Cura trouble shooting</h4>
 <p>
 The only known problems with Tinkercad and Cura are that they are not usuable on Raspberry Pis.
