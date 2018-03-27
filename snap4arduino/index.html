@@ -84,9 +84,10 @@
         	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         	http.onreadystatechange = function() {
-                    
-                	console.log(http.responseText);
-			// ide.rawOpenProjectString();            
+                 
+			console.log(http.responseText);
+ 
+			ide.rawOpenProjectString(http.responseText);            
 
         	};  
 
