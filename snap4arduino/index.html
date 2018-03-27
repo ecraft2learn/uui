@@ -69,7 +69,30 @@
                 };
 
                 setInterval(loop, 1);
-            };
+
+		var users = window.sessionStorage.getItem('username');
+		var sessionId = window.sessionStorage.getItem('pilotsite');
+            
+		var http = new XMLHttpRequest();
+        
+		var url = 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_s4a_script_pilot_2.php';
+        
+		var params = 'users=' + users + '&sessionId=' + sessionId;
+
+        	http.open("POST", url, true);
+
+        	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        	http.onreadystatechange = function() {
+                    
+                	console.log(http.responseText);
+			// ide.rawOpenProjectString();            
+
+        	};  
+
+        	http.send(params);
+
+	    };
 
 
             function loop() {
