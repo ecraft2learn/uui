@@ -71,7 +71,7 @@ setInterval(function() {
         var http = new XMLHttpRequest();
         var url = 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_s4a_scripts_pilot_2.php';
 
-	var params = 'users=' + users + '&sessionId=' + sessionId + '&data=' + code;
+	var params = 'users=' + users + '&sessionId=' + sessionId + '&data=' + encodeURIComponent(code);
 
         http.open("POST", url, true);
 
