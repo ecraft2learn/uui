@@ -474,7 +474,7 @@ function handleSelectUserResponse(php_script_response) {
 
 function makeAjaxCall(formData, handler) {
     $.ajax({
-        url: 'http://cs.uef.fi/~ec2l/fileman.php',
+        url: 'https://cs.uef.fi/~ec2l/fileman.php',
         dataType: 'text',
         cache: false,
         contentType: false,
