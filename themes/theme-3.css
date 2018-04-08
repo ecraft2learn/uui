@@ -104,18 +104,3 @@ h2 {
 #mainTileArea {
 	padding-top:60px;
 }
-
-#userBadge:link, 
-#userBadge:visited, 
-#userBadge:hover, 
-#userBadge:active {
-	color: whitesmoke;
-	text-decoration: none;
-}
-
-.whiteLink:link, 
-.whiteLink:visited, 
-.whiteLink:hover, 
-.whiteLink:active {
-	color: whitesmoke;
-}

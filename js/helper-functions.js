@@ -26,7 +26,3 @@ function hashFnv32a(str, asString, seed) {
     return hval >>> 0;
 }
 
-function getStudentAnalyticData(user, pilotSite) {
-
-}
-

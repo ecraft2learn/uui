@@ -35,7 +35,6 @@
 	
 	<script src="js/window-management.js"></script>
 	<script src="js/helper-functions.js"></script>
-	<script src="js/file_manager.js"></script>
 	
 	<style>
         .tile-area-controls {
@@ -120,19 +119,11 @@
         });
 		
 	$(function(){
-		//if(params['username']!="" && params['pilotsite']!="" && params['username']!=undefined && params['pilotsite']!=undefined)
-		if ( window.sessionStorage.getItem("username")!=undefined 
-		  && window.sessionStorage.getItem("pilotsite")!=undefined
-		  && window.sessionStorage.getItem("userId")!=undefined
-		  && window.sessionStorage.getItem("userId")!=-1)
-		{
+		if(params['username']!="" && params['pilotsite']!="" && params['username']!=undefined && params['pilotsite']!=undefined){
 			$("#loginForm").hide();
-			//window.sessionStorage.setItem('username', unescape(params['username']));
-            //window.sessionStorage.setItem('pilotsite', unescape(params['pilotsite']));
 			//alert(hashFnv32a(params['username']));
 		}
 		else{
-			$("#userProgressDiv").hide();
 			$("#loginForm").animate({opacity:1},1000);
 		}
 	});
@@ -141,8 +132,8 @@
 	<script>
 		function helpClick(helpDialogId, event){
 		
-			/*window.sessionStorage.setItem('username', params['username']);
-            window.sessionStorage.setItem('pilotsite', params['pilotsite']);*/
+			window.sessionStorage.setItem('username', params['username']);
+                        window.sessionStorage.setItem('pilotsite', params['pilotsite']);
 
 			var analyticField = getAnalyticFieldName(helpDialogId, true);
 			openHelpDialog(helpDialogId, event);
@@ -163,8 +154,8 @@
 				//var url = toolUrl + '&username=' + params['username'] + '&sessionId=' + params['pilotsite'];
 				//console.log(url);
 				
-				/*window.sessionStorage.setItem('username', params['username']);
-				window.sessionStorage.setItem('pilotsite', params['pilotsite']);*/
+				window.sessionStorage.setItem('username', params['username']);
+				window.sessionStorage.setItem('pilotsite', params['pilotsite']);
 				
 				openIframeWindow(toolUrl, winTitle, event);
 			}
@@ -610,157 +601,12 @@ if (window.location.hash.indexOf('translate') >= 0) {
 			</div> <!-- End of Share Group-->
 			
 		</div> <!--End of Main Tile Area-->
-
-		<!--
-		<div class="tile-group four">
-		<span class="tile-group-title">UUI Tools</span>
-		<div class="tile tile-super-x tile-square-y bg-steel fg-white" data-role="tile">
-			<div class="tile-content" style="background: top left no-repeat; background-size: cover">
-				<div class="margin30" style="overflow-x:hidden; overflow-y:hidden; height:80px;" id="divPrjContainer">
-					<div class="tile-small bg-steel fg-white" data-role="tile">
-						<div class="tile-content iconic slide-up">
-							<div class="slide-up-2">
-								<span class="icon mif-plus"/>
-							</div>
-							<div class="slide-over bg-steel text-small padding10">
-								Create New Project
-							</div>
-						</div>
-					</div>
-					<script>
-						var userId = window.sessionStorage.getItem("userId");
-						if(userId!=undefined && userId!=-1){
-							getUserProjects(userId, handleGetProjectsResponse);
-						}
-
-						function handleGetProjectsResponse(phpResponse){
-							var jsonData = JSON.parse(phpResponse);
-							
-							for(i=0; i<jsonData.DATA.length;i++){
-								var divTile = $("<div>").addClass("tile-small").addClass("bg-steel").addClass("fg-white").prop("data-role", "tile");
-								var divTileContent = $("<div>").addClass("tile-content").addClass("iconic").addClass("slide-up");
-								var divSlideUp = $("<div>").addClass("slide-up-2");
-								var divSlideOver = $("<div>").addClass("slide-over").addClass("bg-steel").addClass("text-small").addClass("padding10");
-								var spanContent = $("<span>").addClass("icon").addClass("mif-rocket");
-								
-								$(divSlideUp).append(spanContent);
-								$(divSlideOver).html(jsonData.DATA[i].PRJ_NAME);
-								$(divTileContent).append(divSlideUp);
-								$(divTileContent).append(divSlideOver);
-								$(divTile).append(divTileContent);
-								$("#divPrjContainer").append(divTile);
-							}
-						}
-					</script>
-				</div>
-			</div>
-			<span class="tile-label text-shadow">Recent Projects</span>
-		</div>
-		</div>
-
-		<div class="tile-group two" id="divProjects">
-			<span class="tile-group-title">UUI Tools</span>
-			<div class="tile bg-steel fg-white" data-role="tile">
-				<div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="icon mif-plus"/>
-					</div>
-					<div class="slide-over bg-steel text-small padding10">
-						Create New Project
-					</div>
-				</div>
-			</div>
-			<script>
-				var userId = window.sessionStorage.getItem("userId");
-				if(userId!=undefined && userId!=-1){
-					getUserProjects(userId, handleGetProjectsResponse);
-				}
-
-				function handleGetProjectsResponse(phpResponse){
-					var jsonData = JSON.parse(phpResponse);
-					
-					for(i=0; i<jsonData.DATA.length && i<4;i++){
-						var divTile = $("<div>").addClass("tile-small").addClass("bg-steel").addClass("fg-white").prop("data-role", "tile");
-						var divTileContent = $("<div>").addClass("tile-content").addClass("iconic").addClass("slide-up");
-						var divSlideUp = $("<div>").addClass("slide-up-2");
-						var divSlideOver = $("<div>").addClass("slide-over").addClass("bg-steel").addClass("text-small").addClass("padding10");
-						var spanContent = $("<span>").addClass("icon").addClass("mif-rocket");
-						
-						$(divSlideUp).append(spanContent);
-						$(divSlideOver).html(jsonData.DATA[i].PRJ_NAME);
-						$(divTileContent).append(divSlideUp);
-						$(divTileContent).append(divSlideOver);
-						$(divTile).append(divTileContent);
-						$("#divProjects").append(divTile);
-					}
-				}
-			</script>
-			<div class="tile-small bg-steel fg-white" data-role="tile">
-				<div class="tile-content iconic slide-up">
-					<div class="slide-up-2">
-						<span class="icon mif-plus"/>
-					</div>
-					<div class="slide-over bg-steel text-small padding10">
-						Create New Project
-					</div>
-				</div>
-			</div>
-		</div>
-	-->
-		<div class="tile-group two" id="divProjects" style="display:none;">
-			<span class="tile-group-title">UUI Tools</span>
-			<div class="tile-large bg-darkBlue fg-white padding30" data-role="tile">
-				<div class="" style="width:100%; height:100%;" id="tileProjects">
-					<a href="#" class="whiteLink" onclick="openHelpDialog('#NewProjectDialog', event)";>Create New Project ...</a><br/>
-					<div data-role="dialog" id="NewProjectDialog" class="padding20" data-close-button="true" data-href="./dialogs/new_project.html" data-width="600"></div>
-					<hr/>
-				</div>
-				<script>
-					var userId = window.sessionStorage.getItem("userId");
-					if(userId!=undefined && userId!=-1){
-						getUserProjects(userId, handleGetProjectsResponse);
-					}
-	
-					function handleGetProjectsResponse(phpResponse){
-						var jsonData = JSON.parse(phpResponse);
-						
-						for(i=0; i<jsonData.DATA.length && i<8;i++){
-							var prjId = jsonData.DATA[i].ID;
-							var spanLink = $("<div>").css("padding","4px").css("width","100%").css("border", "0px").addClass("no-margin").attr("id", "spanPrj_" + prjId);
-							var alink = $("<a>").addClass("whiteLink").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
-							if(window.sessionStorage.getItem("currentProjectId")==prjId)
-								spanLink.addClass("bg-darkCobalt");
-							spanLink.append(alink);
-							$("#tileProjects").append(spanLink);//.append("<br/>");
-						}
-					}
-					function SelectProject(){
-						var curPrjId = window.sessionStorage.getItem("currentProjectId");
-						var curSelectedDiv = null;
-						if(curPrjId!=null && curPrjId!=undefined && curPrjId!=-1)
-							curSelectedDiv = $("#spanPrj_" + curPrjId);
-
-						var clickedLink = $(event.srcElement);
-						var prjId = clickedLink.data("PROJECTID");
-						window.sessionStorage.setItem("currentProjectId",prjId);
-
-						var newSelectedDiv = $("#spanPrj_" + prjId);
-
-						if(curSelectedDiv!=null)
-							curSelectedDiv.removeClass("bg-darkCobalt");
-						if(newSelectedDiv!=null && newSelectedDiv!=undefined)
-							newSelectedDiv.addClass("bg-darkCobalt");
-					}
-				</script>
-			<span class="tile-label text-shadow">Recent Projects</span>
-			</div>
-		</div>
 	</div> <!--End of Main Content Container-->
 
 	<!--Login Box and Hidden Data-->
 	<div  id="loginForm" class="login-form padding20 block-shadow" style="z-index:2;">
 		
-        <!--<form>-->
+        <form>
             <h1 class="text-light">Login to eCraft2Learn</h1>
             <hr class="thin"/>
             <br />
@@ -786,79 +632,18 @@ if (window.location.hash.indexOf('translate') >= 0) {
             <br />
             <br />
             <div class="form-actions">
-                <button type="button" class="button primary" onclick="HandleUserLogin();">Login</button>
-				<!--<button type="button" class="button link">Cancel</button>-->
-				<script>
-					function HandleUserLogin(){
-						selectUser($("#username").val(), $("#pilotsite").val(), HandleLoginCallback);
-					}
-					function HandleLoginCallback(phpResponse){
-						handleSelectUserResponse(phpResponse);
-						if(window.sessionStorage.getItem("errorStatus")=="fail"){
-							//TODO: I am assuming that the new user IS a group user. Later we should ask the user and act accordingly
-							addUser($("#username").val(), $("#pilotsite").val(), 1);
-							location.reload();
-						}
-						else{
-							location.reload();
-						}
-					}
-				</script>
+                <button type="submit" class="button primary">Login</button>
+                <!--<button type="button" class="button link">Cancel</button>-->
             </div>
-        <!--</form>-->
+        </form>
 	</div>
 	
 	<!-- The Task Bar at the bottom of the page-->
-	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-index:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
+	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-order:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
 	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
 
-	<!-- User name and progress -->
-	<div id="userProgressDiv" class="margin20" style="position: absolute; right:0; top:10px;">
-		<span class="icon mif-user"/>
-		<a id="userBadge" href="#" onclick="openUserMenu();" class="sub-header no-margin text-light"><script>document.write(window.sessionStorage.getItem('username'));</script></span></a><br/>
-		<div class="progress small pull-right" data-role="progress" data-value="getUserProgress();" style="width:100%;"></div>
-		<script>
-			function openUserMenu(){
-				$("#userMenu").show();
-			}
-			function getUserProgress(){
-				var sessionId = window.sessionStorage.getItem('pilotsite');
-				var users = window.sessionStorage.getItem('username');
-
-				var http = new XMLHttpRequest();
-				var url = 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_student_models_pilot_2.php';
-
-				var params = 'users=' + users + '&sessionId=' + sessionId;
-
-				http.open("POST", url, true);
-
-				http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-				http.onreadystatechange = function() {
-					if(http.status==200 && http.readyState==4)
-						alert(params + ':' + http.responseText);
-				
-				};  
-
-				http.send(params);
-			}
-		</script>
-	</div>
-
-	<div id="userMenu" class="margin10 padding20 bg-gray" style="position:absolute; right:0; top:0; display:none; z-index:1;">
-		<h4 class="no-margin"><script>document.write(window.sessionStorage.getItem('username'));</script></h4><br/>
-		<div class="progress pull-right no-margin" data-role="progress" data-value="getUserProgress();" style="width:200px;"></div><br/><br/>
-		<button type="button" class="button primary" onclick="logUserOut();">Logout</button>
-		<script>
-			function logUserOut(){
-				window.sessionStorage.clear();
-				location.reload();
-			}
-		</script>
-	</div>
-
 	<!-- OER Panel to the Right-->
-	<div class="pull-right" style="position: absolute; right:0; top:80px; z-index:0; "  onclick="toggleMetroCharm('#rightCharm');">
+	<div class="pull-right" style="position: absolute; right:0; top:50px; "  onclick="toggleMetroCharm('#rightCharm');">
 		<button class="image-button large-button fg-white bg-transparent">Educational Resources</button>
     </div>
 	<div id="rightCharm" data-role="charm" data-position="right"  class="bg-help-charm" style="overflow-y:auto;"><span>&nbsp;</span>
