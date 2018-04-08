@@ -448,12 +448,8 @@ function handleAddUserResponse(php_script_response) {
         <selectUser>
 */
 function handleSelectUserResponse(php_script_response) {
-    var userObj = null;
+    var userObj = JSON.parse(php_script_response);
     var userId = -1;
-   
-    try {
-        userObj = JSON.parse(php_script_response);
-    }catch(err){}
 
     if (!checkJsonData(userObj)) {
         window.sessionStorage.setItem("userId", -1);
