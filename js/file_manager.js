@@ -452,7 +452,6 @@ function handleSelectUserResponse(php_script_response) {
     var userId = -1;
    
     try {
-        alert(php_script_response);
         userObj = JSON.parse(php_script_response);
     }catch(err){}
 
