@@ -121,6 +121,44 @@
 	$(function(){
 		if(params['username']!="" && params['pilotsite']!="" && params['username']!=undefined && params['pilotsite']!=undefined){
 			$("#loginForm").hide();
+
+			(() => {
+
+        			var sessionId = params['pilotsite'];
+
+
+        			if (! sessionId)
+                			return;
+
+        			$.ajax({
+
+                			type: 'POST',
+                			data: 'sessionId=' + sessionId,
+                			url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_materials.php',
+                			success: (data) => {
+
+                        			var urls = JSON.parse(data);
+
+                        			var str = '';
+
+                        			for (let i = 0; i < urls.length; i++) {
+
+                                			str += '<li><a target=\'_blank\' href=\'' + urls[i].url + '\'>' + urls[i].name + '</a></li>';
+
+                        			}
+
+						if (str !== '')
+                        				$('#teacher-material').html(str);
+
+                			},
+                			error: (error) => {
+
+                			}
+        			});
+
+			})();
+
+
 			//alert(hashFnv32a(params['username']));
 		}
 		else{
@@ -788,6 +826,13 @@ if (window.location.hash.indexOf('translate') >= 0) {
 		</ul>
 		
 		<br/>
+		
+		<h6>Material uploaded by the teacher</h6>
+		<ul id='teacher-material'>
+			<li>No material available</li>
+                </ul>
+
+		<br>
 
 		<div class="input-control text margin40" style="width: 250px; right:0;">
 			<input type="text" id="oerSearch" placeholder="Search..." onkeypress="searchOER();">
