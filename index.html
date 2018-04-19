@@ -35,7 +35,10 @@
 	
 	<script src="js/window-management.js"></script>
 	<script src="js/helper-functions.js"></script>
-	
+
+	<!--LNU CODE-->
+	<script src="lnu/commenting/js/feedback-window-managment.js"></script>
+
 	<style>
         .tile-area-controls {
             position: fixed;
@@ -158,7 +161,9 @@
 				window.sessionStorage.setItem('pilotsite', params['pilotsite']);
 				
 				openIframeWindow(toolUrl, winTitle, event);
-				openIframeWindowRightBottom("./lnu/commenting/index.html","Commenting " + winTitle,event);
+
+                openFeedbackWindow("./lnu/commenting/index.html",winTitle,event);
+
 			}
 			
 			sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
