@@ -4,18 +4,57 @@
     <meta charset="UTF-8">
     <title>Commenting</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
-    <link rel='stylehseet' href='lib/bootstrap/css/bootstrap.min.css' type='text/css'>
+    <!-- <link rel='stylesheet' href='lib/bootstrap/css/bootstrap.min.css' type='text/css'> -->
     <link rel="stylesheet" type="text/css" href="lib/mention/mention.css">
+    <script src="js/feedback-main.js"></script>
     <script src='lib/jquery/jquery.js'></script>
     <script src='lib/bootstrap/js/bootstrap.min.js'></script>
+
 </head>
 <body>
-    some content comes here....
+
+    <!-- Feedback template -->
+    <div id="feedback-template">
+        
+        <!-- Sentence Selection -->
+        <label for="sentence-select">Feedback:</label>
+        <select name="sentence-select" id="sentence-select">
+            <option value="1">Sentence 1</option>
+            <option value="2">Sentence 2</option>
+            <option value="3">Sentence 3</option>
+            <option value="4">Sentence 4</option>
+            <option value="5">Sentence 5</option>
+            <option value="6">Sentence 6</option>
+            <option value="7">Sentence 7</option>
+        </select>
+
+        <!-- Rating Selection -->
+        <label for="feedback-ratings">Rating:</label>
+        <div id="feedback-ratings" name="feedback-ratings">
+            <input type="radio" id="rating1" name="rating" value="1">
+            <label for="rating1">1</label>
+
+            <input type="radio" id="rating2" name="rating" value="2">
+            <label for="rating2">2</label>
+
+            <input type="radio" id="rating3" name="rating" value="3">
+            <label for="rating3">3</label>
+
+            <input type="radio" id="rating4" name="rating" value="4">
+            <label for="rating4">4</label>
+        </div>
+        
+        <!-- Submit button -->
+        <button type="button" id="feedback-btn">Send feedback</button>
+
+    </div>
+   
 
     <script>
         $(document).ready(function() {
             console.log(window.sessionStorage.getItem('username'));
             console.log(window.sessionStorage);
+            initFeedback();
         })
     </script>
 </body>
