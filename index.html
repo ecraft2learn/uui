@@ -6,10 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Welcome to eCraft2Learn</title>
 	
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script src="libraries/js/jquery-3.2.1.min.js"></script>
 	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
+<!-- 	https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7 -->
+    <script src="libraries/js/bootstrap.min.js"></script>  
 
 
     <link href="libraries/css/metro.css" rel="stylesheet">
@@ -19,11 +20,18 @@
     <script src="libraries/js/metro.js"></script>
 
 <!-- Sentry will report bugs to us -->
-    <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
+<!--     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script> -->
     <script>
-    Raven.config('https://7780e314f7d64cc88db0fab885c9ca9b@sentry.io/305194',
+    if (navigator.onLine) {
+    	// if offline no need to even try to load sentry
+    	let script = document.createElement('script');
+    	script.src = "https://cdn.ravenjs.com/3.22.1/raven.min.js";
+    	script.crossorigin = "anonymous";
+    	document.head.appendChild(script);
+    	Raven.config('https://7780e314f7d64cc88db0fab885c9ca9b@sentry.io/305194',
                  {whitelistUrls: [/ecraft2learn\.github\.io/]})
-         .install();
+             .install();
+    }  
     </script>
 
     <link rel="icon" type="image/png" href="images/eCraft2Learn-Favicon.png" />
@@ -121,7 +129,9 @@
 	$(function(){
 		if(params['username']!="" && params['pilotsite']!="" && params['username']!=undefined && params['pilotsite']!=undefined){
 			$("#loginForm").hide();
-
+			if (!navigator.onLine) {
+				return;
+			}
 			(() => {
 
         			var sessionId = params['pilotsite'];
@@ -257,7 +267,7 @@ function googleTranslateElementInit() {
                                             layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
                                            'google_translate_element');
 }
-if (window.location.hash.indexOf('translate') >= 0) {
+if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
     var div = document.createElement('div');
     var add_div_and_script = function () {
         document.body.appendChild(div);
