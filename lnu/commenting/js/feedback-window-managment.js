@@ -43,7 +43,7 @@ function openFeedbackWindow(toolUrl, toolName, event){
  */
 function openIframeWindowRightBottom(toolUrl, toolName, event) {
     docWidth = 300;
-    docHeight = 200;
+    docHeight = 250;
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
     var bgColor = toolTile.css("background-color");
