@@ -85,8 +85,5 @@ def writePin(pin, action):
     return response
 
 if __name__ == "__main__":
-#   context = ('/home/pi/Documents/Python/certificates/raspberrypi.local.cert.pem', '/home/pi/Documents/Python/certificates/raspberrypi.local.key.pem')
-#   app.run(host='0.0.0.0', port=80, threaded=True, debug=True)
-#   context = ('/home/pi/Documents/Python/certificates/selfsigned.crt', '/home/pi/Documents/Python/certificates/raspberrypi.local.key.pem')
-   app.run(host='localhost', port=80, threaded=True, debug=True)
+   app.run(host='0.0.0.0', port=80, threaded=True)
            
