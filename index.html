@@ -401,6 +401,19 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
 						</div>
 						<div data-role="dialog" id="TrelloDialog" class="padding20" data-close-button="true" data-href="./about/trello-help.html" data-width="600"></div>
 					</div>
+					<div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('./uef/plan/index.html', 'eCraft Todo', event);">
+                                                <div class="tile-content iconic slide-up">
+                                                        <div class="slide-up-2">
+                                                                <span class="mif-question place-right margin5" onclick="helpClick('#eCraftIdeaDialog', event);"></span>
+                                                                <img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+                                                                <span class="tile-label">eCraft Plan</span>
+                                                        </div>
+                                                        <div class="slide-over bg-plan text-small padding10">
+                                                                Use this to plan tasks of the project
+                                                        </div>
+                                                </div>
+                                                <div data-role="dialog" id="eCraftIdeaDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-idea-help.html" data-width="600"></div>
+                                        </div>	
 				</div> <!--End of group tiles-->
 			</div> <!-- End of Plan Group-->
 			

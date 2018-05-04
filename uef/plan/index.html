@@ -1,317 +1,57 @@
 <html>
-  <head>
-    <title>Plan</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">  
-    <link rel='stylehseet' href='lib/bootstrap/css/bootstrap.min.css' type='text/css'>  
-    <link rel="stylesheet" type="text/css" href="lib/mention/mention.css"> 
-    <script src='lib/jquery/jquery.js'></script>
-    <script src='lib/bootstrap/js/bootstrap.min.js'></script>
-    <script src='lib/tinymce/tinymce.min.js'></script>
-    <script src='lib/list/list.min.js'></script>
-  </head>
-  <body>
-  <div class='wrapper'>
-    <div class="center">
-    	<div id="contacts">
-  <table class='table'>
-    <thead>
-      <tr>
-        <th class="sort" data-sort="name">Name</th>
-        <th class="sort" data-sort="age">Age</th>
-        <th class="sort" data-sort="city">City</th>
-        <th colspan="2">
-          <input style='display:none;' type="text" class="search" placeholder="Search contact" />
-        </th>
-      </tr>
-    </thead>
-    <tbody class="list">
-     
-      <tr>
-        <td class="id" style="display:none;">1</td>
-        <td class="name"></td>
-        <td class="age"></td>
-        <td class="city"></td>
-        <td class="edit"><button class="edit-item-btn">Edit</button></td>
-        <td class="remove"><button id='remove-empty' class="remove-item-btn">Remove</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <table>
-    <td class="name">
-      <input type="hidden" id="id-field" />
-      <input type="text" id="name-field" placeholder="Name" />
-    </td>
-    <td class="age">
-      <input type="text" id="age-field" placeholder="Age" />
-    </td>
-    <td class="city">
-      <input type="text" id="city-field" placeholder="City" />
-    </td>
-    <td class="add">
-      <button id="add-btn">Add</button>
-      <button id="edit-btn">Edit</button>
-    </td>
-  </table>
-</div>
-    </div>
-</div>
-    <div class="container" style='z-index: 10'>
-      <p>
-        <label for="new-task">Add Item</label><textarea id="new-task" type="text"></textarea><button id='add-task'>Add</button>
-      </p>
-      <h3>Todo</h3>
-      <ul id="incomplete-tasks">
-      </ul>
-      <h3>Completed</h3>
-      <ul id="completed-tasks">
-      </ul>
-    </div>
-    <button class='btn btn-block btn-info' id='save-contents'>Save</button>
-    <script type="text/javascript" src="js/ui.js"></script>
-    <script>
+    <head>
+    	<title>eCraft TODO</title>
+        <link rel="stylesheet" href="lib/Bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="lib/jQuery/jquery.ui.min.css" />
+        <link rel="stylesheet" href="css/todo.css" />
+	<script type="text/javascript" src="lib/jQuery/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/Bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="lib/jQuery/jquery.ui.min.js"></script>
+        <script type="text/javascript" src="js/todo.js"></script>
+    </head>
 
-	$(document).ready(function() {
+    <body class="well">
+        <div id="container">
 
-		window.sessionStorage.setItem('username', 'tapanit');
-		window.sessionStorage.setItem('pilotsite', 11);
+            <div id="header"> Plan tasks </div>
 
-		$.ajax({
-		
-			type: 'POST',
-			url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_todo_pilot_2.php',
-			data: 'users=' + window.sessionStorage.getItem('username') + '&sessionId=' + window.sessionStorage.getItem('pilotsite'),
-			success: function(data) {
+            <div class="task-list task-container" id="pending">
+                <h3>Pending</h3>
+            </div>
 
-				var parsed = JSON.parse(data);
+            <div class="task-list task-container" id="inProgress">
+                <h3>In Progress</h3>
+            </div>
 
+            <div class="task-list task-container" id="completed">
+                <h3>Completed</h3>
+            </div>
 
-				var students = JSON.parse(parsed[0].data);
+            <div class="task-list">
+                <h3>Add a task</h3>
+                <form id="todo-form">
+                    <input type="text" placeholder="Title" />
+                    <textarea placeholder="Description"></textarea>
+                    <input type="text" id="datepicker" placeholder="Due Date (dd/mm/yyyy)" />
+                    <input type="button" class="btn btn-primary" value="Add Task" onclick="todo.add();" />
+		    <input type='button' class='btn btn-primary' value='Save' onclick='todo.save();' />
+		</form>
+                <div id="delete-div">
+                    Drag Here to Delete
+                </div>
+            </div>
 
-				for (var i = 0; i < students.students.length; i++) {
+            <div style="clear:both;"></div>
+            
+	    <script type="text/javascript">
+	    	$( "#datepicker" ).datepicker();
+                $( "#datepicker" ).datepicker("option", "dateFormat", "dd/mm/yy");
 
-					var id = students.students[i].id;
-					var name = students.students[i].name;
-					var age = students.students[i].age;
-					var city = students.students[i].city;
+                $(".task-container").droppable();
+                $(".todo-task").draggable({ revert: "valid", revertDuration:200 });
+                todo.init();
+            </script>
 
-
-					contactList.add({
-    						id: id,
-    						name: name,
-    						age: age,
-    						city: city
-  					});
-  					clearFields();
-  					refreshCallbacks();
-
-				}
-
-				var completed = parsed[0].completed;
-				var incompleted = parsed[0].incompleted;
-				$('#completed-tasks').load(completed, function(response, status, xhr) {
-
-					console.log(status);
-
-				});
-				$('#incomplete-tasks').load(incompleted, function(response, status, xhr) {
-
-					console.log(status);
-
-				});
-
-                
-			},
-			error: function(error) {
-
-
-			}
-
-
-		});
-
-	});
-
-	$('#save-contents').on('click', (event) => {
-
-		var obj = {};
-
-		var people = [];
-		
-		for (var i = 0; i < contactList.items.length; i++) {
-                                        var student = {};
-                                        var name = contactList.items[i]._values.name;
-                                        var id = contactList.items[i]._values.id;
-					var city = contactList.items[i]._values.city;
-					var age = contactList.items[i]._values.age;
-					student.name = name;
-					student.id = id;
-					student.city = city;
-					student.age = age;
-                                        people.push(student);
-		}
-
-		obj.students = people;
-
-		
-		var incompletes = $('#incomplete-tasks').html();
-		var completes = $('#completed-tasks').html();
-
-		var json = JSON.stringify(obj);
-
-		var incompleteFile = new Blob([incompletes], { type: 'text/html' });
-		var completeFile = new Blob([completes], { type: 'text/html' });
-
-		var formData = new FormData();
-		formData.append('data', json);
-		formData.append('incomplete', incompleteFile);
-		formData.append('completeData', completeFile);
-
-		window.sessionStorage.setItem('username', 'tapanit');
-		window.sessionStorage.setItem('pilotsite', 11);
-
-		formData.append('users', window.sessionStorage.getItem('username'));
-                formData.append('sessionId', window.sessionStorage.getItem('pilotsite'));
-
-		$.ajax({
-
-			type: 'POST',
-			url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/save_todo_pilot_2.php',
-			data: formData,
-			success: function(data) { console.log(data) },
-			error: function(error) { console.log(error) },
-			processData: false,
-			contentType: false
-
-		});
-
-	});
-
-	var options = {
-  valueNames: [ 'id', 'name', 'age', 'city' ]
-};
-
-// Init list
-var contactList = new List('contacts', options);
-
-var idField = $('#id-field'),
-    nameField = $('#name-field'),
-    ageField = $('#age-field'),
-    cityField = $('#city-field'),
-    addBtn = $('#add-btn'),
-    editBtn = $('#edit-btn').hide(),
-    removeBtns = $('.remove-item-btn'),
-    editBtns = $('.edit-item-btn');
-
-// Sets callbacks to the buttons in the list
-refreshCallbacks();
-
-addBtn.click(function() {
-  contactList.add({
-    id: Math.floor(Math.random()*110000),
-    name: nameField.val(),
-    age: ageField.val(),
-    city: cityField.val()
-  });
-  clearFields();
-  refreshCallbacks();
-});
-
-editBtn.click(function() {
-  var item = contactList.get('id', idField.val())[0];
-  item.values({
-    id:idField.val(),
-    name: nameField.val(),
-    age: ageField.val(),
-    city: cityField.val()
-  });
-  clearFields();
-  editBtn.hide();
-  addBtn.show();
-});
-
-function refreshCallbacks() {
-  // Needed to add new buttons to jQuery-extended object
-  removeBtns = $('.remove-item-btn');
-  editBtns = $('.edit-item-btn');
-  
-  removeBtns.click(function() {
-    var itemId = $(this).closest('tr').find('.id').text();
-    contactList.remove('id', itemId);
-  });
-  
-  editBtns.click(function() {
-    var itemId = $(this).closest('tr').find('.id').text();
-    var itemValues = contactList.get('id', itemId)[0].values();
-    idField.val(itemValues.id);
-    nameField.val(itemValues.name);
-    ageField.val(itemValues.age);
-    cityField.val(itemValues.city);
-    
-    editBtn.show();
-    addBtn.hide();
-  });
-}
-
-function clearFields() {
-  nameField.val('');
-  ageField.val('');
-  cityField.val('');
-}
-	tinymce.init({ 
-  		file_picker_callback: function(cb, value, meta) {
-    var input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    
-    // Note: In modern browsers input[type="file"] is functional without 
-    // even adding it to the DOM, but that might not be the case in some older
-    // or quirky browsers like IE, so you might want to add it to the DOM
-    // just in case, and visually hide it. And do not forget do remove it
-    // once you do not need it anymore.
-
-    input.onchange = function() {
-      var file = this.files[0];
-      
-      var reader = new FileReader();
-      reader.onload = function () {
-        // Note: Now we need to register the blob in TinyMCEs image blob
-        // registry. In the next release this part hopefully won't be
-        // necessary, as we are looking to handle it internally.
-        var id = 'blobid' + (new Date()).getTime();
-        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-        var base64 = reader.result.split(',')[1];
-        var blobInfo = blobCache.create(id, file, base64);
-        blobCache.add(blobInfo);
-
-        // call the callback and populate the Title field with the file name
-        cb(blobInfo.blobUri(), { title: file.name });
-      };
-      reader.readAsDataURL(file);
-    };
-    
-    input.click();
-  }
-	, selector:'textarea', plugins: 'image media insertdatetime mention', 
-		mentions: {
-			source: function(query, process, delimeter) {
-
-				var data = [];
-
-				for (var i = 0; i < contactList.items.length; i++) {
-					var obj = {};
-					var name = contactList.items[i]._values.name;
-					obj.name = name;
-					data.push(obj);
-				}
-				// TODO: data from selects
-
-				if (delimeter === '@')
-					process(data);
-			}
-		}
-
-	} );
-	$('#remove-empty').click();
-    </script>
-  </body>
+        </div>
+    </body>
 </html>
