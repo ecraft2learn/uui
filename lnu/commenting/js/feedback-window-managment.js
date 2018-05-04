@@ -44,7 +44,7 @@ function openFeedbackWindow(toolUrl, toolName, event){
 function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
     docWidth = 320;
-    docHeight = 200;
+    docHeight = 250;
 
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
@@ -55,7 +55,7 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
     activeWindow = $.Dialog({
         title: "<span class='text-medium fg-white notranslate' style='-ms-user-select: none; -moz-user-select: none; -webkit-user-select: none;user-select: none;' translate='no'> Feedback "+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
-        content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;'   />",
+        content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px; height: 250px'   />",
         padding: 0,
         options: {
             modal: false,
