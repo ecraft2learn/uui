@@ -69,7 +69,7 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
     var toolIcon = toolTile.find('img').attr('src');
 
-    var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, toolIcon, bgColor, toolName);
+    var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, toolIcon, bgColor, "Feedback " + toolName);
 
     activeWindow.data('winData', frame);
     addFeedbackWindow(toolName,activeWindow.attr('id'));
@@ -127,7 +127,28 @@ function maximizeWindow(maxBtn){
     }
     else{
         //Temporal fix, still need to find why it reduces the height on 20px...
-        winData.height = 200;
+        winData.height = 300;
         resizeWindow2Normal(winDiv, winData);
     }
+}
+
+//Given a WinDiv and its WinData, it restores the Div to its original place and size.
+
+    function resizeWindow2Normal($winDiv, $winData){
+
+    $winDiv.animate({
+        top: $winData.posy,
+        left: $winData.posx,
+        width: $winData.width,
+        height: $winData.height+20,
+        opacity: 1
+    }, 300).find('iframe').animate({
+        top: 0,
+        left: 0,
+        width: $winData.width-20,
+        height: $winData.height,
+        opacity: 1
+    }, 300);
+
+    $winDiv.show();
 }
