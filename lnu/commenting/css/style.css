@@ -2,15 +2,44 @@
  * This file contains styles for the commenting/feedback feature
  */
 
+
+/*-----------------------------------------------------------
+ * General styles for the iframe
+ *----------------------------------------------------------*/
+
 body {
     margin: 0;
     padding: 0;
     font-family: "Segoe UI", "Open Sans", sans-serif, serif;
+    color: white;
 } 
+
+/*-----------------------------------------------------------
+ * Feedback styles
+ *----------------------------------------------------------*/
 
 #feedback-template {
     width: 100%; /*@TODO: Get rid of magic number*/
 }
+
+.feedback-component {
+    margin-bottom: 15px;
+}
+
+.feedback-component-title {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.feedback-icon {
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+    right: 5px;
+}
+/*-----------------------------------------------------------
+ * Feedback sentence dropdown
+ *----------------------------------------------------------*/
 
 #sentence-select {
     width: 100%;
@@ -22,22 +51,47 @@ body {
     font-size: 15px;
 }
 
+/*-----------------------------------------------------------
+ * Feedback ratings styles
+ *----------------------------------------------------------*/
+
 #feedback-ratings {
-    display: block;
+    display: flex;
 }
+
+#feedback-ratings input[type="radio"] {
+    flex-grow: 1;
+}
+
+
+/*-----------------------------------------------------------
+ * Feedback post button styles
+ *----------------------------------------------------------*/
 
 #feedback-btn {
     display: block;
     width: 100%;
-    margin-top: 5px;
     font-size: 15px;
     background: hsla(0, 0%, 30%, 0.5);
     color: white;
     border: none;
-    padding: 4px;
+    padding: 10px;
     margin: none;
 }
 
 #feedback-btn:hover {
     cursor:pointer;
+    background: hsla(0, 0%, 20%, 0.5);
 }
+
+/*-----------------------------------------------------------
+ * Util styles
+ *----------------------------------------------------------*/
+
+ .clear::after {
+     content: " ";
+     visibility: hidden;
+     height: 0;
+     display: block;
+     clear: both;
+ }
