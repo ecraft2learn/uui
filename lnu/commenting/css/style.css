@@ -9,7 +9,7 @@ body {
 } 
 
 #feedback-template {
-    width: 94%; /*@TODO: Get rid of magic number*/
+    width: 100%; /*@TODO: Get rid of magic number*/
 }
 
 #sentence-select {

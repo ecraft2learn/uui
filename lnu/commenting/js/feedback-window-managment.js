@@ -15,7 +15,7 @@ feedbackWindows = {}; //associative javascript array {'toolName':'feedback_windo
  */
 function addFeedbackWindow(toolName, windowId){
    feedbackWindows[toolName] = windowId;
-   console.log(feedbackWindows);
+   //console.log(feedbackWindows);
 }
 
 
@@ -42,7 +42,7 @@ function openFeedbackWindow(toolUrl, toolName, event){
  * @returns {*}
  */
 function openIframeWindowRightBottom(toolUrl, toolName, event) {
-    docWidth = 300;
+    docWidth = 320;
     docHeight = 200;
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
@@ -52,8 +52,8 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
         bgColor="rgb(64,64,64)";
 
     activeWindow = $.Dialog({
-        title: "<span class='text-medium fg-white notranslate' translate='no'> Feedback "+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
-        content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' width='300' height='400'  />",
+        title: "<span class='text-medium fg-white notranslate' style='-ms-user-select: none; -moz-user-select: none; -webkit-user-select: none;user-select: none;' translate='no'> Feedback "+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
+        content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;'   />",
         padding: 0,
         options: {
             modal: false,
@@ -62,9 +62,8 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
             height: docHeight,
             place:"bottom-right"
 
-
         }
-    }).css("background-color", bgColor);
+    }).css("background-color", bgColor).css('margin-bottom','65px');
 
     var toolIcon = toolTile.find('img').attr('src');
 
@@ -93,4 +92,40 @@ function closeWindow(closeBtn){
          }
      }
 
+}
+
+
+
+//This function is called when the maximize button of a window is pressed. The function should be able to maximize and revert back to original sizes.
+function maximizeWindow(maxBtn){
+    console.log("inside");
+    var winDiv = getDialogFromBtn(maxBtn);
+    var winFrame = winDiv.find('iframe');
+    var winData = winDiv.data('winData');
+
+    docWidth = $(window).width();
+    docHeight = $(window).height();
+
+    if(winDiv.position().left>0){
+        winDiv.animate({
+            top: 0,
+            left: 0,
+            height: "100%",
+            width: "100%",
+            opacity: 1,
+        },300);
+        winFrame.animate({
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: docHeight-60,
+            width: docWidth-20,
+            opacity: 1,
+        },300);
+    }
+    else{
+        //Temporal fix, still need to find why it reduces the height on 20px...
+        winData.height = 200;
+        resizeWindow2Normal(winDiv, winData);
+    }
 }
