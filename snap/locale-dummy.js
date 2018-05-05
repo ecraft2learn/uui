@@ -6,7 +6,7 @@
 
     written by Jens Mönig
 
-    Copyright (C) 2018 by Jens Mönig
+    Copyright (C) 2017 by Jens Mönig
 
     This file is part of Snap!.
 
@@ -42,7 +42,7 @@
 
 /*global modules, contains*/
 
-modules.locale = '2018-March-09';
+modules.locale = '2017-November-15';
 
 // Global stuff
 
@@ -50,7 +50,9 @@ var Localizer;
 var SnapTranslator = new Localizer();
 
 function localize(string) {
-    return SnapTranslator.translate(string);
+// edited in order for closure to compile it correctly
+return string;
+//    return SnapTranslator.translate(string);
 }
 
 // Localizer /////////////////////////////////////////////////////////////
@@ -160,7 +162,7 @@ SnapTranslator.dict.de = {
     'translator_e-mail':
         'jens@moenig.org',
     'last_changed':
-        '2018-03-09'
+        '2017-10-20'
 };
 
 SnapTranslator.dict.it = {
@@ -237,7 +239,7 @@ SnapTranslator.dict.zh_CN = {
     'translator_e-mail':
         'ubertao@qq.com/djh@rhjxx.cn',
     'last_changed':
-        '2018-01-22'
+        '2017-10-28'
 };
 
 SnapTranslator.dict.eo = {
@@ -281,18 +283,18 @@ SnapTranslator.dict.ru = {
     'translator_e-mail':
         'svetlanap@berkeley.edu, tema@school830.ru',
     'last_changed':
-        '2018-02-05'
+        '2017-09-01'
 };
 
 SnapTranslator.dict.es = {
     'language_name':
         'Espa\u00F1ol',
     'language_translator':
-        'V\u00EDctor Manuel Muratalla Morales / Cristi\u00E1n Rizzi Iribarren / Alfonso Ruzafa',
+        'V\u00EDctor Manuel Muratalla Morales',
     'translator_e-mail':
-        'victor.muratalla@yahoo.com / rizzi.cristian@gmail.com',
+        'victor.muratalla@yahoo.com',
     'last_changed':
-        '2018-02-19'
+        '2013-03-25'
 };
 
 SnapTranslator.dict.nl = {
@@ -358,7 +360,7 @@ SnapTranslator.dict.el = {
     'translator_e-mail':
         'ino.samaras@berkeley.edu',
     'last_changed':
-        '2018-01-19'
+        '2013-09-16'
 };
 
 SnapTranslator.dict.ca = {
@@ -370,17 +372,6 @@ SnapTranslator.dict.ca = {
         'bernat@snap4arduino.rocks, jguille2@xtec.cat',
     'last_changed':
         '2017-11-15'
-};
-
-SnapTranslator.dict.ca_VA = {
-    'language_name':
-    	'Català - Valencià',
-    'language_translator':
-        'Bernat Romagosa Carrasquer, Joan Guillén i Pelegay, Pilar Embid',
-    'translator_e-mail':
-        'bernat@snap4arduino.rocks, jguille2@xtec.cat, embid_mar@gva.es',
-    'last_changed':
-        '2018-02-08'
 };
 
 SnapTranslator.dict.fi = {
@@ -479,7 +470,7 @@ SnapTranslator.dict.tr = {
     'translator_e-mail':
         'hakanatas@gmail.com',
     'last_changed':
-        '2018-01-22'
+        '2015-7-27'
 };
 
 SnapTranslator.dict.hu = {
