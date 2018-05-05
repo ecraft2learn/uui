@@ -2223,7 +2223,11 @@ IDE_Morph.prototype.saveSetting = function (key, value) {
 
 IDE_Morph.prototype.getSetting = function (key) {
     if (this.hasLocalStorage()) {
-        return localStorage['-snap-setting-' + key];
+        let value = localStorage['-snap-setting-' + key];
+        if (value === 'null') {
+            return null; // not sure how this is happening only with localhost - Ken Kahn 
+        }
+        return value;
     }
     return null;
 };
