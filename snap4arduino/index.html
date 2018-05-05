@@ -85,11 +85,13 @@
 
         	http.onreadystatechange = function() {
                  
-			console.log(http.responseText);
- 
-			ide.rawOpenProjectString(http.responseText);            
-
-        	};  
+				if (http.responseText === "") {
+					console.log("No response from " + url + " with " + params);            
+				} else {
+					console.log(http.responseText);
+					ide.rawOpenProjectString(http.responseText);					
+				};
+        	};
 
         	http.send(params);
 
