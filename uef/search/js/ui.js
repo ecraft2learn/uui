@@ -142,15 +142,14 @@ $('#search').on('click keyup', (event) => {
 		data: 'origin=*&action=query&format=json&list=search&srsearch=' + val,
 		success: (data) => {
 
-			var results = JSON.parse(data);
-
 			var html = '';
 
-			for (let i = 0; i < results.query.search.length; i++) {
+			for (let i = 0; i < data.query.search.length; i++) {
 
-				let snippet = results.query.search[i].snippet;
+				let snippet = data.query.search[i].snippet;
+				let pageId = data.query.search[i].pageid;
 
-				html += snippet + '<hr>';
+				html += snippet + '... <a href=\'https://en.wikipedia.org/?curid=' + pageId + '\' target=\'_blank\'>Link</a><hr>';
 			}
 
 			$('#wiki').html(html);
