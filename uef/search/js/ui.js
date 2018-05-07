@@ -135,6 +135,34 @@ $('#search').on('click keyup', (event) => {
                                         
         getRequest(val);
 
+	$.ajax({
+
+		type: 'GET',
+		url: 'https://en.wikipedia.org/w/api.php',
+		data: 'action=query&format=json&list=search&srsearch=' + val,
+		success: (data) => {
+
+			var results = JSON.parse(data);
+
+			var html = '';
+
+			for (let i = 0; i < results.query.search.length; i++) {
+
+				let snippet = results.query.search[i].snippet;
+
+				html += snippet + '<hr>';
+			}
+
+			$('#wiki').html(html);
+
+		},
+		error: (error) => {
+
+
+		}
+
+	});
+
         $.ajax({
 
         	'url': 'https://api.flickr.com/services/rest/',
