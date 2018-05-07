@@ -139,7 +139,7 @@ $('#search').on('click keyup', (event) => {
 
 		type: 'GET',
 		url: 'https://en.wikipedia.org/w/api.php',
-		data: 'action=query&format=json&list=search&srsearch=' + val,
+		data: 'origin=*&action=query&format=json&list=search&srsearch=' + val,
 		success: (data) => {
 
 			var results = JSON.parse(data);
