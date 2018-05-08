@@ -68,6 +68,12 @@ body {
 .todo-task > .task-description{
     font-size: smaller;
 }
+.todo-task > .task-users {
+
+    font-style: italic;
+    font-weight: small;
+
+}
 
 h3{
     text-align: center;

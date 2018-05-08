@@ -7,6 +7,7 @@ data = data || {};
     var defaults = {
             todoTask: "todo-task",
             todoHeader: "task-header",
+	    todoUsers: 'task-users',
             todoDate: "task-date",
             todoDescription: "task-description",
             taskId: "task-",
@@ -30,23 +31,6 @@ data = data || {};
             generateElement(params);
         });
 
-        /*generateElement({
-            id: "123",
-            code: "1",
-            title: "asd",
-            date: "22/12/2013",
-            description: "Blah Blah"
-        });*/
-
-        /*removeElement({
-            id: "123",
-            code: "1",
-            title: "asd",
-            date: "22/12/2013",
-            description: "Blah Blah"
-        });*/
-
-        // Adding drop function to each category of task
         $.each(codes, function (index, value) {
             $(value).droppable({
                 drop: function (event, ui) {
@@ -55,26 +39,19 @@ data = data || {};
                             id = css_id.replace(options.taskId, ""),
                             object = data[id];
 
-                            // Removing old element
                             removeElement(object);
 
-                            // Changing object code
                             object.code = index;
 
-                            // Generating new element
                             generateElement(object);
 			    
-
-                            // Updating Local Storage
                             data[id] = object;
 
-                            // Hiding Delete Area
                             $("#" + defaults.deleteDiv).hide();
                     }
             });
         });
 
-        // Adding drop function to delete div
         $("#" + options.deleteDiv).droppable({
             drop: function(event, ui) {
                 var element = ui.helper,
@@ -82,20 +59,16 @@ data = data || {};
                     id = css_id.replace(options.taskId, ""),
                     object = data[id];
 
-                // Removing old element
                 removeElement(object);
 
-                // Updating local storage
                 delete data[id];
 
-                // Hiding Delete Area
                 $("#" + defaults.deleteDiv).hide();
             }
         })
 
     };
 
-    // Add Task
     var generateElement = function(params){
 
 	var parent = $(codes[params.code]),
@@ -126,7 +99,7 @@ data = data || {};
 
         $("<div />", {
             "class" : defaults.todoDescription,
-            "text": params.description
+            "text": '@' + params.users + ': ' + params.description
         }).appendTo(wrapper);
 
 	    wrapper.draggable({
@@ -146,7 +119,6 @@ data = data || {};
 
     todo.generateElement = generateElement;
 
-    // Remove task
     var removeElement = function (params) {
 
         $("#" + defaults.taskId + params.id).remove();
@@ -162,15 +134,16 @@ data = data || {};
     todo.add = function() {
 	var inputs = $("#" + defaults.formId + " :input"),
             errorMessage = "Title can not be empty",
-            id, title, description, date, tempData;
+            id, title, description, date, tempData, users;
 
-        if (inputs.length !== 5) {
+        if (inputs.length !== 6) {
             return;
         }
 
         title = inputs[0].value;
         description = inputs[1].value;
         date = inputs[2].value;
+	users = inputs[3].value;
 
         if (!title) {
             generateDialog(errorMessage);
@@ -184,18 +157,17 @@ data = data || {};
             code: "1",
             title: title,
             date: date,
-            description: description
+            description: description,
+	    users: users
         };
 
-        // Saving element in local storage
         data[id] = tempData;
-        // Generate Todo Element
         generateElement(tempData);
 
-        // Reset Form
         inputs[0].value = "";
         inputs[1].value = "";
         inputs[2].value = "";
+	inputs[3].value = '';
     };
 
     var generateDialog = function (message) {
@@ -265,14 +237,13 @@ data = data || {};
 	url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_plans_pilot_2.php',
 	data: 'sessionId=' + sessionId + '&users=' + users,
 	success: (data) => {
-	
+		
 		var tasks = JSON.parse(data);
 
 		tasks = JSON.parse(tasks[0].data);
 		
 		for (let i = 0; i < tasks.length; i++)
 			todo.generateElement(tasks[i]);
-
 	},
 	error: (error) => {
 
