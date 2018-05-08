@@ -95,3 +95,13 @@ body {
      display: block;
      clear: both;
  }
+
+/*-----------------------------------------------------------
+ * Feedback  success popup
+ *----------------------------------------------------------*/
+
+.popover{
+    background: rgb(88, 154, 21) !important;
+    border-top: 1px white;
+    border-bottom: 1px white;
+}

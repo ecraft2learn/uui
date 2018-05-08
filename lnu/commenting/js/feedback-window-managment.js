@@ -6,7 +6,7 @@
 
 
 //global variables
-feedbackWindows = {}; //associative javascript array {'toolName':'feedback_window_id'}
+ feedbackWindows = {}; //associative javascript array {'toolName':'feedback_window_id'}
 
 /**
  * This function assigns for each tool one feedback window
@@ -17,6 +17,7 @@ function addFeedbackWindow(toolName, windowId){
    feedbackWindows[toolName] = windowId;
    //console.log(feedbackWindows);
 }
+
 
 
 /**
@@ -43,7 +44,7 @@ function openFeedbackWindow(toolUrl, toolName, event){
  */
 function openIframeWindowRightBottom(toolUrl, toolName, event) {
     docWidth = 320;
-    docHeight = 250;
+    docHeight = 280;
 
     //resize window based on the dialog title length
     var dialogTitle = "Feedback " + toolName;
@@ -51,14 +52,13 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
         docWidth = docWidth + dialogTitle.length +30
     }
 
-    console.log(docWidth);
+
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
     var bgColor = toolTile.css("background-color");
 
     if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
         bgColor="rgb(64,64,64)";
-
 
 
 
