@@ -28,9 +28,12 @@
     	script.src = "https://cdn.ravenjs.com/3.22.1/raven.min.js";
     	script.crossorigin = "anonymous";
     	document.head.appendChild(script);
-    	Raven.config('https://7780e314f7d64cc88db0fab885c9ca9b@sentry.io/305194',
-                 {whitelistUrls: [/ecraft2learn\.github\.io/]})
-             .install();
+    	script.addEventListener('load',
+    	                        function () {
+									Raven.config('https://7780e314f7d64cc88db0fab885c9ca9b@sentry.io/305194',
+											     {whitelistUrls: [/ecraft2learn\.github\.io/]})
+										 .install();	                        	
+    	                        });
     }  
     </script>
 
