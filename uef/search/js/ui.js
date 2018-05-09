@@ -135,6 +135,33 @@ $('#search').on('click keyup', (event) => {
                                         
         getRequest(val);
 
+	$.ajax({
+
+		type: 'GET',
+		url: 'https://en.wikipedia.org/w/api.php',
+		data: 'origin=*&action=query&format=json&list=search&srsearch=' + val,
+		success: (data) => {
+
+			var html = '';
+
+			for (let i = 0; i < data.query.search.length; i++) {
+
+				let snippet = data.query.search[i].snippet;
+				let pageId = data.query.search[i].pageid;
+
+				html += snippet + '... <a href=\'https://en.wikipedia.org/?curid=' + pageId + '\' target=\'_blank\'>Link</a><hr>';
+			}
+
+			$('#wiki').html(html);
+
+		},
+		error: (error) => {
+
+
+		}
+
+	});
+
         $.ajax({
 
         	'url': 'https://api.flickr.com/services/rest/',

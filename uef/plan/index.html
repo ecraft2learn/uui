@@ -12,7 +12,8 @@
 
     <body class="well">
         <div id="container">
-
+	    <img src='img/eCraftLogo.png'>
+	    <h5>You can drag & drop the tasks between "pending", "in progress" and "completed"</h5>
             <div id="header"> Plan tasks </div>
 
             <div class="task-list task-container" id="pending">
@@ -33,7 +34,8 @@
                     <input type="text" placeholder="Title" />
                     <textarea placeholder="Description"></textarea>
                     <input type="text" id="datepicker" placeholder="Due Date (dd/mm/yyyy)" />
-                    <input type="button" class="btn btn-primary" value="Add Task" onclick="todo.add();" />
+		    <input type='text' placeholder='Assigned to who' />
+		    <input type="button" class="btn btn-primary" value="Add Task" onclick="todo.add();" />
 		    <input type='button' class='btn btn-primary' value='Save' onclick='todo.save();' />
 		</form>
                 <div id="delete-div">
