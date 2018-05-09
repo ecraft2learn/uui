@@ -149,8 +149,10 @@ $('#search').on('click keyup', (event) => {
 				let snippet = data.query.search[i].snippet;
 				let pageId = data.query.search[i].pageid;
 
-				html += snippet + '... <a href=\'https://en.wikipedia.org/?curid=' + pageId + '\' target=\'_blank\'>Link</a><hr>';
+				html += '<div class=\'well\' style=\'width: 200px; float: left;\'>' + snippet + '... <a href=\'https://en.wikipedia.org/?curid=' + pageId + '\' target=\'_blank\'>Link</a></div>';
 			}
+
+			html += '<br>';
 
 			$('#wiki').html(html);
 
