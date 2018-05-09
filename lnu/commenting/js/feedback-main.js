@@ -34,16 +34,16 @@ function onSend(event) {
     if(feedback != undefined) {
         var toolName = getToolName();
               //get toolid
-              if(toolName!= undefined){
+              if(toolName != undefined){
                   getToolId(toolName,function (result) {
-                      if(result["DATA"].length>0){
+                      if(result["DATA"].length > 0){
                           var toolID = parseInt(result["DATA"][0]["TOOLID"]);
                           var data = {"toolID":toolID,"userID":userID,"pilotsite":pilotsite,"feedback":feedback,"rating":rating,"language":language,"func":func,"projectID":projectID,"timestamp":timestamp};
                           console.log(data);
                           //postFeedback(data);
                             postRequest(data);
                       }
-                  })
+                  });
               }
               else{
                   console.log("ERROR,could not find tool name, could not send feedback");
@@ -55,7 +55,7 @@ function onSend(event) {
  * Ajax post request - first test
  * @param data - json data
  */
-function postRequest(data){
+function postRequest(data) {
     $.ajax({
         type: "POST",
         url: "https://localhost/lnu.php",
@@ -69,7 +69,7 @@ function postRequest(data){
             }
             setTimeout(function(){
                 $(".feedback-component #feedback-result").text(" ");
-            },3000)
+            }, 3000);
         }
     });
 }
@@ -89,7 +89,7 @@ function getSentences(language) {
  * @param toolname - name of the tool
  * @param callback - tool id
  */
-function getToolId(toolname, callback){
+function getToolId(toolname, callback) {
 
     var toolname = toolname;
     var func = "getToolId";
@@ -183,7 +183,7 @@ function onError(error) {
  * This function gets tool name based on feedback dialog window id
  * @returns {string}- tool name
  */
-function getToolName(){
+function getToolName() {
 
     var iframeId = window.parent.activeWindow.attr('id');
     var feedbackWindows = parent.feedbackWindows;

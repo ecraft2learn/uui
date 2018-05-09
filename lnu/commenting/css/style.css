@@ -7,7 +7,12 @@
  * General styles for the iframe
  *----------------------------------------------------------*/
 
+html {
+    height:100%;
+}
+
 body {
+    height:100%;
     margin: 0;
     padding: 0;
     font-family: "Segoe UI", "Open Sans", sans-serif, serif;
@@ -19,11 +24,17 @@ body {
  *----------------------------------------------------------*/
 
 #feedback-template {
-    width: 100%; /*@TODO: Get rid of magic number*/
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 
 .feedback-component {
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
+    display:block;
 }
 
 .feedback-component-title {
@@ -44,7 +55,7 @@ body {
 #sentence-select {
     width: 100%;
     height: 40px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 #sentence-select option {
@@ -57,10 +68,18 @@ body {
 
 #feedback-ratings {
     display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
 }
 
 #feedback-ratings input[type="radio"] {
-    flex-grow: 1;
+    margin-right:auto;
+}
+
+#feedback-ratings label {
+    flex-grow:1;
+    padding: 5px 0;
+
 }
 
 
@@ -83,18 +102,6 @@ body {
     cursor:pointer;
     background: hsla(0, 0%, 20%, 0.5);
 }
-
-/*-----------------------------------------------------------
- * Util styles
- *----------------------------------------------------------*/
-
- .clear::after {
-     content: " ";
-     visibility: hidden;
-     height: 0;
-     display: block;
-     clear: both;
- }
 
 /*-----------------------------------------------------------
  * Feedback  success popup

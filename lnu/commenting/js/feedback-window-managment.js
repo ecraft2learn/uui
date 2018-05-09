@@ -13,7 +13,7 @@
  * @param toolName: String
  * @param windowId: String
  */
-function addFeedbackWindow(toolName, windowId){
+function addFeedbackWindow(toolName, windowId) {
    feedbackWindows[toolName] = windowId;
    //console.log(feedbackWindows);
 }
@@ -26,8 +26,8 @@ function addFeedbackWindow(toolName, windowId){
  * @param toolName: String
  * @param event
  */
-function openFeedbackWindow(toolUrl, toolName, event){
-     if(feedbackWindows[toolName]===undefined){
+function openFeedbackWindow(toolUrl, toolName, event) {
+     if(feedbackWindows[toolName] === undefined){
          openIframeWindowRightBottom(toolUrl,toolName,event);
      }
 }
@@ -48,8 +48,8 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
     //resize window based on the dialog title length
     var dialogTitle = "Feedback " + toolName;
-    if(dialogTitle.length>25){
-        docWidth = docWidth + dialogTitle.length +30
+    if(dialogTitle.length>25) {
+        docWidth = docWidth + dialogTitle.length +30;
     }
 
 
@@ -64,7 +64,7 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
     activeWindow = $.Dialog({
         title: "<span class='text-medium fg-white notranslate' style='-ms-user-select: none; -moz-user-select: none; -webkit-user-select: none;user-select: none;' translate='no'> Feedback "+toolName+"</span><span class='btn-min' onclick='minimizeFeedbackWindow(this)'></span> <span class='btn-max' onclick='maximizeFeedbackWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
-        content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' height='"+(docHeight-60)+"'  />",
+        content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' height='"+(docHeight-60)+"' width="+ (docWidth-20) +" />",
         padding: 0,
         options: {
             modal: false,
@@ -93,13 +93,13 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
  * Close feedback window
  * @param closeBtn
  */
-function closeWindow(closeBtn){
+function closeWindow(closeBtn) {
     var winDiv = $(closeBtn).parent().closest('[data-role], .dialog');
     metroDialog.close(winDiv);
 
     //find tool name based on feedback window id and remove it from feedbackWidnows array
-     for(var k in feedbackWindows){
-         if(feedbackWindows[k]===winDiv.attr('id')){
+     for(var k in feedbackWindows) {
+         if(feedbackWindows[k] === winDiv.attr('id')) {
              delete feedbackWindows[k];
          }
      }
@@ -109,7 +109,7 @@ function closeWindow(closeBtn){
 
 
 //This function is called when the maximize button of a window is pressed. The function should be able to maximize and revert back to original sizes.
-function maximizeFeedbackWindow(maxBtn){
+function maximizeFeedbackWindow(maxBtn) {
     //console.log("inside");
     var winDiv = getDialogFromBtn(maxBtn);
     var winFrame = winDiv.find('iframe');
@@ -118,7 +118,7 @@ function maximizeFeedbackWindow(maxBtn){
     docWidth = $(window).width();
     docHeight = $(window).height();
 
-    if(winDiv.position().left>0){
+    if(winDiv.position().left>0) {
         winDiv.animate({
             top: 0,
             left: 0,
@@ -143,7 +143,7 @@ function maximizeFeedbackWindow(maxBtn){
 
 //Given a WinDiv and its WinData, it restores the Div to its original place and size.
 
-function resizeFeedbackWindow2Normal($winDiv, $winData){
+function resizeFeedbackWindow2Normal($winDiv, $winData) {
 
     $winDiv.animate({
         top: $winData.posy,
@@ -179,7 +179,7 @@ function unminimizeFeedbackWindow() {
 
     $($buttonElem).remove();
 
-    if($('#bottomCharm').find('button').length==0){
+    if($('#bottomCharm').find('button').length == 0){
         hideMetroCharm('#bottomCharm');
     }
 }
@@ -195,13 +195,13 @@ function unminimizeWindowFromJS(minButton){
 
     $(minButton).remove();
 
-    if($('#bottomCharm').find('button').length==0){
+    if($('#bottomCharm').find('button').length == 0){
         hideMetroCharm('#bottomCharm');
     }
 }
 
 //Given the clicked minimize button of a window, it finds the window object and minimizes it. This includes creating a small button and the bottom charm and storing the WinData struct in it.
-function minimizeFeedbackWindow(minBtn){
+function minimizeFeedbackWindow(minBtn) {
     var winDiv = getDialogFromBtn(minBtn);
     var winData = winDiv.data('winData');
 
