@@ -7,7 +7,7 @@ data = data || {};
     var defaults = {
             todoTask: "todo-task",
             todoHeader: "task-header",
-	    todoUsers: 'task-users',
+	    todoUsers: 'users',
             todoDate: "task-date",
             todoDescription: "task-description",
             taskId: "task-",
@@ -94,12 +94,19 @@ data = data || {};
 
         $("<div />", {
             "class" : defaults.todoDate,
-            "text": params.date
+            "text": 'Due ' + params.date
         }).appendTo(wrapper);
+
+	$('<span>', {
+
+	  	'class': 'users',
+		'text': '@' + params.users + ': '
+
+	}).appendTo(wrapper);
 
         $("<div />", {
             "class" : defaults.todoDescription,
-            "text": '@' + params.users + ': ' + params.description
+            "text": params.description
         }).appendTo(wrapper);
 
 	    wrapper.draggable({
