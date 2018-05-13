@@ -33,21 +33,20 @@ function onSend(event) {
 
     if(feedback != undefined) {
         var toolName = getToolName();
-              //get toolid
-              if(toolName != undefined){
-                  getToolId(toolName,function (result) {
-                      if(result["DATA"].length > 0){
-                          var toolID = parseInt(result["DATA"][0]["TOOLID"]);
-                          var data = {"toolID":toolID,"userID":userID,"pilotsite":pilotsite,"feedback":feedback,"rating":rating,"language":language,"func":func,"projectID":projectID,"timestamp":timestamp};
-                          console.log(data);
-                          //postFeedback(data);
-                            postRequest(data);
-                      }
-                  });
-              }
-              else{
-                  console.log("ERROR,could not find tool name, could not send feedback");
-              }
+        //get toolid
+        if(toolName != undefined){
+            getToolId(toolName,function (result) {
+                if(result["DATA"].length > 0){
+                    var toolID = parseInt(result["DATA"][0]["TOOLID"]);
+                    var data = {"toolID":toolID,"userID":userID,"pilotsite":pilotsite,"feedback":feedback,"rating":rating,"language":language,"func":func,"projectID":projectID,"timestamp":timestamp};
+                    //postFeedback(data);
+                    postRequest(data);
+                }
+            });
+        }
+        else{
+            console.log("ERROR,could not find tool name, could not send feedback");
+        }
     }
 }
 
@@ -84,6 +83,8 @@ function getSentences(language) {
     var url = "lnu.php?lang=" + language;
     XHRcall("GET", url, handleSenteces, onError);
 }
+
+
 /**
  * This function gets tool id by tool name
  * @param toolname - name of the tool
@@ -121,7 +122,9 @@ function handleSentences(response) {
  * @param data : json data
  */
 function postFeedback(data) {
-    XHRcall("POST", "https://localhost/lnu.php", handleFeedback, onError, data);
+    data = JSON.stringify(data);
+    console.log("postFeedback data:", data);
+    XHRcall("POST", "/lnu.php", handleFeedback, onError, data);
 }
 
 
@@ -132,6 +135,7 @@ function postFeedback(data) {
  */
 function handleFeedback(response) {
     response = JSON.parse(response);
+    console.log(response);
 }
 
 
@@ -141,7 +145,7 @@ function handleFeedback(response) {
  * @param error : int
  */
 function onError(error) {
-    console.log("XHR fail, status code:", "error");
+    console.log("XHR fail, status code:", error);
 }
 
 
@@ -164,7 +168,7 @@ function onError(error) {
     data = data || null;
     var request = (XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
         request.open(method, url, true);
-        request.setRequestHeader("Content-type", "application/json");
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.send(data);
         request.addEventListener("readystatechange", function(event) {
             if ( request.readyState == XMLHttpRequest.DONE && 
