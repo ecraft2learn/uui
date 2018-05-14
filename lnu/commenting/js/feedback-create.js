@@ -18,7 +18,7 @@
  /**
   * Creates the specified feedback elements, specifies settings for the inputs
   */
- function createFeedback() {
+ function createFeedback(sentences) {
     // Object specifying a select menu
 
     var selectMenu = {
@@ -30,39 +30,26 @@
 
         // The inputSettings for the component
         // Each object represents one option / menu item in the select menu
+        inputSettings:[{
+                    // The option value
+                    value: 0,
 
-        inputSettings: [
-            {
-                // The option value
-                value: 0,
+                    // The option text
+                    text: "I feel that...",
 
-                // The option text
-                text: "I feel that...",
+                    // If the option should be selected
+                    selected: true,
 
-                // If the option should be selected
-                selected: true,
-
-                // If the option should be hidden
-                hidden: true
-            },
-            {
-                value: 1,
-                text: "Feedback sentence 1"
-            },
-            {
-                value: 2,
-                text: "Feedback sentence 2" 
-            },
-            {
-                value: 3,
-                text: "Feedback sentence 3"
-            },
-            {
-                value: 4,
-                text: "Feedback sentence 4"
-            }
-        ]
+                    // If the option should be hidden
+                    hidden: true
+                }]
     };
+
+    for(var i=0;i<sentences.length;i++){
+        var option = {value:sentences[i]["ID"],text:sentences[i]["SENETENCE"]};
+        selectMenu.inputSettings.push(option);
+    }
+
 
     // Ratings
     var ratings = {
@@ -97,7 +84,7 @@
 
     // Free text
     var freeText = {
-        label: "Free text",
+        label: "Free text:",
         input: "textfield"
     };
 
@@ -116,9 +103,16 @@
         ]
     };
 
+    //Confirmation message
+
+     var confirmation = {
+         label:null,
+         input:"label"
+     };
+
     // Compiling the input objects in an array
     var settings = {
-        inputs: [selectMenu, ratings, freeText, sendButton]
+        inputs: [selectMenu, ratings, freeText, sendButton,confirmation]
     };
 
     initCreation(settings);
@@ -148,12 +142,12 @@ function m_parseOptions(configuration) {
         var wrapper = m_createComponent();
         var input = m_createInput(configuration.inputs[i]);
 
+
         if (configuration.inputs[i].label != null) {
             var label = m_createTitle(input.id, configuration.inputs[i].label);
             wrapper.appendChild(label);
         }
 
-        wrapper.appendChild(label);
         wrapper.appendChild(input);
         el.appendChild(wrapper);
     }
@@ -219,6 +213,10 @@ function m_createInput(configuration) {
         case "button":
             val = m_createButton(configuration);
         break;
+
+        case "label":
+            val = m_createLable(configuration);
+            break;
     }
     return val;
 }
@@ -338,8 +336,12 @@ function m_createButton(options) {
 }
 
 /**
- * Example callback function
+ * Creates and returns the confirmation message
+ * @param options : The input object configuration
  */
-function onSend() {
-    console.log("onSend");
+function m_createLable(options){
+    var el;
+        el = document.createElement("lablel");
+        el.id = "feedback-confirmation";
+     return el;
 }

@@ -7,12 +7,28 @@
  *  - function of requesting tool name
  */
 
+/**
+ * Static languages variable, temporal, since language support is not supported by UUI yet....
+ * @type {{11: string, 12: string, 13: string, 14: string}}
+ */
+var languages ={
+    '11':"fi",
+    '12':"fi",
+    '13':"el",
+    '14':"el"
+};
+
 
  /**
   * This function initializes the feedback functionality.
   */
 function initFeedback() {
-    document.getElementById("feedback-btn").addEventListener("click", onSend);
+     var language = 'en';
+     getSentences(language,function (data,result) {
+         var sentences = data["DATA"];
+         createFeedback(sentences);
+     });
+
 }
 
 
@@ -21,26 +37,42 @@ function initFeedback() {
  * @param event : MouseEvent
  */
 function onSend(event) {
-    console.log("Sending feedback...");
+
     var userID = parseInt(window.sessionStorage.getItem('userId')) || 1;
     var pilotsite = parseInt(window.sessionStorage.getItem('pilotsite'));
-    var language = 'en';
     var feedback = parseInt($('#sentence-select').val());
     var rating = parseInt($('input[name=rating]:checked').val());
+    var free_text = $('#feedback-freetext').val();
     var func = "addFeedback";
     var projectID = parseInt(window.sessionStorage.getItem('projectId')) || 1;
     var timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-    if(feedback != undefined) {
+    // console.log(feedback);
+    // console.log(rating);
+    // console.log(free_text);
+
+
+    if(feedback != undefined || rating != undefined || free_text!=undefined) {
         var toolName = getToolName();
         //get toolid
         if(toolName != undefined){
             getToolId(toolName,function (result) {
                 if(result["DATA"].length > 0){
                     var toolID = parseInt(result["DATA"][0]["TOOLID"]);
-                    var data = {"toolID":toolID,"userID":userID,"pilotsite":pilotsite,"feedback":feedback,"rating":rating,"language":language,"func":func,"projectID":projectID,"timestamp":timestamp};
+                    var data = {"toolID":toolID,"userID":userID,"pilotsite":pilotsite,"feedback":feedback,"rating":rating,"func":func,"projectID":projectID,"timestamp":timestamp,"free_input":free_text};
                     //postFeedback(data);
-                    postRequest(data);
+                    postRequest(data,function(data,result){
+                        console.log(data);
+                        if(result === "success"){
+                            $(".feedback-component #feedback-confirmation").text("Your feedback was send successfully.");
+                        }
+                        else{
+                            $(".feedback-component #feedback-confirmation").text("Your feedback was not send successfully.");
+                        }
+                        setTimeout(function(){
+                            $(".feedback-component #feedback-confirmation").text(" ");
+                        }, 3000);
+                    });
                 }
             });
         }
@@ -54,21 +86,14 @@ function onSend(event) {
  * Ajax post request - first test
  * @param data - json data
  */
-function postRequest(data) {
+function postRequest(data, callback) {
     $.ajax({
         type: "POST",
         url: "https://localhost/lnu.php",
         data: data,
-        success: function (error,data) {
-            if(data === "success"){
-                $(".feedback-component #feedback-result").text("Your feedback was send successfully.");
-            }
-            else{
-                $(".feedback-component #feedback-result").text("Your feedback was not send successfully.");
-            }
-            setTimeout(function(){
-                $(".feedback-component #feedback-result").text(" ");
-            }, 3000);
+        success: function (data,result) {
+
+            callback(JSON.parse(data),result);
         }
     });
 }
@@ -78,10 +103,14 @@ function postRequest(data) {
  * This function retrieves the sentences for a specified language.
  * @param language : String
  */
-function getSentences(language) {
-    // Perhaps this should work with a language ID instead?
-    var url = "lnu.php?lang=" + language;
-    XHRcall("GET", url, handleSenteces, onError);
+function getSentences(language,callback) {
+    // Perhaps this should work with a language ID instead? -> we do noe have language ID, we have sentence ID in database
+    //we have three languages: english, greece, and finish
+    var data = {"language":language,"func":"getFeedbackSentences"};
+    postRequest(data,callback)
+
+    //var url = "lnu.php?lang=" + language;
+    //XHRcall("GET", url, handleSenteces, onError);
 }
 
 

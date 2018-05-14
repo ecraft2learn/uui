@@ -15,86 +15,11 @@
 <body>
 
     <!-- Feedback template -->
-    <div id="feedback-template">
-        
-        <!-- Sentence Selection -->
-        <div class="feedback-component">
-            <label for="sentence-select" class="feedback-component-title">Feedback:</label>
-            <select name="sentence-select" id="sentence-select">
-                <option selected hidden>I feel that...</option>
-                <option value="1">Sentence 1</option>
-                <option value="2">Sentence 2</option>
-                <option value="3">Sentence 3</option>
-                <option value="4">Sentence 4</option>
-                <option value="5">Sentence 5</option>
-                <option value="6">Sentence 6</option>
-                <option value="7">Sentence 7</option>
-            </select>
-        </div>
-        
-
-        <!-- Rating Selection -->
-        <div class="feedback-component">
-            <label for="feedback-ratings" class="feedback-component-title">Rating:</label>
-            <div id="feedback-ratings" name="feedback-ratings">
-                <label for="rating1">
-                    <input type="radio" id="rating1" name="rating" value="1">
-                    1
-                </label>
-
-                <label for="rating2">
-                    <input type="radio" id="rating2" name="rating" value="2">
-                    2
-                </label>
-
-                <label for="rating3">
-                    <input type="radio" id="rating3" name="rating" value="3">
-                    3
-                </label>
-
-                <label for="rating4">
-                    <input type="radio" id="rating4" name="rating" value="4">
-                    4
-                </label>
-
-                <label for="rating5">
-                    <input type="radio" id="rating5" name="rating" value="5">
-                    5
-                </label>
-
-            </div>
-        </div>
-
-        <!-- Submit button -->
-        <div class="feedback-component">
-            <button type="button" id="feedback-btn">
-                <!-- Feedback button icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 61 61" class="feedback-icon">
-                <g fill="none" fill-rule="evenodd">
-                  <path fill="#FFF" d="M32.3132338,47.7890947 L19.9799508,59.1008422 C19.2421379,59.7775439 18.2773882,60.1529684 17.2762422,60.1529684 C15.0671032,60.1529684 14.2762422,58.3621074 14.2762422,56.1529684 L14.2762422,48 C14.2762422,47.4477153 13.828527,47 13.2762422,47 L10,47 C4.4771525,47 6.76353751e-16,42.5228475 0,37 L3.55271368e-15,10 C2.87635993e-15,4.4771525 4.4771525,-7.61826213e-16 10,0 L51,0 C56.5228475,-1.01453063e-15 61,4.4771525 61,10 L61,37 C61,42.5228475 56.5228475,47 51,47 L34.3410152,47 C33.5901558,47 32.8665935,47.2815684 32.3132338,47.7890947 Z M29.7220586,42.6903885 C30.4595727,42.015148 31.4232487,41.6406266 32.4231871,41.6406266 L52.0766747,41.6406266 C54.4018392,41.6406266 56.2867575,39.7557083 56.2867575,37.4305437 L56.2867575,9.01248441 C56.2867575,6.68731984 54.4018392,4.80240154 52.0766747,4.80240154 L8.92332532,4.80240154 C6.59816076,4.80240154 4.71324245,6.68731984 4.71324245,9.01248441 L4.71324245,37.4305437 C4.71324245,39.7557083 6.59816076,41.6406266 8.92332532,41.6406266 L16.6867624,41.6406266 C17.7913319,41.6406266 18.6867624,42.5360571 18.6867624,43.6406266 L18.6867624,50.5283189 C18.6867624,50.7786054 18.7806185,51.0197928 18.949794,51.204246 C19.3230982,51.6112624 19.9556731,51.6385916 20.3626896,51.2652873 L23.9711019,47.9557509 L29.7220586,42.6903885 Z"/>
-                  <path fill="none" d="M29.7220586,42.6903885 C30.4595727,42.015148 31.4232487,41.6406266 32.4231871,41.6406266 L52.0766747,41.6406266 C54.4018392,41.6406266 56.2867575,39.7557083 56.2867575,37.4305437 L56.2867575,9.01248441 C56.2867575,6.68731984 54.4018392,4.80240154 52.0766747,4.80240154 L8.92332532,4.80240154 C6.59816076,4.80240154 4.71324245,6.68731984 4.71324245,9.01248441 L4.71324245,37.4305437 C4.71324245,39.7557083 6.59816076,41.6406266 8.92332532,41.6406266 L16.6867624,41.6406266 C17.7913319,41.6406266 18.6867624,42.5360571 18.6867624,43.6406266 L18.6867624,50.5283189 C18.6867624,50.7786054 18.7806185,51.0197928 18.949794,51.204246 C19.3230982,51.6112624 19.9556731,51.6385916 20.3626896,51.2652873 L23.9711019,47.9557509 L29.7220586,42.6903885 Z"/>
-                  <g stroke="#FFF" stroke-linecap="square" stroke-width="3" transform="translate(12 13)">
-                    <path d="M.5 1.5L36.6247837 1.5M.5 10.5L36.6247837 10.5M.5 19.5L36.6247837 19.5"/>
-                  </g>
-                </g>
-              </svg>
-              <!-- Feedback button text -->
-              Send feedback
-            </button>
-        </div>
-
-        <!--Success/Error message -->
-        <div class="feedback-component">
-            <span id="feedback-result"></span>
-        </div>
-
-    </div>
+    <div id="uui-feedback"></div>
    
 
     <script>
         $(document).ready(function() {
-            console.log(window.sessionStorage.getItem('username'));
-            console.log(window.sessionStorage);
             initFeedback();
         })
     </script>

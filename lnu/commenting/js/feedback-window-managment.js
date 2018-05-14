@@ -44,7 +44,7 @@ function openFeedbackWindow(toolUrl, toolName, event) {
  */
 function openIframeWindowRightBottom(toolUrl, toolName, event) {
     docWidth = 320;
-    docHeight = 280;
+    docHeight = 290;
 
     //resize window based on the dialog title length
     var dialogTitle = "Feedback " + toolName;
