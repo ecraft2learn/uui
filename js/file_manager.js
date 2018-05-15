@@ -13,7 +13,7 @@
         This function does not return any value. It uses the <handleGetUserProjectsResponse> or responseHandler (the last parameter to this function) callback functions to parse the data received from the server. 
         If this function fails before making the AJAX call, then the *errorStatus* field in the *window.sessionStorage* is set to "fail".
 
-    Remakrs:
+    Remarks:
         Tool IDs are preset and are as follows:
 
         |  1 | General             
