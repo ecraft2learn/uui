@@ -12,6 +12,7 @@
  *      | rating        | value, label                  |
  *      | textfield     |                               |
  *      | button        | buttonLabel, callback         |
+ *      | label         | value                         |
  */
 
 

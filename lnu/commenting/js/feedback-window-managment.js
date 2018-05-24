@@ -52,6 +52,17 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
         docWidth = docWidth + dialogTitle.length +30;
     }
 
+    //if it opens as external URL in new tab
+    if (toolName==undefined){
+        //get tile title
+        toolName= $(event.srcElement).closest('[data-role], tile')[0].childNodes[1].childNodes[1].innerText;
+
+        if (toolName.length<1){
+            //get title for tiles with sub-title
+            toolName= $(event.srcElement).closest('[class], slide-over')[0].childNodes[1].innerText;
+        }
+
+    }
 
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
