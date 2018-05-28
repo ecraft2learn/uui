@@ -815,8 +815,9 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
 	</div>
 
 	<div id="userMenu" class="margin10 padding20 bg-gray" style="position:absolute; right:0; top:0; display:none; z-index:1;">
-		<h4 class="no-margin"><script>document.write(window.sessionStorage.getItem('username'));</script></h4><br/>
-		<div class="progress pull-right no-margin" data-role="progress" data-value="getUserProgress();" style="width:200px;"></div><br/><br/>
+		
+		<div style="display:flex; justify-content: left; align-items: center; font-size:20px;"> <span class="icon mif-user mif-2x fg-lightTeal"></span> <span class="no-margin text-heavy"></span>&nbsp;<script>document.write(window.sessionStorage.getItem('username'));</script></span></div><br/>
+		<div class="progress pull-right no-margin" data-role="progress" dataz-value="getUserProgress();" data-value="73" style="width:200px;"></div><br/><br/>
 		<button type="button" class="button primary" onclick="logUserOut();">Logout</button>
 		<script>
 			function logUserOut(){
@@ -870,7 +871,7 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Gyroscope/Gyroscope.html');">Gyroscope</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/imu/imu.html');">IMU</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ir_proximity_sensor/ir_proximity_sensor.html');">IR Proximity Sensor</a></li>
-							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/LDR_Sensor/LDR_Sensor.html');">LDR Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/LDR_Sensor/LDR_Sensor.html');">Photoresistor (LDR Sensor)</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/line_tracking_sensor/line_tracking_sensor.html');">Line Tracking Sensor</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Microphone/Microphone.html');">Microphone</a></li>
 							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Piezo_Sensor/Piezo_Sensor.html');">Piezo Sensor</a></li>
