@@ -115,7 +115,7 @@ function openHelpDialog(helpUrl, event){
 
 //Given a url and a title for the window, this function creates a window (uses Metro UI dialog classes) and opens the url as an iframe in it.
 function openIframeWindow(toolUrl, toolName, event) {
-	docWidth = $(window).width()-500;
+	docWidth = $(window).width()-600;
 	docHeight = $(window).height()-100;
 	
 	var toolTile = $(event.srcElement).closest('[data-role], tile');
