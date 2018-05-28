@@ -819,6 +819,7 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
 		<div style="display:flex; justify-content: left; align-items: center; font-size:20px;"> <span class="icon mif-user mif-2x fg-lightTeal"></span> <span class="no-margin text-heavy"></span>&nbsp;<script>document.write(window.sessionStorage.getItem('username'));</script></span></div><br/>
 		<div class="progress pull-right no-margin" data-role="progress" dataz-value="getUserProgress();" data-value="73" style="width:200px;"></div><br/><br/>
 		<button type="button" class="button primary" onclick="logUserOut();">Logout</button>
+		<button type="button" class="button primary" onclick="$('#userMenu').hide();">Cancel</button>
 		<script>
 			function logUserOut(){
 				window.sessionStorage.clear();
