@@ -733,7 +733,7 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
             <div class="input-control text full-size" data-role="input">
                 <label for="user_login">Username:</label>
                 <input type="text" name="username" id="username" class="fg-black" placeholder="Enter your name, nickname, or user name.">
-                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+				<button class="button helper-button clear"><span class="mif-cross"></span></button>
             </div>
             <br />
             <br />
@@ -769,6 +769,17 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
 							location.reload();
 						}
 					}
+					$('#loginForm').keyup(function HandleKeyUp(event)
+					{
+						if(event.which == 13)
+							HandleUserLogin();
+					});
+					$('#pilotsite').keydown(function HandleKeyUp(event)
+					{
+						event.preventDefault();
+						if(event.which == 13)
+							HandleUserLogin();
+					});
 				</script>
             </div>
         <!--</form>-->

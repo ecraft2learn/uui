@@ -88,6 +88,12 @@ h2 {
 	margin-bottom: 20px;
 }
 
+#username:focus {
+	background-color: whitesmoke;
+}
+#pilotsite:focus {
+	background-color: whitesmoke;
+}
 
 #oerSearch {
 	background-color: #3c3f41;
