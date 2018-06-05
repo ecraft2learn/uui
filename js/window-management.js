@@ -117,7 +117,7 @@ function openHelpDialog(helpUrl, event){
 function openIframeWindow(toolUrl, toolName, event) {
 	docWidth = $(window).width()-600;
 	docHeight = $(window).height()-100;
-	
+
 	var toolTile = $(event.srcElement).closest('[data-role], tile');
 	var bgColor = toolTile.css("background-color");
 	
@@ -141,7 +141,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, toolIcon, bgColor, toolName);
 	
 	activeWindow.data('winData', frame);
-	
+
 	return activeWindow;
 }
 

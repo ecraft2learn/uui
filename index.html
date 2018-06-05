@@ -46,8 +46,15 @@
 	
 	<script src="js/window-management.js"></script>
 	<script src="js/helper-functions.js"></script>
+
 	<script src="js/file_manager.js"></script>
 	
+
+
+	<!--LNU CODE START-->
+	<script src="lnu/commenting/js/feedback-window-managment.js"></script>
+	<!--LNU CODE END-->
+
 	<style>
         .tile-area-controls {
             position: fixed;
@@ -204,6 +211,7 @@
 			if(winTitle==undefined) {
 				analyticField = getAnalyticFieldName(toolUrl);
 				gotoTileDestination(toolUrl);
+
 			}
 			else{
 				analyticField = getAnalyticFieldName(toolUrl);
@@ -215,10 +223,16 @@
 				//window.sessionStorage.setItem('pilotsite', params['pilotsite']);
 				
 				openIframeWindow(toolUrl, winTitle, event);
+
 			}
+
 			var username = window.sessionStorage.getItem("username");
 			sendAnalyticsData(hashFnv32a(username), 0, analyticField);
 			//sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
+
+            openFeedbackWindow("./lnu/commenting/index.html",winTitle,event);
+
+
 		}
 		function showInOERWindow(event, addr){
 			//allWin = $("div").find('[class], bg-red');
