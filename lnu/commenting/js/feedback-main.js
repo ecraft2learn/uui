@@ -36,7 +36,7 @@ function initFeedback() {
  * This function runs when the send button is clicked.
  * @param event : MouseEvent
  */
-function onSend(event) {
+function onSendFeedback(event) {
 
     var userID = parseInt(window.sessionStorage.getItem('userId')) || 1;
     var pilotsite = parseInt(window.sessionStorage.getItem('pilotsite'));
@@ -63,6 +63,8 @@ function onSend(event) {
                     //postFeedback(data);
                     postRequest(data,function(data,result){
                         console.log(data);
+                        console.log(result);
+                        clearFeedback();
                         if(result === "success"){
                             $(".feedback-component #feedback-confirmation").text("Your feedback was send successfully.");
                         }
@@ -87,14 +89,20 @@ function onSend(event) {
  * @param data - json data
  */
 function postRequest(data, callback) {
+    //console.log("here");
     $.ajax({
         type: "POST",
-        url: "https://localhost/lnu.php",
+        url: "https://cs.uef.fi/~ec2l/lnu.php",
         data: data,
         success: function (data,result) {
-
+            //console.log(data);
             callback(JSON.parse(data),result);
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            console.log(exception);
         }
+
     });
 }
 
@@ -106,6 +114,7 @@ function postRequest(data, callback) {
 function getSentences(language,callback) {
     // Perhaps this should work with a language ID instead? -> we do noe have language ID, we have sentence ID in database
     //we have three languages: english, greece, and finish
+
     var data = {"language":language,"func":"getFeedbackSentences"};
     postRequest(data,callback)
 
@@ -126,11 +135,16 @@ function getToolId(toolname, callback) {
     var data = {"toolname":toolname,"func":func};
     $.ajax({
         type: "POST",
-        url: "https://localhost/lnu.php",
+        url: "https://cs.uef.fi/~ec2l/lnu.php",
         data: data,
         success: function (data) {
-            //console.log(data);
+            console.log("here");
+            console.log(data);
             callback(JSON.parse(data));
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            console.log(exception);
         }
     });
 }

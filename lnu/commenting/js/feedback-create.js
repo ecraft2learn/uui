@@ -45,10 +45,12 @@
                     hidden: true
                 }]
     };
+    if(sentences!=null){
 
-    for(var i=0;i<sentences.length;i++){
-        var option = {value:sentences[i]["ID"],text:sentences[i]["SENETENCE"]};
-        selectMenu.inputSettings.push(option);
+        for(var i=0;i<sentences.length;i++){
+            var option = {value:sentences[i]["ID"],text:sentences[i]["SENETENCE"]};
+            selectMenu.inputSettings.push(option);
+        }
     }
 
 
@@ -85,7 +87,7 @@
 
     // Free text
     var freeText = {
-        label: "Free text:",
+        label: "Comment:",
         input: "textfield"
     };
 
@@ -99,7 +101,7 @@
                 buttonLabel: "Send feedback",
 
                 // The callback method that will run once the button is pressed
-                callback: onSend
+                callback: onSendFeedback
             }
         ]
     };
@@ -118,6 +120,14 @@
 
     initCreation(settings);
 }
+
+/**
+ * Resets the feedback fields
+ */
+function clearFeedback() {
+    document.getElementById("feedback-form").reset();
+}
+
 
 
 /**
@@ -139,6 +149,9 @@ function m_parseOptions(configuration) {
         el = document.createElement("div");
         el.classList.add("feedback-template");
 
+    var form = document.createElement("form");
+    form.id = "feedback-form";
+
     for (var i = 0; i < configuration.inputs.length; i++) {
         var wrapper = m_createComponent();
         var input = m_createInput(configuration.inputs[i]);
@@ -150,7 +163,8 @@ function m_parseOptions(configuration) {
         }
 
         wrapper.appendChild(input);
-        el.appendChild(wrapper);
+        form.appendChild(wrapper);
+        el.appendChild(form);
     }
     return el;
 }
@@ -342,7 +356,12 @@ function m_createButton(options) {
  */
 function m_createLable(options){
     var el;
-        el = document.createElement("lablel");
+        el = document.createElement("label");
         el.id = "feedback-confirmation";
      return el;
 }
+
+
+/**
+ *Reset all fields in the form
+ */

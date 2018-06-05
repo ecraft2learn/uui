@@ -16,8 +16,20 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Segoe UI", "Open Sans", sans-serif, serif;
-    color: white;
-} 
+    /*color: white;*/
+    background: white;
+}
+
+
+/*-----------------------------------------------------------
+ * Tabcontrols
+ *----------------------------------------------------------*/
+
+.frame {
+    background-color: white !important;
+}
+
+
 
 /*-----------------------------------------------------------
  * Feedback styles
@@ -91,9 +103,11 @@ body {
     display: block;
     width: 100%;
     font-size: 15px;
-    background: hsla(0, 0%, 30%, 0.5);
-    color: white;
+    /*background: hsla(0, 0%, 30%, 0.5);*/
+    /*color: white;*/
+    background: #1ba1e2;
     border: none;
+    margin-top: 10px;
     padding: 10px;
     margin: none;
 }

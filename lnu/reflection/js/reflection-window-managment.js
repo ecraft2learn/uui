@@ -1,35 +1,38 @@
 /**
- * This file manage opening and closing of feedback window for each tool
- * Requirement: one feedback window per tool
+ * Created by asoadmin on 2018-05-24.
+ */
+/**
+ * This file manage opening and closing of reflection window for each tool
+ * Requirement: one reflection window per tool
  *
  */
 
 
 //global variables
- feedbackWindows = {}; //associative javascript array {'toolName':'feedback_window_id'}
+reflectionWindows = {}; //associative javascript array {'toolName':'feedback_window_id'}
 
 /**
- * This function assigns for each tool one feedback window
+ * This function assigns for each tool one reflection window
  * @param toolName: String
  * @param windowId: String
  */
-function addFeedbackWindow(toolName, windowId) {
-   feedbackWindows[toolName] = windowId;
-   //console.log(feedbackWindows);
+function addReflectionWindow(toolName, windowId) {
+    reflectionWindows[toolName] = windowId;
+    //console.log(feedbackWindows);
 }
 
 
 
 /**
- * This function opens feedback window if it not open already
+ * This function opens reflection window if it not open already
  * @param toolUrl: String
  * @param toolName: String
  * @param event
  */
-function openFeedbackWindow(toolUrl, toolName, event) {
-     if(feedbackWindows[toolName] === undefined){
-         openIframeWindowRightBottom(toolUrl,toolName,event);
-     }
+function openReflectionWindow(toolUrl, toolName, event) {
+    if(reflectionWindows[toolName] === undefined){
+        openIframeWindowLeftBottom(toolUrl,toolName,event);
+    }
 }
 
 
@@ -42,12 +45,12 @@ function openFeedbackWindow(toolUrl, toolName, event) {
  * @param event
  * @returns {*}
  */
-function openIframeWindowRightBottom(toolUrl, toolName, event) {
+function openIframeWindowLeftBottom(toolUrl, toolName, event) {
     docWidth = 320;
-    // docHeight = 290;
-    docHeight = 350;
+    docHeight = 290;
+
     //resize window based on the dialog title length
-    var dialogTitle = "Feedback " + toolName;
+    var dialogTitle = "Reflection " + toolName;
     if(dialogTitle.length>25) {
         docWidth = docWidth + dialogTitle.length +30;
     }
@@ -74,7 +77,7 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
 
     activeWindow = $.Dialog({
-        title: "<span class='text-medium fg-white notranslate' style='-ms-user-select: none; -moz-user-select: none; -webkit-user-select: none;user-select: none;' translate='no'> Feedback "+toolName+"</span><span class='btn-min' onclick='minimizeFeedbackWindow(this)'></span> <span class='btn-max' onclick='maximizeFeedbackWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
+        title: "<span class='text-medium fg-white notranslate' style='-ms-user-select: none; -moz-user-select: none; -webkit-user-select: none;user-select: none;' translate='no'> Reflection "+toolName+"</span><span class='btn-min' onclick='minimizeReflectionWindow(this)'></span> <span class='btn-max' onclick='maximizeReflectionWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
         content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' height='"+(docHeight-60)+"' width="+ (docWidth-20) +" />",
         padding: 0,
         options: {
@@ -82,7 +85,7 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
             closeButton: false,
             width: docWidth,
             height: docHeight,
-            place:"bottom-right"
+            place:"bottom-left"
 
         }
     }).css("background-color", bgColor).css('margin-bottom','65px').css('z-index','10000');
@@ -93,7 +96,7 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
     activeWindow.data('winData', frame);
 
-    addFeedbackWindow(toolName,activeWindow.attr('id'));
+    addReflectionWindow(toolName,activeWindow.attr('id'));
     //using jquery draggable function to make commenting window draggable
     //NOTE! in Metro UI v.4 this should be removed and used original draggable option of the dialog
     activeWindow.draggable();
@@ -109,18 +112,18 @@ function closeWindow(closeBtn) {
     metroDialog.close(winDiv);
 
     //find tool name based on feedback window id and remove it from feedbackWidnows array
-     for(var k in feedbackWindows) {
-         if(feedbackWindows[k] === winDiv.attr('id')) {
-             delete feedbackWindows[k];
-         }
-     }
+    for(var k in reflectionWindows) {
+        if(reflectionWindows[k] === winDiv.attr('id')) {
+            delete reflectionWindows[k];
+        }
+    }
 
 }
 
 
 
 //This function is called when the maximize button of a window is pressed. The function should be able to maximize and revert back to original sizes.
-function maximizeFeedbackWindow(maxBtn) {
+function maximizeReflectionWindow(maxBtn) {
     //console.log("inside");
     var winDiv = getDialogFromBtn(maxBtn);
     var winFrame = winDiv.find('iframe');
@@ -147,14 +150,14 @@ function maximizeFeedbackWindow(maxBtn) {
         },300);
     }
     else{
-        resizeFeedbackWindow2Normal(winDiv, winData);
+        resizeReflectionWindow2Normal(winDiv, winData);
     }
 }
 
 
 //Given a WinDiv and its WinData, it restores the Div to its original place and size.
 
-function resizeFeedbackWindow2Normal($winDiv, $winData) {
+function resizeReflectionWindow2Normal($winDiv, $winData) {
 
     $winDiv.animate({
         top: $winData.posy,
@@ -174,7 +177,7 @@ function resizeFeedbackWindow2Normal($winDiv, $winData) {
 }
 
 //When a minimized tab button is pressed, this function finds the related WinDiv and Data and restores the window. Notice that the window is not actually removed when minimized, so this function just makes it visible again.
-function unminimizeFeedbackWindow() {
+function unminimizeReflectionWindow() {
     // event is not bound in FireFox
     if (typeof event === 'undefined') {
         return; // needs to be fixed
@@ -186,7 +189,7 @@ function unminimizeFeedbackWindow() {
 
 
 
-    resizeFeedbackWindow2Normal($winDiv, $winData);
+    resizeReflectionWindow2Normal($winDiv, $winData);
 
     $($buttonElem).remove();
 
@@ -202,7 +205,7 @@ function unminimizeWindowFromJS(minButton){
     var $winData = $(minButton).data('winData');
     var $winDiv = $(minButton).data('winDiv');
 
-    resizeFeedbackWindow2Normal($winDiv, $winData);
+    resizeReflectionWindow2Normal($winDiv, $winData);
 
     $(minButton).remove();
 
@@ -212,11 +215,11 @@ function unminimizeWindowFromJS(minButton){
 }
 
 //Given the clicked minimize button of a window, it finds the window object and minimizes it. This includes creating a small button and the bottom charm and storing the WinData struct in it.
-function minimizeFeedbackWindow(minBtn) {
+function minimizeReflectionWindow(minBtn) {
     var winDiv = getDialogFromBtn(minBtn);
     var winData = winDiv.data('winData');
 
-    var $button = createFeedbackMinimizedTab(winData);
+    var $button = createReflectionMinimizedTab(winData);
     $button.data('winDiv', winDiv);
     $button.attr('id', $(winDiv).attr('id')+"_btn");
     $('#bottomCharm').append($button);
@@ -234,7 +237,7 @@ function minimizeFeedbackWindow(minBtn) {
 }
 
 //Create a small button which represents the minimized window. The button is added to the bottom charm.
-function createFeedbackMinimizedTab(winData) {
+function createReflectionMinimizedTab(winData) {
     var $button = $("<button></button>", {
         class: "image-button fg-white icon-left minimized-window-tab",
         style: "background-color:"+winData.color+"; margin-right:5px;"
@@ -248,7 +251,7 @@ function createFeedbackMinimizedTab(winData) {
 
     $button.append($buttonImage).append(winData.title);
     $button.data('winData', winData);
-    $button.click(unminimizeFeedbackWindow);
+    $button.click(unminimizeReflectionWindow);
 
     return $button;
 }

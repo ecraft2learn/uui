@@ -5,22 +5,47 @@
     <title>Commenting</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
      <!--<link rel='stylesheet' href='lib/bootstrap/css/bootstrap.min.css' type='text/css'>-->
+    <link rel="stylesheet" href="css/metro.css" type="text/css" media="screen" charset="utf-8">
+
     <link rel="stylesheet" type="text/css" href="lib/mention/mention.css">
     <script src="js/feedback-create.js"></script>
     <script src="js/feedback-main.js"></script>
+    <script src="js/reflection-main.js"></script>
     <script src='lib/jquery/jquery.js'></script>
     <script src='lib/bootstrap/js/bootstrap.min.js'></script>
+    <script src='lib/metro/metro.js'></script>
+
 
 </head>
 <body>
 
-    <!-- Feedback template -->
-    <div id="uui-feedback"></div>
-   
+
+    <div class="tabcontrol" id="tab-control">
+        <ul class="tabs">
+            <li><a href="#feedback-tab">Feedback</a></li>
+
+            <li><a href="#reflection-tab">Reflection</a></li>
+        </ul>
+        <div class="frames">
+            <div class="frame" id="feedback-tab">
+                <!-- Feedback template -->
+                <div id="uui-feedback"></div>
+            </div>
+
+            <div class="frame" id="reflection-tab">
+
+                <!-- Reflection template -->
+                <div id="uui-reflection"></div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         $(document).ready(function() {
             initFeedback();
+            initReflection();
+            $("#tab-control").tabcontrol();
         })
     </script>
 </body>
