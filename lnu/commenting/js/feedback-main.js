@@ -23,6 +23,7 @@ var languages ={
   * This function initializes the feedback functionality.
   */
 function initFeedback() {
+
      var language = 'en';
      getSentences(language,function (data,result) {
          var sentences = data["DATA"];
@@ -47,10 +48,6 @@ function onSendFeedback(event) {
     var projectID = parseInt(window.sessionStorage.getItem('projectId')) || 1;
     var timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-    // console.log(feedback);
-    // console.log(rating);
-    // console.log(free_text);
-
 
     if(feedback != undefined || rating != undefined || free_text!=undefined) {
         var toolName = getToolName();
@@ -58,22 +55,26 @@ function onSendFeedback(event) {
         if(toolName != undefined){
             getToolId(toolName,function (result) {
                 if(result["DATA"].length > 0){
+
                     var toolID = parseInt(result["DATA"][0]["TOOLID"]);
                     var data = {"toolID":toolID,"userID":userID,"pilotsite":pilotsite,"feedback":feedback,"rating":rating,"func":func,"projectID":projectID,"timestamp":timestamp,"free_input":free_text};
-                    //postFeedback(data);
+
                     postRequest(data,function(data,result){
-                        console.log(data);
-                        console.log(result);
                         clearFeedback();
                         if(result === "success"){
-                            $(".feedback-component #feedback-confirmation").text("Your feedback was send successfully.");
+                            $.Notify({
+                                caption: 'Success',
+                                content: 'Your feedback was send successfully',
+                                type:    null
+                            });
                         }
                         else{
-                            $(".feedback-component #feedback-confirmation").text("Your feedback was not send successfully.");
+                            $.Notify({
+                                caption: 'Error',
+                                content: 'Your feedback was not send successfully',
+                                type:    'alert'
+                            });
                         }
-                        setTimeout(function(){
-                            $(".feedback-component #feedback-confirmation").text(" ");
-                        }, 3000);
                     });
                 }
             });
