@@ -38,7 +38,7 @@ function initFeedback() {
  * @param event : MouseEvent
  */
 function onSendFeedback(event) {
-
+    event.preventDefault();
     var userID = parseInt(window.sessionStorage.getItem('userId')) || 1;
     var pilotsite = parseInt(window.sessionStorage.getItem('pilotsite'));
     var feedback = parseInt($('#sentence-select').val());
