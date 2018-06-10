@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sharing</title>
+    <link rel="stylesheet" href="css/sharing-form.css" type="text/css" media="screen" charset="utf-8">
+    <!--<link rel='stylesheet' href='lib/bootstrap/css/bootstrap.min.css' type='text/css'>-->
+    <link rel="stylesheet" href="css/metro.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../libs/mention/mention.css">
+    <!--Java Scripts-->
+    <script src='../libs/jquery/jquery.js'></script>
+    <script src='../libs/bootstrap/js/bootstrap.min.js'></script>
+    <script src='../libs/metro/metro.js'></script>
+
+</head>
+<body>
+<div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="padding20">
+
+        <form data-role="validator">
+            <h1 class="text-light">Share My Work</h1>
+            <hr class="thin">
+            <br>
+            <!--Title-->
+            <label class="block">Title</label>
+            <div class="input-control text full-size">
+                <input
+                        placeholder="Name of the work"
+                        data-validate-func="required"
+                        data-validate-hint="Please enter the title of your work"
+                        type="text">
+                <span class="input-state-error mif-warning"></span>
+                <span class="input-state-success mif-checkmark"></span>
+            </div>
+
+            <!--Keywords-->
+            <label class="block">Keywords</label>
+            <div class="input-control text full-size">
+                <input
+                        placeholder="Separate by comas like: keyword1,keyword2,..."
+                        data-validate-func="required"
+                        data-validate-hint="Please enter some keywords"
+                        type="text">
+                <span class="input-state-error mif-warning"></span>
+                <span class="input-state-success mif-checkmark"></span>
+            </div>
+
+            <!--Short Description-->
+            <label class="block">Short description</label>
+            <div class="input-control textarea full-size">
+                <textarea
+                        placeholder="Describe your work here..."
+                        data-validate-func="required"
+                        data-validate-hint="Please describe your work shortly"
+                        > </textarea>
+                <span class="input-state-error mif-warning"></span>
+                <span class="input-state-success mif-checkmark"></span>
+            </div>
+
+            <!--Project list-->
+            <label class="block">Select a project</label>
+            <div class="input-control select full-size">
+                <select>
+                    <option value="1">None</option>
+                    <option value="1">Project 1</option>
+                    <option value="3">Project 2</option>
+                    <option value="4">Project 3</option>
+                    <option value="5">Project 4</option>
+                </select>
+            </div>
+
+
+            <!--File list-->
+            <label class="block">Select a file</label>
+            <div class="input-control select full-size">
+                <select>
+                    <option value="1">None</option>
+                    <option value="1">File name 1</option>
+                    <option value="3">File name 2</option>
+                    <option value="4">File name 3</option>
+                </select>
+            </div>
+
+
+            <!--Button submit-->
+
+            <div>
+                <button class="button success">Share</button>
+            </div>
+
+
+        </form>
+</div>
+
+<button onclick="metroDialog.open('#sharing-dialog')">Share</button>
+
+
+</body>
+</html>
