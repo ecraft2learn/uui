@@ -1,0 +1,6 @@
+
+.dialog {
+    /*max-height: 100%;*/
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
