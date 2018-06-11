@@ -1,0 +1,57 @@
+/**
+ * This file contains styles for the sharing feature
+ */
+
+
+/*-----------------------------------------------------------
+ * Tabcontrols
+ *----------------------------------------------------------*/
+
+ .frame {
+     background-color:white !important;
+ }
+
+.tabcontrol > .tabs li {
+    background-color: white;
+}
+
+
+/*-----------------------------------------------------------
+ * Table
+ *----------------------------------------------------------*/
+
+.gridview-content td {
+    height: 61px;
+}
+
+.d-menu li a {
+    padding: .75rem 2rem .75rem 1rem !important;
+}
+
+.d-menu li a span {
+    padding-right:10px;
+}
+
+/*-----------------------------------------------------------
+ * Sharing status
+ *----------------------------------------------------------*/
+
+.sharing-status-indicator {
+    height: 16px;
+    width: 16px;
+    background-color: #bbb;
+    border: 2px solid hsla(0, 0%, 0%, 0.2);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right:5px;
+    position: relative;
+    top: 3px;
+}
+
+.sharing-status-approved {
+    background-color: #6bbd17;
+}
+
+.sharing-status-awaiting {
+    background-color: #ffef2c;
+}

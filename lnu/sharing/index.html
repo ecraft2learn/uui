@@ -3,96 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <title>Sharing</title>
-    <link rel="stylesheet" href="css/sharing-form.css" type="text/css" media="screen" charset="utf-8">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/sharing.css" type="text/css" media="screen" charset="utf-8">
     <!--<link rel='stylesheet' href='lib/bootstrap/css/bootstrap.min.css' type='text/css'>-->
     <link rel="stylesheet" href="css/metro.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../libs/mention/mention.css">
-    <!--Java Scripts-->
+    <link rel="stylesheet" href="../libs/mention/mention.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../../libraries/css/metro-icons.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- JavaScript -->
     <script src='../libs/jquery/jquery.js'></script>
     <script src='../libs/bootstrap/js/bootstrap.min.js'></script>
     <script src='../libs/metro/metro.js'></script>
 
 </head>
 <body>
-<div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="padding20">
+    <div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="padding20">
 
-        <form data-role="validator">
-            <h1 class="text-light">Share My Work</h1>
-            <hr class="thin">
-            <br>
-            <!--Title-->
-            <label class="block">Title</label>
-            <div class="input-control text full-size">
-                <input
-                        placeholder="Name of the work"
-                        data-validate-func="required"
-                        data-validate-hint="Please enter the title of your work"
-                        type="text">
-                <span class="input-state-error mif-warning"></span>
-                <span class="input-state-success mif-checkmark"></span>
-            </div>
+            <form data-role="validator">
+                <h1 class="text-light">Share My Work</h1>
+                <hr class="thin">
+                <br>
+                <!--Title-->
+                <label class="block">Title</label>
+                <div class="input-control text full-size">
+                    <input
+                            placeholder="Name of the work"
+                            data-validate-func="required"
+                            data-validate-hint="Please enter the title of your work"
+                            type="text">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
 
-            <!--Keywords-->
-            <label class="block">Keywords</label>
-            <div class="input-control text full-size">
-                <input
-                        placeholder="Separate by comas like: keyword1,keyword2,..."
-                        data-validate-func="required"
-                        data-validate-hint="Please enter some keywords"
-                        type="text">
-                <span class="input-state-error mif-warning"></span>
-                <span class="input-state-success mif-checkmark"></span>
-            </div>
+                <!--Keywords-->
+                <label class="block">Keywords</label>
+                <div class="input-control text full-size">
+                    <input
+                            placeholder="Separate by comas like: keyword1,keyword2,..."
+                            data-validate-func="required"
+                            data-validate-hint="Please enter some keywords"
+                            type="text">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
 
-            <!--Short Description-->
-            <label class="block">Short description</label>
-            <div class="input-control textarea full-size">
-                <textarea
-                        placeholder="Describe your work here..."
-                        data-validate-func="required"
-                        data-validate-hint="Please describe your work shortly"
-                        > </textarea>
-                <span class="input-state-error mif-warning"></span>
-                <span class="input-state-success mif-checkmark"></span>
-            </div>
+                <!--Short Description-->
+                <label class="block">Short description</label>
+                <div class="input-control textarea full-size">
+                    <textarea
+                            placeholder="Describe your work here..."
+                            data-validate-func="required"
+                            data-validate-hint="Please describe your work shortly"
+                            > </textarea>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
 
-            <!--Project list-->
-            <label class="block">Select a project</label>
-            <div class="input-control select full-size">
-                <select>
-                    <option value="1">None</option>
-                    <option value="1">Project 1</option>
-                    <option value="3">Project 2</option>
-                    <option value="4">Project 3</option>
-                    <option value="5">Project 4</option>
-                </select>
-            </div>
-
-
-            <!--File list-->
-            <label class="block">Select a file</label>
-            <div class="input-control select full-size">
-                <select>
-                    <option value="1">None</option>
-                    <option value="1">File name 1</option>
-                    <option value="3">File name 2</option>
-                    <option value="4">File name 3</option>
-                </select>
-            </div>
+                <!--Project list-->
+                <label class="block">Select a project</label>
+                <div class="input-control select full-size">
+                    <select>
+                        <option value="1">None</option>
+                        <option value="1">Project 1</option>
+                        <option value="3">Project 2</option>
+                        <option value="4">Project 3</option>
+                        <option value="5">Project 4</option>
+                    </select>
+                </div>
 
 
-            <!--Button submit-->
+                <!--File list-->
+                <label class="block">Select a file</label>
+                <div class="input-control select full-size">
+                    <select>
+                        <option value="1">None</option>
+                        <option value="1">File name 1</option>
+                        <option value="3">File name 2</option>
+                        <option value="4">File name 3</option>
+                    </select>
+                </div>
 
-            <div>
-                <button class="button success">Share</button>
-            </div>
+
+                <!--Button submit-->
+
+                <div>
+                    <button class="button success">Share</button>
+                </div>
 
 
-        </form>
-</div>
+            </form>
+    </div>
 
-<button onclick="metroDialog.open('#sharing-dialog')">Share</button>
+    <button onclick="metroDialog.open('#sharing-dialog')">Share</button>
 
 
+
+
+    <div id="sharing-gridview">
+        
+        <div class="tabcontrol" id="tabcontrol" data-role="tabcontrol">
+    
+            <ul class="tabs">
+                <li><a href="#my_work">My work</a></li>
+                <li><a href="#public_work">Public work</a></li>
+            </ul>
+    
+            <div class="frames">
+                <div class="frame" id="my_work">
+    
+                    <!-- Tab content -->
+                    <table class="table bg-white hovered">
+    
+                        <thead>
+                            <tr>
+                                <th class="sortable-column sort-asc">File</th>
+                                <th class="sortable-column sort-asc">Project</th>
+                                <th class="sortable-column sort-desc">Status</th>
+                                <th class="sortable-column sort-asc">Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody class="gridview-content">
+                            <tr>
+                                <td>Filename 1</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator sharing-status-awaiting"></span>Awaiting approval</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Longer filename</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator sharing-status-approved"></span>Approved</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>This is an even longer filename, believe it or not</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 4</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 5</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 6</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 7</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 8</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 9</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 10</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 11</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 12</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr><tr>
+                                <td>Filename 13</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Filename 14</td>
+                                <td>Project name</td>
+                                <td><span class="sharing-status-indicator"></span>Not shared</td>
+                                <td>2018-04-10</td>
+                                <td>
+                                    <div class="dropdown-button place-right">
+                                        <button class="button dropdown-toggle"><span class="mif-more-vert"></span></button>
+                                        <ul class="split-content d-menu place-right" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-share"></span>Share</a></li>
+                                            <li><a href="#"><span class="mif-cancel"></span>Stop sharing</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+    
+                    </table>
+    
+                </div> <!-- END my_work-->
+    
+                <div class="frame" id="public_work">
+    
+                    <!-- Tab content -->
+                    <table class="table bg-white hovered">
+    
+                            <thead>
+                                <tr>
+                                    <th class="sortable-column sort-asc">File</th>
+                                    <th class="sortable-column sort-asc">Project</th>
+                                    <th class="sortable-column sort-desc">Author</th>
+                                    <th class="sortable-column sort-asc">Date</th>
+                                </tr>
+                            </thead>
+        
+                            <tbody class="gridview-content">
+                                <tr>
+                                    <td>Filename 1</td>
+                                    <td>Project name</td>
+                                    <td>Author name</td>
+                                    <td>2018-04-10</td>
+                                </tr>
+                                <tr>
+                                    <td>Longer filename</td>
+                                    <td>Project name</td>
+                                    <td>Author name</td>
+                                    <td>2018-04-10</td>
+                                </tr>
+                                <tr>
+                                    <td>This is an even longer filename, believe it or not</td>
+                                    <td>Project name</td>
+                                    <td>Author name</td>
+                                    <td>2018-04-10</td>
+                                </tr>
+                                <tr>
+                                    <td>Filename 4</td>
+                                    <td>Project name</td>
+                                    <td>Author name</td>
+                                    <td>2018-04-10</td>
+                                </tr>
+                                <tr>
+                                    <td>Filename 5</td>
+                                    <td>Project name</td>
+                                    <td>Author name</td>
+                                    <td>2018-04-10</td>
+                                </tr>
+                            </tbody>
+        
+                        </table>
+    
+                </div><!-- END public_work-->
+    
+            </div> <!-- END frames-->
+    
+        </div> <!-- END tabControl -->
+
+    </div> <!-- END #sharing-gridview-->
+
+    <script>
+        $(document).ready(function() {
+            //
+        });
+    </script>
 </body>
 </html>
