@@ -2,5 +2,11 @@
 .dialog {
     /*max-height: 100%;*/
     max-height: calc(100vh - 210px);
+    min-height: 400px;
     overflow-y: auto;
+}
+
+
+.dialog ~ .hint2 {
+    z-index: 1051;
 }

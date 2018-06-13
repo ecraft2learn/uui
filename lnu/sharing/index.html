@@ -14,6 +14,7 @@
 
     <!-- JavaScript -->
     <script src='../../js/file_manager.js'></script>
+    <script src='js/my-work-gridview.js'></script>
     <script src='js/api-calls.js'></script>
     <script src='js/sharing-form.js'></script>
 
@@ -23,9 +24,10 @@
 
 </head>
 <body>
-    <div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="padding20">
+    <div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="padding20"  >
 
-            <form data-role="validator" id="sharingForm">
+
+            <form data-role="validator">
                 <h1 class="text-light">Share My Work</h1>
                 <hr class="thin">
                 <br>
@@ -35,7 +37,7 @@
                     <input
                             placeholder="Name of the work"
                             data-validate-func="required"
-                            data-validate-hint="Please enter the title of your work"
+                            data-validate-hint="Title can not be empty and not more then 50 characters"
                             type="text"
                             name="title">
                     <span class="input-state-error mif-warning"></span>
@@ -120,7 +122,7 @@
     
                         <tbody class="gridview-content">
                             <tr>
-                                <td>Filename 1</td>
+                                <td><img class="file-icon" src="./images/tool-icons/ecraft-plan.png"/> Filename 1</td>
                                 <td>Project name</td>
                                 <td><span class="sharing-status-indicator sharing-status-awaiting"></span>Awaiting approval</td>
                                 <td>2018-04-10</td>
@@ -135,7 +137,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Longer filename</td>
+                                <td> <img class="file-icon" src="./images/tool-icons/ardublock.png"/> Longer filename</td>
                                 <td>Project name</td>
                                 <td><span class="sharing-status-indicator sharing-status-approved"></span>Approved</td>
                                 <td>2018-04-10</td>
@@ -395,6 +397,7 @@
         $(document).ready(function() {
             //
             initSharingForm();
+            initGridView();
         });
     </script>
 </body>

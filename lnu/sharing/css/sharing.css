@@ -55,3 +55,12 @@
 .sharing-status-awaiting {
     background-color: #ffef2c;
 }
+
+
+/*-----------------------------------------------------------
+ * File icons
+ *----------------------------------------------------------*/
+.file-icon{
+    width: 30px;
+    height: 30px;
+}

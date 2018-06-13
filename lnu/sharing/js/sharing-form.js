@@ -6,6 +6,10 @@
 
 function initSharingForm(){
 
+    getUserFiles(function (files) {
+        console.log(files);
+    });
+
     $('input[type=radio][name=filesourceradio]').change(function() {
         if(this.value==0){
 
@@ -108,9 +112,11 @@ function generateHtmlLocalFile() {
             shareLocalFileButton.classList.add("button");
             shareLocalFileButton.classList.add("success");
             shareLocalFileButton.textContent = "Share";
-            shareLocalFileButton.addEventListener("click", function(event){
-                event.preventDefault();
-                shareLocalFile(function (result) {
+            shareLocalFileButton.addEventListener("click", function (event) {
+                //event.preventDefault();
+                //event.parent.preventDefault();
+
+                shareLocalFile(function () {
                     if(result === "success"){
                         $.Notify({
                             caption: 'Success',
@@ -126,8 +132,8 @@ function generateHtmlLocalFile() {
                         });
                     }
                     metroDialog.close('#sharing-dialog');
-                });
-            }, false);
+                })
+            });
             divEl.appendChild(shareLocalFileButton);
             $("#dynamicContent").append(divEl);
 
@@ -144,14 +150,18 @@ function generateUploadButton(){
     divEl.classList.add("input-control");
     divEl.classList.add("file");
     divEl.classList.add("full-size");
+    divEl.classList.add("required");
     divEl.setAttribute("data-role","input");
     var fileInput = document.createElement("input");
     fileInput.setAttribute("type","file");
     fileInput.setAttribute("id","fileInput");
+    fileInput.setAttribute("data-validate-func","required");
     var buttonFile = document.createElement("button");
     buttonFile.classList.add("button");
     var img = document.createElement("img");
     img.setAttribute("src","images/file-icon.png");
+
+
 
     buttonFile.appendChild(img);
     divEl.appendChild(fileInput).appendChild(buttonFile);
