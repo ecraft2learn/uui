@@ -6,21 +6,22 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/sharing.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="css/sharing-form.css" type="text/css" media="screen" charset="utf-8">
-
-    <!--<link rel='stylesheet' href='lib/bootstrap/css/bootstrap.min.css' type='text/css'>-->
+    
     <link rel="stylesheet" href="css/metro.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="../libs/mention/mention.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="../../libraries/css/metro-icons.min.css" type="text/css" media="screen" charset="utf-8">
 
     <!-- JavaScript -->
     <script src='../../js/file_manager.js'></script>
-    <script src='js/my-work-gridview.js'></script>
     <script src='js/api-calls.js'></script>
+    <script src='js/my-work-gridview.js'></script>
     <script src='js/sharing-form.js'></script>
-
+    
     <script src='../libs/jquery/jquery.js'></script>
     <script src='../libs/bootstrap/js/bootstrap.min.js'></script>
+    <script src="../libs/DataTables/datatables.min.js"></script>
     <script src='../libs/metro/metro.js'></script>
+ 
 
 </head>
 <body>
@@ -108,20 +109,29 @@
                 <div class="frame" id="my_work">
     
                     <!-- Tab content -->
-                    <table class="table bg-white hovered">
+                    <table id="myWorkTable" class="dataTable hovered">
     
                         <thead>
                             <tr>
-                                <th class="sortable-column sort-asc">File</th>
-                                <th class="sortable-column sort-asc">Project</th>
-                                <th class="sortable-column sort-desc">Status</th>
-                                <th class="sortable-column sort-asc">Date</th>
-                                <th>Action</th>
+                                <!-- <th class="sortable-column sorting_asc">File</th>
+                                <th class="sortable-column sorting_asc">Project</th>
+                                <th class="sortable-column sorting_asc">Status</th>
+                                <th class="sortable-column sorting_asc">Date</th>
+                                <th>Action</th> -->
+
+                                <th class="sortable-column sorting_asc">ID</th>
+                                <th class="sortable-column sorting_asc">PROJECTID</th>
+                                <th class="sortable-column sorting_asc">USERID</th>
+                                <th>FILE_PATH</th>
+                                <th>PRJ_NAME</th>
+                                <th>ORIG_NAME</th>
+                                <th>TOOL_NAME</th>
+                                <th class="sortable-column sorting_asc">TOOLID</th>
                             </tr>
                         </thead>
     
                         <tbody class="gridview-content">
-                            <tr>
+                            <!-- <tr>
                                 <td><img class="file-icon" src="./images/tool-icons/ecraft-plan.png"/> Filename 1</td>
                                 <td>Project name</td>
                                 <td><span class="sharing-status-indicator sharing-status-awaiting"></span>Awaiting approval</td>
@@ -329,7 +339,7 @@
                                         </ul>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
     
                     </table>

@@ -7,7 +7,7 @@
 function initSharingForm(){
 
     getUserFiles(function (files) {
-        console.log(files);
+        // console.log(files);
     });
 
     $('input[type=radio][name=filesourceradio]').change(function() {

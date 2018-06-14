@@ -24,7 +24,7 @@ function getTools(callback){
         url: SERVER_URL,
         data: data,
         success: function (data,result) {
-            //console.log(data);
+            console.log("getTools:",data);
             callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {
@@ -74,7 +74,7 @@ function getUserFiles(callback) {
         type: 'post',
         async: false,
         success: function (php_script_response) {
-            console.log(php_script_response);
+            // console.log(php_script_response);
             callback(php_script_response);
         }
     });
