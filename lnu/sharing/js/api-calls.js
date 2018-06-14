@@ -10,6 +10,7 @@
  *   - getSharedFiles: gets public files (uui_sharing and uui_files table)
  */
 var SERVER_URL = "https://localhost/lnu.php";
+var SERVER_URL_2="https://localhost/fileman.php";
 
 //GET TOOL LIST
 /**
@@ -24,7 +25,7 @@ function getTools(callback){
         url: SERVER_URL,
         data: data,
         success: function (data,result) {
-            console.log("getTools:",data);
+            console.log(data);
             callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {
@@ -59,14 +60,15 @@ function getProjects(callback) {
  * @param callback - array of files
  * File: { ID, PROJECTID,TOOLID,USERID,FILE_PATH,ORIG_NAME,TOOL_NAME,PRJ_NAME}
  */
-function getUserFiles(callback) {
+function getUserFilesAPI(callback) {
     var userId = window.sessionStorage.getItem("userId");
     var formData = new FormData();
     formData.append("userId",userId);
     formData.append("func","getUserFiles");
 
     $.ajax({
-        url: 'https://cs.uef.fi/~ec2l/fileman.php',
+        //url: 'https://cs.uef.fi/~ec2l/fileman.php',
+        url:SERVER_URL_2,
         cache: false,
         contentType: false,
         processData: false,
@@ -74,7 +76,7 @@ function getUserFiles(callback) {
         type: 'post',
         async: false,
         success: function (php_script_response) {
-            // console.log(php_script_response);
+            console.log(php_script_response);
             callback(php_script_response);
         }
     });
@@ -88,39 +90,44 @@ function getUserFiles(callback) {
 function shareLocalFile(callback) {
 
     var data = $('#sharingForm').serializeArray();
-    //console.log($('#sharingForm').serializeArray());
+    console.log($('#sharingForm').serializeArray());
+    if(data.length>0){
 
-    var projectId = data.find(function (field) {
-        return field.name ==="projectId";
-    });
 
-    var toolId = data.find(function (field) {
-        return field.name ==="toolId";
-    });
-
-    if(projectId.value!=""){
-
-        var formData = new FormData();
-        formData.append("file", $("#fileInput")[0].files[0]);
-        formData.append("projectId",projectId.value);
-        formData.append("toolId",toolId.value);
-        formData.append("func","uploadFile");
-        //upload file to the server
-        $.ajax({
-            url: 'https://cs.uef.fi/~ec2l/fileman.php',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: formData,
-            type: 'post',
-            async: false,
-            success: function (php_script_response) {
-                //console.log(php_script_response);
-                var fileId = JSON.parse(php_script_response)["DATA"]["ID"];
-                data.push({"name":"fileId","value":fileId});
-                saveSharing(data,callback);
-            }
+        var projectId = data.find(function (field) {
+            return field.name ==="projectId";
         });
+
+        var toolId = data.find(function (field) {
+            return field.name ==="toolId";
+        });
+
+        if(projectId.value!=""){
+
+            var formData = new FormData();
+            formData.append("file", $("#fileInput")[0].files[0]);
+            formData.append("projectId",projectId.value);
+            formData.append("toolId",toolId.value);
+            formData.append("func","uploadFile");
+            //upload file to the server
+            $.ajax({
+                //url: 'https://cs.uef.fi/~ec2l/fileman.php',
+                url:SERVER_URL_2,
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData,
+                type: 'post',
+                async: false,
+                success: function (php_script_response) {
+                    //console.log(php_script_response);
+                    var fileId = JSON.parse(php_script_response)["DATA"]["ID"];
+                    data.push({"name":"fileId","value":fileId});
+                    saveSharing(data,callback);
+                }
+            });
+        }
+
     }
 
 }
@@ -135,52 +142,55 @@ function saveSharing(data,callback) {
     formData.append("userId",window.sessionStorage.getItem("userId"));
     formData.append("pilotsite",window.sessionStorage.getItem("pilotsite"));
 
+    if(data.length>0){
 
-    var title = data.find(function (field) {
-        return field.name ==="title";
-    });
 
-    var description = data.find(function (field) {
-        return field.name ==="description";
-    });
+        var title = data.find(function (field) {
+            return field.name ==="title";
+        });
 
-    var keywords = data.find(function (field) {
-        return field.name ==="keywords";
-    });
+        var description = data.find(function (field) {
+            return field.name ==="description";
+        });
 
-    var fileId = data.find(function (field) {
-        return field.name ==="fileId";
-    });
+        var keywords = data.find(function (field) {
+            return field.name ==="keywords";
+        });
 
-    formData.append("title",title.value);
-    formData.append("description",description.value);
-    formData.append("keywords",keywords.value);
-    formData.append("fileId",fileId.value);
-    formData.append("func","shareFile");
-    formData.append("role",0);
-    var timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    formData.append("timestamp",timestamp);
+        var fileId = data.find(function (field) {
+            return field.name ==="fileId";
+        });
 
-    $.ajax({
-        type: "POST",
-        url: SERVER_URL,
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: formData,
-        type: 'post',
-        async: false,
-        success: function (data,result) {
-            console.log(data);
-            callback("success");
-        },
-        error: function (jqXHR, exception) {
-            console.log(jqXHR);
-            console.log(exception);
-            callback("error");
-        }
+        formData.append("title",title.value);
+        formData.append("description",description.value);
+        formData.append("keywords",keywords.value);
+        formData.append("fileId",fileId.value);
+        formData.append("func","shareFile");
+        formData.append("role",0);
+        var timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        formData.append("timestamp",timestamp);
 
-    });
+        $.ajax({
+            type: "POST",
+            url: SERVER_URL,
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            type: 'post',
+            async: false,
+            success: function (data,result) {
+                console.log(data);
+                callback("success");
+            },
+            error: function (jqXHR, exception) {
+                console.log(jqXHR);
+                console.log(exception);
+                callback("error");
+            }
+
+        });
+    }
 }
 
 //GET USERS SHARED FILES
@@ -206,7 +216,7 @@ function getUsersSharedFiles(callback){
         success: function (data,result) {
             console.log(data);
 
-            //callback(JSON.parse(data));
+            callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {
             console.log(jqXHR);
@@ -240,6 +250,35 @@ function getSharedFiles(callback) {
         success: function (data,result) {
             console.log(data);
             callback(JSON.parse(data));
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            console.log(exception);
+            callback([]);
+        }
+
+    });
+}
+
+
+//GET NOT SHARED FILES
+function getNotSharedFiles(callback) {
+    var formData = new FormData();
+    formData.append("userId",window.sessionStorage.getItem("userId"));
+    formData.append("func","getNotSharedFiles");
+
+    $.ajax({
+        type: "POST",
+        url: SERVER_URL,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        type: 'post',
+        async: false,
+        success: function (data,result) {
+            console.log(data);
+            callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {
             console.log(jqXHR);

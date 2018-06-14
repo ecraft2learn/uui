@@ -10,7 +10,7 @@ function initGridView(){
     // getUsersSharedFiles(function (result) {
     //
     // });
-    getUserFiles(m_parseData);
+    getUsersSharedFiles(m_parseData);
     // $('#myWorkTable').DataTable();
 }
 
@@ -38,26 +38,65 @@ function updateActionMenu() {
 function m_parseData(data) {
     // var table = document.getElementsByClassName("gridview-content")[0];
 
-    data = JSON.parse(data);
     console.log(data);
     var table = $('#myWorkTable').DataTable({
         columns: [
-            { data: "ID" }, 
-            { data: "PROJECTID" }, 
-            { data: "USERID" },
-            { data: "FILE_PATH" },
-            { data: "PRJ_NAME" },
-            { data: "ORIG_NAME" },
-            { data: "TOOL_NAME"},
-            { data: "TOOLID" }
-          ]
+            // { data: "ID" },//0
+            // { data: "TITLE"},//1
+            // { data: "PILOTSITE"},//2
+            // { data: "DESCRIPTION"},//3
+            // { data: "KEYWORDS"},//4
+            // { data: "ROLE"},//5
+            // { data: "FILEID"},//6
+            // { data: "ID" },
+            // { data: "TITLE"},
+            // { data: "TOOLID"},//10,
+            // { data: "USERID"}//12
+            // { data: "TIME_STAMP"},//7
+            // { data: "IS_AUTHORISED"},//8
+            // { data: "PROJECTID"},//9
+            // { data: "TOOLID"},//10
+            // { data: "TOOL_NAME"},//11
+            // { data: "USERID"},//12
+            // { data: "FILE_PATH"},//13
+            // { data: "ORIG_NAME"},//14
+            // { data: "PRJ_NAME"}//15
+            // { data: "DESCRIPTION"},//0
+            // { data: "FILEID"},//1
+            // { data: "FILE_PATH" },//2
+            //
+            // { data: "IS_AUTHORISED"},//4
+            // { data: "KEYWORDS"},//5
+            // { data: "ORIG_NAME" },//6
+            // { data: "PILOTSITE"},//7
+            // { data: "PRJ_NAME" },//8
+            // { data: "PROJECTID"},//9
+            // { data: "ROLE"},//10
+            // { data: "TIME_STAMP"},//11
+            //
+            // { data: "TOOLID"},//13
+            // { data: "TOOL_NAME"},//14
+            // { data: "USERID" }//15
+
+
+          ],
+        columnDefs: [
+            {
+                "targets": [0,1],
+                "visible": false,
+                "searchable": false,
+                "name":"Name"
+            }
+
+        ]
     });
     
-    if (data.DATA.length > 0) {
-        for (var i = 0; i < data.DATA.length; i++) {
+    if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
             // var row = m_generateRow(data.DATA[i]);
             // table.appendChild(row);
-            table.row.add(data.DATA[i]);
+            console.log(data[i]);
+            table.row.add(data[i]);
             // console.log(data.DATA[i]);
         }
         table.draw();
