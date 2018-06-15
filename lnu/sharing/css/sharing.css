@@ -36,7 +36,8 @@
  * Sharing status
  *----------------------------------------------------------*/
 
-.sharing-status-indicator {
+.sharing-status-indicator::before {
+    content: "";
     height: 16px;
     width: 16px;
     background-color: #bbb;
@@ -48,11 +49,11 @@
     top: 3px;
 }
 
-.sharing-status-approved {
+.sharing-status-approved::before {
     background-color: #6bbd17;
 }
 
-.sharing-status-awaiting {
+.sharing-status-awaiting::before {
     background-color: #ffef2c;
 }
 

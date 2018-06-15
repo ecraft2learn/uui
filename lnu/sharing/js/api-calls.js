@@ -9,8 +9,10 @@
  *   - getUsersSharedFiles: gets user shared files from uui_sharing table (uui_sharing and uui_files table)
  *   - getSharedFiles: gets public files (uui_sharing and uui_files table)
  */
-var SERVER_URL = "https://localhost/lnu.php";
-var SERVER_URL_2="https://localhost/fileman.php";
+
+var SERVER_URL   = "https://localhost/lnu.php";
+var SERVER_URL_2 = "https://localhost/fileman.php";
+
 
 //GET TOOL LIST
 /**
@@ -37,6 +39,7 @@ function getTools(callback){
     });
 }
 
+
 //GET USER PROJECTS
 /**
  * This function gets list of user projects by userId
@@ -53,6 +56,7 @@ function getProjects(callback) {
         callback(jsonData["DATA"]);
     }
 }
+
 
 //GET USER FILES UPLOADED ON THE SERVER
 /**
@@ -131,6 +135,8 @@ function shareLocalFile(callback) {
     }
 
 }
+
+
 /**
  * Add file to sharing table
  * @param data
@@ -192,6 +198,7 @@ function saveSharing(data,callback) {
         });
     }
 }
+
 
 //GET USERS SHARED FILES
 /**
