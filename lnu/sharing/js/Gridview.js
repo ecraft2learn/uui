@@ -123,7 +123,6 @@ class Gridview {
      * @param fullData : Object - The full data for the data object (one object)
      */
     m_parseData(content, rules, fullData) {
-        console.log("content:", content, "rules", rules, "fullData", fullData);
         if (rules.dataOptions) {
             for (var i = 0; i < rules.dataOptions.length; i++) {
 
