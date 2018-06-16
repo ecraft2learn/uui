@@ -40,7 +40,6 @@ function initGridView() {
             actionMenu: true,
             dataMapping: null,
             menuItems: [
-                { label: "Share",        icon: "mif-share",    callback: shareCallback    },
                 { label: "Stop sharing", icon: "mif-cancel",   callback: cancelCallback   },
                 { label: "Download",     icon: "mif-download", callback: downloadCallback }
             ]
