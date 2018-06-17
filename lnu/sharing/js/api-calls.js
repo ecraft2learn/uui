@@ -295,3 +295,16 @@ function getNotSharedFiles(callback) {
 
     });
 }
+
+//DOWNLOAD FILE
+function download(filename) {
+    var element = document.createElement('a');
+    element.setAttribute('href', "https://localhost/download_file.php?file=" + filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}

@@ -3,6 +3,9 @@
  * This file creates and populates the gridview with data
  */
 
+//global variables
+var MYFILES; //array of my work files
+
 function initGridView() {
     var columns = [
         {
@@ -47,6 +50,7 @@ function initGridView() {
     ];
 
     getUsersSharedFiles(function(data) {
+        MYFILES = data;
         var gv = new Gridview(columns, data, document.getElementById("myWorkTable"));
         var table = $('#myWorkTable').DataTable();
     });
@@ -74,10 +78,18 @@ function cancelCallback(event, fileid) {
 
 
 /**
- * 
+ * Download file from server
  * @param event 
- * @param fileid 
+ * @param fileid - file id
  */
 function downloadCallback(event, fileid) {
-    console.log("downloadCallback", fileid);
+    //console.log("downloadCallback", fileid);
+
+    var filePath = MYFILES.find(function (file) {
+       return parseInt(file["FILEID"])===parseInt(fileid);
+    });
+
+    var filename = filePath["FILE_PATH"].split("/")[1];
+
+    download(filename);
 }
