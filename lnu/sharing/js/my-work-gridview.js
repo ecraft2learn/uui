@@ -24,7 +24,7 @@ function initGridView() {
         {
             title: "Status",
             sortable: true,
-            dataMapping: "IS_AUTHORISED",
+            dataMapping: "STATUS",
             dataOptions : [
                 { statusIndicator: true }
             ]
@@ -46,7 +46,7 @@ function initGridView() {
                 { label: "Stop sharing", icon: "mif-cancel",   callback: cancelCallback   },
                 { label: "Download",     icon: "mif-download", callback: downloadCallback }
             ]
-        },
+        }
     ];
 
     getUsersSharedFiles(function(data) {
@@ -68,12 +68,43 @@ function shareCallback(event, fileid) {
 
 
 /**
- * 
+ * Stop sharing the file
  * @param event 
  * @param fileid 
  */
 function cancelCallback(event, fileid) {
     console.log("cancelCallback", fileid);
+
+    var file = MYFILES.find(function (file) {
+        return parseInt(file["FILEID"])===parseInt(fileid);
+    });
+
+    switch (file["STATUS"]){
+        case "0":
+            //0 - waiting for approval from teacher
+            //stop sharing without asking permission in the teacher
+            stopSharingDialog(file["ID"],"File is not shared anymore.");
+            //TODO:remove row in the table
+            break;
+        case "1":
+            //1 - file is approved by a teacher
+            //first ask teacher to approve
+            stopSharingDialog(file["ID"],"Note, teacher needs to approve it. It will take some time.");
+            //TODO:update file status (color,text)->(orange,"waiting for approval")
+            break;
+        case "2":
+            //2 - file was rejected by teacher to be shared
+            //stop sharing without asking permission in the teacher
+            stopSharingDialog(file["ID"],"File is not shared anymore.");
+            //TODO:remove row in the table
+            break;
+        case "3":
+            //3 - file is waiting to be approved by teacher to stop sharing
+            //disable button "Stop Sharing"
+            //TODO:disable button "Stop Sharing" if possible
+            break;
+
+    }
 }
 
 
@@ -85,11 +116,36 @@ function cancelCallback(event, fileid) {
 function downloadCallback(event, fileid) {
     //console.log("downloadCallback", fileid);
 
-    var filePath = MYFILES.find(function (file) {
+    var file = MYFILES.find(function (file) {
        return parseInt(file["FILEID"])===parseInt(fileid);
     });
 
-    var filename = filePath["FILE_PATH"].split("/")[1];
+    var filename = file["FILE_PATH"].split("/")[1];
 
     download(filename);
+}
+
+/**
+ * Stop sharing a file
+ * @param id - record id in the table
+ * @param message - feedback message
+ */
+function stopSharingDialog(id,message) {
+    stopSharing(id,function (result) {
+        console.log(result);
+         if(result==="success"){
+             $.Notify({
+                 caption: 'Success',
+                 content: message,
+                 type:    null
+             });
+         }
+         else{
+             $.Notify({
+                 caption: 'Error',
+                 content: 'Some issues occur, please try again later.',
+                 type:    'alert'
+             });
+         }
+    });
 }

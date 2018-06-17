@@ -308,3 +308,32 @@ function download(filename) {
 
     document.body.removeChild(element);
 }
+
+//REMOVE FILE FROM SHARING TABLE
+function stopSharing(ID,callback) {
+    var formData = new FormData();
+    formData.append("id",ID);
+    formData.append("func","stopSharing");
+
+    $.ajax({
+        type: "POST",
+        url: SERVER_URL,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        type: 'post',
+        async: false,
+        success: function (data,result) {
+            console.log(data);
+            callback("success");
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            console.log(exception);
+            //callback([]);
+            callback("error");
+        }
+
+    });
+}
