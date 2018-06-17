@@ -243,7 +243,7 @@ function getSharedFiles(callback) {
     var formData = new FormData();
     formData.append("pilotsite",window.sessionStorage.getItem("pilotsite"));
     formData.append("role",0);
-    formData.append("func","getSharedFiles");
+    formData.append("func","getSchoolSharedFiles");
 
     $.ajax({
         type: "POST",
@@ -256,7 +256,7 @@ function getSharedFiles(callback) {
         async: false,
         success: function (data,result) {
             console.log(data);
-            callback(JSON.parse(data));
+            callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {
             console.log(jqXHR);
