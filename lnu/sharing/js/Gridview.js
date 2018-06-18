@@ -215,12 +215,29 @@ class Gridview {
      */
     m_createStatusIndicator(content) {
         var span = document.createElement("span");
-            span.classList.add("sharing-status-indicator");
-        if (content == 0) {
-            span.textContent = "Private";
-        } else if (content == 1) {
-            span.classList.add("sharing-status-approved");
-            span.textContent = "Shared";
+        span.classList.add("sharing-status-indicator");
+        switch (content) {
+            case 0:
+                span.textContent = "Waiting to be approved";
+                break;
+
+            case 1:
+                span.classList.add("sharing-status-approved");
+                span.textContent = "Approved";
+                break;
+
+            case 2:
+                span.classList.add("sharing-status-rejected");
+                span.textContent = "Rejected";
+                break;
+
+            case 3:
+                span.classList.add("sharing-status-awaiting-removal")
+                span.textContent = "Waiting for removal";
+                break;
+        
+            default:
+                break;
         }
         return span;
     }

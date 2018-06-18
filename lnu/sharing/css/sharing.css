@@ -32,8 +32,25 @@
     padding-right:10px;
 }
 
+.dataTables_paginate {
+    float: none !important;
+    margin-bottom: 5px !important;
+}
+
 /*-----------------------------------------------------------
  * Sharing status
+ *
+ * 0 - Wating for teacher approval (default)
+ * [Gray] - .sharing-status-indicator
+ *
+ * 1 - Approved by teacher
+ * [Green] - .sharing-status-approved
+ *
+ * 2 - Sharing request rejected by teacher
+ * [Red] - .sharing-status-rejected
+ *
+ * 3 - Wating for teacher approval to remove / stop sharing
+ * [Yellow] - .sharing-status-awaiting-removal
  *----------------------------------------------------------*/
 
 .sharing-status-indicator::before {
@@ -53,13 +70,12 @@
     background-color: #6bbd17;
 }
 
-.sharing-status-awaiting::before {
+.sharing-status-rejected::before {
     background-color: #ffef2c;
 }
 
-.dataTables_paginate {
-    float: none !important;
-    margin-bottom: 5px !important;
+.sharing-status-awaiting-removal::before {
+    background-color: #D15353;
 }
 
 
