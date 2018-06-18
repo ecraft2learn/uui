@@ -217,21 +217,21 @@ class Gridview {
         var span = document.createElement("span");
         span.classList.add("sharing-status-indicator");
         switch (content) {
-            case 0:
+            case "0":
                 span.textContent = "Waiting to be approved";
                 break;
 
-            case 1:
+            case "1":
                 span.classList.add("sharing-status-approved");
                 span.textContent = "Approved";
                 break;
 
-            case 2:
+            case "2":
                 span.classList.add("sharing-status-rejected");
                 span.textContent = "Rejected";
                 break;
 
-            case 3:
+            case "3":
                 span.classList.add("sharing-status-awaiting-removal")
                 span.textContent = "Waiting for removal";
                 break;
