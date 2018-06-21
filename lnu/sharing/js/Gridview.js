@@ -218,22 +218,22 @@ class Gridview {
         span.classList.add("sharing-status-indicator");
         switch (content) {
             case "0":
-                span.textContent = "Waiting to be approved";
+                span.textContent = "Pending authorization";
                 break;
 
             case "1":
                 span.classList.add("sharing-status-approved");
-                span.textContent = "Approved";
+                span.textContent = "Authorized";
                 break;
 
             case "2":
                 span.classList.add("sharing-status-rejected");
-                span.textContent = "Rejected";
+                span.textContent = "Authorization rejected";
                 break;
 
             case "3":
                 span.classList.add("sharing-status-awaiting-removal")
-                span.textContent = "Waiting for removal";
+                span.textContent = "Pending authorization to stop sharing";
                 break;
         
             default:
