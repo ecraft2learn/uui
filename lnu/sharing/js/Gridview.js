@@ -135,7 +135,11 @@ class Gridview {
                 }
 
                 if (rules.dataOptions[i].hasOwnProperty("hint")) {
-                    content = this.m_createHint(content, fullData, rules.dataOptions[i].hint);
+                    var span = document.createElement("span");
+                    span.classList.add("content-hint");
+                    span.appendChild(this.m_createFileIcon(fullData));
+                    span.appendChild(this.m_createHint(content, fullData, rules.dataOptions[i].hint));
+                    content = span;
                 }
 
             }
@@ -256,12 +260,29 @@ class Gridview {
         span.setAttribute("data-role", "hint");
         span.setAttribute("data-hint-background", "bg-blue");
         span.setAttribute("data-hint-color", "fg-white");
-        span.setAttribute("data-hint-mode", "2");
+        span.setAttribute("data-hint-mode", "1");
         span.setAttribute("data-hint", hintLabel + "|" + fullData.DESCRIPTION);
-        span.textContent = content;
+        span.innerHTML += content;
         return span;
     }
 
+    /**
+     * Creates a fileicon base on the toolID property
+     * @param fullData : Object - The current data object (one object)
+     */
+    m_createFileIcon(fullData) {
+        var span = document.createElement("span");
+            span.setAttribute("data-role", "hint");
+            span.setAttribute("data-hint-background", "bg-blue");
+            span.setAttribute("data-hint-color", "fg-white");
+            span.setAttribute("data-hint-mode", "2");
+            span.setAttribute("data-hint-position", "right");
+            span.setAttribute("data-hint", "fullData.TOOLID");
+        var img = document.createElement("img");
+            img.classList.add("file-icon");
+            img.src = "../sharing/images/tool-icons-redux/" + fullData.TOOLID + ".png";
+        return img;
+    }
 
     /**
      * Creates td element and appends the content
