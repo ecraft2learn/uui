@@ -16,9 +16,20 @@ function initSharingForm(){
             generateHtmlProjectFile();
         }
     });
+    document.getElementsByName("title")[0].addEventListener("input", updateCharCount);
+    document.getElementsByName("keywords")[0].addEventListener("input", updateCharCount);
+    document.getElementsByName("description")[0].addEventListener("input", updateCharCount);
 }
 
+// NOTE: This requires the element that holds the counter values in the HTML to be right after the input element like follows.
+// Also the input element must have a maxLength attribute. And the element that holds the information must have class charCount
+// Exemple:
+// <input name="title" maxlength="32">
+// <span class="charCount"></span>
+function updateCharCount(event) {
+    event.target.nextElementSibling.innerHTML = event.target.value.length + "/" + event.target.maxLength;
 
+}
 
 function generateHtmlLocalFile() {
 
