@@ -56,11 +56,15 @@ The view consists of a table that has the following table headers:
 
 ## CSS classes for status indicator
 
-```
-Default (gray)             - "sharing-status-indicator"
-Awaiting approval (yellow) - "sharing-status-indicator sharing-status-awaiting"
-Approved (green)           - "sharing-status-indicator sharing-status-approved"
-```
+
+| Status  | Color  | Description                           | CSS class                                                    |
+| ------- | ------ | ------------------------------------- | ------------------------------------------------------------ | 
+| 0       | Gray   | Default, pending authorization        | .sharing-status-indicator                                    | 
+| 1       | Green  | Authorized to be shared               | .sharing-status-indicator + .sharing-status-approved         | 
+| 2       | Red    | Authorization rejected                | .sharing-status-indicator + .sharing-status-rejected         | 
+| 3       | Yellow | Pending authorization to stop sharing | .sharing-status-indicator + .sharing-status-awaiting-removal | 
+
+
 
 ---
 
