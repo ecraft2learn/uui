@@ -79,6 +79,16 @@ function cancelCallback(event, fileid) {
         return parseInt(file["FILEID"])===parseInt(fileid);
     });
 
+    // This removes the element from the html immediately, is this the desired behaviour?
+    
+    // var rows = document.getElementById("myWorkTable").getElementsByTagName("tr");
+    // for (var i = 0; i < rows.length; i++) {
+    //     if (rows[i].dataset.fileid == fileid) {
+    //         // console.log(fileid, "succesfully removed");
+    //         rows[i].parentElement.removeChild(rows[i]);
+    //     }
+    // }
+
     switch (file["STATUS"]){
         case "0":
             //0 - waiting for approval from teacher

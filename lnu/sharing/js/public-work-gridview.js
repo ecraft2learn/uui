@@ -23,7 +23,7 @@ function initGridView2() {
             dataMapping: "PRJ_NAME"
         },
         {
-            title: "User",
+            title: "Author",
             sortable: true,
             dataMapping: "USERNAME"
         },
@@ -50,7 +50,7 @@ function initGridView2() {
         PUBLICFILES = data;
         console.log(PUBLICFILES);
         var gv = new Gridview(columns, data, document.getElementById("publicWorkTable"));
-        var table = $('#myWorkTable').DataTable();
+        var table = $('#publicWorkTable').DataTable();
     });
 }
 
