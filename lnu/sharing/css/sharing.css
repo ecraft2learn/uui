@@ -71,11 +71,11 @@
 }
 
 .sharing-status-rejected::before {
-    background-color: #ffef2c;
+    background-color: #D15353;
 }
 
 .sharing-status-awaiting-removal::before {
-    background-color: #D15353;
+    background-color: #ffef2c;
 }
 
 
