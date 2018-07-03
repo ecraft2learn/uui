@@ -10,8 +10,10 @@
  *   - getSharedFiles: gets public files (uui_sharing and uui_files table)
  */
 
-var SERVER_URL   = "https://localhost/lnu.php";
-var SERVER_URL_2 = "https://localhost/fileman.php";
+//var SERVER_URL   = "https://localhost/lnu.php";
+//var SERVER_URL_2 = "https://localhost/fileman.php";
+var SERVER_URL   = "https://cs.uef.fi/~ec2l/lnu.php";
+var SERVER_URL_2 = "https://cs.uef.fi/~ec2l/fileman.php";
 
 
 //GET TOOL LIST
@@ -299,7 +301,7 @@ function getNotSharedFiles(callback) {
 //DOWNLOAD FILE
 function download(filename) {
     var element = document.createElement('a');
-    element.setAttribute('href', "https://localhost/download_file.php?file=" + filename);
+    element.setAttribute('href', "https://cs.uef.fi/~ec2l/download_file.php?file=" + filename);
 
     element.style.display = 'none';
     document.body.appendChild(element);

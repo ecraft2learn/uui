@@ -79,22 +79,16 @@ function cancelCallback(event, fileid) {
         return parseInt(file["FILEID"])===parseInt(fileid);
     });
 
-    // This removes the element from the html immediately, is this the desired behaviour?
-    
-    // var rows = document.getElementById("myWorkTable").getElementsByTagName("tr");
-    // for (var i = 0; i < rows.length; i++) {
-    //     if (rows[i].dataset.fileid == fileid) {
-    //         // console.log(fileid, "succesfully removed");
-    //         rows[i].parentElement.removeChild(rows[i]);
-    //     }
-    // }
+
+
 
     switch (file["STATUS"]){
         case "0":
             //0 - waiting for approval from teacher
             //stop sharing without asking permission in the teacher
             stopSharingDialog(file["ID"],"File is not shared anymore.");
-            //TODO:remove row in the table
+            //remove row in the table;
+            removeRow(fileid);
             break;
         case "1":
             //1 - file is approved by a teacher
@@ -106,7 +100,7 @@ function cancelCallback(event, fileid) {
             //2 - file was rejected by teacher to be shared
             //stop sharing without asking permission in the teacher
             stopSharingDialog(file["ID"],"File is not shared anymore.");
-            //TODO:remove row in the table
+            removeRow(fileid);
             break;
         case "3":
             //3 - file is waiting to be approved by teacher to stop sharing
@@ -114,6 +108,20 @@ function cancelCallback(event, fileid) {
             //TODO:disable button "Stop Sharing" if possible
             break;
 
+    }
+}
+
+/**
+ * This function removes the element (row) from the html table immediately
+ * @param fileid
+ */
+function removeRow(fileid){
+    var rows = document.getElementById("myWorkTable").getElementsByTagName("tr");
+    for (var i = 0; i < rows.length; i++) {
+        if (rows[i].dataset.fileid == fileid) {
+            // console.log(fileid, "succesfully removed");
+            rows[i].parentElement.removeChild(rows[i]);
+        }
     }
 }
 
