@@ -694,6 +694,22 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
 						  </div>
 						  <div data-role="dialog" id="ThingiverseDialog" class="padding20" data-close-button="true" data-href="./about/thingiverse-help.html" data-width="600"></div>
 					</div>
+
+					<!--My Work-->
+					<div class="tile bg-share fg-white" data-role="tile" onclick="tileClick('./lnu/sharing/index.html','Sharing', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<!--<span class="mif-question place-right margin5"  onclick="helpClick('#ThingiverseDialog', event);"></span>-->
+								<img class="tile-image icon" src="./lnu/sharing/images/share-bug-300x300.png"/>
+								<span class="tile-label">Share My Work
+								</span>
+							</div>
+							<div class="slide-over bg-share text-small padding10">
+								Share you work here
+							</div>
+						</div>
+						<!--<div data-role="dialog" id="ThingiverseDialog" class="padding20" data-close-button="true" data-href="./about/thingiverse-help.html" data-width="600"></div>-->
+					</div>
 			  
 				</div> <!--End of group tiles-->
 			</div> <!-- End of Share Group-->
@@ -752,7 +768,7 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
 
 	<!--Login Box and Hidden Data-->
 	<div  id="loginForm" class="login-form padding20 block-shadow" style="z-index:2;">
-		
+		<div class="overlay" style="background-color: rgba(0, 0, 0, 0.5);z-index:-1;"></div>
         <!--<form>-->
             <h1 class="text-light">Login to eCraft2Learn</h1>
             <hr class="thin"/>
