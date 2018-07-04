@@ -345,6 +345,19 @@ if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
 						</div>
 						<div data-role="dialog" id="eCraftSearchDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-search-help.html" data-width="600"></div>
 					</div>
+					<div class="tile bg-inspiratorium" data-role="tile" onclick="tileClick('http://ecraft.zsi.at/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#inspiratoriumDialog', event);"></span>
+								<img class="tile-image icon" src="./images/inspiratorium_logo.svg"/>
+								<span class="tile-label">Inspiratorium</span>
+							</div>
+							<div class="slide-over bg-inspiratorium text-small padding10">
+								Let yourself inspire and discover amazing instructables via the association driven Inspiratorium
+							</div>
+						</div>
+						<div data-role="dialog" id="inspiratoriumDialog" class="padding20" data-close-button="true" data-href="./about/inspiratorium-help.html" data-width="600"></div>
+					</div>
 					<!--Google Drive-->
 					<!--<div class="tile bg-ideation" data-role="tile" onclick="tileClick('https://drive.google.com', undefined, event);">
 						<div class="tile-content iconic slide-up">
