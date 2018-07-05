@@ -139,7 +139,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 		"<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
 		"<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='"+(docWidth-20)+"' height='"+(docHeight-60)+"'  />",
 		{	
-			clsBox: 'p-0',
+			clsWindow: 'p-0',
 			width: docWidth,
 			height: docHeight,
 		}
