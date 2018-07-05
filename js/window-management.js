@@ -135,15 +135,13 @@ function openIframeWindow(toolUrl, toolName, event) {
 	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
 		bgColor="rgb(64,64,64)";
 	
-	activeWindow = Metro.window.create(
-		"<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
-		"<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='"+(docWidth-20)+"' height='"+(docHeight-60)+"'  />",
-		{	
-			clsWindow: 'p-0',
-			width: docWidth,
-			height: docHeight,
-		}
-	).css("background-color", bgColor);
+	activeWindow = Metro.window.create({
+		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
+		content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='"+(docWidth-20)+"' height='"+(docHeight-60)+"'  />",
+		clsWindow: 'p-0',
+		width: docWidth,
+		height: docHeight,
+	}).css("background-color", bgColor);
 	
 	var toolIcon = toolTile.find('img').attr('src');
 	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, toolIcon, bgColor, toolName);
