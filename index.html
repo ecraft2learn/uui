@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
 	
 	<meta charset="utf-8">
@@ -78,12 +78,12 @@
         }
 		
 		@media all and (min-width: 640px) {
-		  .tiles-group {
-			margin-left: 40px;
-		  }
-		  .tile-area {
-                overflow-x: scroll;
-            }
+			.tiles-group {
+				margin-left: 40px;
+			}
+			.tile-area {
+				overflow-x: scroll;
+			}
 		}
 
         @media screen and (max-width: 640px) {
@@ -313,7 +313,7 @@
 	
 </head>
 
-<body class="bg-dark fg-white">
+<body class="bg-dark fg-white h-100">
 
 	<!-- Google Translate -->
 
@@ -372,7 +372,7 @@
 		};
 	</script>
 	
-	<div class="container-fluid start-screen no-overflow">
+	<div class="container-fluid start-screen no-overflow mb-20">
 		<div class="grid">
 			<div class="row">
 				<div class="cell-9"> 
@@ -433,24 +433,26 @@
 						</script>
 					</div>
 				</div>
+			</div>
+		</div>
 		<div class="tiles-area pt-20 pl-10 pr-10">
 			<div class="tiles-grid tiles-group size-1 fg-white" data-group-title="Imagine">
-				<div data-role="tile" class="bg-ideation fg-white" data-effect="hover-slide-up">
+				<div data-role="tile" class="tile bg-ideation fg-white" data-effect="hover-slide-up">
 				<!--helpClick('#eCraftSearchDialog', event);-->
 					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-search-help.html', '#eCraftSearchDialog');"></span>
 					<div class="slide-front">
-						<img class="icon" src="./images/google-drive-logo-flat.png"/>
+						<img class="icon" src="./images/google-drive-logo-flat.png">
 						<span class="branding-bar">eCraft Search</span>
 					</div>
-					<div  class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./uef/search/index.html', 'eCraft Search', event);">
+					<div id="test" class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./uef/search/index.html', 'eCraft Search', event);">
 						Use this to search for help from Maker web sites
 					</div>
                 </div>
-				<div data-role="tile" class="bg-ideation fg-white" data-effect="hover-slide-up">
+				<div data-role="tile" class="tile bg-ideation fg-white" data-effect="hover-slide-up">
 				<!--helpClick('#eCraftSearchDialog', event);-->
 					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/inspiratorium-help.html', '#inspiratoriumDialog');"></span>
 					<div class="slide-front">
-						<img class="icon" src="./images/inspiratorium_logo.svg"/>
+						<img class="icon" src="./images/inspiratorium_logo.svg">
 						<span class="branding-bar">Inspiratorium</span>
 					</div>
 					<div  class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('http://ecraft.zsi.at/', undefined, event);">
@@ -460,22 +462,22 @@
 			</div>
 			<!-- PLAN GROUP -->
 			<div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Plan">
-				<div data-role="tile" class="bg-plan fg-white" data-effect="hover-slide-up">
+				<div data-role="tile" class="tile bg-plan fg-white" data-effect="hover-slide-up">
 				<!--helpClick('#eCraftSearchDialog', event);-->
 					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-idea-help.html');"></span>
 					<div class="slide-front">
-						<img class="icon" src="./images/google-drive-logo-flat.png"/>
+						<img class="icon" src="./images/google-drive-logo-flat.png">
 						<span class="branding-bar">eCraft Plan</span>
 					</div>
 					<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./uef/ideation/index.html', 'eCraft Idea', event);">
 						Use this to note down your ideas
 					</div>
                 </div>
-				<div data-role="tile" class="bg-plan fg-white" data-effect="hover-slide-up">
+				<div data-role="tile" data-size="medium" class="tile bg-plan fg-white" data-effect="hover-slide-up">
 				<!--helpClick('#eCraftSearchDialog', event);-->
 					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/trello-help.html');"></span>
 					<div class="slide-front">
-						<img class="icon" src="./images/trello-logo.png"/>
+						<img class="icon" src="./images/trello-logo.png">
 						<span class="branding-bar">Trello</span>
 					</div>
 					<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('https://trello.com/', undefined, event);">
@@ -540,6 +542,9 @@
 			<div class="overlay" style="background: rgba(0, 0, 0, 0.5); z-index:-1;"></div>
         <!--</form>-->
 	</form>
+	<!-- The Task Bar at the bottom of the page-->
+	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-index:0;" onmouseenter="Metro.charms.open('#bottomCharm');"></div>
+	<div id="bottomCharm" data-role="charms" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
 </body>
 <script>
 includeHTML();

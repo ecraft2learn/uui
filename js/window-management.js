@@ -126,28 +126,32 @@ function openHelpDialog(helpUrl, event){
 
 //Given a url and a title for the window, this function creates a window (uses Metro UI dialog classes) and opens the url as an iframe in it.
 function openIframeWindow(toolUrl, toolName, event) {
-	docWidth = $(window).width()-600;
-	docHeight = $(window).height()-100;
+	docWidth = $(window).width() * 0.6;
+	docHeight = $(window).height() * 0.8;
 
 	var toolTile = $(event.srcElement).closest('[data-role], tile');
 	var bgColor = toolTile.css("background-color");
-	
+	var tIcon = $(event.srcElement).prev('.slide-front').find('.icon').attr('src');
 	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
 		bgColor="rgb(64,64,64)";
 	
 	activeWindow = Metro.window.create({
-		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span><span class='btn-min' onclick='minimizeWindow(this)'></span> <span class='btn-max' onclick='maximizeWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
-		content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='"+(docWidth-20)+"' height='"+(docHeight-60)+"'  />",
+		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span>",
+		content: "<iframe class='iframeWindow' id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='100%' height='"+(docHeight * 0.9)+"'  />",
+		draggable: true,
+		resizable: false,
 		clsWindow: 'p-0',
+		top: $(window).height() * 0.1,
+		left: $(window).height() * 0.4,
 		width: docWidth,
 		height: docHeight,
-	}).css("background-color", bgColor);
-	
+		icon: '<img class="icon" src="'+tIcon+'">'
+	}).css("background-color", bgColor).css('height', '100px');
 	var toolIcon = toolTile.find('img').attr('src');
-	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, toolIcon, bgColor, toolName);
-	
+	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, tIcon, bgColor, toolName);
+	//activeWindow = activeWindow.data();
 	activeWindow.data('winData', frame);
-
+	console.log(activeWindow);
 	return activeWindow;
 }
 
@@ -188,10 +192,14 @@ function maximizeWindow(maxBtn){
 	}
 }
 
+$(document).on('click', '.btn-min', function(){
+	minimizeWindow(this);
+});
 //Given the clicked minimize button of a window, it finds the window object and minimizes it. This includes creating a small button and the bottom charm and storing the WinData struct in it.
 function minimizeWindow(minBtn){
-	var winDiv = getDialogFromBtn(minBtn);
+	var winDiv = getWindowFromBtn(minBtn);
 	var winData = winDiv.data('winData');
+	console.log(winDiv);
 	var icon = winData.iconUrl;
 	var color = winData.color;
 	
@@ -211,7 +219,7 @@ function minimizeWindow(minBtn){
 	$button.attr('id', $(winDiv).attr('id')+"_btn");
 	$('#bottomCharm').append($button);
 	
-	showMetroCharm('#bottomCharm');
+	Metro.charms.open('#bottomCharm');
 	
 	var winDiv = $(minBtn).parent().closest('[data-role], .dialog');
 	winDiv.animate({
@@ -284,6 +292,10 @@ function createMinimizedTab(winData) {
 //Helper function to find a window from the clicked button (close, max, min).
 function getDialogFromBtn(btn) {
 	return $(btn).parent().closest('[data-role], .dialog');
+}
+
+function getWindowFromBtn(btn) {
+	return $(btn).closest('.window').find('.iframeWindow');
 }
 
 //Given a WinDiv and its WinData, it restores the Div to its original place and size.
