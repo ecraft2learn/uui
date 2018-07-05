@@ -135,7 +135,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
 		bgColor="rgb(64,64,64)";
 	
-	activeWindow = Metro.window.create({
+	Metro.window.create({
 		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span>",
 		content: "<iframe class='iframeWindow' id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='100%' height='"+(docHeight * 0.9)+"'  />",
 		draggable: true,
@@ -146,12 +146,11 @@ function openIframeWindow(toolUrl, toolName, event) {
 		width: docWidth,
 		height: docHeight,
 		icon: '<img class="icon" src="'+tIcon+'">'
-	}).css("background-color", bgColor).css('height', '100px');
+	}).css("background-color", bgColor);
+	activeWindow = $('.window').last();
 	var toolIcon = toolTile.find('img').attr('src');
 	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, tIcon, bgColor, toolName);
-	//activeWindow = activeWindow.data();
 	activeWindow.data('winData', frame);
-	console.log(activeWindow);
 	return activeWindow;
 }
 
@@ -295,7 +294,7 @@ function getDialogFromBtn(btn) {
 }
 
 function getWindowFromBtn(btn) {
-	return $(btn).closest('.window').find('.iframeWindow');
+	return $(btn).closest('.window');
 }
 
 //Given a WinDiv and its WinData, it restores the Div to its original place and size.
