@@ -81,6 +81,9 @@
 		  .tiles-group {
 			margin-left: 40px;
 		  }
+		  .tile-area {
+                overflow-x: scroll;
+            }
 		}
 
         @media screen and (max-width: 640px) {
@@ -434,13 +437,24 @@
 			<div class="tiles-grid tiles-group size-1 fg-white" data-group-title="Imagine">
 				<div data-role="tile" class="bg-ideation fg-white" data-effect="hover-slide-up">
 				<!--helpClick('#eCraftSearchDialog', event);-->
-					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-search-help.html');"></span>
+					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-search-help.html', '#eCraftSearchDialog');"></span>
 					<div class="slide-front">
 						<img class="icon" src="./images/google-drive-logo-flat.png"/>
 						<span class="branding-bar">eCraft Search</span>
 					</div>
-					<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3">
+					<div  class="slide-back text-small d-flex flex-justify-center flex-align-center p-3">
 						Use this to search for help from Maker web sites
+					</div>
+                </div>
+				<div data-role="tile" class="bg-ideation fg-white" data-effect="hover-slide-up">
+				<!--helpClick('#eCraftSearchDialog', event);-->
+					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/inspiratorium-help.html', '#inspiratoriumDialog');"></span>
+					<div class="slide-front">
+						<img class="icon" src="./images/inspiratorium_logo.svg"/>
+						<span class="branding-bar">Inspiratorium</span>
+					</div>
+					<div  class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('http://ecraft.zsi.at/', undefined, event);">
+						Let yourself inspire and discover amazing instructables via the association driven Inspiratorium
 					</div>
                 </div>
 			</div>
