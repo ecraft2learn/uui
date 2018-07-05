@@ -99,14 +99,25 @@ function gotoTileDestination(dest){
 	window.open(dest, '_blank');
 }
 
+//This function is responsible for opening a new Infobox.
+var alreadyOpenInfobox = null;		
+function openInfobox(helpUrl, event){
+    event.stopPropagation();
+	
+	Metro.infobox.open(helpUrl);
+	if(alreadyOpenInfobox!=null && alreadyOpenInfobox!=helpUrl)
+		Metro.infobox.close(alreadyOpenInfobox);
+	alreadyOpenInfobox = helpUrl;
+}
+
 //This function is responsible for opening a new HELP DIALOG.
 var alreadyOpenDialog = null;		
 function openHelpDialog(helpUrl, event){
     event.stopPropagation();
 	
-	metroDialog.open(helpUrl);
+	Metro.dialog.open(helpUrl);
 	if(alreadyOpenDialog!=null && alreadyOpenDialog!=helpUrl)
-		metroDialog.close(alreadyOpenDialog);
+		Metro.dialog.close(alreadyOpenDialog);
 	alreadyOpenDialog = helpUrl;
 }
 
