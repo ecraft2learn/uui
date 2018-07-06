@@ -165,7 +165,6 @@ function maximizeWindow(maxBtn){
 	var winDiv = getDialogFromBtn(maxBtn);
 	var winFrame = winDiv.find('iframe');
 	var winData = winDiv.data('winData');
-	
 	docWidth = $(window).width();
 	docHeight = $(window).height();
 	
@@ -192,13 +191,13 @@ function maximizeWindow(maxBtn){
 }
 
 $(document).on('click', '.btn-min', function(){
+	
 	minimizeWindow(this);
 });
 //Given the clicked minimize button of a window, it finds the window object and minimizes it. This includes creating a small button and the bottom charm and storing the WinData struct in it.
 function minimizeWindow(minBtn){
 	var winDiv = getWindowFromBtn(minBtn);
 	var winData = winDiv.data('winData');
-	console.log(winDiv);
 	var icon = winData.iconUrl;
 	var color = winData.color;
 	
@@ -220,7 +219,7 @@ function minimizeWindow(minBtn){
 	
 	Metro.charms.open('#bottomCharm');
 	
-	var winDiv = $(minBtn).parent().closest('[data-role], .dialog');
+	//var winDiv = $(minBtn).parent().closest('[data-role], .dialog');
 	winDiv.animate({
 		top: winData.posy+winData.height-10,
 		width: 10,
@@ -241,7 +240,7 @@ function unminimizeWindow() {
 	var $winData = $buttonElem.data('winData');
 	var $winDiv = $buttonElem.data('winDiv');
 	
-	
+	$winDiv.removeClass('minimized');
 	
 	resizeWindow2Normal($winDiv, $winData);
 	
