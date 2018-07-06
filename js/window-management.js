@@ -142,7 +142,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 		resizable: false,
 		clsWindow: 'p-0',
 		top: $(window).height() * 0.1,
-		left: $(window).height() * 0.2,
+		left: $(window).height() * 0.1,
 		width: docWidth,
 		height: docHeight,
 		icon: '<img class="icon" src="'+tIcon+'">'
