@@ -216,8 +216,11 @@
 	</script>
 	
 	<script>
-		function infoClick(file) {
+		function infoClick(file, infoId) {
 			if (file) {
+			  var username = window.sessionStorage.getItem("username");
+			  var analyticField = getAnalyticFieldName(infoId, true);
+			  sendAnalyticsData(hashFnv32a(username), 0, analyticField);
 			  /*make an HTTP request using the attribute value as the file name:*/
 			  xhttp = new XMLHttpRequest();
 			  xhttp.open("GET", file, true);
@@ -473,7 +476,7 @@
 			<div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Plan">
 				<div data-role="tile" class="tile bg-plan fg-white" data-effect="hover-slide-up">
 				<!--helpClick('#eCraftSearchDialog', event);-->
-					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-idea-help.html');"></span>
+					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-idea-help.html', '#eCraftIdeaDialog');"></span>
 					<div class="slide-front">
 						<img class="icon" src="./images/google-drive-logo-flat.png">
 						<span class="branding-bar">eCraft Plan</span>
@@ -484,7 +487,7 @@
                 </div>
 				<div data-role="tile" data-size="medium" class="tile bg-plan fg-white" data-effect="hover-slide-up">
 				<!--helpClick('#eCraftSearchDialog', event);-->
-					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/trello-help.html');"></span>
+					<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/trello-help.html', '#TrelloDialog');"></span>
 					<div class="slide-front">
 						<img class="icon" src="./images/trello-logo.png">
 						<span class="branding-bar">Trello</span>
