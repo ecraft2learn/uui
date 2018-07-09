@@ -3691,12 +3691,12 @@ $('#temp-canvas').on('mousedown touchstart', function(e)
 	console.log('a');
     blockMenuHeaderScroll = true;
 });
-$('.design-surface').on('mouseup touchend', function()
+$('#temp-canvas').on('mouseup touchend', function()
 {
 	console.log('b');
     blockMenuHeaderScroll = false;
 });
-$('.design-surface').on('touchmove', function(e)
+$('#temp-canvas').on('touchmove', function(e)
 {
     if (blockMenuHeaderScroll)
     {
