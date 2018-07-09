@@ -273,20 +273,23 @@
 								removeOnClose: true,
 								actions: [
 									{
-										caption: "Cancle",
-										cls: "js-dialog-close"
+										caption: "Create",
+										cls: "button primary success",
+										onclick: function(){
+											if(createNewProject()) {
+												alert('close');
+											}
+										}
 									},
 									{
-										caption: "Create",
-										cls: "js-dialog-close button primary success",
-										onclick: function(){
-											createNewProject();
-										}
+										caption: "Cancle",
+										cls: "js-dialog-close"
 									}
+									
 								]
 							});
 						}
-						if (this.status == 404) { Metro.dialog.create("Page not found.");}
+						if (this.status == 404) { Metro.dialog.create(title: "Page not found.");}
 					}
 				}
 			}

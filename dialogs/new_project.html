@@ -18,6 +18,7 @@
 						cls: "alert"
 					}
                 );
+				return true;
             else{
 				Metro.notify.create(
 					'Project <i>' + prjName + '</i> successfully created.',
@@ -26,8 +27,8 @@
 						cls: "success"
 					}
                 );
+				return false;
             }
-            Metro.infobox.close($(this));
         }
         function notifyOnErrorInput(input){
         var message = input.data('validateHint');
