@@ -6,6 +6,34 @@
 		<script src="../libraries/js/jquery-3.2.1.min.js"></script>
 		<script src="../libraries/js/bootstrap.min.js"></script>  
 		<script src="../libraries/js/metro.js"></script>
+		<script>
+			function createNewProject(){
+				var prjName = $("#txtPrjName").val();
+				var userId = window.sessionStorage.getItem("userId");
+				
+				//addProject(userId, prjName);
+
+				var newPrjId = window.sessionStorage.getItem("projectId");
+				if(newPrjId==undefined || newPrjId==-1 || newPrjId==null)
+					/*$.Notify({
+						caption: 'Error',
+						content: 'Could not create new project.',
+						type:    'alert'
+					});*/
+				else{
+					var notify = Metro.notify; 
+					notify.setup({container: 'html'}); 
+					notify.create(
+						'Project <i>' + prjName + '</i> successfully created.', 
+						'New Project', 
+						{ 
+							cls: 'pos-fixed pos-top-right success'
+						}
+					);
+				}
+				//metroDialog.close("#NewProjectDialog");
+			}
+		</script>
 	</head>
 	<body>
 			<form data-role="validator" action="javascript:">
@@ -16,7 +44,7 @@
 						Project name cannot be empty
 					</span>
 				</div>
-				<button class="button primary success" onclick="var notify = Metro.notify; notify.setup({container: 'html'}); notify.create('test', '', { cls: 'pos-fixed pos-top-right success'});">Create</button>
+				<button class="button primary success">Create</button>
 			</form>
 	</body>
 </html>
