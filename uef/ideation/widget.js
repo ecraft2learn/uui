@@ -3686,17 +3686,15 @@
 
 })();
 window.blockMenuHeaderScroll = false;
-$('#temp-canvas').on('mousedown touchstart', function(e)
+$('.draw-area').on('mousedown touchstart', function(e)
 {
-	console.log('a');
     blockMenuHeaderScroll = true;
 });
-$('#temp-canvas').on('mouseup touchend', function()
+$('.draw-area').on('mouseup touchend', function()
 {
-	console.log('b');
     blockMenuHeaderScroll = false;
 });
-$('#temp-canvas').on('touchmove', function(e)
+$('.draw-area').on('touchmove', function(e)
 {
     if (blockMenuHeaderScroll)
     {
