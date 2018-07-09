@@ -36,7 +36,28 @@
 		</script>
 	</head>
 	<body>
-			<form data-role="validator" action="javascript:">
+			<form data-role="validator" action="javascript:"
+				data-on-submit='
+					var prjName = $("#txtPrjName").val();
+				var userId = window.sessionStorage.getItem("userId");
+				
+				//addProject(userId, prjName);
+
+				var newPrjId = window.sessionStorage.getItem("projectId");
+				if(newPrjId==undefined || newPrjId==-1 || newPrjId==null) {
+
+				} else{
+					var notify = Metro.notify; 
+					notify.setup({container: "html"}); 
+					notify.create(
+						"Project <i>" + prjName + "</i> successfully created.", 
+						"New Project", 
+						{ 
+							cls: "pos-fixed pos-top-right success"
+						}
+					);
+				}
+				'>
 				<div class="form-group">
 					<label>Project name</label>
 					<input type="text" data-validate="required" name="nickname">
