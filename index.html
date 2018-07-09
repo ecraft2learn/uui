@@ -735,7 +735,7 @@
 									for(i=0; i<jsonData.DATA.length && i<8;i++){
 										var prjId = jsonData.DATA[i].ID;
 										var spanLink = $("<div>").css("padding","4px").css("width","100%").css("border", "0px").addClass("no-margin").attr("id", "spanPrj_" + prjId);
-										var alink = $("<a>").addClass("fg-white").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
+										var alink = $("<a>").addClass("fg-white small-text").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
 										if(window.sessionStorage.getItem("currentProjectId")==prjId)
 											spanLink.addClass("bg-darkCobalt");
 										spanLink.append(alink);
