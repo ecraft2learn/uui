@@ -257,7 +257,7 @@
 		function helpClick(file, helpDialogId, event){
 			if (file) {
 			  var username = window.sessionStorage.getItem("username");
-			  var analyticField = getAnalyticFieldName(infoId, true);
+			  var analyticField = getAnalyticFieldName(helpDialogId, true);
 			  sendAnalyticsData(hashFnv32a(username), 0, analyticField);
 			  /*make an HTTP request using the attribute value as the file name:*/
 			  xhttp = new XMLHttpRequest();
