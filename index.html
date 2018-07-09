@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Welcome to eCraft2Learn</title>
+	
+	<script src="libraries/js/jquery-3.2.1.min.js"></script>
+	
+	<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
+<!-- 	https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7 -->
+    <script src="libraries/js/bootstrap.min.js"></script>  
+
+
+    <link href="libraries/css/metro.css" rel="stylesheet">
+	<link href="libraries/css/metro-schemes.css" rel="stylesheet">
+	<link href="libraries/css/metro-icons.css" rel="stylesheet">
+	
+    <script src="libraries/js/metro.js"></script>
+
+<!-- Sentry will report bugs to us -->
+<!--     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script> -->
+    <script>
+    if (navigator.onLine) {
+    	// if offline no need to even try to load sentry
+    	let script = document.createElement('script');
+    	script.src = "https://cdn.ravenjs.com/3.22.1/raven.min.js";
+    	script.crossorigin = "anonymous";
+    	document.head.appendChild(script);
+    	script.addEventListener('load',
+    	                        function () {
+									Raven.config('https://7780e314f7d64cc88db0fab885c9ca9b@sentry.io/305194',
+											     {whitelistUrls: [/ecraft2learn\.github\.io/]})
+										 .install();	                        	
+    	                        });
+    }  
+    </script>
+
+    <link rel="icon" type="image/png" href="images/eCraft2Learn-Favicon.png" />
+	
+		
+	<!-- This links to the css file that we use for coloring of the tiles. The themes are stored in the "themes" folder. Change this to see other themes-->
+	<link rel="stylesheet" type="text/css" href="themes/theme-3.css" />
+	<link rel="stylesheet" type="text/css" href="extra-btn.css" />
+	
+	<script src="js/window-management.js"></script>
+	<script src="js/helper-functions.js"></script>
+
+	<script src="js/file_manager.js"></script>
+	
+
+
+	<!--LNU CODE START-->
+	<script src="lnu/commenting/js/feedback-window-managment.js"></script>
+	<!--LNU CODE END-->
+
+	<style>
+        .tile-area-controls {
+            position: fixed;
+            right: 40px;
+            top: 40px;
+        }
+
+        .tile-group {
+            left: 100px;
+        }
+
+        .tile, .tile-small, .tile-sqaure, .tile-wide, .tile-large, .tile-big, .tile-super {
+            opacity: 0;
+            -webkit-transform: scale(.8);
+            transform: scale(.8);
+        }
+
+        #charmSettings .button {
+            margin: 5px;
+        }
+
+        @media screen and (max-width: 640px) {
+            .tile-area {
+                overflow-y: scroll;
+            }
+            .tile-area-controls {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            .tile-area {
+                overflow-y: scroll;
+            }
+
+            .tile-area-controls {
+                display: none;
+            }
+        }
+		
+		.login-form {
+			width: 30rem;
+			height: 19rem;
+			background-color: #404436;
+
+			position: absolute;
+			top:0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			opacity: 0;
+
+			margin: auto;
+		}
+    </style>
+	
+	<script>
+	params={};location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){params[k]=v})
+	
+	$(function(){
+            //$.StartScreen();
+
+            var tiles = $(".tile, .tile-small, .tile-sqaure, .tile-wide, .tile-large, .tile-big, .tile-super");
+
+            $.each(tiles, function(){
+                var tile = $(this);
+                setTimeout(function(){
+                    tile.css({
+                        opacity: 1,
+                        "-webkit-transform": "scale(1)",
+                        "transform": "scale(1)",
+                        "-webkit-transition": ".3s",
+                        "transition": ".3s"
+                    });
+                }, Math.floor(Math.random()*500));
+            });
+
+            $(".tile-group").animate({
+                left: 0
+            });
+        });
+		
+	$(function(){
+		//if(params['username']!="" && params['pilotsite']!="" && params['username']!=undefined && params['pilotsite']!=undefined){
+		if ( window.sessionStorage.getItem("username")!=undefined 
+		  		&& window.sessionStorage.getItem("pilotsite")!=undefined
+		  		&& window.sessionStorage.getItem("userId")!=undefined
+		  		&& window.sessionStorage.getItem("userId")!=-1)
+		{
+			$("#loginForm").hide();
+			if (!navigator.onLine) {
+				return;
+			}
+			(() => {
+
+        			var sessionId = window.sessionStorage.getItem("pilotsite");// params['pilotsite'];
+
+        			if (! sessionId)
+                			return;
+
+        			$.ajax({
+
+                			type: 'POST',
+                			data: 'sessionId=' + sessionId,
+                			url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_materials.php',
+                			success: (data) => {
+									//alert(data);
+                        			var urls = JSON.parse(data);
+
+                        			var str = '';
+									//<a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/3d_printing_troubleshooting_guide/3d_printing_troubleshooting_guide.pdf')">Other 3D Printing Problems</a>
+                        			for (let i = 0; i < urls.length; i++) {
+
+                                			//str += '<li><a target=\'_blank\' href=\'' + urls[i].url + '\'>' + urls[i].name + '</a></li>';
+											str += '<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, \'' + urls[i].url + '\')">' + urls[i].name + '</a></li>';
+                        			}
+
+						if (str !== '')
+                        				$('#teacher-material').html(str);
+
+                			},
+                			error: (error) => {
+
+                			}
+        			});
+
+			})();
+
+
+			//alert(hashFnv32a(params['username']));
+		}
+		else{
+			$("#userProgressDiv").hide();
+			$("#loginForm").animate({opacity:1},1000);
+		}
+	});
+	</script>
+	
+	<script>
+		function helpClick(helpDialogId, event){
+		
+			//window.sessionStorage.setItem('username', params['username']);
+            //window.sessionStorage.setItem('pilotsite', params['pilotsite']);
+			var username = window.sessionStorage.getItem("username");
+			var analyticField = getAnalyticFieldName(helpDialogId, true);
+			openHelpDialog(helpDialogId, event);
+			//sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
+			sendAnalyticsData(hashFnv32a(username), 0, analyticField);
+		}
+		
+		function tileClick(toolUrl, winTitle, event){
+			var analyticField;
+			
+			if(winTitle==undefined) {
+				analyticField = getAnalyticFieldName(toolUrl);
+				gotoTileDestination(toolUrl);
+
+			}
+			else{
+				analyticField = getAnalyticFieldName(toolUrl);
+				
+				//var url = toolUrl + '&username=' + params['username'] + '&sessionId=' + params['pilotsite'];
+				//console.log(url);
+				
+				//window.sessionStorage.setItem('username', params['username']);
+				//window.sessionStorage.setItem('pilotsite', params['pilotsite']);
+				
+				openIframeWindow(toolUrl, winTitle, event);
+
+			}
+
+			var username = window.sessionStorage.getItem("username");
+			sendAnalyticsData(hashFnv32a(username), 0, analyticField);
+			//sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
+
+            //openFeedbackWindow("./lnu/commenting/index.html",winTitle,event);
+
+
+		}
+		function showInOERWindow(event, addr){
+			//allWin = $("div").find('[class], bg-red');
+			allWin = $("*").find("div[data-role*='dialog']");
+			oerWin = $("#oerWin");	
+			
+			var oerMainFolder = "help/oer/";
+			var eventNode = $(event.srcElement);
+			var oerText = $(eventNode).html();
+			var oerAddress = addr==undefined ? (oerMainFolder + oerText + "/" + oerText + ".html").toLowerCase().replace(/ /g,'_') : addr.toLowerCase();
+
+			if ($(oerWin).html() == undefined)
+			{
+				var dialog = openIframeWindow(oerAddress, "Open Educational Resources", event);
+				$(dialog).attr('id', 'oerWin');
+				/*var iframe = $(dialog).find("[id|='iframeWindow']")[0];
+				var dcmnt = (iframe.contentDocument || iframe.contentWindow.document);
+				var otherhead = dcmnt.getElementsByTagName("head")[0];
+				var link = dcmnt.createElement("link");
+				link.setAttribute("rel", "stylesheet");
+				link.setAttribute("type", "text/css");
+				link.setAttribute("href", "../../libraries/css/metro.css");
+				otherhead.appendChild(link);
+				
+				alert(otherhead.innerHTML);
+				curHead = document.getElementByTagName("head");
+				//iframe = $(dialog).getElementById("iframeWindow");
+				iframe.reload();
+				alert(curHead);
+				if($(iframe).find("head").length == 0)
+					$(iframe).append("<head></head>");
+				alert($(iframe).find("td").length);*/
+			}
+			else{
+				var iframe = $(oerWin).find("[id|='iframeWindow']")[0];
+				$(iframe).attr('src', oerAddress);
+				
+				var oerMinimizedBtn = $("#oerWin_btn");
+				if($(oerMinimizedBtn).attr('id') == 'oerWin_btn'){
+					unminimizeWindowFromJS(oerMinimizedBtn);
+				}
+			}
+		}
+	</script>
+	
+</head>
+
+<body class="tile-area-scheme-dark fg-white">
+
+<!-- Google Translate -->
+
+<!-- Conditionally activated if translate is in the hash term of the URL -- after the # -->
+<script>
+function googleTranslateElementInit() {
+     new google.translate.TranslateElement({pageLanguage: 'en',
+                                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
+                                           'google_translate_element');
+}
+if (window.location.hash.indexOf('translate') >= 0 && navigator.onLine) {
+    var div = document.createElement('div');
+    var add_div_and_script = function () {
+        document.body.appendChild(div);
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.body.appendChild(script);
+    }
+    div.id = "google_translate_element";
+    if (document.body) {
+        add_div_and_script();
+    } else {
+        // wait for the document to load
+        document.addEventListener('DOMContentLoaded', add_div_and_script);
+    }
+}
+</script>
+	
+	<div class="container-float">
+		
+	
+		<!-- HEADER -->
+		<header>
+			<div class="padding30 no-padding-bottom">
+				<img id="eCraftLogo" src="images/eCraft2Learn-icon.png" />
+			</div>
+			<div id="eCraftMotto" class="no-margin-top">
+				Digital Fabrication and Maker Movement in Education <!--(<a href="./help/troubleshooting/" target="_blank">Trouble shooting help</a>)-->
+			</div>
+		</header>
+	
+		<!-- TILE AREA -->
+		<div id="mainTileArea" class="tile-area">
+			
+			<!-- IDEATION GROUP -->
+			<div class="tile-group one">
+				<span class="tile-group-title">Imagine</span>
+				<div class="tile-container">
+					<!-- UEF Tools -->
+					<!--UEF Ideation-->
+					<div class="tile bg-ideation" data-role="tile" onclick="tileClick('./uef/search/index.html', 'eCraft Search', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#eCraftSearchDialog', event);"></span>
+								<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+								<span class="tile-label">eCraft Search</span>
+							</div>
+							<div class="slide-over bg-ideation text-small padding10">
+								Use this to search for help from Maker web sites
+							</div>
+						</div>
+						<div data-role="dialog" id="eCraftSearchDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-search-help.html" data-width="600"></div>
+					</div>
+					<div class="tile bg-inspiratorium" data-role="tile" onclick="tileClick('http://ecraft.zsi.at/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#inspiratoriumDialog', event);"></span>
+								<img class="tile-image icon" src="./images/inspiratorium_logo.svg"/>
+								<span class="tile-label">Inspiratorium</span>
+							</div>
+							<div class="slide-over bg-inspiratorium text-small padding10">
+								Let yourself inspire and discover amazing instructables via the association driven Inspiratorium
+							</div>
+						</div>
+						<div data-role="dialog" id="inspiratoriumDialog" class="padding20" data-close-button="true" data-href="./about/inspiratorium-help.html" data-width="600"></div>
+					</div>
+					<!--Google Drive-->
+					<!--<div class="tile bg-ideation" data-role="tile" onclick="tileClick('https://drive.google.com', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#GoogleDriveDialog', event);"></span>
+								<img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+								<span class="tile-label">Google Drive</span>
+							</div>
+							<div class="slide-over bg-ideation text-small padding10">
+								Google Drive drives you crazy
+							</div>
+						</div>
+						<div data-role="dialog" id="GoogleDriveDialog" class="padding20" data-close-button="true" data-href="./about/google-drive-help.html" data-width="600"></div>
+					</div>
+					<!-- Coggle -->
+					<!--
+					<div class="tile-small bg-ideation-light" data-role="tile" onclick="tileClick('https://coggle.it/','Coggle', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#CoggleDialog', event);"></span>
+								<img class="tile-image icon" src="./images/coggle-logo.png"/>
+							</div>
+							<div class="slide-over bg-ideation-light text-small padding10">
+								Coggle
+							</div>
+						</div>
+						<div data-role="dialog" id="CoggleDialog" class="padding20" data-close-button="true" data-href="./about/coggle-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- Sketchboard -->
+					<!--
+					<div class="tile-small bg-ideation-light" data-role="tile" onclick="tileClick('https://sketchboard.me', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#SketchboardDialog', event);"></span>
+								<img class="tile-image icon" src="./images/sketch-board-logo.png"/>
+							</div>
+							<div class="slide-over bg-ideation-light text-small padding10">
+								Sketchboard
+							</div>
+						  </div>
+						  <div data-role="dialog" id="SketchboardDialog" class="padding20" data-close-button="true" data-href="./about/sketchboard-help.html" data-width="600"></div>
+					  </div>
+					  -->
+				</div> <!--End of group tiles-->
+				
+			</div> <!-- End of Ideation Group-->
+			
+			<!-- PLAN GROUP -->
+			<div class="tile-group two">
+				<span class="tile-group-title">Plan</span>
+				<div class="tile-container">
+					<!--UEF Ideation-->
+                                        <div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('./uef/ideation/index.html', 'eCraft Idea', event);">
+                                                <div class="tile-content iconic slide-up">
+                                                        <div class="slide-up-2">
+                                                                <span class="mif-question place-right margin5" onclick="helpClick('#eCraftIdeaDialog', event);"></span>
+                                                                <img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+                                                                <span class="tile-label">eCraft Plan</span>
+                                                        </div>
+                                                        <div class="slide-over bg-plan text-small padding10">
+                                                                Use this to note down your ideas
+                                                        </div>
+                                                </div>
+                                                <div data-role="dialog" id="eCraftIdeaDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-idea-help.html" data-width="600"></div>
+                                        </div>
+					<!-- Trello -->
+					<div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('https://trello.com/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#TrelloDialog', event);"></span>
+								<img class="tile-image icon" src="./images/trello-logo.png"/>
+								<span class="tile-label">Trello</span>
+							</div>
+							<div class="slide-over bg-plan text-small padding10">
+								Trello helps you plan and work together
+							</div>
+						</div>
+						<div data-role="dialog" id="TrelloDialog" class="padding20" data-close-button="true" data-href="./about/trello-help.html" data-width="600"></div>
+					</div>
+					<div class="tile bg-plan fg-white" data-role="tile" onclick="tileClick('./uef/plan/index.html', 'eCraft Todo', event);">
+                                                <div class="tile-content iconic slide-up">
+                                                        <div class="slide-up-2">
+                                                                <span class="mif-question place-right margin5" onclick="helpClick('#eCraftIdeaDialog', event);"></span>
+                                                                <img class="tile-image icon" src="./images/google-drive-logo-flat.png"/>
+                                                                <span class="tile-label">eCraft TODO</span>
+                                                        </div>
+                                                        <div class="slide-over bg-plan text-small padding10">
+                                                                Use this to plan tasks of the project
+                                                        </div>
+                                                </div>
+                                                <div data-role="dialog" id="eCraftIdeaDialog" class="padding20" data-close-button="true" data-href="./about/ecraft-idea-help.html" data-width="600"></div>
+                                        </div>	
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Plan Group-->
+			
+			<!-- CREATE GROUP -->
+			<div class="tile-group double">
+				<span class="tile-group-title">Create</span>
+				<div class="tile-container">
+				
+					<!-- TinkerCad 3D Design -->
+					<div class="tile bg-create" data-role="tile" onclick="tileClick('https://www.tinkercad.com/#/?type=tinkercad&collection=designs','TinkerCad 3D Design', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#TinkerCad3DDesignDialog', event);"></span>
+								<img class="tile-image icon" src="./images/tinkercad-logo.png"/>
+								<span class="tile-label">3D Design</span>
+							</div>
+							<div class="slide-over bg-create text-small padding10">
+								TinkerCad is a 3D modelling application
+							</div>
+						</div>
+						<div data-role="dialog" id="TinkerCad3DDesignDialog" class="padding20" data-close-button="true" data-href="./about/tinkercad-3d-design-help.html" data-width="600"></div>
+					</div>
+
+					<!-- TinkerCad Circuit Design -->
+					<div class="tile bg-create" data-role="tile" onclick="tileClick('https://www.tinkercad.com/#/?type=circuits&collection=designs','TinkerCad Circuit Design', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#TinkerCadCircuitDesignDialog', event);"></span>
+								<img class="tile-image icon" src="./images/tinkercad-logo.png"/>
+								<span class="tile-label">Circuit Design</span>
+							</div>
+							<div class="slide-over bg-create text-small padding10">
+								TinkerCad includes a circuit design and simulation application
+							</div>
+						</div>
+						<div data-role="dialog" id="TinkerCadCircuitDesignDialog" class="padding20" data-close-button="true" data-href="./about/tinkercad-circuit-design-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- Beetle Blocks -->
+					<div class="tile bg-create" data-role="tile" onclick="tileClick('http://beetleblocks.com/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#BeetleBloxDialog', event);"></span>
+								<img class="tile-image icon" src="./images/beetle-blocks.png"/>
+								<span class="tile-label"><span class='notranslate' translate='no'>Beetle Blocks</span></span>
+							</div>
+							<div class="slide-over bg-create text-small padding10">
+								Design a 3D model through programming
+							</div>
+						</div>
+						<div data-role="dialog" id="BeetleBloxDialog" class="padding20" data-close-button="true" data-href="./about/beetleblocks-help.html" data-width="600"></div>
+					</div>
+
+					<!-- 3D Slah -->
+					<div class="tile-small bg-create" data-role="tile" onclick="tileClick('https://www.3dslash.net/slash.php', '3D Slash', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#3DSlashDialog', event);"></span>
+								<img class="tile-image icon" src="./images/3d-slash-logo.png"/>
+							</div>
+							<div class="slide-over bg-create text-small padding10">
+								3D Slash to make models
+							</div>
+						</div>
+						<div data-role="dialog" id="3DSlashDialog" class="padding20" data-close-button="true" data-href="./about/3d-slash-help.html" data-width="600"></div>
+					</div>
+
+					<!-- Cura -->
+					<div class="tile-small bg-create" data-role="tile" onclick="helpClick('#CuraDialog', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#CuraDialog', event);"></span>
+								<img class="tile-image icon" src="./images/cura-logo.png"/>
+							</div>
+							<div class="slide-over bg-create text-small padding10">
+								Cura to print 3D models
+							</div>
+						</div>
+						<div data-role="dialog" id="CuraDialog" class="padding20" data-close-button="true" data-href="./about/cura-help.html" data-width="600"></div>
+					</div>
+
+					
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Create Group-->
+			
+			<!-- PROGRAM GROUP -->
+			<div class="tile-group double">
+				<span class="tile-group-title">Program</span>
+				<div class="tile-container">
+					
+					<!-- SNAP -->
+					<div class="tile bg-ardu-pi" data-role="tile" onclick="tileClick('./snap/snap.html','Snap!', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5" onclick="helpClick('#SnapDialog', event);"></span>
+								<img class="tile-image icon" src="./images/snap_logo-110.png"/>
+								<span class="tile-label"><span class='notranslate' translate='no'>Snap!</span></span>
+							</div>
+							<div class="slide-over bg-ardu-pi text-small padding10">
+								<span class='notranslate' translate='no'>Snap!</span> might have been called Scratch Senior</span>
+							</div>
+						</div>
+						<div data-role="dialog" id="SnapDialog" class="padding20" data-close-button="true" data-href="./about/snap-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- SNAP4ARDUINO -->
+<!-- 					<div class="tile bg-arduino" data-role="tile" onclick="var win = window.open('http://snap4arduino.rocks/run/'); win.focus();"> -->
+					<div class="tile bg-arduino" data-role="tile" onclick="tileClick('./snap4arduino/index.html','Snap4Arduino', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#Snap4ArduinoDialog', event);"></span>
+								<img class="tile-image icon" src="./images/ardu-logo.png"/>
+								<span class="tile-label">Snap4Arduino</span>
+							</div>
+							<div class="slide-over bg-arduino text-small padding10">
+								A version of Snap! for controlling Arduinos. Click the ? for help if this is the first time.
+							</div>
+						</div>
+						<div data-role="dialog" id="Snap4ArduinoDialog" class="padding20" data-close-button="true" data-href="./about/snap4arduino-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- ARDUBLOCK -->
+					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="tileClick('http://blog.ardublock.com/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#ArdublockDialog', event);"></span>
+								<span class="tile-image icon"><span class='notranslate' translate='no'>A</span></span>
+<!-- 								<span class="tile-label">Ardublock</span> -->
+							</div>
+							<div class="slide-over bg-arduino text-small padding10">
+								Ardublock blocks-based language for programming Arduinos.
+							</div>
+						</div>
+						<div data-role="dialog" id="ArdublockDialog" class="padding20" data-close-button="true" data-href="./about/ardublock-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- SCRATCH 4 RPi -->
+					<div class="tile-small bg-raspberry" data-role="tile" onclick="tileClick('https://scratch.mit.edu/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#Scratch4RPiDialog', event);"></span>
+								<img class="tile-image icon" src="./images/scratch-logo-small.png"/>
+							</div>
+							<div class="slide-over bg-raspberry text-small padding10">
+								Scratch for Raspberry Pi.
+							</div>
+						</div>
+						<div data-role="dialog" id="Scratch4RPiDialog" class="padding20" data-close-button="true" data-href="./about/scratch-4-raspberry-pi.html" data-width="600"></div>
+					</div>
+					
+					<!-- SCRATCH 4 ARDUINO -->
+					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="tileClick('http://s4a.cat/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#Scratch4ArduDialog', event);"></span>
+								<img class="tile-image icon" src="./images/scratch-logo-small.png"/>
+							</div>
+							<div class="slide-over bg-arduino text-small padding10">
+								Scratch for Arduino.
+							</div>
+						</div>
+						<div data-role="dialog" id="Scratch4ArduDialog" class="padding20" data-close-button="true" data-href="./about/scratch-4-arduino.html" data-width="600"></div>
+					</div>
+					
+					<!-- APP INVENTOR -->
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="tileClick('http://ai2.appinventor.mit.edu/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#AppInventorDialog', event);"></span>
+								<img class="tile-image icon" src="./images/app-inventor-allwhite.png"/>
+							</div>
+							<div class="slide-over bg-ardu-pi text-small padding10">
+								MIT App Inventor
+							</div>
+						</div>
+						<div data-role="dialog" id="AppInventorDialog" class="padding20" data-close-button="true" data-href="./about/app-inventor-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- POCKET CODE -->
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="tileClick('https://www.catrobat.org/intro/', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#PocketCodeDialog', event);"></span>
+								<img class="tile-image icon" src="./images/pocket-code-allwhite.png"/>
+							</div>
+							<div class="slide-over bg-ardu-pi text-small padding10">
+								<span class='notranslate' translate='no'>Pocket Code</span>
+							</div>
+						</div>
+						<div data-role="dialog" id="PocketCodeDialog" class="padding20" data-close-button="true" data-href="./about/pocket-code-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- NETSBLOX -->
+					<div class="tile-small bg-ardu-pi fg-white" data-role="tile" onclick="tileClick('https://editor.netsblox.org/','NetsBlox', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#NetsBloxDialog', event);"></span>
+								<img class="tile-image icon" src="./images/netsblox.png"/>
+							</div>
+							<div class="slide-over bg-ardu-pi text-small padding10">
+								NetsBlox
+							</div>
+						</div>
+						<div data-role="dialog" id="NetsBloxDialog" class="padding20" data-close-button="true" data-href="./about/netsblox-help.html" data-width="600"></div>
+					</div>
+					
+					<!-- ARDUINO IDE -->
+					<div class="tile-small bg-arduino fg-white" data-role="tile" onclick="tileClick('https://create.arduino.cc/editor', undefined, event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#ArduinoIdeDialog', event);"></span>
+								<img class="tile-image icon" src="./images/arduino-ide.png"/>
+							</div>
+							<div class="slide-over bg-arduino text-small padding10">
+								Arduino IDE
+							</div>
+						</div>
+						<div data-role="dialog" id="ArduinoIdeDialog" class="padding20" data-close-button="true" data-href="./about/arduino-ide-help.html" data-width="600"></div>
+					</div>
+					
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Program Group-->
+			
+			<!-- SHARE GROUP -->
+			<div class="tile-group one">
+				<span class="tile-group-title">Share</span>
+				<div class="tile-container">
+				
+					<!--Thingiverse-->
+					<div class="tile bg-share fg-white" data-role="tile" onclick="tileClick('https://www.thingiverse.com/','Thingiverse', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<span class="mif-question place-right margin5"  onclick="helpClick('#ThingiverseDialog', event);"></span>
+								<img class="tile-image icon" src="./images/thingiverse-logo.png"/>
+								<span class="tile-label">Thingiverse
+								</span>
+							</div>
+							<div class="slide-over bg-share text-small padding10">
+								Share you 3D models here
+							</div>
+						  </div>
+						  <div data-role="dialog" id="ThingiverseDialog" class="padding20" data-close-button="true" data-href="./about/thingiverse-help.html" data-width="600"></div>
+					</div>
+
+					<!--My Work-->
+					<div class="tile bg-share fg-white" data-role="tile" onclick="tileClick('./lnu/sharing/index.html','Sharing', event);">
+						<div class="tile-content iconic slide-up">
+							<div class="slide-up-2">
+								<!--<span class="mif-question place-right margin5"  onclick="helpClick('#ThingiverseDialog', event);"></span>-->
+								<img class="tile-image icon" src="./lnu/sharing/images/share-tool-icon.png"/>
+								<span class="tile-label">Share My Work
+								</span>
+							</div>
+							<div class="slide-over bg-share text-small padding10">
+								Share you work here
+							</div>
+						</div>
+						<!--<div data-role="dialog" id="ThingiverseDialog" class="padding20" data-close-button="true" data-href="./about/thingiverse-help.html" data-width="600"></div>-->
+					</div>
+			  
+				</div> <!--End of group tiles-->
+			</div> <!-- End of Share Group-->
+			
+		</div> <!--End of Main Tile Area-->
+
+		<div class="tile-group two" id="divProjects" stylez="display:none;">
+			<span class="tile-group-title">UUI Tools</span>
+			<div class="tile-large bg-darkBlue fg-white padding30" data-role="tile">
+				<div class="" style="width:100%; height:100%;" id="tileProjects">
+					<a href="#" class="whiteLink" onclick="openHelpDialog('#NewProjectDialog', event)";>Create New Project ...</a><br/>
+					<div data-role="dialog" id="NewProjectDialog" class="padding20" data-close-button="true" data-href="./dialogs/new_project.html" data-width="600"></div>
+					<hr/>
+				</div>
+				<script>
+					var userId = window.sessionStorage.getItem("userId");
+					if(userId!=undefined && userId!=-1){
+						getUserProjects(userId, handleGetProjectsResponse);
+					}
+	
+					function handleGetProjectsResponse(phpResponse){
+						var jsonData = JSON.parse(phpResponse);
+						
+						for(i=0; i<jsonData.DATA.length && i<8;i++){
+							var prjId = jsonData.DATA[i].ID;
+							var spanLink = $("<div>").css("padding","4px").css("width","100%").css("border", "0px").addClass("no-margin").attr("id", "spanPrj_" + prjId);
+							var alink = $("<a>").addClass("whiteLink").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
+							if(window.sessionStorage.getItem("currentProjectId")==prjId)
+								spanLink.addClass("bg-darkCobalt");
+							spanLink.append(alink);
+							$("#tileProjects").append(spanLink);//.append("<br/>");
+						}
+					}
+					function SelectProject(){
+						var curPrjId = window.sessionStorage.getItem("currentProjectId");
+						var curSelectedDiv = null;
+						if(curPrjId!=null && curPrjId!=undefined && curPrjId!=-1)
+							curSelectedDiv = $("#spanPrj_" + curPrjId);
+
+						var clickedLink = $(event.srcElement);
+						var prjId = clickedLink.data("PROJECTID");
+						window.sessionStorage.setItem("currentProjectId",prjId);
+
+						var newSelectedDiv = $("#spanPrj_" + prjId);
+
+						if(curSelectedDiv!=null)
+							curSelectedDiv.removeClass("bg-darkCobalt");
+						if(newSelectedDiv!=null && newSelectedDiv!=undefined)
+							newSelectedDiv.addClass("bg-darkCobalt");
+					}
+				</script>
+			<span class="tile-label text-shadow">Recent Projects</span>
+			</div>
+		</div>
+	</div> <!--End of Main Content Container-->
+
+	<!--Login Box and Hidden Data-->
+	<div  id="loginForm" class="login-form padding20 block-shadow" style="z-index:2;">
+		<div class="overlay" style="background-color: rgba(0, 0, 0, 0.5);z-index:-1;"></div>
+        <!--<form>-->
+            <h1 class="text-light">Login to eCraft2Learn</h1>
+            <hr class="thin"/>
+            <br />
+            <div class="input-control text full-size" data-role="input">
+                <label for="user_login">Username:</label>
+                <input type="text" name="username" id="username" class="fg-black" placeholder="Enter your name, nickname, or user name.">
+				<button class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <br />
+            <br />
+            <div class="input-control select full-size" data-role="input">
+                <label for="user_password">Pilot Site:</label>
+                <!--<input type="password" name="user_password" id="user_password">
+                <button class="button helper-button reveal"><span class="mif-looks"></span></button>-->
+				<select class="fg-black" name="pilotsite" id="pilotsite">
+					<option value='10'>Not at a pilot site</option>
+					<option value='11'>Pataluoto School</option>
+					<option value='12'>Lyseo High School</option>
+					<option value='13'>Athens informal pilot site</option>
+					<option value='14'>Athens formal pilot site</option>
+				</select>
+            </div>
+            <br />
+            <br />
+            <div class="form-actions">
+                <button type="button" class="button primary" onclick="HandleUserLogin();">Login</button>
+				<!--<button type="button" class="button link">Cancel</button>-->
+				<script>
+					function HandleUserLogin(){
+						selectUser($("#username").val(), $("#pilotsite").val(), HandleLoginCallback);
+					}
+					function HandleLoginCallback(phpResponse){
+						handleSelectUserResponse(phpResponse);
+						if(window.sessionStorage.getItem("errorStatus")=="fail"){
+							//TODO: I am assuming that the new user IS a group user. Later we should ask the user and act accordingly
+							addUser($("#username").val(), $("#pilotsite").val(), 1);
+							location.reload();
+						}
+						else{
+							location.reload();
+						}
+					}
+					$('#loginForm').keyup(function HandleKeyUp(event)
+					{
+						if(event.which == 13)
+							HandleUserLogin();
+					});
+					$('#pilotsite').keydown(function HandleKeyUp(event)
+					{
+						event.preventDefault();
+						if(event.which == 13)
+							HandleUserLogin();
+					});
+				</script>
+            </div>
+        <!--</form>-->
+	</div>
+	
+	<!-- The Task Bar at the bottom of the page-->
+	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-index:0;" onmouseenter="showMetroCharm('#bottomCharm');"></div>
+	<div id="bottomCharm" data-role="charm" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
+
+	<!-- User name and progress -->
+	<div id="userProgressDiv" class="margin20" style="position: absolute; right:0; top:10px;">
+		<span class="icon mif-user"/>
+		<a id="userBadge" href="#" onclick="openUserMenu();" class="sub-header no-margin text-light"><script>document.write(window.sessionStorage.getItem('username'));</script></span></a><br/>
+		<div class="progress small pull-right" data-role="progress" data-value="getUserProgress();" style="width:100%;"></div>
+		<script>
+			function openUserMenu(){
+				$("#userMenu").show();
+			}
+			function getUserProgress(){
+				var sessionId = window.sessionStorage.getItem('pilotsite');
+				var users = window.sessionStorage.getItem('username');
+
+				var formData = new FormData();
+				formData.append("users", users);
+				formData.append("sessionId", sessionId);
+
+				$.ajax({
+					url: 'http://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_student_models_pilot_2.php',
+					//url: 'http://localhost/fileman/fileman.php',
+					dataType: 'text',
+					cache: false,
+					contentType: false,
+					processData: false,
+					data: formData,
+					type: 'post',
+					async: false,
+					success: function (php_script_response) {
+						//alert(php_script_response);
+						return 50;
+					}
+				});
+			}
+		</script>
+	</div>
+
+	<div id="userMenu" class="margin10 padding20 bg-gray" style="position:absolute; right:0; top:0; display:none; z-index:1;">
+		
+		<div style="display:flex; justify-content: left; align-items: center; font-size:20px;"> <span class="icon mif-user mif-2x fg-lightTeal"></span> <span class="no-margin text-heavy"></span>&nbsp;<script>document.write(window.sessionStorage.getItem('username'));</script></span></div><br/>
+		<div class="progress pull-right no-margin" data-role="progress" dataz-value="getUserProgress();" data-value="73" style="width:200px;"></div><br/><br/>
+		<button type="button" class="button primary" onclick="logUserOut();">Logout</button>
+		<button type="button" class="button primary" onclick="$('#userMenu').hide();">Cancel</button>
+		<script>
+			function logUserOut(){
+				window.sessionStorage.clear();
+				location.reload();
+			}
+		</script>
+	</div>
+
+	<!-- OER Panel to the Right-->
+	<div class="pull-right" style="position: absolute; right:0; top:80px; z-index:0;" onclick="toggleMetroCharm('#rightCharm');">
+		<button class="image-button large-button fg-white bg-transparent">Educational Resources</button>
+    </div>
+	<div id="rightCharm" data-role="charm" data-position="right"  class="bg-help-charm" style="overflow-y:auto;"><span>&nbsp;</span>
+		
+		<br/><br/><br/>
+		
+		<ul id="oerElementsUL" class="v-menu subdown darcula notranslate" translate="no" style="width:100%;">
+			<!--<li><a href="#"><img src="./images/electronics.png">Electronic Devices</a></li>-->
+
+			<!-- Electronic Devices -->
+			<li><a class="dropdown-toggle"><img src="./images/electronics.png" class="mif-ani-hover-spanner"></img>Electronic Devices</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" class="dropdown-toggle">Basics</a>
+						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/.html');"></a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/arduino/arduino.html');">Arduino</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/arduino_prototyping_shield/arduino_prototyping_shield.html');">Arduino Prototyping Shield</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/batteries/batteries.html');">Batteries</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/breadboard/breadboard.html');">Breadboard</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/DC_Motor/DC_Motor.html');">DC Motor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Digital_and_Analog_Signals/Digital_and_Analog_Signals.html');">Digital and Analog Signals</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/general_purpose_transistor/general_purpose_transistor.html');">General Purpose Transistor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Input_and_Output_Devices/Input_and_Output_Devices.html');">Input and Output Devices</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Jumper_Wires/Jumper_Wires.html');">Jumper Wires</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/led/led.html');">LED</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/raspberry_pi/raspberry_pi.html');">Raspberry Pi</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Resistor/Resistor.html');">Resistor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Switch/Switch.html');">Switch</a></li>
+						</ul>
+					</li>
+					<li><a href="#" class="dropdown-toggle">Sensors</a>
+						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Accelerometer/Accelerometer.html');">Accelerometer</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Color_Sensor/Color_Sensor.html');">Color Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/flame_sensor/flame_sensor.html');">Flame Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Flex_Sensor/Flex_Sensor.html');">Flex Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/force_sensor/force_sensor.html');">Force Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Gas_Sensor/Gas_Sensor.html');">Gas Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Gyroscope/Gyroscope.html');">Gyroscope</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/imu/imu.html');">IMU</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ir_proximity_sensor/ir_proximity_sensor.html');">IR Proximity Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/LDR_Sensor/LDR_Sensor.html');">Photoresistor (LDR Sensor)</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/line_tracking_sensor/line_tracking_sensor.html');">Line Tracking Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Microphone/Microphone.html');">Microphone</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Piezo_Sensor/Piezo_Sensor.html');">Piezo Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/PIR_sensor/PIR_sensor.html');">PIR sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Potentiometer_Sensor/Potentiometer_Sensor.html');">Potentiometer Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Pressure_Sensor/Pressure_Sensor.html');">Pressure Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Sensors/Sensors.html');">Sensors</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Tilt_Sensor/Tilt_Sensor.html');">Tilt Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Ultrasonic_Sensor/Ultrasonic_Sensor.html');">Ultrasonic Sensor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/visible_light_sensor/visible_light_sensor.html');">Visible Light Sensor</a></li>
+						</ul>
+					</li>
+					<li><a href="#" class="dropdown-toggle">More ...</a>
+						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/IR_Array/IR_Array.html');">IR Array</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Conductive_Paint/Conductive_Paint.html');">Conductive Paint</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Conductive_Thread/Conductive_Thread.html');">Conductive Thread</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Copper_Tape/Copper_Tape.html');">Copper Tape</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/l293d_h_bridge/l293d_h_bridge.html');">L293D Bridge</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Magnetic_Switch/Magnetic_Switch.html');">Magnetic Switch</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/motor_controller/motor_controller.html');">Motor Controller</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/piezo_speaker/piezo_speaker.html');">Piezo Speaker</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/relay_board/relay_board.html');">Relay Board</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/Servo_Motor/Servo_Motor.html');">Servo Motor</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/step_up_voltage_regulator/step_up_voltage_regulator.html');">Step-up Voltage Regulator</a></li>
+						</ul>
+					</li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+			
+			<!-- 3D Printing -->
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-rocket mif-ani-hover-spanner"></span>
+					<span class="title">3D Printing</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/3d_printing/3d_printing.html');">3D Printing</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/introduction_to_3d_printing/introduction_to_3d_printing.html');">3D Printing Introduction</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/3d_cad_modelling_in_tinkercad/3d_cad_modelling_in_tinkercad.html');">3D Modelling in Tinkercad</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/getting_started_guide_for_schools/getting_started_guide_for_schools.html');">Getting Started</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/extruding_a_3d_model_from_a_2d_image/extruding_a_3d_model_from_a_2d_image.html');">3D Model from 2D Image</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/cura_quick_start_guide/cura_quick_start_guide.pdf');">Cura Quickstart</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/cura_videos_3/cura_videos_3.html');">Cura Videos</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ultimaker_2plus_manual/ultimaker_2plus_manual.html');">UM2+ User Manual</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ultimaker_3_quick_start_guide/ultimaker_3_quick_start_guide.html');">UM3 Quick Start</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, 'help/oer/ultimaker_3_manual/ultimaker_3_manual.html');">UM3 Manual</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+				
+			<!-- A.I. Section -->
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-squirrel mif-ani-hover-spanner"></span>
+					<span class="title">A.I.</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" data-role="searchable" onclick="tileClick('/ai/', 'AI programming guide in Snap and Snap4Arduino', event)">AI programming in Snap</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+
+			<!-- Communities Section -->
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-users mif-ani-hover-spanner"></span>
+					<span class="title">Communities</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<li><a href="#" onclick="tileClick('https://community.ultimaker.com/','Ultimaker Community', event);">3D Printing</a></li>
+					<!--The following 2 links cannot be opened in a window because of XFrame limitation and HTTP/HTTPS, for now I am opening them in a new tab, until the issue is fixed-->
+					<li><a href="https://forum.arduino.cc/"  target="_blank" onclick_oldold="tileClick('https://forum.arduino.cc/','Arduino Forum', event);">Arduino Forum</a></li>
+					<li><a href="http://playground.arduino.cc/" target="_blank" onclick_old="tileClick('http://playground.arduino.cc/','Arduino Playground', event);">Arduino Wiki</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+			
+			<!-- Troubleshooting Section -->
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-wrench mif-ani-hover-spanner"></span>
+					<span class="title">Troubleshooting</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li class="divider"></li>
+					<!--<li><a href="#" onclick="tileClick('https://ultimaker.com/en/resources/troubleshooting','Ultimaker Troubleshooting', event);">3D Printing</a></li>-->
+					<li><a href="#" class="dropdown-toggle">3D Printing</a>
+						<ul class="d-menu" data-role="dropdown">
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/3d_print_not_sticking_to_the_build_plate_long_version/3d_print_not_sticking_to_the_build_plate_long_version.html')">3D Print Not Sticking to Plate</a></li>
+							<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/3d_printing_troubleshooting_guide/3d_printing_troubleshooting_guide.pdf')">Other 3D Printing Problems</a></li>
+							<li class="divider"></li>
+						</ul>
+					</li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/troubleshooting/index.html');">eCraft2Learn Components</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+
+			
+			<!-- Worksheets Section -->
+			<li><a href="#" class="dropdown-toggle">
+					<span class="icon mif-stack mif-ani-hover-spanner"></span>
+					<span class="title">Worksheets</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown">
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/3d_modelling_student_worksheet/3d_modelling_student_worksheet.html')">3D Modelling</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/ai_student_worksheet/ai_student_worksheet.html')">A.I. (Artificial Intelligence)</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/christmas_student_worksheet/christmas_student_worksheet.html')">Christmas</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/lighthouse_student_worksheet/lighthouse_student_worksheet.html')">Lighthouse</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/open_robot_student_worksheet/open_robot_student_worksheet_1.html')">Open Robot 1</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/open_robot_student_worksheet/open_robot_student_worksheet_2.html')">Open Robot 2</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/open_robot_student_worksheet/open_robot_student_worksheet_3.html')">Open Robot 3</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/shyrabbit_student_worksheet/shyrabbit_student_worksheet.html')">Shy Rabbit</a></li>
+					<li><a href="#" data-role="searchable" onclick="showInOERWindow(event, './help/oer/sunflower_student_worksheet/sunflower_student_worksheet.html')">Sunflower</a></li>
+					<li class="divider"></li>
+				</ul>
+			</li>
+
+			<!-- Teacher Uploads Section-->
+			<li><a href="#" class="dropdown-toggle">
+				<span class="icon mif-organization mif-ani-hover-spanner"></span>
+				<span class="title">Teacher Uploads</span>
+				</a>
+				<ul class="d-menu" data-role="dropdown" id="teacher-material">
+					<li><a href="#">No material available . . . </a></li>
+				</ul>
+			</li>
+		</ul>
+		
+		<br/>
+		
+		<!--<h6>Material uploaded by the teacher</h6>
+		<ul id='teacher-material'>
+			<li>No material available</li>
+                </ul>
+
+		<br>-->
+
+		<div class="input-control text margin40" style="width: 250px; right:0;">
+			<input type="text" id="oerSearch" placeholder="Search..." onkeypress="searchOER();">
+			<button class="button" onclick="searchOER();"><span class="mif-search"></span></button>
+			<script>
+				function searchOER(){
+					var text2search = $("#oerSearch").val().toLowerCase();
+					var elemsList = $("#oerElementsUL").find("li");//.find('[data-role], searchable');
+					var resultsDiv = $("#oerResults");
+					var aElem;
+					var aText;
+
+					$(resultsDiv).empty();
+
+					$.each(elemsList, function(i, liElem){
+						aElem = $(liElem).children("a");
+					
+						if($(aElem).attr('data-role')=="searchable"){
+							aText = $(aElem).text();
+							//alert(aText+", "+text2search);
+							if(aText.toLowerCase().indexOf(text2search)>=0)
+								$(resultsDiv).append($(aElem).clone().addClass('oerSearchResult')).append("<br>");
+						}
+					});
+
+					
+				}	
+			</script>
+		</div>
+
+		<div id="oerResults">
+
+		</div>
+	</div>
+	
+</body>
