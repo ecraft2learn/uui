@@ -31,7 +31,7 @@
 					}
                 });
             }
-            metroDialog.close("#NewProjectDialog");
+            Metro.dialog.close("#NewProjectDialog");
         }
         function notifyOnErrorInput(input){
         var message = input.data('validateHint');
@@ -46,8 +46,42 @@
     </script>
     <form data-role="validator" 
 			action="javascript:"
-            data-on-submit="createNewProject()"
-            data-on-error="notifyOnErrorInput()"
+            data-on-submit='
+				var prjName = $("#txtPrjName").val();
+				var userId = window.sessionStorage.getItem("userId");
+				
+				addProject(userId, prjName);
+
+				var newPrjId = window.sessionStorage.getItem("projectId");
+				if(newPrjId==undefined || newPrjId==-1 || newPrjId==null)
+					Metro.notify.create({
+						"Could not create new project.",
+						"Alert",
+						{
+							cls: "alert"
+						}
+					});
+				else{
+					Metro.notify.create({
+						"Project <i>" + prjName + "</i> successfully created.",
+						"New Project",
+						{
+							cls: "success"
+						}
+					});
+				}
+				Metro.dialog.close("#NewProjectDialog");
+			'
+            data-on-error='
+				var message = input.data("validateHint");
+				Metro.notify.create({
+					message,
+					"Error",
+					{
+						cls: "alert"
+					}
+				});
+			'
     <!--<div class="grid">
         <div class="row cells1">
             <div class="cell">-->
