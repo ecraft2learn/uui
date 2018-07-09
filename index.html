@@ -289,7 +289,15 @@
 								]
 							});
 						}
-						if (this.status == 404) { Metro.dialog.create(title: "Page not found.");}
+						if (this.status == 404) { 
+							Metro.notify.create(
+								'Page not found.',
+								'Alert',
+								{
+									cls: "alert"
+								}
+							);
+						}
 					}
 				}
 			}
