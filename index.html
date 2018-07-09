@@ -254,15 +254,27 @@
 			}
 		}
 		
-		function helpClick(helpDialogId, event){
-		
-			//window.sessionStorage.setItem('username', params['username']);
-            //window.sessionStorage.setItem('pilotsite', params['pilotsite']);
-			var username = window.sessionStorage.getItem("username");
-			var analyticField = getAnalyticFieldName(helpDialogId, true);
-			openHelpDialog(helpDialogId, event);
-			//sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
-			sendAnalyticsData(hashFnv32a(username), 0, analyticField);
+		function helpClick(file, helpDialogId, event){
+			if (file) {
+			  var username = window.sessionStorage.getItem("username");
+			  var analyticField = getAnalyticFieldName(infoId, true);
+			  sendAnalyticsData(hashFnv32a(username), 0, analyticField);
+			  /*make an HTTP request using the attribute value as the file name:*/
+			  xhttp = new XMLHttpRequest();
+			  xhttp.open("GET", file, true);
+			  xhttp.send();
+			  xhttp.onreadystatechange = function() {
+				if (this.readyState == 4) {
+				  if (this.status == 200) { 
+					  Metro.dialog.create(this.responseText, "", {
+						width: 600,
+						removeOnClose: true
+					  });
+				  }
+				  if (this.status == 404) { Metro.dialog.create("Page not found.");}
+				}
+			  }
+			}
 		}
 		
 		function tileClick(toolUrl, winTitle, event){
@@ -677,7 +689,7 @@
 			<span class="tile-group-title">UUI Tools</span>
 			<div class="tile-large bg-darkBlue fg-white padding30" data-role="tile">
 				<div class="" style="width:100%; height:100%;" id="tileProjects">
-					<a href="#" class="whiteLink" onclick="infoClick('./dialogs/new_project.html', '#NewProjectDialog', event)";>Create New Project ...</a><br/>
+					<a href="#" class="whiteLink" onclick="helpClick('./dialogs/new_project.html', '#NewProjectDialog', event)";>Create New Project ...</a><br/>
 					<div data-role="dialog" id="NewProjectDialog" class="padding20" data-close-button="true" data-width="600"></div>
 					<hr/>
 				</div>
