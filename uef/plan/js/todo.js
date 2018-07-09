@@ -260,22 +260,3 @@ data = data || {};
     });
 
 })(todo, data, jQuery);
-window.blockMenuHeaderScroll = false;
-$('#temp-canvas').on('touchstart', function(e)
-{
-    if ($(e.target).closest('#mobileMenuHeader').length == 1)
-    {
-        blockMenuHeaderScroll = true;
-    }
-});
-$('#temp-canvas').on('touchend', function()
-{
-    blockMenuHeaderScroll = false;
-});
-$('#temp-canvas').on('touchmove', function(e)
-{
-    if (blockMenuHeaderScroll)
-    {
-        e.preventDefault();
-    }
-});

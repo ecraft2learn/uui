@@ -3685,3 +3685,21 @@
     };
 
 })();
+window.blockMenuHeaderScroll = false;
+$('#temp-canvas').on('mousedown touchstart', function(e)
+{
+	console.log('a');
+    blockMenuHeaderScroll = true;
+});
+$('.design-surface').on('mouseup touchend', function()
+{
+	console.log('b');
+    blockMenuHeaderScroll = false;
+});
+$('.design-surface').on('touchmove', function(e)
+{
+    if (blockMenuHeaderScroll)
+    {
+        e.preventDefault();
+    }
+});
