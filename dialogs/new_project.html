@@ -2,10 +2,6 @@
 <h3>New Project</h3>
 <hr/>
 <div class="m-5">
-    <!--New Project Name:
-    <div class="input-control text bg-red">
-        <input type="text input-control full-size" placeholder="Type the name of your project ...">
-    </div>-->
     <script>
         function createNewProject(){
             var prjName = $("#txtPrjName").val();
@@ -46,42 +42,8 @@
     </script>
     <form data-role="validator" 
 			action="javascript:"
-            data-on-submit='
-				var prjName = $("#txtPrjName").val();
-				var userId = window.sessionStorage.getItem("userId");
-				
-				addProject(userId, prjName);
-
-				var newPrjId = window.sessionStorage.getItem("projectId");
-				if(newPrjId==undefined || newPrjId==-1 || newPrjId==null)
-					Metro.notify.create({
-						"Could not create new project.",
-						"Alert",
-						{
-							cls: "alert"
-						}
-					});
-				else{
-					Metro.notify.create({
-						"Project <i>" + prjName + "</i> successfully created.",
-						"New Project",
-						{
-							cls: "success"
-						}
-					});
-				}
-				Metro.dialog.close($(this).closest(".info-box"));
-			'
-            data-on-error='
-				var message = input.data("validateHint");
-				Metro.notify.create({
-					message,
-					"Error",
-					{
-						cls: "alert"
-					}
-				});
-			'
+            data-on-submit='createNewProject'
+            data-on-error='notifyOnErrorInput'
 	>
 		<label>Project Name</label>
 		<div class="input-control text full-size">
