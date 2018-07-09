@@ -88,8 +88,10 @@
                 <label>Project Name</label>
                 <div class="input-control text full-size">
                     <input type="text" id="txtPrjName" 
-                                        data-validate-func="required" 
-                                        data-validate-hint="Project name cannot be empty">
+                                        data-validate="required minlength=1">
+					<span class="invalid_feedback">
+						Project name cannot be empty
+					</span>
                     <!--<span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>-->
                 </div>
