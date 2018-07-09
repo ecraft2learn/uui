@@ -42,7 +42,7 @@
     </script>
     <form data-role="validator" 
 			action="javascript:"
-            data-on-submit='createNewProject'
+            data-on-submit='createNewProject()'
 	>
 		<label>Project Name</label>
 		<div class="input-control text full-size">
@@ -56,7 +56,7 @@
     
 
 		<div class="form-actions" style="margin-top:30px;">
-			<button class="button primary" onclick="Metro.infobox.close($(this).closest('.info-box').attr('id'));">Cancel</button>
+			<!--<button class="button primary" onclick="Metro.infobox.close($(this).closest('.info-box').attr('id'));">Cancel</button>--!>
 			<button class="button primary success">Create</button>
 		</div>
     
