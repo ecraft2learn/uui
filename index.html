@@ -233,51 +233,51 @@
 	<script>
 		function infoClick(file, infoId) {
 			if (file) {
-			  var username = window.sessionStorage.getItem("username");
-			  var analyticField = getAnalyticFieldName(infoId, true);
-			  sendAnalyticsData(hashFnv32a(username), 0, analyticField);
-			  /*make an HTTP request using the attribute value as the file name:*/
-			  xhttp = new XMLHttpRequest();
-			  xhttp.open("GET", file, true);
-			  xhttp.send();
-			  xhttp.onreadystatechange = function() {
-				if (this.readyState == 4) {
-				  if (this.status == 200) { 
-					  Metro.infobox.create(this.responseText, "", {
-						width: 600,
-						removeOnClose: true
-					  });
-				  }
-				  if (this.status == 404) { Metro.infobox.create("Page not found.");}
+				var username = window.sessionStorage.getItem("username");
+				var analyticField = getAnalyticFieldName(infoId, true);
+				sendAnalyticsData(hashFnv32a(username), 0, analyticField);
+				/*make an HTTP request using the attribute value as the file name:*/
+				xhttp = new XMLHttpRequest();
+				xhttp.open("GET", file, true);
+				xhttp.send();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4) {
+						if (this.status == 200) { 
+							Metro.infobox.create(this.responseText, "", {
+								width: 600,
+								removeOnClose: true
+							});
+						}
+						if (this.status == 404) { Metro.infobox.create("Page not found.");}
+					}
 				}
-			  }
 			}
 		}
 		
 		function helpClick(file, helpDialogId, event){
 			if (file) {
-			  var username = window.sessionStorage.getItem("username");
-			  var analyticField = getAnalyticFieldName(helpDialogId, true);
-			  sendAnalyticsData(hashFnv32a(username), 0, analyticField);
-			  /*make an HTTP request using the attribute value as the file name:*/
-			  xhttp = new XMLHttpRequest();
-			  xhttp.open("GET", file, true);
-			  xhttp.send();
-			  xhttp.onreadystatechange = function() {
-				if (this.readyState == 4) {
-				  if (this.status == 200) { 
-					  Metro.dialog.create({
-						  "", 
-						  this.responseText, 
-						  actions [{
-							width: 600,
-							removeOnClose: true
-						  }]
-					  });
-				  }
-				  if (this.status == 404) { Metro.dialog.create("Page not found.");}
+				var username = window.sessionStorage.getItem("username");
+				var analyticField = getAnalyticFieldName(helpDialogId, true);
+				sendAnalyticsData(hashFnv32a(username), 0, analyticField);
+				/*make an HTTP request using the attribute value as the file name:*/
+				xhttp = new XMLHttpRequest();
+				xhttp.open("GET", file, true);
+				xhttp.send();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4) {
+						if (this.status == 200) { 
+							Metro.dialog.create({
+								title: "", 
+								content: this.responseText, 
+								actions: [{
+									width: 600,
+									removeOnClose: true
+								}]
+							});
+						}
+						if (this.status == 404) { Metro.dialog.create("Page not found.");}
+					}
 				}
-			  }
 			}
 		}
 		
