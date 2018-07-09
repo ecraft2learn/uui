@@ -56,6 +56,9 @@
 	<!--LNU CODE END-->
 
 	<style>
+		.whitelink {
+			color: white !important;
+		}
 		.badge-small-top {
 			top: 2px;
 			right: 2px;
@@ -720,7 +723,7 @@
 						<span class="tile-group-title">UUI Tools</span>
 						<div class="tile-large bg-darkBlue fg-white p-3" data-role="tile">
 							<div class="" style="width:100%; height:100%;" id="tileProjects">
-								<a href="#" class="fg-white" onclick="infoClick('./dialogs/new_project.html', 'New project', event);">Create New Project ...</a><br/>
+								<a href="#" class="whiteLink" onclick="infoClick('./dialogs/new_project.html', 'New project', event);">Create New Project ...</a><br/>
 								<hr/>
 							</div>
 							<script>
@@ -735,7 +738,7 @@
 									for(i=0; i<jsonData.DATA.length && i<8;i++){
 										var prjId = jsonData.DATA[i].ID;
 										var spanLink = $("<div>").css("padding","4px").css("width","100%").css("border", "0px").addClass("no-margin").attr("id", "spanPrj_" + prjId);
-										var alink = $("<a>").addClass("fg-white small-text").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
+										var alink = $("<a>").addClass("whiteLink").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
 										if(window.sessionStorage.getItem("currentProjectId")==prjId)
 											spanLink.addClass("bg-darkCobalt");
 										spanLink.append(alink);
