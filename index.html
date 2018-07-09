@@ -271,6 +271,16 @@
 								content: this.responseText, 
 								width: "600",
 								removeOnClose: true
+								actions: [
+									{
+										caption: "Create",
+										cls: "js-dialog-close button primary success"
+									},
+									{
+										caption: "Cancle",
+										cls: "js-dialog-close"
+									}
+								]
 							});
 						}
 						if (this.status == 404) { Metro.dialog.create("Page not found.");}
