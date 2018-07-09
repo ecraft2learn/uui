@@ -6,11 +6,6 @@
 		<script src="../libraries/js/jquery-3.2.1.min.js"></script>
 		<script src="../libraries/js/bootstrap.min.js"></script>  
 		<script src="../libraries/js/metro.js"></script>
-		<script>
-			function showNotify() {
-				Metro.notify.create("This is a notify", "Title", {});
-			}
-		</script>
 	</head>
 	<body>
 			<form data-role="validator" action="javascript:">
@@ -21,7 +16,7 @@
 						Project name cannot be empty
 					</span>
 				</div>
-				<button class="button primary success closer" onclick="showNotify();">Create</button>
+				<button class="button primary success" onclick="onclick="var notify = Metro.notify; notify.setup({container: 'html'}); notify.create('test', '', { cls: 'pos-fixed pos-top-right success'});"">Create</button>
 			</form>
 	</body>
 </html>
