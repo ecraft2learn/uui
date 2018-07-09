@@ -269,10 +269,8 @@
 							Metro.dialog.create({
 								title: "", 
 								content: this.responseText, 
-								actions: [{
-									width: 600,
-									removeOnClose: true
-								}]
+								width: "600",
+								removeOnClose: true
 							});
 						}
 						if (this.status == 404) { Metro.dialog.create("Page not found.");}
