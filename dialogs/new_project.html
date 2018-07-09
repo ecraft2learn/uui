@@ -6,31 +6,6 @@
     <div class="input-control text bg-red">
         <input type="text input-control full-size" placeholder="Type the name of your project ...">
     </div>-->
-    
-    <form data-role="validator" 
-            data-on-submit="createNewProject()"
-            data-on-error-input="notifyOnErrorInput"
-            data-show-error-hint="false">
-    <!--<div class="grid">
-        <div class="row cells1">
-            <div class="cell">-->
-                <label>Project Name</label>
-                <div class="input-control text full-size">
-                    <input type="text" id="txtPrjName" 
-                                        data-validate-func="required" 
-                                        data-validate-hint="Project name cannot be empty">
-                    <!--<span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span>-->
-                </div>
-        <!--</div>
-        </div>
-    </div>-->
-    
-
-    <div class="form-actions" style="margin-top:30px;">
-        <button class="button primary" onclick="Metro.dialog.close('#NewProjectDialog');">Cancel</button>
-        <button class="button primary success">Create</button>
-    </div>
     <script>
         function createNewProject(){
             var prjName = $("#txtPrjName").val();
@@ -69,6 +44,31 @@
 		});
     }
     </script>
+    <form data-role="validator" 
+			action="javascript:"
+            data-on-submit="createNewProject()"
+            data-on-error="notifyOnErrorInput()"
+    <!--<div class="grid">
+        <div class="row cells1">
+            <div class="cell">-->
+                <label>Project Name</label>
+                <div class="input-control text full-size">
+                    <input type="text" id="txtPrjName" 
+                                        data-validate-func="required" 
+                                        data-validate-hint="Project name cannot be empty">
+                    <!--<span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>-->
+                </div>
+        <!--</div>
+        </div>
+    </div>-->
+    
+
+    <div class="form-actions" style="margin-top:30px;">
+        <button class="button primary" onclick="Metro.infobox.close('#NewProjectDialog');">Cancel</button>
+        <button class="button primary success">Create</button>
+    </div>
+    
 
     </form>
 </div>
