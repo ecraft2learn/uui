@@ -153,6 +153,34 @@ function openIframeWindow(toolUrl, toolName, event) {
 	activeWindow.data('winData', frame);
 	return activeWindow;
 }
+//Given a url and a title for the window, this function creates a window (uses Metro UI dialog classes) and opens the url as an iframe in it. (no minimize, close, tray)
+function openIframeWindowP(toolUrl, toolName, event) {
+	docWidth = $(window).width() * 0.6;
+	docHeight = $(window).height() * 0.8;
+
+	var toolTile = $(event.srcElement).closest('[data-role], tile');
+	var bgColor = toolTile.css("background-color");
+	var tIcon = $(event.srcElement).prev('.slide-front').find('.icon').attr('src');
+	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
+		bgColor="rgb(64,64,64)";
+	
+	Metro.window.create({
+		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span>",
+		content: "<iframe class='iframeWindow' id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='100%' height='100%'  />",
+		draggable: false,
+		resizable: false,
+		btnMin: false,
+		btnMax: false,
+		place: 'center',
+		clsWindow: 'p-0',
+		clsContent: 'p-5'
+	}).css("background-color", bgColor);
+	activeWindow = $('.window').last();
+	var toolIcon = toolTile.find('img').attr('src');
+	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, tIcon, bgColor, toolName);
+	activeWindow.data('winData', frame);
+	return activeWindow;
+}
 
 //Given a window button (close, maximize, minimize) this function, finds the related window and closes it.
 function closeWindow(closeBtn){

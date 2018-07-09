@@ -331,6 +331,11 @@
 
 
 		}
+		
+		function newProject(toolUrl, winTitle, event){
+			openIframeWindowP(toolUrl, winTitle, event);
+		}
+		
 		function showInOERWindow(event, addr){
 			//allWin = $("div").find('[class], bg-red');
 			allWin = $("*").find("div[data-role*='dialog']");
@@ -715,7 +720,7 @@
 						<span class="tile-group-title">UUI Tools</span>
 						<div class="tile-large bg-darkBlue fg-white padding30" data-role="tile">
 							<div class="" style="width:100%; height:100%;" id="tileProjects">
-								<a href="#" class="whiteLink" onclick="helpClick('./dialogs/new_project.html', '#NewProjectDialog', event);">Create New Project ...</a><br/>
+								<a href="#" class="whiteLink" onclick="infoClick('./dialogs/new_project.html', 'New project', event);">Create New Project ...</a><br/>
 								<div data-role="dialog" id="NewProjectDialog" class="padding20" data-close-button="true" data-width="600"></div>
 								<hr/>
 							</div>
