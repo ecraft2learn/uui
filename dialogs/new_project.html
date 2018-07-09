@@ -70,7 +70,7 @@
 						}
 					});
 				}
-				Metro.dialog.close("#NewProjectDialog");
+				Metro.dialog.close($(this).closest(".info-box"));
 			'
             data-on-error='
 				var message = input.data("validateHint");
@@ -101,7 +101,7 @@
     
 
     <div class="form-actions" style="margin-top:30px;">
-        <button class="button primary" onclick="Metro.infobox.close('#NewProjectDialog');">Cancel</button>
+        <button class="button primary" onclick="Metro.dialog.close($(this).closest('.info-box'));">Cancel</button>
         <button class="button primary success">Create</button>
     </div>
     
