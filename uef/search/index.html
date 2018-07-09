@@ -1,60 +1,55 @@
 <html>
 
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel='stylesheet' type='text/css' href='lib/bootstrap/css/bootstrap.min.css'>
 		<link rel='stylesheet' type='text/css' href='lib/blueimp/css/blueimp-gallery.min.css'>
-		
 		<link rel='stylesheet' type='text/css' href='css/style.css'>
-
-		
 		<script src='lib/jquery/jquery.js'></script>
 		<script src='lib/bootstrap/js/bootstrap.min.js'></script>
 		<script src='https://www.youtube.com/iframe_api'></script>
 		<script src='js/auth.js'></script>
-
-		<link rel="stylesheet" href="../../libraries/css/metro-all.min.css">
-		
-
-		<script src="../../libraries/js/metro.js"></script>
 	</head>
 	<body>
-		<div class="container mt-10">
+		<div class="container">
     			<nav class="navbar navbar-default" role="navigation">
-				<div class="img-container" style="max-height:84px;max-width:441px;">
-					<img src='img/ecraft2learn.png' alt=''>
-				</div>
+				<img src='img/ecraft2learn.png' alt=''>
         			<div class="container-fluid">
-						<div class="place-right">
-							<span class="ml-1" style="color: slategrey;">Seach for ideas</span><br>
-							<form class="mb-2" style="max-width: 300px;">
-								<input id='search-input' type="text" data-role="search" data-clear-button="false" data-on-search-button-click="searchData(event);" placeholder="type keyword(s) here">
-							</form>
-						</div>
+            				<div class="navbar-header">
+                				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    					<span class="sr-only">Toggle navigation</span>
+                    					<span class="icon-bar"></span>
+                    					<span class="icon-bar"></span>
+                    					<span class="icon-bar"></span>
+                				</button>
+                				<a class="navbar-brand" href="#">Seach for ideas</a>
+            				</div>
+
+            				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                				<ul class="nav navbar-nav navbar-right">
+                    					<li><a href="#search">Search</a></li>
+                				</ul>
+            				</div><!-- /.navbar-collapse -->
         			</div>
     			</nav>
 		</div>
-		<!--<div id="search">
+		<div id="search">
     			<button type="button" class="close">x</button>
     			<form>
         			<input type="search" id='search-input' value="" placeholder="type keyword(s) here" />
         			<button type="submit" id='search' class="btn btn-primary">Search</button>
     			</form>
-		</div>-->
-		<div class="container">
-			<div id='wiki'></div>
-			<div id='videos'></div>
-			<div id='pictures'></div>
-			<div id="blueimp-gallery" class="blueimp-gallery">
-					<div class="slides"></div>
-					<h3 class="title"></h3>
-					<a class="prev">&larr;</a>
-					<a class="next">&rarr;</a>
-					<a class="close">&times;</a>
-					<a class="play-pause"></a>
-					<ol class="indicator"></ol>
-			</div>
+		</div>
+		<div id='wiki'></div>
+		<div id='videos'></div>
+		<div id='pictures'></div>
+		<div id="blueimp-gallery" class="blueimp-gallery">
+    			<div class="slides"></div>
+    			<h3 class="title"></h3>
+    			<a class="prev">&larr;</a>
+    			<a class="next">&rarr;</a>
+    			<a class="close">&times;</a>
+    			<a class="play-pause"></a>
+    			<ol class="indicator"></ol>
 		</div>
 		<script src='js/ui.js'></script>
 		<script src='lib/blueimp/js/blueimp-gallery.min.js'></script>

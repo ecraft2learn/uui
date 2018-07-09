@@ -3685,19 +3685,3 @@
     };
 
 })();
-window.blockMenuHeaderScroll = false;
-$('.draw-area').on('mousedown touchstart', function(e)
-{
-    blockMenuHeaderScroll = true;
-});
-$('.draw-area').on('mouseup touchend', function()
-{
-    blockMenuHeaderScroll = false;
-});
-$('.draw-area').on('touchmove', function(e)
-{
-    if (blockMenuHeaderScroll)
-    {
-        e.preventDefault();
-    }
-});
