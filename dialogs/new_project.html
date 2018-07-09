@@ -1,4 +1,7 @@
-<form data-role="validator" action="javascript:">
+<form data-role="validator" action="javascript:"
+	data-on-submit="
+		Metro.notify.create('test', 'test', {});
+	">
 	<label>First name</label>
 	<input type="text"
                 data-validate="required minlength=1"
@@ -6,4 +9,5 @@
 	<span class="invalid_feedback">
 		Input correct name with min length 1 symbols
 	</span>
+	<button class="button primary">Create</button>
 </form>
