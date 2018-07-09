@@ -564,7 +564,7 @@ function makeAjaxCall(formData, handler) {
         processData: false,
         data: formData,
         type: 'post',
-        async: true,
+        async: false,
         //success: function(php_script_response){
         //    $('#result').append(php_script_response + "<br/>");
         //}
