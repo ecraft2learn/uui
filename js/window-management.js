@@ -115,7 +115,11 @@ var alreadyOpenDialog = null;
 function openHelpDialog(helpUrl, event){
     event.stopPropagation();
 	
-	Metro.dialog.open(helpUrl);
+	//Metro.dialog.open(helpUrl);
+	Metro.dialog.create({
+		title: '',
+		content: helpURL
+	});
 	if(alreadyOpenDialog!=null && alreadyOpenDialog!=helpUrl)
 		Metro.dialog.close(alreadyOpenDialog);
 	alreadyOpenDialog = helpUrl;
