@@ -1,7 +1,5 @@
 <form data-role="validator" action="javascript:"
-	data-on-submit="
-		Metro.notify.create('test', 'test', {});
-	">
+	data-on-submit="custom=createNewProject">
 	<label>First name</label>
 	<input type="text"
                 data-validate="required minlength=1"
@@ -11,3 +9,8 @@
 	</span>
 	<button class="button primary">Create</button>
 </form>
+<script>
+	function createNewProject() {
+		Metro.notify.create('test', 'test', {});
+	}
+</script>
