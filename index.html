@@ -266,9 +266,13 @@
 			  xhttp.onreadystatechange = function() {
 				if (this.readyState == 4) {
 				  if (this.status == 200) { 
-					  Metro.dialog.create(this.responseText, "", {
-						width: 600,
-						removeOnClose: true
+					  Metro.dialog.create({
+						  "", 
+						  this.responseText, 
+						  actions [{
+							width: 600,
+							removeOnClose: true
+						  }]
 					  });
 				  }
 				  if (this.status == 404) { Metro.dialog.create("Page not found.");}
@@ -452,7 +456,6 @@
 					<div class="tiles-area pt-20 pl-10 pr-10">
 						<div class="tiles-grid tiles-group size-1 fg-white" data-group-title="Imagine">
 							<div data-role="tile" class="tile bg-ideation fg-white" data-effect="hover-slide-up">
-							<!--helpClick('#eCraftSearchDialog', event);-->
 								<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-search-help.html', '#eCraftSearchDialog');"></span>
 								<div class="slide-front" onclick="tileClick('./uef/search/index.html', 'eCraft Search', event);">
 									<img class="icon" src="./images/google-drive-logo-flat.png">
@@ -463,7 +466,6 @@
 								</div>
 							</div>
 							<div data-role="tile" class="tile bg-ideation fg-white" data-effect="hover-slide-up">
-							<!--helpClick('#eCraftSearchDialog', event);-->
 								<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/inspiratorium-help.html', '#inspiratoriumDialog');"></span>
 								<div class="slide-front" onclick="tileClick('http://ecraft.zsi.at/', undefined, event);">
 									<img class="icon" src="./images/inspiratorium_logo.svg">
@@ -477,7 +479,6 @@
 						<!-- PLAN GROUP -->
 						<div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Plan">
 							<div data-role="tile" class="tile bg-plan fg-white" data-effect="hover-slide-up">
-							<!--helpClick('#eCraftSearchDialog', event);-->
 								<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-idea-help.html', '#eCraftIdeaDialog');"></span>
 								<div class="slide-front" onclick="tileClick('./uef/ideation/index.html', 'eCraft Idea', event);">
 									<img class="icon" src="./images/google-drive-logo-flat.png">
@@ -488,7 +489,6 @@
 								</div>
 							</div>
 							<div data-role="tile" data-size="medium" class="tile bg-plan fg-white" data-effect="hover-slide-up">
-							<!--helpClick('#eCraftSearchDialog', event);-->
 								<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/trello-help.html', '#TrelloDialog');"></span>
 								<div class="slide-front" onclick="tileClick('https://trello.com/', undefined, event);">
 									<img class="icon" src="./images/trello-logo.png">
@@ -499,7 +499,6 @@
 								</div>
 							</div>
 							<div data-role="tile" data-size="medium" class="tile bg-plan fg-white" data-effect="hover-slide-up">
-							<!--helpClick('#eCraftSearchDialog', event);-->
 								<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-idea-help.html', '#eCraftIdeaDialog');"></span>
 								<div class="slide-front" onclick="tileClick('./uef/plan/index.html', 'eCraft Todo', event);">
 									<img class="icon" src="./images/google-drive-logo-flat.png">
