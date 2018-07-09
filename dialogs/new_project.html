@@ -40,33 +40,7 @@
 		});
     }
     </script>
-    <form data-role="validator" 
-			action="javascript:"
-            data-on-submit='var prjName = $("#txtPrjName").val();
-            var userId = window.sessionStorage.getItem("userId");
-            
-            addProject(userId, prjName);
-
-            var newPrjId = window.sessionStorage.getItem("projectId");
-            if(newPrjId==undefined || newPrjId==-1 || newPrjId==null)
-                Metro.notify.create({
-					"Could not create new project.",
-					"Alert",
-                    {
-						cls: "alert"
-					}
-                });
-            else{
-				Metro.notify.create({
-					"Project <i>" + prjName + "</i> successfully created.",
-					"New Project",
-                    {
-						cls: "success"
-					}
-                });
-            }
-            Metro.dialog.close($(this));'
-	>
+    <form data-role="validator" action="javascript:">
 		<label>Project Name</label>
 		<div class="input-control text full-size">
 			<div class="form-group">
@@ -76,14 +50,6 @@
 				</span>
 			</div>
 		</div>
-    
-
-		<!--<div class="dialog-actions" style="margin-top:30px;">
-			<button class="button js-dialog-close">Cancel</button>
-			<button class="button primary success js-dialog-close">Create</button>
-		</div>-->
-    
-
     </form>
 </div>
 </body>
