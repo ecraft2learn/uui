@@ -39,7 +39,31 @@
 		);
     }
     </script>
-    <form data-role="validator" action="javascript:">
+    <form class="new_project_form" data-role="validator" action="javascript:" data-on-submit='
+		var prjName = $("#txtPrjName").val();
+            var userId = window.sessionStorage.getItem("userId");
+            
+            addProject(userId, prjName);
+
+            var newPrjId = window.sessionStorage.getItem("projectId");
+            if(newPrjId==undefined || newPrjId==-1 || newPrjId==null)
+                Metro.notify.create(
+					"Could not create new project.",
+					"Alert",
+                    {
+						cls: "alert"
+					}
+                );
+            else{
+				Metro.notify.create(
+					"Project <i>" + prjName + "</i> successfully created.",
+					"New Project",
+                    {
+						cls: "success"
+					}
+                );
+            }
+	'>
 		<label>Project Name</label>
 		<div class="input-control text full-size">
 			<div class="form-group">

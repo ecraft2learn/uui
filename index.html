@@ -274,9 +274,10 @@
 								actions: [
 									{
 										caption: "Create",
-										cls: "button primary success",
+										cls: "js-dialog-close button primary success",
 										onclick: function(){
-											createNewProject();
+											$('.new_project_form').submit();
+											//createNewProject();
 										}
 									},
 									{
