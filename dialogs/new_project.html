@@ -15,7 +15,7 @@
 		var userId = window.sessionStorage.getItem("userId");
 		var newPrjId = window.sessionStorage.getItem("projectId");
 		
-		 addProject(userId, prjName);
+		addProject(userId, prjName);
 		
 		if(newPrjId==undefined || newPrjId==-1 || newPrjId==null) {
 			Metro.toast.create('Could not create new project.', null, 5000, "bg-red fg-white");
