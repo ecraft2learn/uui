@@ -22,6 +22,7 @@
 		
 		if(newPrjId==undefined || newPrjId==-1 || newPrjId==null) {
 			Metro.toast.create('Could not create new project.', null, 5000, "bg-red fg-white");
+			$('.info-box').last().data('infobox').close();
 			//Metro.notify.create('Could not create new project.', 'Alert', { cls: "alert z-front"});
 			return false;
 		} else
