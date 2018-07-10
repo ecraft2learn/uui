@@ -239,7 +239,7 @@
 	
 	<script>
 		$(document).on('click', '.btn-max', function(){
-			$(this).css('top', $(this).offset.top + $(window).scrollTop());
+			window.scrollTo($(this).position.x, 0);
 		});
 		function infoClick(file, infoId) {
 			if (file) {
