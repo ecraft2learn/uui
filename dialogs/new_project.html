@@ -1,6 +1,6 @@
 <style>
-	.z-front {
-		z-index: 999;
+	.toast-up {
+		margin-bottom: 10px;
 	}
 </style>
 <form data-role="validator" action="javascript:"
@@ -23,8 +23,8 @@
 		//addProject(userId, prjName);
 		
 		if(newPrjId==undefined || newPrjId==-1 || newPrjId==null) {
-			//Metro.toast.create('Could not create new project.', null, 5000, "bg-red fg-white");
-			Metro.notify.create('Could not create new project.', 'Alert', { cls: "alert z-front"});
+			Metro.toast.create('Could not create new project.', null, 5000, "bg-red fg-white");
+			//Metro.notify.create('Could not create new project.', 'Alert', { cls: "alert z-front"});
 			return false;
 		} else
 			Metro.toast.create('Project <i>' + prjName + '</i> successfully created.', null, 5000, "bg-green fg-white");
