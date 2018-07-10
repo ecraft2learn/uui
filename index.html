@@ -721,49 +721,63 @@
 				<div class="cell">
 					<div class="tiles-area pt-20 pl-10 pr-10" id="divProjects" stylez="display:none;">
 						<span class="tile-group-title">UUI Tools</span>
-						<div class="tile-large bg-darkBlue fg-white p-3" data-role="tile">
-							<div class="" style="width:100%; height:100%;" id="tileProjects">
-								<a href="#" class="whiteLink" onclick="infoClick('./dialogs/new_project.html', 'New project', event);">Create New Project ...</a><br/>
-								<hr/>
+						<div class="tile-large bg-darkBlue fg-white p-5" data-role="tile">
+							<div class="grid">
+								<div class="row">
+									<div class="cell">
+										<div class="" style="width:100%; height:100%;">
+											<a href="#" class="whiteLink" onclick="infoClick('./dialogs/new_project.html', 'New project', event);">Create New Project ...</a><br/>
+											<hr class="pb-0 mb-0">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="cell pt-0 mt-0 mb-5">
+										<span class="text-shadow">Recent Projects</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="cell"id="tileProjects">	
+										<script>
+											var userId = window.sessionStorage.getItem("userId");
+											if(userId!=undefined && userId!=-1){
+												getUserProjects(userId, handleGetProjectsResponse);
+											}
+							
+											function handleGetProjectsResponse(phpResponse){
+												var jsonData = JSON.parse(phpResponse);
+												
+												for(i=0; i<jsonData.DATA.length && i<8;i++){
+													var prjId = jsonData.DATA[i].ID;
+													var spanLink = $("<div>").css("width","100%").css("border", "0px").addClass("m-0 p-0").attr("id", "spanPrj_" + prjId);
+													var alink = $("<a>").addClass("whiteLink").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
+													if(window.sessionStorage.getItem("currentProjectId")==prjId)
+														spanLink.addClass("bg-darkCobalt");
+													spanLink.append(alink);
+													$("#tileProjects").append(spanLink);//.append("<br/>");
+												}
+											}
+											function SelectProject(){
+												var curPrjId = window.sessionStorage.getItem("currentProjectId");
+												var curSelectedDiv = null;
+												if(curPrjId!=null && curPrjId!=undefined && curPrjId!=-1)
+													curSelectedDiv = $("#spanPrj_" + curPrjId);
+
+												var clickedLink = $(event.srcElement);
+												var prjId = clickedLink.data("PROJECTID");
+												window.sessionStorage.setItem("currentProjectId",prjId);
+
+												var newSelectedDiv = $("#spanPrj_" + prjId);
+
+												if(curSelectedDiv!=null)
+													curSelectedDiv.removeClass("bg-darkCobalt");
+												if(newSelectedDiv!=null && newSelectedDiv!=undefined)
+													newSelectedDiv.addClass("bg-darkCobalt");
+											}
+										</script>
+									</div>
+								</div>
 							</div>
-							<script>
-								var userId = window.sessionStorage.getItem("userId");
-								if(userId!=undefined && userId!=-1){
-									getUserProjects(userId, handleGetProjectsResponse);
-								}
-				
-								function handleGetProjectsResponse(phpResponse){
-									var jsonData = JSON.parse(phpResponse);
-									
-									for(i=0; i<jsonData.DATA.length && i<8;i++){
-										var prjId = jsonData.DATA[i].ID;
-										var spanLink = $("<div>").css("padding","4px").css("width","100%").css("border", "0px").addClass("no-margin").attr("id", "spanPrj_" + prjId);
-										var alink = $("<a>").addClass("whiteLink").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
-										if(window.sessionStorage.getItem("currentProjectId")==prjId)
-											spanLink.addClass("bg-darkCobalt");
-										spanLink.append(alink);
-										$("#tileProjects").append(spanLink);//.append("<br/>");
-									}
-								}
-								function SelectProject(){
-									var curPrjId = window.sessionStorage.getItem("currentProjectId");
-									var curSelectedDiv = null;
-									if(curPrjId!=null && curPrjId!=undefined && curPrjId!=-1)
-										curSelectedDiv = $("#spanPrj_" + curPrjId);
-
-									var clickedLink = $(event.srcElement);
-									var prjId = clickedLink.data("PROJECTID");
-									window.sessionStorage.setItem("currentProjectId",prjId);
-
-									var newSelectedDiv = $("#spanPrj_" + prjId);
-
-									if(curSelectedDiv!=null)
-										curSelectedDiv.removeClass("bg-darkCobalt");
-									if(newSelectedDiv!=null && newSelectedDiv!=undefined)
-										newSelectedDiv.addClass("bg-darkCobalt");
-								}
-							</script>
-						<span class="tile-label text-shadow">Recent Projects</span>
 						</div>
 					</div>
 				</div>
