@@ -1,11 +1,16 @@
+<style>
+	.z-front {
+		z-index: 999;
+	}
+</style>
 <form data-role="validator" action="javascript:"
 	data-on-submit="custom=createNewProject">
-	<label>First name</label>
+	<label>Project Name</label>
 	<input type="text"
                 data-validate="required custom=createNewProject"
                 placeholder="Enter first name">
 	<span class="invalid_feedback">
-		Input correct name with min length 1 symbols
+		Project name cannot be empty
 	</span>
 	<button class="button primary">Create</button>
 </form>
@@ -15,10 +20,11 @@
 		var userId = window.sessionStorage.getItem("userId");
 		var newPrjId = window.sessionStorage.getItem("projectId");
 		
-		addProject(userId, prjName);
+		//addProject(userId, prjName);
 		
 		if(newPrjId==undefined || newPrjId==-1 || newPrjId==null) {
-			Metro.toast.create('Could not create new project.', null, 5000, "bg-red fg-white");
+			//Metro.toast.create('Could not create new project.', null, 5000, "bg-red fg-white");
+			Metro.notify.create('Could not create new project.', 'Alert', { cls: "alert z-front"});
 			return false;
 		} else
 			Metro.toast.create('Project <i>' + prjName + '</i> successfully created.', null, 5000, "bg-green fg-white");
