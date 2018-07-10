@@ -131,7 +131,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 
 	var toolTile = $(event.srcElement).closest('[data-role], tile');
 	var bgColor = toolTile.css("background-color");
-	var tIcon = $(event.srcElement).prev('.slide-front').find('.icon').attr('src');
+	var tIcon = $(event.srcElement).closest('.tile').find('.slide-front').find('.icon').attr('src');
 	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
 		bgColor="rgb(64,64,64)";
 	

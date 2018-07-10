@@ -241,8 +241,27 @@
 	</script>
 	
 	<script>
+		window.blockWindowHeaderScroll = false;
+		$('.window-caption').on('mousedown touchstart', function(e)
+		{
+			blockWindowHeaderScroll = true;
+		});
+		$('.window-caption').on('mouseup touchend', function()
+		{
+			blockWindowHeaderScroll = false;
+		});
+		$('.window-caption').on('touchmove', function(e)
+		{
+			if (blockWindowHeaderScroll)
+			{
+				e.preventDefault();
+			}
+		});
 		$(document).on('click', '.btn-max', function(){
 			window.scrollTo($(this).position.x, 0);
+		});
+		$(document).on('click', '.btn-min', function(){
+			$(this).closest('.window').css('top', $(window).height() * 0.1 + $(window).scrollTop());
 		});
 		function infoClick(file, infoId) {
 			if (file) {
