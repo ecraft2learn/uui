@@ -141,7 +141,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 		draggable: true,
 		resizable: false,
 		clsWindow: 'p-0',
-		top: $(window).height() * 0.1,
+		top: $(window).height() * 0.1 + $(window).scrollTop(),
 		left: $(window).height() * 0.1,
 		width: docWidth,
 		height: docHeight,
