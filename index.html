@@ -238,6 +238,9 @@
 	</script>
 	
 	<script>
+		$(document).on('click', '.btn-max', function(){
+			$(this).css('top', $(this).offset.top + $(window).scrollTop();
+		});
 		function infoClick(file, infoId) {
 			if (file) {
 				var username = window.sessionStorage.getItem("username");
