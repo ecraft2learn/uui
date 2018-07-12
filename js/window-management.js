@@ -189,8 +189,15 @@ function closeWindow(closeBtn){
 }
 
 //This function is called when the maximize button of a window is pressed. The function should be able to maximize and revert back to original sizes.
-function maximizeWindow(maxBtn){
-	var winDiv = getDialogFromBtn(maxBtn);
+function maximizeWindow(iFrame){
+	iFrame.animate({
+				top: 0,
+				left: 0,
+				height: "100%",
+				width: "100%",
+				opacity: 1,
+		},300);
+	/*var winDiv = getDialogFromBtn(maxBtn);
 	var winFrame = winDiv.find('iframe');
 	var winData = winDiv.data('winData');
 	docWidth = $(window).width();
@@ -215,7 +222,7 @@ function maximizeWindow(maxBtn){
 	}
 	else{
 		resizeWindow2Normal(winDiv, winData);
-	}
+	}*/
 }
 
 $(document).on('click', '.btn-min', function(){

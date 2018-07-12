@@ -56,6 +56,37 @@
 	<!--LNU CODE END-->
 
 	<style>
+		.charm-closer:after {
+		  content: '\D7';
+		  position: absolute;
+		  left: 50%;
+		  top: 50%;
+		  margin-top: -0.65rem;
+		  margin-left: -0.35rem;
+		}
+		.charm-closer:hover {
+		  color: #ffffff;
+		}
+		.charm-closer:active {
+		  color: #ffffff;
+		}
+		.charm-closer {
+			position: absolute;
+			display: block;
+			padding: .5rem;
+			text-align: center;
+			vertical-align: middle;
+			font-size: 2rem;
+			font-weight: normal;
+			z-index: 3;
+			outline: none;
+			cursor: pointer;
+			color: #777777;
+			top: .25rem;
+			right: 1rem;
+		}
+
+
 		.button.large {
 			font-size: 1.25rem;
 		}
@@ -258,7 +289,9 @@
 			}
 		});
 		$(document).on('click', '.btn-max', function(){
-			window.scrollTo($(this).position.x, 0);
+			window.scrollTo($(this).position.x, 0); 
+			maximizeWindow($(this).closest('.window').find('.iframeWindow'));
+			//$(this).closest('.window').find('.iframeWindow').css('height', '100%');
 		});
 		$(document).on('click', '.btn-min', function(){
 			$(this).closest('.window').css('top', $(window).height() * 0.1 + $(window).scrollTop());
@@ -875,11 +908,11 @@
 		<button class="image-button button large fg-white bg-transparent large-text">Educational Resources</button>
     </div>
 	<div id="rightCharm" data-role="charms" data-position="right"  class="bg-help-charm" style="overflow-y:auto;">
-		<div class="pull-right" style="position: absolute; right:0; top:20px;" onclick="$('#rightCharm').data('charms').close();">
-			<button class="image-button large-button fg-white bg-transparent"">Close</button>
+		<div class="pull-right" style="position: absolute; right:0; top:0;" onclick="$('#rightCharm').data('charms').close();">
+			<button class="image-button large-button bg-transparent charm-closer"></button>
 		</div>
-		<br/><br/><br/>
-		<ul id="oerElementsUL" class="v-menu subdown darcula notranslate bg-transparent fg-white" translate="no" style="width:100%;">
+		<br/><br/>
+		<ul id="oerElementsUL" class="v-menu subdown darcula notranslate bg-transparent fg-white p-3" translate="no" style="width:100%;">
 			<!--<li><a href="#"><img src="./images/electronics.png">Electronic Devices</a></li>-->
 
 			<!-- Electronic Devices -->
@@ -1048,7 +1081,7 @@
 		
 		<br/>
 		
-		<div class="input-control text margin40" style="width: 250px; right:0;">
+		<div class="input-control text m-2" style="width: 250px; right:0;">
 			<input type="text" data-role="search" data-clear-button="false" id="oerSearch" placeholder="Search..." onkeydown="searchOER();" data-on-search-button-click="searchOER();">
 			<!--<button class="button" onclick="searchOER();"><span class="mif-search"></span></button>-->
 			<script>
@@ -1065,6 +1098,7 @@
 						aElem = $(liElem).children("a");
 					
 						if($(aElem).attr('data-role')=="searchable"){
+							aElem.addClass('fg-darkBlue');
 							aText = $(aElem).text();
 							//alert(aText+", "+text2search);
 							if(aText.toLowerCase().indexOf(text2search)>=0)
@@ -1077,7 +1111,7 @@
 			</script>
 		</div>
 
-		<div id="oerResults">
+		<div id="oerResults" class="p-3" style="font-size: 0.875rem;">
 
 		</div>
 	</div>
