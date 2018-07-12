@@ -280,16 +280,15 @@
 	
 	<script>
 		window.blockWindowHeaderScroll = false;
-		$('.window-caption, .window').on('mousedown touchstart', function(e)
+		$(document).on('mousedown touchstart', '.window-caption', function(e)
 		{
-			console.log('test');
 			blockWindowHeaderScroll = true;
 		});
-		$('.window-caption, .window').on('mouseup touchend', function()
+		$(document).on('mouseup touchend', '.window-caption', function()
 		{
 			blockWindowHeaderScroll = false;
 		});
-		$('.window-caption, .window').on('touchmove', function(e)
+		$(document).on('touchmove', '.window-caption', function(e)
 		{
 			if (blockWindowHeaderScroll)
 			{
