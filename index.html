@@ -89,10 +89,6 @@
 			right: 1rem;
 		}
 
-
-		.button.large {
-			font-size: 1.25rem;
-		}
 		.toast {
 			bottom: 4rem;
 			font-size: 110%;
@@ -156,6 +152,10 @@
 			.tile-area {
 				overflow-x: scroll;
 			}
+			
+			.button.large {
+				font-size: 1.25rem;
+			}
 		}
 
         @media screen and (max-width: 640px) {
@@ -168,6 +168,14 @@
 			.tiles-group {
 				margin-bottom: 40px;
 			}
+			
+			.small-text-mobile {
+				font-size: 0.65rem;
+			}
+			
+			.button.large {
+				font-size: 0.65rem;
+			}
         }
 
         @media screen and (max-width: 320px) {
@@ -179,9 +187,10 @@
                 display: none;
             }
 			
-			.mobile-small-text {
-				font-size: 0.8rem;
+			.large-text {
+				font-size: 0.8rem !important;
 			}
+			
         }
 		
 		.login-form {
@@ -496,7 +505,7 @@
 					<div class="pt-4 pl-4 pr-4 mb-0 img-container">
 							<img id="eCraftLogo" style="min-width:120px;width:auto;" src="images/eCraft2Learn-icon.png" />
 					</div>
-					<div id="eCraftMotto" class="mt-0 mobile-small-text">
+					<div id="eCraftMotto" class="mt-0">
 						Digital Fabrication and Maker Movement in Education <!--(<a href="./help/troubleshooting/" target="_blank">Trouble shooting help</a>)-->
 					</div>
 				</div>
@@ -505,7 +514,7 @@
 					<div id="userProgressDiv" class="m-4" style="position: absolute; right:0; top:10px;">
 						<div class="row">
 							<div class="cell">
-								<a id="userBadge" href="#" onclick="openUserMenu();" class="sub-header m-0 fg-darkBlue small-text-md"><span class="icon mif-user"/><script>document.write(window.sessionStorage.getItem('username'));</script></span></a><br/>
+								<a id="userBadge" href="#" onclick="openUserMenu();" class="sub-header m-0 fg-darkBlue small-text-mobile"><span class="icon mif-user"/><script>document.write(window.sessionStorage.getItem('username'));</script></span></a><br/>
 							</div>
 						</div>
 						<div class="row">
