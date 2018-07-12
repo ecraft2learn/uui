@@ -282,6 +282,7 @@
 		window.blockWindowHeaderScroll = false;
 		$('.window-caption, .window').on('mousedown touchstart', function(e)
 		{
+			console.log('test');
 			blockWindowHeaderScroll = true;
 		});
 		$('.window-caption, .window').on('mouseup touchend', function()
