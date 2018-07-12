@@ -137,7 +137,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 	
 	Metro.window.create({
 		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span>",
-		content: "<iframe class='iframeWindow' id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='100%' height='"+(docHeight * 0.9)+"'  />",
+		content: "<iframe class='iframeWindow m-0 p-0' id='iframeWindow' src='"+toolUrl+"' frameborder='0' allowfullscreen width='100%' height='100%'  />",
 		draggable: true,
 		resizable: false,
 		clsWindow: 'p-0',
@@ -146,11 +146,12 @@ function openIframeWindow(toolUrl, toolName, event) {
 		width: docWidth,
 		height: docHeight,
 		icon: '<img class="icon" src="'+tIcon+'">'
-	}).css("background-color", bgColor);
+	});
 	activeWindow = $('.window').last();
 	var toolIcon = toolTile.find('img').attr('src');
-	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, tIcon, bgColor, toolName);
+	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, '100%', '100%', toolUrl, tIcon, bgColor, toolName);
 	activeWindow.data('winData', frame);
+	activeWindow.find('.window-caption').css("background-color", bgColor);
 	return activeWindow;
 }
 //Given a url and a title for the window, this function creates a window (uses Metro UI dialog classes) and opens the url as an iframe in it. (no minimize, close, tray)
