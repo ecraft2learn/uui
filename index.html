@@ -56,6 +56,12 @@
 	<!--LNU CODE END-->
 
 	<style>
+		.no-scroll {
+			overflow: hidden;
+		}
+		.scroll {
+			overflow: auto;
+		}
 		.window-content {
 			overflow: hidden;
 		}
@@ -299,21 +305,16 @@
 	</script>
 	
 	<script>
-		window.blockWindowHeaderScroll = false;
 		$(document).on('mousedown touchstart', '.window-caption', function(e)
 		{
-			blockWindowHeaderScroll = true;
+			$('body').removeClass('scroll');
+			$('body').addClass('no-scroll');
+			
 		});
 		$(document).on('mouseup touchend', '.window-caption', function()
 		{
-			blockWindowHeaderScroll = false;
-		});
-		$(document).on('touchmove', '.window-caption', function(e)
-		{
-			if (blockWindowHeaderScroll)
-			{
-				e.preventDefault();
-			}
+			$('body').removeClass('no-scroll');
+			$('body').addClass('scroll');
 		});
 		$(document).on('click', '.btn-max', function(){
 			window.scrollTo($(this).position.x, 0); 
