@@ -306,11 +306,12 @@
 	
 	<script>
 		$(document).ready(function(){
-			if(window.innerWidth < 320) { //mobile
-				$.each($('.no-mobile'), function(){
+			//if(window.innerWidth < 320) { //mobile
+				$('.no-mobile').each(function(index){
+					alert(index);
 					$(this).remove();
 				});
-			}
+			//}
 		});
 		$(document).on('mousedown touchstart', '.window-caption', function(e)
 		{
