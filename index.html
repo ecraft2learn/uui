@@ -307,14 +307,17 @@
 	<script>
 		$(document).on('mousedown touchstart', '.window-caption', function(e)
 		{
-			$('body').removeClass('scroll');
-			$('body').addClass('no-scroll');
-			
+			if(window.innerWidth < 640) {
+				$('body').removeClass('scroll');
+				$('body').addClass('no-scroll');
+			}
 		});
 		$(document).on('mouseup touchend', '.window-caption', function()
 		{
-			$('body').removeClass('no-scroll');
-			$('body').addClass('scroll');
+			if(window.innerWidth < 640) {
+				$('body').removeClass('no-scroll');
+				$('body').addClass('scroll');
+			}
 		});
 		$(document).on('click', '.btn-max', function(){
 			window.scrollTo($(this).position.x, 0); 
