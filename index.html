@@ -305,6 +305,13 @@
 	</script>
 	
 	<script>
+		$(document).ready(function(){
+			if(window.innerWidth < 320) { //mobile
+				$('.no-mobile').each(function(){
+					$(this).hide();
+				});
+			}
+		});
 		$(document).on('mousedown touchstart', '.window-caption', function(e)
 		{
 			if(window.innerWidth < 640) {
@@ -711,7 +718,7 @@
 						<!-- PROGRAM GROUP -->
 						<div class="tiles-grid tiles-group size-2 fg-white  mb-15" data-group-title="Program">
 							<!-- SNAP -->
-							<div data-role="tile" class="tile bg-ardu-pi fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" class="tile bg-ardu-pi fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/snap-help.html', '#SnapDialog');"></span>
 								<div class="slide-front" onclick="tileClick('./snap/snap.html','Snap!', event);">
 									<img class="icon" src="./images/snap_logo-110.png">
@@ -722,7 +729,7 @@
 								</div>
 							</div>
 							<!-- SNAP4ARDUINO -->
-							<div data-role="tile" class="tile bg-arduino fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" class="tile bg-arduino fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-top m-0 bg-transparent" onclick="infoClick('./about/snap4arduino-help.html', '#Snap4ArduinoDialog');"></span>
 								<div class="slide-front" onclick="tileClick('./snap/snap.html','Snap!', event);">
 									<img class="icon" src="./images/snap_logo-110.png">
