@@ -306,9 +306,8 @@
 	
 	<script>
 		$(document).ready(function(){
-			alert(window.innerWidth);
 			if(window.innerWidth < 320) { //mobile
-				$('.no-mobile').each(function(){
+				$.each($('.no-mobile'), function(){
 					$(this).remove();
 				});
 			}
