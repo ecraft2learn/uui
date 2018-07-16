@@ -306,14 +306,14 @@
 	
 	<script>
 		$(document).ready(function(){
-			//if(window.innerWidth < 320) { //mobile
+			alert(window.innerWidth);
+			if(window.innerWidth < 320) { //mobile
 				var ele = document.getElementsByClassName('no-mobile');
 				var len = ele.length
-				alert(ele.length);
 				for (var i = 0; i < len; ++i) {
 					ele[0].remove();
 				}
-			//}
+			}
 		});
 		$(document).on('mousedown touchstart', '.window-caption', function(e)
 		{
