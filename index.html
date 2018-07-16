@@ -191,7 +191,7 @@
 			}
         }
 
-        @media screen and (max-width: 320px) {
+        @media screen and (max-width: 420px) {
             .tile-area {
                 overflow-y: scroll;
             }
@@ -306,13 +306,15 @@
 	
 	<script>
 		$(document).ready(function(){
-			alert(window.innerWidth);
-			if(window.innerWidth < 320) { //mobile
-				var ele = document.getElementsByClassName('no-mobile');
+			if(window.innerWidth < 420) { //mobile
+				/*var ele = document.getElementsByClassName('no-mobile');
 				var len = ele.length
 				for (var i = 0; i < len; ++i) {
 					ele[0].remove();
-				}
+				}*/
+				$('.no-mobile').each(function(){
+					$(this).remove();
+				});
 			}
 		});
 		$(document).on('mousedown touchstart', '.window-caption', function(e)
