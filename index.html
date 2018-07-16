@@ -307,10 +307,11 @@
 	<script>
 		$(document).ready(function(){
 			if(window.innerWidth < 320) { //mobile
-				$('.no-mobile').each(function(index){
-					alert(index);
-					$(this).remove();
-				});
+				var ele = document.getElementsByClassName('no-mobile');
+				var len = ele.length
+				for (var i = 0; i < len; ++i) {
+					ele[0].remove();
+				}
 			}
 		});
 		$(document).on('mousedown touchstart', '.window-caption', function(e)
