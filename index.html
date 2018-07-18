@@ -16,7 +16,7 @@
     <!--<link href="libraries/css/metro.css" rel="stylesheet">
 	<link href="libraries/css/metro-schemes.css" rel="stylesheet">
 	<link href="libraries/css/metro-icons.css" rel="stylesheet">-->
-	<link rel="stylesheet" href="libraries/css/metro-all.min.css">
+	<link rel="stylesheet" href="libraries/css/metro-all.css">
     <script src="libraries/js/metro.js"></script>
 
 <!-- Sentry will report bugs to us -->
@@ -200,7 +200,7 @@
             margin: 5px;
         }
 		
-		@media all and (min-width: 640px) {
+		@media all and (min-width: 420px) {
 			.tiles-group {
 				margin-left: 40px;
 			}
@@ -210,6 +210,9 @@
 			
 			.button.large {
 				font-size: 1.25rem;
+			}
+			.mobile-only {
+				display: none;
 			}
 		}
 
@@ -350,22 +353,36 @@
 		$(document).on('click', '#hidden_apps', function(){
 			if($(this).is(':checked')) {
 				$('.no-mobile').each(function(){
-					$(this).removeClass('no-mobile');
-					$(this).addClass('no-mobile-x');
+					$(this).show();
+				});
+				$('.tiles-grid').each(function(){
+					$(this).show();
+					if(!$(this).children().is(':visible')) {
+						$(this).show();
+					}
 				});
 			} else {
-				$('.no-mobile-x').each(function(){
-					$(this).removeClass('no-mobile-x');
-					$(this).addClass('no-mobile');
+				$('.no-mobile').each(function(){
+					$(this).hide();
+				});
+				$('.tiles-grid').each(function(){
+					if(!$(this).children().is(':visible')) {
+						$(this).hide();
+					}
 				});
 			}
 		});
 		$(document).ready(function(){
 			if(window.innerWidth < 420) { //mobile
 				$('.no-mobile').each(function(){
-					$(this).remove();
+					$(this).hide();
 				});
 			}
+			$('.tiles-grid').each(function(){
+				if(!$(this).children().is(':visible')) {
+					$(this).hide();
+				}
+			});
 		});
 		$(document).on('mousedown touchstart', '.window-caption', function(e)
 		{
@@ -636,8 +653,10 @@
 						
 						<div style="display:flex; justify-content: left; align-items: center; font-size:20px;"> <span class="icon mif-user mif-2x fg-lightTeal"></span> <span class="no-margin text-heavy"></span>&nbsp;<script>document.write(window.sessionStorage.getItem('username'));</script></span></div><br/>
 						<div class="progress pull-right no-margin" data-role="progress" data-value="getUserProgress();" dataz-value="73" style="width:200px;"></div><br/><br/>
-						<input id="hidden_apps" type="checkbox" data-role="checkbox" data-caption="Show hidden applications (mobile)">
-						<br><br>
+						<div class="mobile-only">
+							<input id="hidden_apps" type="checkbox" data-role="checkbox" data-caption="Show hidden applications (mobile)">
+							<br><br>
+						</div>
 						<button type="button" class="button primary" onclick="logUserOut();">Logout</button>
 						<button type="button" class="button primary" onclick="$('#userMenu').hide();">Cancel</button>
 						<script>
@@ -669,7 +688,7 @@
 									Use this to search for help from Maker web sites
 								</div>
 							</div>
-							<div data-role="tile" class="tile bg-ideation fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" class="tile bg-ideation fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-medium-top m-0 bg-transparent" onclick="infoClick('./about/inspiratorium-help.html', '#inspiratoriumDialog');"></span>
 								<div class="slide-front" onclick="tileClick('http://ecraft.zsi.at/', undefined, event);">
 									<img class="icon" src="./images/inspiratorium_logo.svg">
@@ -797,7 +816,7 @@
 								</div>
 							</div>
 							<!-- ARDUBLOCK -->
-							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/ardublock-help.html', '#ArdublockDialog');"></span>
 								<div class="slide-front" onclick="infoClick('./about/cura-help.html', '#ArdublockDialog');">
 									<span class="tile-image icon"><span class='notranslate' translate='no'>A</span></span>
@@ -807,7 +826,7 @@
 								</div>
 							</div>
 							<!-- SCRATCH 4 RPi -->
-							<div data-role="tile" data-size="small" class="tile bg-raspberry fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" data-size="small" class="tile bg-raspberry fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/scratch-4-raspberry-pi.html', '#Scratch4RPiDialog');"></span>
 								<div class="slide-front" onclick="tileClick('https://scratch.mit.edu/', undefined, event);">
 									<img class="icon" src="./images/scratch-logo-small.png">
@@ -817,7 +836,7 @@
 								</div>
 							</div>
 							<!-- SCRATCH 4 ARDUINO -->
-							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/scratch-4-arduino.html', '#Scratch4ArduDialog');"></span>
 								<div class="slide-front" onclick="tileClick('http://s4a.cat/', undefined, event);">
 									<img class="icon" src="./images/scratch-logo-small.png">
@@ -827,7 +846,7 @@
 								</div>
 							</div>
 							<!-- APP INVENTOR -->
-							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/app-inventor-help.html', '#AppInventorDialog');"></span>
 								<div class="slide-front" onclick="tileClick('http://ai2.appinventor.mit.edu/', undefined, event);">
 									<img class="icon" src="./images/app-inventor-allwhite.png">
@@ -837,7 +856,7 @@
 								</div>
 							</div>
 							<!-- POCKET CODE -->
-							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/pocket-code-help.html', '#PocketCodeDialog');"></span>
 								<div class="slide-front" onclick="tileClick('https://www.catrobat.org/intro/', undefined, event);">
 									<img class="icon" src="./images/pocket-code-allwhite.png">
@@ -847,7 +866,7 @@
 								</div>
 							</div>
 							<!-- NETSBLOX -->
-							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/netsblox-help.html', '#NetsBloxDialog');"></span>
 								<div class="slide-front" onclick="tileClick('https://editor.netsblox.org/','NetsBlox', event);">
 									<img class="icon" src="./images/netsblox.png">
@@ -857,7 +876,7 @@
 								</div>
 							</div>
 							<!-- ARDUINO IDE -->
-							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/arduino-ide-help.html', '#ArduinoIdeDialog');"></span>
 								<div class="slide-front" onclick="tileClick('https://create.arduino.cc/editor', undefined, event);">
 									<img class="icon" src="./images/arduino-ide.png">
@@ -870,7 +889,7 @@
 						<!-- SHARE GROUP -->
 						<div class="tiles-grid tiles-group size-1 fg-white  mb-15" data-group-title="Share">
 							<!--Thingiverse-->
-							<div data-role="tile" class="tile bg-share fg-white" data-effect="hover-slide-up">
+							<div data-role="tile" class="tile bg-share fg-white no-mobile" data-effect="hover-slide-up">
 								<span class="mif-question badge-medium-top m-0 bg-transparent" onclick="infoClick('./about/thingiverse-help.html', '#ThingiverseDialog');"></span>
 								<div class="slide-front" onclick="tileClick('https://www.thingiverse.com/','Thingiverse', event);">
 									<img class="icon" src="./images/thingiverse-logo.png">
@@ -1197,7 +1216,7 @@
 		<br/>
 		
 		<div class="input-control text m-2" style="width: 250px; right:0;">
-			<input class="fg-white" type="text" data-role="search" data-clear-button="false" id="oerSearch" placeholder="Search..." onkeydown="searchOER();" data-on-search-button-click="searchOER();">
+			<input class="fg-white" type="text" data-role="search" data-clear-button="false" id="oerSearch" placeholder="Search..." onkeyup="searchOER();" data-on-search-button-click="searchOER();">
 			<!--<button class="button" onclick="searchOER();"><span class="mif-search"></span></button>-->
 			<script>
 				function searchOER(){
@@ -1208,7 +1227,8 @@
 					var aText;
 
 					$(resultsDiv).empty();
-
+					if(text2search.length == 0)
+						return;
 					$.each(elemsList, function(i, liElem){
 						aElem = $(liElem).children("a");
 					

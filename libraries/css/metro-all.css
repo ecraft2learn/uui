@@ -20884,10 +20884,14 @@ fieldset.disabled,
   font-weight: bold;
 }
 .d-menu li:hover,
-.v-menu li:hover {
+.v-menu li::hover {
   text-decoration: none;
-  background-color: rgba(29, 29, 29, 0.1);
+  background-color: transparent;
 }
+.v-menu a:hover {
+	background-color: #1d1d1d !important;
+}
+
 .d-menu li:hover > a,
 .v-menu li:hover > a,
 .d-menu li:hover .icon,

@@ -20777,12 +20777,7 @@ fieldset.disabled,
 .h-menu.mega > li {
   position: static;
 }
-.h-menu.mega > li.active-container {
-  background-color: inherit;
-}
-.h-menu.mega > li.active-container a {
-  background-color: inherit;
-}
+
 .h-menu.mega .mega-container {
   position: absolute;
   top: 100%;
