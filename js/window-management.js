@@ -239,7 +239,6 @@ function minimizeWindow(minBtn){
 	var winData = winDiv.data('winData');
 	var icon = winData.iconUrl;
 	var color = winData.color;
-	
 	//$('#bottomCharm').append("<img src='"+icon+"' width='30px' height='30px' />");
 	
 	//Image Button Style
@@ -253,6 +252,7 @@ function minimizeWindow(minBtn){
 	
 	var $button = createMinimizedTab(winData);
 	$button.data('winDiv', winDiv);
+	$button.data('winTop', winDiv.position().top); //Store width of window
 	$button.data('winWidth', winDiv.data('winWidth')); //Store width of window
 	$button.data('winHeight', winDiv.data('winHeight')); //Store height of window
 	$button.attr('id', $(winDiv).attr('id')+"_btn");
@@ -262,7 +262,7 @@ function minimizeWindow(minBtn){
 	
 	//var winDiv = $(minBtn).parent().closest('[data-role], .dialog');
 	winDiv.animate({
-		top: winData.posy+winData.height-10,
+		top: $('#bottomCharm').position().top,
 		width: 10,
 		height: 10,
 		opacity: 0
@@ -282,7 +282,7 @@ function unminimizeWindow() {
 	var $winDiv = $buttonElem.data('winDiv');
 	
 	$winDiv.removeClass('minimized');
-	resizeWindow2Normal($winDiv, $winData, $buttonElem.data('winWidth'), $buttonElem.data('winHeight'));
+	resizeWindow2Normal($winDiv, $winData, $buttonElem.data('winWidth'), $buttonElem.data('winHeight'), $buttonElem.data('winTop'));
 	
 	$($buttonElem).remove();
 	
@@ -298,7 +298,7 @@ function unminimizeWindowFromJS(minButton){
 	var $winData = $(minButton).data('winData');
 	var $winDiv = $(minButton).data('winDiv');
 	
-	//resizeWindow2Normal($winDiv, $winData);
+	resizeWindow2Normal($winDiv, $winData);
 	$($winDiv).show();
 	$(minButton).remove();
 	
@@ -337,9 +337,9 @@ function getWindowFromBtn(btn) {
 }
 
 //Given a WinDiv and its WinData, it restores the Div to its original place and size.
-function resizeWindow2Normal($winDiv, $winData, width, height){
+function resizeWindow2Normal($winDiv, $winData, width, height, winTop){
 	$winDiv.animate({
-		top: $winDiv.posy,
+		top: winTop,
 		left: $winDiv.posx,
 		width: width,
 		height: height,
