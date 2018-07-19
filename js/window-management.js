@@ -253,8 +253,8 @@ function minimizeWindow(minBtn){
 	
 	var $button = createMinimizedTab(winData);
 	$button.data('winDiv', winDiv);
-	$button.data('winWidth', winDiv.data('winWidth'));
-	$button.data('winHeight', winDiv.data('winHeight'));
+	$button.data('winWidth', winDiv.data('winWidth')); //Store width of window
+	$button.data('winHeight', winDiv.data('winHeight')); //Store height of window
 	$button.attr('id', $(winDiv).attr('id')+"_btn");
 	$('#bottomCharm').append($button);
 	
@@ -282,7 +282,6 @@ function unminimizeWindow() {
 	var $winDiv = $buttonElem.data('winDiv');
 	
 	$winDiv.removeClass('minimized');
-	console.log($buttonElem.data('winWidth'));
 	resizeWindow2Normal($winDiv, $winData, $buttonElem.data('winWidth'), $buttonElem.data('winHeight'));
 	
 	$($buttonElem).remove();
