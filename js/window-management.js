@@ -151,6 +151,8 @@ function openIframeWindow(toolUrl, toolName, event) {
 	var toolIcon = toolTile.find('img').attr('src');
 	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, '100%', '100%', toolUrl, tIcon, bgColor, toolName);
 	activeWindow.data('winData', frame);
+	activeWindow.data('winWidth', activeWindow.width());
+	activeWindow.data('winHeight', activeWindow.height());
 	activeWindow.find('.window-caption').css("background-color", bgColor);
 	return activeWindow;
 }
@@ -180,6 +182,8 @@ function openIframeWindowP(toolUrl, toolName, event) {
 	var toolIcon = toolTile.find('img').attr('src');
 	var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, tIcon, bgColor, toolName);
 	activeWindow.data('winData', frame);
+	activeWindow.data('winWidth', activeWindow.width());
+	activeWindow.data('winHeight', activeWindow.height());
 	return activeWindow;
 }
 
@@ -227,12 +231,11 @@ function maximizeWindow(iFrame){
 }
 
 $(document).on('click', '.btn-min', function(){
-	
 	minimizeWindow(this);
 });
 //Given the clicked minimize button of a window, it finds the window object and minimizes it. This includes creating a small button and the bottom charm and storing the WinData struct in it.
-function minimizeWindow(minBtn){
-	var winDiv = getWindowFromBtn(minBtn);
+function minimizeWindow(minBtn){	
+	var winDiv = $(minBtn).closest('.window');//getWindowFromBtn(minBtn);
 	var winData = winDiv.data('winData');
 	var icon = winData.iconUrl;
 	var color = winData.color;
@@ -250,6 +253,8 @@ function minimizeWindow(minBtn){
 	
 	var $button = createMinimizedTab(winData);
 	$button.data('winDiv', winDiv);
+	$button.data('winWidth', winDiv.data('winWidth'));
+	$button.data('winHeight', winDiv.data('winHeight'));
 	$button.attr('id', $(winDiv).attr('id')+"_btn");
 	$('#bottomCharm').append($button);
 	
@@ -277,13 +282,13 @@ function unminimizeWindow() {
 	var $winDiv = $buttonElem.data('winDiv');
 	
 	$winDiv.removeClass('minimized');
-	
-	resizeWindow2Normal($winDiv, $winData);
+	console.log($buttonElem.data('winWidth'));
+	resizeWindow2Normal($winDiv, $winData, $buttonElem.data('winWidth'), $buttonElem.data('winHeight'));
 	
 	$($buttonElem).remove();
 	
 	 if($('#bottomCharm').find('button').length==0){
-		hideMetroCharm('#bottomCharm');
+		Metro.charms.close('#bottomCharm');
 	} 
 }
 //Does as the unminimizeWindow function, except that this one is trigerred from JS code
@@ -294,12 +299,12 @@ function unminimizeWindowFromJS(minButton){
 	var $winData = $(minButton).data('winData');
 	var $winDiv = $(minButton).data('winDiv');
 	
-	resizeWindow2Normal($winDiv, $winData);
-	
+	//resizeWindow2Normal($winDiv, $winData);
+	$($winDiv).show();
 	$(minButton).remove();
 	
 	 if($('#bottomCharm').find('button').length==0){
-		hideMetroCharm('#bottomCharm');
+		Metro.charms.close('#bottomCharm');
 	} 
 }
 
@@ -333,8 +338,15 @@ function getWindowFromBtn(btn) {
 }
 
 //Given a WinDiv and its WinData, it restores the Div to its original place and size.
-function resizeWindow2Normal($winDiv, $winData){
+function resizeWindow2Normal($winDiv, $winData, width, height){
 	$winDiv.animate({
+		top: $winDiv.posy,
+		left: $winDiv.posx,
+		width: width,
+		height: height,
+		opacity: 1
+	}, 300);
+	/*$winDiv.animate({
 		top: $winData.posy,
 		left: $winData.posx,
 		width: $winData.width,
@@ -346,7 +358,7 @@ function resizeWindow2Normal($winDiv, $winData){
 		width: $winData.width-20,
 		height: $winData.height-60,
 		opacity: 1
-	}, 300);
+	}, 300);*/
 	 
 	$winDiv.show();
 }
