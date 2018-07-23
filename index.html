@@ -49,7 +49,8 @@
 
 	<script src="js/file_manager.js"></script>
 	
-
+	<!--Link to the css file for the stars achievment-->
+	<link rel="stylesheet" type="text/css"href="bower_components/css-star-rating/dist/css/star-rating.css">
 
 	<!--LNU CODE START-->
 	<script src="lnu/commenting/js/feedback-window-managment.js"></script>
@@ -266,6 +267,61 @@
 			opacity: 0;
 
 			margin: auto;
+		}
+
+		.star-container {
+			display: inline-block;
+			width: 240px;
+		}
+		.star {
+			font-size: 1.5em;
+			display: inline-block;
+			color: gray;
+			position: relative;
+		}
+		.star:last-child {
+			margin-right: 0;
+		}
+		.star:before {
+			content: '\2605';
+		}
+		.star.gold {
+			color: #BFCE45;
+		}
+		.star.red {
+			color: #D36247;
+		}
+		.star.blue {
+			color: #33985C;
+		}
+		.star.green {
+			color: #7B318B;
+		}
+		.star.fuchsia {
+			color: #8F260D;
+		}
+		.star.lightcoral {
+			color: #7E8C0C;
+		}
+		.star.halfgold::after {
+			content: '\2605';
+			position: absolute;
+			left: 0;
+			right: 50%;
+			top: 0;
+			bottom: 0;
+			overflow: hidden;
+			color: #BFCE45;
+		}
+		.star.halfblue::after {
+			content: '\2605';
+			position: absolute;
+			left: 0;
+			right: 50%;
+			top: 0;
+			bottom: 0;
+			overflow: hidden;
+			color: #33985C;
 		}
     </style>
 	
@@ -655,6 +711,84 @@
 						
 						<div style="display:flex; justify-content: left; align-items: center; font-size:20px;"> <span class="icon mif-user mif-2x fg-lightTeal"></span> <span class="no-margin text-heavy"></span>&nbsp;<script>document.write(window.sessionStorage.getItem('username'));</script></span></div><br/>
 						<div class="progress pull-right no-margin" data-role="progress" data-value="getUserProgress();" dataz-value="73" style="width:200px;"></div><br/><br/>
+												
+						<div> 
+							<div class="row no-margin" >
+								<span>
+									<th>Building the circuit</th>
+								</span>
+								<span class="star-container pull-right" style="width: auto" >
+									<span class="star lightcoral"></span>
+									<span class="star "></span>
+									<span class="star "></span>
+									<span class="star "></span>
+									<span class="star"></span>
+
+								</span>
+							</div>
+
+							<div class="row  no-margin">
+								<span>
+									<th>3D Design</th>
+								</span>
+								<span class="star-container pull-right" style="width: auto">
+									<span class="star red"></span>
+									<span class="star red"></span>
+									<span class="star "></span>
+									<span class="star "></span>
+									<span class="star"></span>
+								</span>
+							</div>
+							<div class="row  no-margin">
+								<span>
+									<th>Programming</th>
+								</span>
+								<span class="star-container pull-right" style="width: auto">
+									<span class="star gold"></span>
+									<span class="star halfgold"></span>
+									<span class="star "></span>
+									<span class="star "></span>
+									<span class="star"></span>
+								</span>
+							</div>
+							<div class="row  no-margin">
+								<span>
+									<th>Presentation of the project</th>
+								</span>
+								<span class="star-container pull-right" style="width: auto;">
+									<span class="star blue"></span>
+									<span class="star halfblue"></span>
+									<span class="star "></span>
+									<span class="star "></span>
+									<span class="star"></span>
+								</span>
+							</div>
+							<div class="row  no-margin">
+								<span>
+									<th>Collaboration</th>
+								</span>
+								<span class="star-container pull-right" style="width: auto">
+									<span class="star fuchsia"></span>
+									<span class="star fuchsia"></span>
+									<span class="star fuchsia"></span>
+									<span class="star "></span>
+									<span class="star"></span>
+								</span>
+							</div>
+							<div class="row  no-margin">
+								<span>
+									<th>Originality</th>
+								</span>
+								<span class="star-container pull-right" style="width: auto">
+									<span class="star green"></span>
+									<span class="star green"></span>
+									<span class="star "></span>
+									<span class="star "></span>
+									<span class="star"></span>
+								</span>
+							</div>
+						</div>
+						
 						<div class="mobile-only">
 							<input id="hidden_apps" type="checkbox" data-role="checkbox" data-caption="Show hidden applications (mobile)">
 							<br><br>
@@ -917,7 +1051,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="cell">
+				<div class="cell-xl-3 cell-lg-4">
 					<div class="tiles-area pt-5 pl-10 pr-10" id="divProjects" stylez="display:none;">
 						<div class="tiles-grid tiles-group size-1 fg-white  mb-15" data-group-title="UUI Tools">
 							<!--<span class="tile-group-title">UUI Tools</span><br>-->
@@ -982,10 +1116,31 @@
 						</div>
 					</div>
 				</div>
+				<div class="cell-xl-9 cell-lg-8">
+					<div class="tiles-area pt-5 pl-10 pr-10" id="divProjects" stylez="display:none;">
+						<div class="tiles-grid tiles-group size-1 fg-white  mb-15" data-group-title="Achievements">
+							<div data-role="tile" data-size="small" class="tile bg-selfevaluation fg-white no-mobile" data-effect="hover-slide-up">
+								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/selfevaluation-help.html', '#SelfEvaluationDialog');"></span>
+								<div class="slide-front" onclick="tileClick('https://create.arduino.cc/editor', undefined, event);">
+									<img class="icon" src="./images/white-star-icon-32.png">
+								</div>
+								<div class="slide-back text-extra-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./SelfEvaluation/index.html?p='+(new Date()).getTime() ,'Achievements', event);">
+									Self evaluation
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
 			</div>
+
+			
+
 		</div>		
 	</div><!--End of Main Content Container-->
 	
+
 	<!--Login Box and Hidden Data-->
 	<form  id="loginForm" class="login-form p-3 mx-auto border db-default win-shadow" style="z-index:2;" data-overlay="true">		
         <!--<form>-->

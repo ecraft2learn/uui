@@ -1,0 +1,276 @@
+<html>
+
+<head>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="../libraries/css/bootstrap.min.css">
+    <style>
+        header,
+        footer {
+            padding: 1em;
+            color: white;
+            background-color: black;
+            clear: left;
+            text-align: center;
+        }
+
+        select {
+            float: right;
+            margin-left: 10px;
+        }
+
+        div.container {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .column {
+            padding: 10px;
+        }
+
+        .row {
+            padding: 5px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: large;
+            padding: 0.5em;
+            border: 1px solid red;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+        }
+
+        .flex-container-row {
+            align-content: space-around;
+            padding: 5px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .category-block {
+            border: 1px solid red;
+            border-top: 0px;
+        }
+
+        .mybody {
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+
+<header>
+    <h1>Activity title</h1>
+
+    Activity description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
+    nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget,
+    auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in
+    odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper
+    ipsum dignissim ac...
+
+</header>
+
+<body class="mybody">
+
+    <div class="flex-container">
+
+        <div class="flex-container column category-block">
+
+            <div class="title">Building the circuit</div>
+
+            <div class="flex-container-row container">
+
+                <div class="flex-container column" style="max-width: 500px;">
+                    <div class="row">The circuit works
+
+                        <select>
+                            <option value="">-</option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                            <option value="partially">partially</option>
+                        </select>
+
+                    </div>
+                    <div class="row">
+                        We tried to solve the bugs by ourselves
+
+                        <select>
+                            <option value="">-</option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                            <option value="partially">no bugs</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="flex-container column">
+
+                    <div>
+                        <textarea name="testo" rows="5" cols="50">Students remarks</textarea>
+                    </div>
+                </div>
+
+                <div class="flex-container column">
+                    <div>
+                        self evaluation (1-5)
+                        <input type="number" value="4" size="10" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-container column container">
+                <div>
+                    Teacher evaluation (1-5)
+                    <input type="number" value="4" size="10" />
+                </div>
+                <p>Teacher note: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum
+                    interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. </p>
+            </div>
+        </div>
+
+
+        <div class="flex-container column category-block">
+            <div class="title">3D Designing</div>
+
+            <div class="flex-container-row container">
+
+                <div class="flex-container column" style="max-width: 500px;">
+                    <div class="row">We managed to print functional pieces
+
+                        <select>
+                            <option value="">-</option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                            <option value="partially">partially</option>
+                        </select>
+
+                    </div>
+                    <div class="row">
+                        We tried to solve the bugs by ourselves
+
+                        <select>
+                            <option value="">-</option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                            <option value="partially">no bugs</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="flex-container column">
+                    
+                    <div>
+                        <textarea name="testo" rows="5" cols="50">Students remarks</textarea>
+                    </div>
+                </div>
+
+                <div class="flex-container column">
+                        <div>
+                            self evaluation (1-5)
+                            <input type="number" value="4" size="10" />
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="flex-container column container">
+                <div>
+                    Teacher evaluation (1-5)
+                    <input type="number" value="4" size="10" />
+                </div>
+                <p>Teacher note: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum
+                    interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. </p>
+            </div>
+        </div>
+
+
+
+        <div class="flex-container column category-block">
+            <div class="title">Programming</div>
+
+            <div class="flex-container-row container">
+
+                <div class="flex-container column" style="max-width: 500px;">
+                    <div class="row">The program works
+
+                        <select>
+                            <option value="">-</option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                            <option value="partially">partially</option>
+                        </select>
+
+                    </div>
+                    <div class="row">
+                        The program is efficient
+                        <select>
+                            <option value="">-</option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        We tried to solve the bugs by ourselves
+                        <select>
+                            <option value="">-</option>
+                            <option value="yes">yes</option>
+                            <option value="no">no bugs</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="flex-container column">
+                    
+                    <div>
+                        <textarea name="testo" rows="5" cols="50">Students remarks</textarea>
+                    </div>
+                </div>
+                <div class="flex-container column">
+                        <div>
+                            self evaluation (1-5)
+                            <input type="number" value="4" size="10" />
+                        </div>
+                    </div>
+            </div>
+
+            <div class="flex-container column container">
+                <div>
+                    Teacher evaluation (1-5)
+                    <input type="number" value="4" size="10" />
+                
+                <p>Teacher note: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum
+                    interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-container-row container">
+            <div class="column">
+                <textarea name="testo" rows="6" cols="50">what we know... </textarea>
+            </div>
+            <div class="column">
+                <textarea name="testo" rows="6" cols="50">what is not clear... </textarea>
+            </div>
+        </div>
+
+
+        <div class="container column ">
+            <input type="submit" value="Submit" />
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
