@@ -48,7 +48,7 @@ function initGridView2() {
 
     getSharedFiles(function(data) {
         PUBLICFILES = data;
-        console.log(PUBLICFILES);
+        // console.log(PUBLICFILES);
         var gv = new Gridview(columns, data, document.getElementById("publicWorkTable"));
         var table = $('#publicWorkTable').DataTable();
     });

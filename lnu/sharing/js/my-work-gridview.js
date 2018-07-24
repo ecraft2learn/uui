@@ -63,7 +63,7 @@ function initGridView() {
  * @param fileid 
  */
 function shareCallback(event, fileid) {
-    console.log("shareCallback", fileid);
+    // console.log("shareCallback", fileid);
 }
 
 
@@ -73,7 +73,7 @@ function shareCallback(event, fileid) {
  * @param fileid 
  */
 function cancelCallback(event, fileid) {
-    console.log("cancelCallback", fileid);
+    // console.log("cancelCallback", fileid);
 
     var file = MYFILES.find(function (file) {
         return parseInt(file["FILEID"])===parseInt(fileid);
@@ -150,7 +150,7 @@ function downloadCallback(event, fileid) {
  */
 function stopSharingDialog(id,message) {
     stopSharing(id,function (result) {
-        console.log(result);
+        // console.log(result);
          if(result==="success"){
              $.Notify({
                  caption: 'Success',

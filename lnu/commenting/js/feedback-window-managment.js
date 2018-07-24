@@ -73,10 +73,13 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
 
 
-    activeWindow = $.Dialog({
+    activeWindow = Metro.dialog.create({
         title: "<span class='text-medium fg-white notranslate' style='-ms-user-select: none; -moz-user-select: none; -webkit-user-select: none;user-select: none;' translate='no'> Feedback "+toolName+"</span><span class='btn-min' onclick='minimizeFeedbackWindow(this)'></span> <span class='btn-max' onclick='maximizeFeedbackWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
         content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' height='"+(docHeight-60)+"' width="+ (docWidth-20) +" />",
         padding: 0,
+        overlay: false,
+        width: docWidth,
+        defaultAction: false,
         options: {
             modal: false,
             closeButton: false,
@@ -106,7 +109,8 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
  */
 function closeWindow(closeBtn) {
     var winDiv = $(closeBtn).parent().closest('[data-role], .dialog');
-    metroDialog.close(winDiv);
+    // metroDialog.close(winDiv);
+    Metro.dialog.close(winDiv);
 
     //find tool name based on feedback window id and remove it from feedbackWidnows array
      for(var k in feedbackWindows) {
@@ -221,7 +225,8 @@ function minimizeFeedbackWindow(minBtn) {
     $button.attr('id', $(winDiv).attr('id')+"_btn");
     $('#bottomCharm').append($button);
 
-    showMetroCharm('#bottomCharm');
+    // showMetroCharm('#bottomCharm');
+    Metro.charms.open('#bottomCharm');
 
     var winDiv = $(minBtn).parent().closest('[data-role], .dialog');
     winDiv.animate({

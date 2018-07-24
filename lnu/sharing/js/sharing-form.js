@@ -86,28 +86,32 @@ function generateUploadButton(){
     labelEl.classList.add("block");
     labelEl.textContent = "Choose a file";
 
-    var divEl = document.createElement("div");
-    divEl.classList.add("input-control");
-    divEl.classList.add("file");
-    divEl.classList.add("full-size");
-    divEl.classList.add("required");
-    divEl.setAttribute("data-role","input");
+    // var divEl = document.createElement("div");
+    // divEl.classList.add("input-control");
+    // divEl.classList.add("file");
+    // divEl.classList.add("full-size");
+    // divEl.classList.add("required");
+    // divEl.setAttribute("data-role","input");
 
     var fileInput = document.createElement("input");
     fileInput.setAttribute("type","file");
     fileInput.setAttribute("id","fileInput");
+    fileInput.setAttribute("data-role", "file");
+    fileInput.setAttribute("data-caption", "<span class='mif-folder'></span>");
+    fileInput.setAttribute("data-caption-position", "right");
     fileInput.setAttribute("data-validate-func","required");
 
-    var buttonFile = document.createElement("button");
-    buttonFile.classList.add("button");
+    // var buttonFile = document.createElement("button");
+    // buttonFile.classList.add("button");
 
-    var img = document.createElement("img");
-    img.setAttribute("src","images/file-icon.png");
+    // var img = document.createElement("img");
+    // img.setAttribute("src","images/file-icon.png");
 
-    buttonFile.appendChild(img);
-    divEl.appendChild(fileInput).appendChild(buttonFile);
+    // buttonFile.appendChild(img);
+    // divEl.appendChild(fileInput).appendChild(buttonFile);
 
-    $("#dynamicContent").append(labelEl).append(divEl);
+    // $("#dynamicContent").append(labelEl).append(divEl);
+    $("#dynamicContent").append(labelEl).append(fileInput);
 }
 
 function generateProjectSelect(labelText,callback) {
@@ -118,17 +122,19 @@ function generateProjectSelect(labelText,callback) {
             labelEl.classList.add("block");
             labelEl.textContent = labelText;
 
-            var divEl = document.createElement("div");
-            divEl.classList.add("input-control");
-            divEl.classList.add("select");
-            divEl.classList.add("full-size");
-            divEl.classList.add("required");
-            divEl.setAttribute("data-role","input");
+            // var divEl = document.createElement("div");
+            // divEl.classList.add("input-control");
+            // divEl.classList.add("select");
+            // divEl.classList.add("full-size");
+            // divEl.classList.add("required");
+            // divEl.setAttribute("data-role","input");
 
             var selectEl = document.createElement("select");
 
             selectEl.setAttribute("data-validate-func","required");
             selectEl.setAttribute("name","projectId");
+            selectEl.setAttribute("data-role", "select");
+            selectEl.setAttribute("data-filter", "false");
 
             var option = document.createElement("option");
             option.textContent = "None";
@@ -145,8 +151,9 @@ function generateProjectSelect(labelText,callback) {
                 selectEl.appendChild(option);
             }
 
-            divEl.appendChild(selectEl);
-            $("#dynamicContent").append(labelEl).append(divEl);
+            // divEl.appendChild(selectEl);
+            // $("#dynamicContent").append(labelEl).append(divEl);
+            $("#dynamicContent").append(labelEl).append(selectEl);
             callback();
         }
     });
@@ -162,16 +169,18 @@ function generateToolSelect(callback){
             labelEl.classList.add("block");
             labelEl.textContent = "Which tool did you use to create this file?";
 
-            var divEl = document.createElement("div");
-            divEl.classList.add("input-control");
-            divEl.classList.add("select");
-            divEl.classList.add("full-size");
-            divEl.classList.add("required");
-            divEl.setAttribute("data-role", "input");
+            // var divEl = document.createElement("div");
+            // divEl.classList.add("input-control");
+            // divEl.classList.add("select");
+            // divEl.classList.add("full-size");
+            // divEl.classList.add("required");
+            // divEl.setAttribute("data-role", "input");
 
             var selectEl = document.createElement("select");
             selectEl.setAttribute("data-validate-func", "required");
             selectEl.setAttribute("name", "toolId");
+            selectEl.setAttribute("data-role", "select");
+            selectEl.setAttribute("data-filter", "false");
 
             var option = document.createElement("option");
             option.textContent = "None";
@@ -187,8 +196,9 @@ function generateToolSelect(callback){
                 selectEl.appendChild(option);
             }
 
-            divEl.appendChild(selectEl);
-            $("#dynamicContent").append(labelEl).append(divEl);
+            // divEl.appendChild(selectEl);
+            // $("#dynamicContent").append(labelEl).append(divEl);
+            $("#dynamicContent").append(labelEl).append(selectEl);
             callback();
         }
     });
