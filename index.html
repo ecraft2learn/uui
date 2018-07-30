@@ -269,14 +269,29 @@
 			margin: auto;
 		}
 
-		.star-container {
-			display: inline-block;
-			width: 240px;
+		.category-container{			
+  			display: flex;
+  			justify-content: space-between;
 		}
+
+		.star-container {
+  			order: 1;
+  			align-self: flex-end;		
+			padding-right: 5px;	
+		}
+		
+		.category-title {
+			display: inline-block;
+			align-self: flex-start;		
+			flex-grow: 2;	
+			height: 45px;
+			padding: 10px;
+		}
+
 		.star {
 			font-size: 1.5em;
 			display: inline-block;
-			color: gray;
+			color: rgb(82, 81, 81);
 			position: relative;
 		}
 		.star:last-child {
@@ -285,25 +300,26 @@
 		.star:before {
 			content: '\2605';
 		}
-		.star.gold {
-			color: #BFCE45;
+		.star.circuit {
+			color: #fc7000;
 		}
-		.star.red {
-			color: #D36247;
+		.star.design {
+			color: #37cd00;
 		}
-		.star.blue {
-			color: #33985C;
+		.star.prog {
+			color: #e24691;
 		}
-		.star.green {
-			color: #7B318B;
+		.star.prj {
+			color: #ffef2b;
 		}
-		.star.fuchsia {
-			color: #8F260D;
+		.star.collab {
+			color: #ff442b;
 		}
-		.star.lightcoral {
-			color: #7E8C0C;
+		.star.org {
+			color: #3565f4;
 		}
-		.star.halfgold::after {
+
+		.star.halfCircuit::after {
 			content: '\2605';
 			position: absolute;
 			left: 0;
@@ -311,9 +327,9 @@
 			top: 0;
 			bottom: 0;
 			overflow: hidden;
-			color: #BFCE45;
+			color: #fc7000;
 		}
-		.star.halfblue::after {
+		.star.halfPrj::after {
 			content: '\2605';
 			position: absolute;
 			left: 0;
@@ -321,7 +337,7 @@
 			top: 0;
 			bottom: 0;
 			overflow: hidden;
-			color: #33985C;
+			color: #ffef2b;
 		}
     </style>
 	
@@ -710,84 +726,77 @@
 					<div id="userMenu" class="m-2 p-4 bg-darkGray" style="position:absolute; right:0; top:0; display:none; z-index:1;">
 						
 						<div style="display:flex; justify-content: left; align-items: center; font-size:20px;"> <span class="icon mif-user mif-2x fg-lightTeal"></span> <span class="no-margin text-heavy"></span>&nbsp;<script>document.write(window.sessionStorage.getItem('username'));</script></span></div><br/>
-						<div class="progress pull-right no-margin" data-role="progress" data-value="getUserProgress();" dataz-value="73" style="width:200px;"></div><br/><br/>
+						<div class="progress pull-right no-margin" data-role="progress" data-value="getUserProgress();" dataz-value="73" style="width:200px;"></div>
+						<br/><br/>
 												
-						<div> 
-							<div class="row no-margin" >
-								<span>
-									<th>Building the circuit</th>
-								</span>
-								<span class="star-container pull-right" style="width: auto" >
-									<span class="star lightcoral"></span>
-									<span class="star "></span>
+						<div > 
+							<div class="row category-container" >
+								<span class="category-title">Building the circuit</span>
+								<span class="star-container" >
+									<span class="star circuit"></span>
+									<span class="star halfCircuit"></span>
 									<span class="star "></span>
 									<span class="star "></span>
 									<span class="star"></span>
-
 								</span>
 							</div>
 
-							<div class="row  no-margin">
-								<span>
-									<th>3D Design</th>
-								</span>
-								<span class="star-container pull-right" style="width: auto">
-									<span class="star red"></span>
-									<span class="star red"></span>
+							<div class="row no-margin category-container">
+								<span class="category-title">3D Design</span>
+								<span class="star-container">
+									<span class="star design"/></span>
+									<span class="star design"/></span>
+									<span class="star "/></span>
+									<span class="star "/></span>
+									<span class="star"/></span>
+								</span>								
+							</div>
+
+							<div class="row  no-margin category-container">
+								<span class="category-title">Programming</span>
+								<span class="star-container ">
+									<span class="star prog"></span>
+									<span class="star prog"></span>
 									<span class="star "></span>
 									<span class="star "></span>
 									<span class="star"></span>
 								</span>
 							</div>
-							<div class="row  no-margin">
-								<span>
-									<th>Programming</th>
-								</span>
-								<span class="star-container pull-right" style="width: auto">
-									<span class="star gold"></span>
-									<span class="star halfgold"></span>
+
+							<div class="row  no-margin category-container">
+								<span class="category-title">Project presentation</span>
+								<span class="star-container">
+									<span class="star prj"></span>
+									<span class="star halfPrj"></span>
 									<span class="star "></span>
 									<span class="star "></span>
 									<span class="star"></span>
 								</span>
 							</div>
-							<div class="row  no-margin">
-								<span>
-									<th>Presentation of the project</th>
-								</span>
-								<span class="star-container pull-right" style="width: auto;">
-									<span class="star blue"></span>
-									<span class="star halfblue"></span>
-									<span class="star "></span>
-									<span class="star "></span>
-									<span class="star"></span>
-								</span>
-							</div>
-							<div class="row  no-margin">
-								<span>
-									<th>Collaboration</th>
-								</span>
-								<span class="star-container pull-right" style="width: auto">
-									<span class="star fuchsia"></span>
-									<span class="star fuchsia"></span>
-									<span class="star fuchsia"></span>
+
+							<div class="row  no-margin category-container">
+								<span class="category-title">Collaboration</span>
+								<span class="star-container ">
+									<span class="star collab"></span>
+									<span class="star collab"></span>
+									<span class="star collab"></span>
 									<span class="star "></span>
 									<span class="star"></span>
 								</span>
 							</div>
-							<div class="row  no-margin">
-								<span>
-									<th>Originality</th>
-								</span>
-								<span class="star-container pull-right" style="width: auto">
-									<span class="star green"></span>
-									<span class="star green"></span>
+
+							<div class="row  no-margin category-container">
+								<span class="category-title">Originality</span>
+								<span class="star-container ">
+									<span class="star org"></span>
+									<span class="star org"></span>
 									<span class="star "></span>
 									<span class="star "></span>
 									<span class="star"></span>
 								</span>
 							</div>
 						</div>
+						</br>
 						
 						<div class="mobile-only">
 							<input id="hidden_apps" type="checkbox" data-role="checkbox" data-caption="Show hidden applications (mobile)">
