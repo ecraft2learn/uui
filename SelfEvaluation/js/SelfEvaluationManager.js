@@ -23,7 +23,15 @@ function getActivityCategories(activityId, responseHandler) {
     formData.append("pilotSite", window.sessionStorage.getItem('pilotsite'));
 
     makeAjaxCall(formData, responseHandler);
+}
 
+function getCategoryCriterias(categoryId, responseHandler){
+    var formData = new FormData();
+
+    formData.append("func", "getCategoryCriterias");
+    formData.append("category", categoryId);
+
+    makeAjaxCall(formData, responseHandler);
 }
 
 function ping(handler) {

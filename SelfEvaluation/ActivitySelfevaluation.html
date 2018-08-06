@@ -22,6 +22,13 @@
             text-align: center;
         }
 
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Ubuntu", "Helvetica Neue", sans-serif;
+            line-height: 1.5;
+            font-style: normal;
+            font-weight: 400;
+
+        }
 
         .category {
             margin: 10px;
@@ -62,13 +69,88 @@
 
                 for (i = 0; i < list.DATA.length; i++) {
                     var riga = list.DATA[i];
-                    $("<div class=\"grid-item col-sm-4 \" onClick=\"divClick(" + riga.ActivityId + ") \"/>")
-                        .append("<div class=\"activity\" >  <div class=\"activityHeader\" > " + riga.Title + " <div class=\"activityBody\">" + riga.CategoryName)
-                        .appendTo("#tileGrid");
+
+                    var html = "<div id=\"category_" + riga.CategoryId + "\" class=\"category row-fluid container-fluid \">";
+                    html += "<div class=\"row-fluid  container-fluid category-header\">    <div class=\"categoryTitle col-xs-12\">";
+                    html += "<h4>" + riga.CategoryName + "</h4>    </div> </div> <div class=\"row-fluid  container-fluid category-body\">";
+
+                    //category criteria
+                    html += "<div id=\"category_" + riga.CategoryId + "-criterias\" class=\"col-sm-6 col-md-5\" style=\"padding-left: 0px; padding-right:opx;\"> </div>";
+
+                    //students remarks
+                    html += "<div class=\"col-sm-4 col-md-5\" style=\"padding-bottom: 10px;\">        <textarea rows=\"5\" style=\"width: 100%;\" placeholder=\"Students remarks\"></textarea>    </div>";
+
+                    //self-evaluation
+                    html += "<div class=\"col-sm-2\">        <input type=\"number\" style=\"width: 100px\" placeholder=\"self-evaluation\" />    </div> </div>";
+
+                    //teacher evaluation
+                    html += "<div class=\"row-fluid container-fluid category-footer\">    <div class=\"col-md-2 container-fluid\">        <span><strong>Teacher evaluation: </strong></span>        <span>";
+                    //TODO TROVARE MODO PIù CARINO PER SCRIVERE IL VALORE MAGARI SENZA USARE L'INPUT
+                    html += "<input type=\"number\" style=\"width: 130px;\" placeholder=\"Teacher evaluation\" disabled/>        </span>    </div>";
+                    //teacher remark
+                    html += "<div class=\"col-md-10\" style=\"text-align: justify; text-justify: inter-word;\">        <p>            <strong> Teacher note:</strong> TODO";
+                    //TODO
+                    html += "</p>    </div></div></div>";
+
+                    $('#categoryContainer').append(html);
+
+                    getCategoryCriterias(riga.CategoryId, addCriterias);
+
                 }
             });
         });
 
+        function addCriterias(result, status) {
+
+            var list = JSON.parse(result);
+
+            var gruppedCriterias = groupCriteriaValues(list.DATA);
+
+            var html = "";
+
+            console.log("CATEGORY: " + list.DATA[0].Category);
+
+            $.each(gruppedCriterias, function (index, criteria) {
+                html += "<div class=\"row container\" style=\"width: 100%; padding-bottom: 5px; padding-right: 0px; padding-left: 0px; margin:0px; \">";
+                html += "<div class=\"col-md-8\">" + criteria.Name + "</div>  <div class=\"col-md-4\">  <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "-value\"> <option value=\"\">-</option>";
+
+                console.log("category ID:" + criteria.Category + " criteria -->" + criteria.Name);
+
+                for (i = 0; i < criteria.CritValues.length; i++) {
+                    html += "<option value=\"" + criteria.CritValues[i] + "\">" + criteria.CritValues[i] + "</option>";
+                }
+
+                html += "</select></div> </div>";
+            });
+
+            console.log(html);
+            $('#category_' + list.DATA[0].Category + '-criterias').append(html);
+        }
+
+        function groupCriteriaValues(list) {
+
+            var grouppedCritValues = Object.values(list.reduce((result, {
+                CritId,
+                Name,
+                Value,
+                Category
+            }) => {
+                // Create new group
+                if (!result[CritId]) result[CritId] = {
+                    CritId,
+                    Name,
+                    Category,
+                    CritValues: [],
+                };
+                // Append to group
+                result[CritId].CritValues.push(
+                    Value
+                );
+                return result;
+            }, {}));
+
+            return grouppedCritValues;
+        }
 
         function getActivityId() {
             var parameters = location.search.substring(1).split("&");
@@ -96,161 +178,6 @@
 <body>
 
     <div id="categoryContainer" class="container-fluid ">
-
-        <!--CATEGORY 1-->
-
-        <div class="category row-fluid container-fluid ">
-
-            <div class="row-fluid  container-fluid category-header">
-                <div class="categoryTitle col-xs-12">
-                    <h4>NOME CATEGORIA</h4>
-                </div>
-            </div>
-
-            <div class="row-fluid  container-fluid category-body">
-
-                <div class="col-sm-6 col-md-5" style="padding-left: 0px; padding-right:opx;">
-
-                    <div class="row container" style="width: 100%; padding-bottom: 5px; padding-right: 0px; padding-left: 0px; margin:0px; ">
-                        <div class="col-md-8"> The circuit works</div>
-                        <div class="col-md-4">
-                            <select>
-                                <option value="">-</option>
-                                <option value="yes">yes</option>
-                                <option value="no">no</option>
-                                <option value="partially">partially</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row container" style="width: 100%; padding-bottom: 5px; padding-right: 0px;  padding-left: 0px; margin:0px;">
-                        <div class="col-md-8">We tried to solve the bugs by ourselves</div>
-                        <div class="col-md-4">
-                            <select>
-                                <option value="">-</option>
-                                <option value="yes">yes</option>
-                                <option value="no">no</option>
-                                <option value="partially">no bugs</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row container" style="width: 100%; padding-bottom: 5px; padding-right: 0px;  padding-left: 0px; margin:0px;">
-                        <div class="col-md-8">We tried to solve the bugs by ourselves</div>
-                        <div class="col-md-4">
-                            <select>
-                                <option value="">-</option>
-                                <option value="yes">yes</option>
-                                <option value="no">no</option>
-                                <option value="partially">no bugs</option>
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-sm-4 col-md-5">
-
-                    <textarea name="testo" rows="5" style="width: 100%" placeholder="Students remarks"></textarea>
-
-                </div>
-
-                <div class="col-sm-2">
-                    <input type="number" style="width: 100px" placeholder="self-evaluation" />
-                </div>
-            </div>
-
-
-            <div class="row-fluid container-fluid category-footer">
-                <div class="col-md-2 container-fluid">
-                    <span>Teacher evaluation: </span>
-                    <span>
-                        <!--TODO TROVARE MODO PIù CARINO PER SCRIVERE IL VALORE MAGARI SENZA USARE L'INPUT-->
-                        <input type="number" style="width: 130px;" placeholder="Teacher evaluation" disabled/>
-                    </span>
-                </div>
-                <div class="col-md-10" style="text-align: justify; text-justify: inter-word;">
-                    <p>
-                        <strong> Teacher note:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet,
-                        nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-
-        <!--CATEGORY 2-->
-
-        <div class="category row-fluid container-fluid ">
-
-                <div class="row-fluid  container-fluid category-header">
-                    <div class="categoryTitle col-xs-12">
-                        <h4>NOME CATEGORIA 2</h4>
-                    </div>
-                </div>
-    
-                <div class="row-fluid  container-fluid category-body">
-    
-                    <div class="col-sm-6 col-md-5" style="padding-left: 0px; padding-right:opx;">
-    
-                        <div class="row container" style="width: 100%; padding-bottom: 5px; padding-right: 0px; padding-left: 0px; margin:0px; ">
-                            <div class="col-md-8"> The circuit works</div>
-                            <div class="col-md-4">
-                                <select>
-                                    <option value="">-</option>
-                                    <option value="yes">yes</option>
-                                    <option value="no">no</option>
-                                    <option value="partially">partially</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row container" style="width: 100%; padding-bottom: 5px; padding-right: 0px;  padding-left: 0px; margin:0px;">
-                            <div class="col-md-8">We tried to solve the bugs by ourselves</div>
-                            <div class="col-md-4">
-                                <select>
-                                    <option value="">-</option>
-                                    <option value="yes">yes</option>
-                                    <option value="no">no</option>
-                                    <option value="partially">no bugs</option>
-                                </select>
-                            </div>
-                        </div>
-                            
-                    </div>
-    
-                    <div class="col-sm-4 col-md-5">
-    
-                        <textarea name="testo" rows="5" style="width: 100%" placeholder="Students remarks"></textarea>
-    
-                    </div>
-    
-                    <div class="col-sm-2">
-                        <input type="number" style="width: 100px" placeholder="self-evaluation" />
-                    </div>
-                </div>
-    
-    
-                <div class="row-fluid container-fluid category-footer">
-                    <div class="col-md-2 container-fluid">
-                        <span>Teacher evaluation: </span>
-                        <span>
-                            <!--TODO TROVARE MODO PIù CARINO PER SCRIVERE IL VALORE MAGARI SENZA USARE L'INPUT-->
-                            <input type="number" style="width: 130px;" placeholder="Teacher evaluation" disabled/>
-                        </span>
-                    </div>
-                    <div class="col-md-10" style="text-align: justify; text-justify: inter-word;">
-                        <p>
-                            <strong> Teacher note:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet,
-                            nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet,
-                            nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet,
-                            nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.
-                        </p>
-                    </div>
-                </div>
-    
-            </div>
-
 
     </div>
     <!--CATEGORY CONTAINER END-->
