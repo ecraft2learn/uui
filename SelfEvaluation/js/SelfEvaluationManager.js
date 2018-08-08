@@ -25,7 +25,7 @@ function getActivityCategories(activityId, responseHandler) {
     makeAjaxCall(formData, responseHandler);
 }
 
-function getCategoryCriterias(categoryId, responseHandler){
+function getCategoryCriterias(categoryId, responseHandler) {
     var formData = new FormData();
 
     formData.append("func", "getCategoryCriterias");
@@ -33,6 +33,33 @@ function getCategoryCriterias(categoryId, responseHandler){
 
     makeAjaxCall(formData, responseHandler);
 }
+
+function getSelfEvaluation(activityId, responseHandler) {
+    var formData = new FormData();
+
+    formData.append("func", "getSelfEvaluation");
+    formData.append("activity", activityId);
+    formData.append("group", window.sessionStorage.getItem("userId"));
+
+    makeAjaxCall(formData, responseHandler);
+}
+
+function getCategorySelfEvaluation(activityId, categoryId, responseHandler) {
+    var formData = new FormData();
+
+    formData.append("func", "getCategorySelfEvaluation");
+    formData.append("activity", activityId);
+    formData.append("category", categoryId);
+    formData.append("group", window.sessionStorage.getItem("userId"));
+
+    makeAjaxCall(formData, responseHandler);
+}
+
+/*function submitCategorySelfEvaluation(categoryEvaluation, responseHandler) {
+
+    makeAjaxCall(formData, responseHandler);
+}*/
+
 
 function ping(handler) {
     var formData = new FormData();

@@ -17,10 +17,11 @@
         footer {
             padding: 1em;
             color: white;
-            background-color: black;
+            background-color: #1d1d1d !important;
             clear: left;
             text-align: center;
         }
+
 
         body {
             font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Ubuntu", "Helvetica Neue", sans-serif;
@@ -28,6 +29,10 @@
             font-style: normal;
             font-weight: 400;
 
+        }
+
+        button {
+            padding: 1em;
         }
 
         .category {
@@ -70,7 +75,7 @@
                 for (i = 0; i < list.DATA.length; i++) {
                     var riga = list.DATA[i];
 
-                    var html = "<div id=\"category_" + riga.CategoryId + "\" class=\"category row-fluid container-fluid \">";
+                    var html = "<div id=\"category_" + riga.CategoryId + "\" class=\"category row-fluid container-fluid form-horizontal\">";
                     html += "<div class=\"row-fluid  container-fluid category-header\">    <div class=\"categoryTitle col-xs-12\">";
                     html += "<h4>" + riga.CategoryName + "</h4>    </div> </div> <div class=\"row-fluid  container-fluid category-body\">";
 
@@ -78,27 +83,35 @@
                     html += "<div id=\"category_" + riga.CategoryId + "-criterias\" class=\"col-sm-6 col-md-5\" style=\"padding-left: 0px; padding-right:opx;\"> </div>";
 
                     //students remarks
-                    html += "<div class=\"col-sm-4 col-md-5\" style=\"padding-bottom: 10px;\">        <textarea rows=\"5\" style=\"width: 100%;\" placeholder=\"Students remarks\"></textarea>    </div>";
+                    html += "<div class=\"col-sm-4 col-md-5 form-group\" > <label for=\"category_" + riga.CategoryId + "-remark\">Students remarks:</label>  <textarea id=\"category_" + riga.CategoryId + "-remark\" rows=\"5\" class=\"form-control\" placeholder=\"Students remarks\"></textarea>    </div>";
 
                     //self-evaluation
-                    html += "<div class=\"col-sm-2\">        <input type=\"number\" style=\"width: 100px\" placeholder=\"self-evaluation\" />    </div> </div>";
+                    html += "<div class=\"col-sm-2 form-group\">  <label for=\"category_" + riga.CategoryId + "-selfEvaluation\">Self-evaluation:</label> <select class=\"form-control\" id=\"category_" + riga.CategoryId + "-selfEvaluation\" placeholder=\"self-evaluation\"><option value=\"\"></option> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> </select> </div> </div>";
 
                     //teacher evaluation
                     html += "<div class=\"row-fluid container-fluid category-footer\">    <div class=\"col-md-2 container-fluid\">        <span><strong>Teacher evaluation: </strong></span>        <span>";
-                    //TODO TROVARE MODO PIù CARINO PER SCRIVERE IL VALORE MAGARI SENZA USARE L'INPUT
-                    html += "<input type=\"number\" style=\"width: 130px;\" placeholder=\"Teacher evaluation\" disabled/>        </span>    </div>";
+                    html += "<label id=\"category_" + riga.CategoryId + "-teacherEvaluation\" style=\"width: 130px;\"> </label>        </span>    </div>";
+
                     //teacher remark
-                    html += "<div class=\"col-md-10\" style=\"text-align: justify; text-justify: inter-word;\">        <p>            <strong> Teacher note:</strong> TODO";
-                    //TODO
-                    html += "</p>    </div></div></div>";
+                    html += "<div class=\"col-md-10\" style=\"text-align: justify; text-justify: inter-word;\">        <p id=\"category_" + riga.CategoryId + "-teacherNote\">            <strong> Teacher note: </strong></p>    </div></div></div>";
 
                     $('#categoryContainer').append(html);
 
                     getCategoryCriterias(riga.CategoryId, addCriterias);
-
                 }
+
+                getSelfEvaluation(getActivityId(), setSelfEvaluation);
+
             });
+
         });
+
+        function setSelfEvaluation(result, status) {
+            var list = JSON.parse(result);
+
+            $('#whatWeKnow').val(list.DATA[0].WhatWeKnow);
+            $('#notClear').val(list.DATA[0].NotClear);
+        }
 
         function addCriterias(result, status) {
 
@@ -108,23 +121,44 @@
 
             var html = "";
 
-            console.log("CATEGORY: " + list.DATA[0].Category);
 
             $.each(gruppedCriterias, function (index, criteria) {
-                html += "<div class=\"row container\" style=\"width: 100%; padding-bottom: 5px; padding-right: 0px; padding-left: 0px; margin:0px; \">";
-                html += "<div class=\"col-md-8\">" + criteria.Name + "</div>  <div class=\"col-md-4\">  <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "-value\"> <option value=\"\">-</option>";
-
-                console.log("category ID:" + criteria.Category + " criteria -->" + criteria.Name);
+                html += "<div class=\"row-fluid container-fluid form-group\" style=\"width: 100%; padding-bottom: 5px; padding-right: 0px; padding-left: 0px; margin:0px; \">";
+                //html += "<div class=\"col-md-8\">" + criteria.Name + "</div>  <div class=\"col-md-4\">  <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "-value\" class=\"form-control\"> <option value=\"\">-</option>";
+                html += "<label for=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "-value\">" + criteria.Name + "</label>  <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "-value\" class=\"form-control\"> <option value=\"\">-</option>";
 
                 for (i = 0; i < criteria.CritValues.length; i++) {
                     html += "<option value=\"" + criteria.CritValues[i] + "\">" + criteria.CritValues[i] + "</option>";
                 }
 
-                html += "</select></div> </div>";
+                //html += "</select></div> </div>";
+                html += "</select> </div>";
             });
 
-            console.log(html);
             $('#category_' + list.DATA[0].Category + '-criterias').append(html);
+
+            getCategorySelfEvaluation(getActivityId(), list.DATA[0].Category, setCategorySelfEvaluation);
+        }
+
+        function setCategorySelfEvaluation(result, status) {
+
+            var list = JSON.parse(result);
+
+            var gruppedEvaluations = groupEvaluations(list.DATA);
+
+            //$('#whatWeKnow').val(gruppedEvaluations.WhatWeKnow);
+            //$('#notClear').val(gruppedEvaluations.NotClear);
+
+            $('#category_' + gruppedEvaluations.Category + '-remark').val(gruppedEvaluations.Remark);
+            $('#category_' + gruppedEvaluations.Category + '-selfEvaluation').val(gruppedEvaluations.SelfEvaluation);
+            $('#category_' + gruppedEvaluations.Category + '-teacherEvaluation').append(gruppedEvaluations.TeacherEvaluation);
+            $('#category_' + gruppedEvaluations.Category + '-teacherNote').append(gruppedEvaluations.TeacherNote);
+
+            $.each(gruppedEvaluations.Criterias, function (index, critEval) {
+
+                $('#category_' + gruppedEvaluations.Category + '-criteria_' + critEval.Criteria + '-value').val(critEval.Value);
+            });
+
         }
 
         function groupCriteriaValues(list) {
@@ -152,6 +186,30 @@
             return grouppedCritValues;
         }
 
+        function groupEvaluations(list) {
+
+            var grouppedEvaluaion = {
+                Category: list[0].Category,
+                SelfEvaluation: list[0].SelfEvaluation,
+                Remark: list[0].Remark,
+                TeacherEvaluation: list[0].TeacherEvaluation,
+                TeacherNote: list[0].TeacherNote,
+                TeacherSubmissionDate: list[0].TeacherSubmissionDate,
+                Criterias: []
+            };
+
+            $.each(list, function (index, row) {
+
+                grouppedEvaluaion.Criterias.push(
+                    {
+                        Criteria: row.Criteria,
+                        Value: row.Value
+                    });
+            });
+
+            return grouppedEvaluaion;
+        }
+
         function getActivityId() {
             var parameters = location.search.substring(1).split("&");
 
@@ -176,11 +234,61 @@
 
 
 <body>
+    <div class="container-fluid">
+        <div id="categoryContainer" class="row-fluid ">
 
-    <div id="categoryContainer" class="container-fluid ">
+        </div>
 
+        <div class="row-fluid">
+            <div style="padding-bottom: 10px;">
+                <div class="form-group container-fluid category">
+                    <label for="whatWeKnow">What we know:</label>
+                    <textarea id="whatWeKnow" rows="8" class="form-control" style="width: 100%;" placeholder="What we know"></textarea>
+                </div>
+                <div class="form-group container-fluid category">
+                    <label for="notClear">What is not clear:</label>
+                    <textarea id="notClear" rows="8" class="form-control" style="width: 100%;" placeholder="What is not clear"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid ">
+            <div class="row-fluid " style="text-align: center; ">
+                <button type="submit" class="btn btn-primary btn-lg m-5" style="margin: 10px;">Submit</button>
+                <button type="button" name="goBack" class="btn btn-danger btn-lg m-5" style="margin: 10px;" data-toggle="modal" data-target="#myModal">Cancel</button>
+
+            </div>
+        </div>
     </div>
-    <!--CATEGORY CONTAINER END-->
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="goBack()">Go back!</button>
+                </div>
+
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
 </body>
+
+
+<footer>
+
+</footer>
 
 </html>
