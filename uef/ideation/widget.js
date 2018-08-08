@@ -3502,6 +3502,23 @@
         if (!uid) {
             uid = event.data.uid;
         }
+		
+		if(event.data.setPoints) {
+			points = JSON.parse(event.data.points);
+			lastPointIndex = points.length;
+
+			// redraw the <canvas> surfaces
+			drawHelper.redraw();
+			return;
+		}
+		
+		if(event.data.getPoints) {
+			window.parent.postMessage({
+				points: points,
+				uid:uid
+			}, '*');
+			return;
+		}
 
         if (event.data.captureStream) {
             webrtcHandler.createOffer(function(sdp) {
@@ -3685,19 +3702,3 @@
     };
 
 })();
-window.blockMenuHeaderScroll = false;
-$('.draw-area').on('mousedown touchstart', function(e)
-{
-    blockMenuHeaderScroll = true;
-});
-$('.draw-area').on('mouseup touchend', function()
-{
-    blockMenuHeaderScroll = false;
-});
-$('.draw-area').on('touchmove', function(e)
-{
-    if (blockMenuHeaderScroll)
-    {
-        e.preventDefault();
-    }
-});

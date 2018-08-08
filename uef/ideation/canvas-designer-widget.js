@@ -31,6 +31,7 @@ function CanvasDesigner() {
     var syncDataListener = function(data) {};
     var dataURLListener = function(dataURL) {};
     var captureStreamCallback = function() {};
+	var getPointsCallback = function() {};
 
     function onMessage(event) {
         if (!event.data || event.data.uid !== designer.uid) return;
@@ -57,6 +58,11 @@ function CanvasDesigner() {
             dataURLListener(event.data.dataURL);
             return;
         }
+		
+		if(!!event.data.points) {
+			getPointsCallback(event.data.points);
+			return;
+		}
     }
 
     function getRandomString() {
@@ -155,6 +161,24 @@ function CanvasDesigner() {
             captureStream: true
         });
     };
+	
+	designer.getPoints = function(callback) {
+		if (!designer.iframe) return;
+		
+		getPointsCallback = callback;
+		designer.postMessage({
+			getPoints: true
+		});
+	};
+	
+	designer.setPoints = function(points) {
+		if (!designer.iframe) return;
+		
+		designer.postMessage({
+			setPoints: true,
+			points: points
+		});	
+	};
 
     designer.widgetHtmlURL = 'widget.html';
     designer.widgetJsURL = 'widget.min.js';

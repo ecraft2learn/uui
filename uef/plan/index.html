@@ -1,13 +1,23 @@
 <html>
     <head>
     	<title>eCraft TODO</title>
+		<link rel="stylesheet" href="../../libraries/css/metro-all.css">
         <link rel="stylesheet" href="lib/Bootstrap/bootstrap.min.css" />
         <link rel="stylesheet" href="lib/jQuery/jquery.ui.min.css" />
         <link rel="stylesheet" href="css/todo.css" />
 	<script type="text/javascript" src="lib/jQuery/jquery.min.js"></script>
+	<script src="../../libraries/js/metro.js"></script>
+		<script src="../../js/file_manager.js"></script>
         <script type="text/javascript" src="lib/Bootstrap/bootstrap.min.js"></script>
         <script type="text/javascript" src="lib/jQuery/jquery.ui.min.js"></script>
         <script type="text/javascript" src="js/todo.js"></script>
+		
+		<!-- This ccs is needed because metro-all.css is changing position on divs  -->
+		<style>
+			.task-list, .ui-droppable, form, input, textarea {
+				position: initial !important;
+			}
+		</style>
     </head>
 
     <body class="well">
@@ -36,7 +46,8 @@
                     <input type="text" id="datepicker" placeholder="Due Date (dd/mm/yyyy)" />
 		    <input type='text' placeholder='Assigned to who' />
 		    <input type="button" class="btn btn-primary" value="Add Task" onclick="todo.add();" />
-		    <input type='button' class='btn btn-primary' value='Save' onclick='todo.save();' />
+		    <!--<input type='button' class='btn btn-primary' value='Save' onclick='todo.save();' />-->
+			<input type='button' id="save" class='btn btn-primary' value='Save' />
 		</form>
                 <div id="delete-div">
                     Drag Here to Delete
@@ -46,13 +57,17 @@
             <div style="clear:both;"></div>
             
 	    <script type="text/javascript">
+			$(document).on('click', '#save', function(){
+				var elem = JSON.stringify(todo.elements);
+				saveDataToCloud(elem, 'eCraft Todo', 'eCraft Todo');
+			});
 	    	$( "#datepicker" ).datepicker();
-                $( "#datepicker" ).datepicker("option", "dateFormat", "dd/mm/yy");
+			$( "#datepicker" ).datepicker("option", "dateFormat", "dd/mm/yy");
 
-                $(".task-container").droppable();
-                $(".todo-task").draggable({ revert: "valid", revertDuration:200 });
-                todo.init();
-            </script>
+			$(".task-container").droppable();
+			$(".todo-task").draggable({ revert: "valid", revertDuration:200 });
+			todo.init();
+		</script>
 
         </div>
     </body>

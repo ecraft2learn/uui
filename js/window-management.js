@@ -310,7 +310,7 @@ function unminimizeWindowFromJS(minButton){
 //Create a small button which represents the minimized window. The button is added to the bottom charm.
 function createMinimizedTab(winData) {
 	var $button = $("<button></button>", {
-							class: "image-button fg-white icon-left minimized-window-tab",
+							class: "image-button fg-white icon-left minimized-window-tab mt-1 mb-1",
 							style: "background-color:"+winData.color+"; margin-right:5px;"
 	});
 	

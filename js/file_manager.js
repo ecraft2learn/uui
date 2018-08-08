@@ -34,7 +34,8 @@
         | 16 | Pocket Code         
         | 17 | NetsBlox            
         | 18 | Arduino IDE         
-        | 19 | Thingiverse         
+        | 19 | Thingiverse      
+		| 20 | eCraft TODO
 
    
     See Also:
@@ -45,20 +46,6 @@ function addFile(projectId, toolId, fileInputObject, responseHandler) {
     formData.append("func", "uploadFile");
     formData.append("toolId", toolId);
     formData.append("projectId", projectId);
-
-    if (fileInputObject == null || fileInputObject == undefined
-        || $(fileInputObject) == null || $(fileInputObject) == undefined
-        || $(fileInputObject).prop('files') == null || $(fileInputObject).prop('files') == undefined) {
-        window.sessionStorage.setItem("errorStatus", "fail");
-        return;
-    }
-    var file_data = $(fileInputObject).prop('files')[0];
-    formData.append('file', file_data);
-
-    if (file_data == null || file_data == undefined) {
-        window.sessionStorage.setItem("errorStatus", "fail");
-        return;
-    }
 
     if (responseHandler == undefined)
         responseHandler = handleAddFileResponse;
@@ -310,13 +297,12 @@ function handleAddFileResponse(php_script_response) {
 */
 function handleAddProjectResponse(php_script_response) {
     var respObj = JSON.parse(php_script_response);
-
     if (!checkJsonData(respObj)) {
         //window.sessionStorage.setItem("projectId", -1);
         window.sessionStorage.setItem("errorStatus", "fail");
     }
     else {
-        var projectId = parseInt(respObj.DATA[0].ID);
+        var projectId = parseInt(respObj.DATA['ID']);
         window.sessionStorage.setItem("projectId", projectId);
         window.sessionStorage.setItem("errorStatus", "success");
     }
@@ -404,9 +390,10 @@ function handleAddUserResponse(php_script_response) {
 function handleGetProjectFilesResponse(php_script_response) {
     var respObj = JSON.parse(php_script_response);
 
-    if (!checkJsonData(respObj))
-        window.sessionStorage.setItem("errorStatus", "fail");
-    else {
+    if (!checkJsonData(respObj)) {
+		window.sessionStorage.removeItem("projectFiles");
+		window.sessionStorage.setItem("errorStatus", "fail");
+	} else {
         window.sessionStorage.setItem("projectFiles", php_script_response);
         window.sessionStorage.setItem("errorStatus", "success");
     }
@@ -451,10 +438,10 @@ function handleGetProjectFilesResponse(php_script_response) {
 */
 function handleGetUserFilesResponse(php_script_response) {
     var respObj = JSON.parse(php_script_response);
-
-    if (!checkJsonData(respObj))
-        window.sessionStorage.setItem("errorStatus", "fail");
-    else {
+    if (!checkJsonData(respObj)){
+		window.sessionStorage.removeItem("userFiles");
+		window.sessionStorage.setItem("errorStatus", "fail");
+	} else {
         window.sessionStorage.setItem("userFiles", php_script_response);
         window.sessionStorage.setItem("errorStatus", "success");
     }
@@ -579,8 +566,8 @@ function checkJsonData(jsonData) {
         return false;
     if (jsonData.DATA == null || jsonData.DATA == undefined)
         return false;
-    if (jsonData.DATA[0] == null || jsonData.DATA[0] == undefined)
-        return false;
+    /*if (jsonData.DATA[0] == null || jsonData.DATA[0] == undefined)
+        return false;*/
 
     return true;
 }
