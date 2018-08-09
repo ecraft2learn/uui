@@ -28,7 +28,7 @@
 					
 				var arr = JSON.parse(storage);
 				designer.setPoints( arr.DATA[id]['FILE_PATH'] );
-				$(this).closest('.info-box').find('.closer').click();
+				$('.info-box').find('.closer').click();
 			});
 			$(document).on('click', '#save_file', function(){
 				if($('.loc_btn.active').text() == 'Cloud') {
@@ -36,10 +36,47 @@
 					if($('#file_name').val().length > 0) {
 						designer.getPoints(function(array){
 							var data = JSON.stringify(array);
-							saveDataToCloud(data, $('#file_name').val(), 'eCraft Plan')
+							saveDataToCloud(data, $('#file_name').val(), 'eCraft Plan');
 						});
 					}
 				}
+			});
+			$(document).on('click', '#save_file_local', function(){
+				if($('.loc_btn.active').text() == 'Local') {
+					$('#save_form').submit();
+					if($('#file_name').val().length > 0) {
+						designer.getPoints(function(array){
+							var data = JSON.stringify(array);
+							saveDataToLocal(data, $('#file_name').val(), 'eCraft Plan', '.eidea');
+						});
+					}
+				}
+			});
+			$(document).on('change', '#load_local_file', function(e){
+				var file = e.target.files[0];
+				
+				var ext = file.name.split('.').pop().toLowerCase();
+				if(ext != 'eidea'){
+					$('#invalid_local_ext').show();
+					return;
+				}
+				
+				if (!file) {
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					var arr = JSON.parse(e.target.result);
+					console.log(arr.toolid);
+					if(arr.toolid != 3){
+						$('#invalid_local_file').show();
+						return;
+					}
+					designer.setPoints( arr.data );
+					$('.info-box').find('.closer').click();
+					return;
+				};
+				reader.readAsText(file);
 			});
 		</script>
 	</head>
@@ -55,7 +92,7 @@
 			$(document).on('click', '#save', function(){
 				//var toolName = window.parent.$('.window').find('.title').text().trim();
 				var toolName = 'eCraft Plan';
-				openDialog(toolName);
+				openDialog(toolName, '.eidea');
 			});
 		</script>
 	</body>
