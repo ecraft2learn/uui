@@ -55,6 +55,15 @@ function getCategorySelfEvaluation(activityId, categoryId, responseHandler) {
     makeAjaxCall(formData, responseHandler);
 }
 
+function saveSelfEvaluation(selfEvaluation, responseHandler) {
+    var formData = new FormData();
+
+    formData.append("func", "saveSelfEvaluation");
+    selfEvaluation.Group = window.sessionStorage.getItem("userId");
+    formData.append("selfEvaluation", JSON.stringify(selfEvaluation));
+
+    makeAjaxCall(formData, responseHandler);
+}
 /*function submitCategorySelfEvaluation(categoryEvaluation, responseHandler) {
 
     makeAjaxCall(formData, responseHandler);
