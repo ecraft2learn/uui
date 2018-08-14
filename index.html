@@ -42,6 +42,7 @@
 		
 	<!-- This links to the css file that we use for coloring of the tiles. The themes are stored in the "themes" folder. Change this to see other themes-->
 	<link rel="stylesheet" type="text/css" href="themes/theme-3.css" />
+	<link rel="stylesheet" type="text/css" href="themes/loading-animation.css" />
 	<link rel="stylesheet" type="text/css" href="extra-btn.css" />
 	
 	<script src="js/window-management.js"></script>
@@ -49,12 +50,11 @@
 
 	<script src="js/file_manager.js"></script>
 	
-	<!--Link to the css file for the stars achievment-->
-	<link rel="stylesheet" type="text/css"href="bower_components/css-star-rating/dist/css/star-rating.css">
-
 	<!--LNU CODE START-->
 	<script src="lnu/commenting/js/feedback-window-managment.js"></script>
 	<!--LNU CODE END-->
+
+	<!--<script src="SelfEvaluation/js/SelfEvaluationManager.js"></script>-->
 
 	<style>
 		.bg-darkBlue {
@@ -300,45 +300,14 @@
 		.star:before {
 			content: '\2605';
 		}
-		.star.circuit {
-			color: #fc7000;
-		}
-		.star.design {
-			color: #37cd00;
-		}
-		.star.prog {
-			color: #e24691;
-		}
-		.star.prj {
-			color: #ffef2b;
-		}
-		.star.collab {
-			color: #ff442b;
-		}
-		.star.org {
-			color: #3565f4;
-		}
 
-		.star.halfCircuit::after {
-			content: '\2605';
-			position: absolute;
-			left: 0;
-			right: 50%;
-			top: 0;
-			bottom: 0;
-			overflow: hidden;
-			color: #fc7000;
+		.loadingAnimation{
+			height: 5em;
+  			display: flex;
+  			align-items: center;
+  			justify-content: center
 		}
-		.star.halfPrj::after {
-			content: '\2605';
-			position: absolute;
-			left: 0;
-			right: 50%;
-			top: 0;
-			bottom: 0;
-			overflow: hidden;
-			color: #ffef2b;
-		}
+	
     </style>
 	
 	<script>
@@ -689,6 +658,7 @@
 						<script>
 							function openUserMenu(){
 								$("#userMenu").show();
+								getGroupAchievements(addStars);
 							}
 							function getUserProgress(){
 								var sessionId = window.sessionStorage.getItem('pilotsite');
@@ -714,6 +684,37 @@
 									}
 								});
 							}
+
+
+							function getGroupAchievements(responseHandler){
+								$(".loadingAnimation").show();
+								$("#AchievementsContainer").empty();
+								var formData = new FormData();
+
+								formData.append("func", "getGroupAchievements");
+
+								var sessionId = window.sessionStorage.getItem("pilotsite");
+								var users = window.sessionStorage.getItem("userId");
+
+								formData.append("group", users);
+								formData.append("pilotSite", sessionId);
+								
+								//TODO change the url!!!!
+								var url = "http://localhost/php/selfEvaluationManager.php"; //'https://cs.uef.fi/~ec2l/WebDocs/SelfEvaluationManger.php'
+								$.ajax({
+									url: url,
+									dataType: 'text',
+									cache: false,
+									contentType: false,
+									processData: false,
+									data: formData,
+									type: 'post',
+									async: true,
+									success: function (php_script_response) {
+										responseHandler(php_script_response);
+									}
+								});
+							}
 						</script>
 						<div class="row">
 							<div class="cell">
@@ -728,79 +729,44 @@
 						<div style="display:flex; justify-content: left; align-items: center; font-size:20px;"> <span class="icon mif-user mif-2x fg-lightTeal"></span> <span class="no-margin text-heavy"></span>&nbsp;<script>document.write(window.sessionStorage.getItem('username'));</script></span></div><br/>
 						<div class="progress pull-right no-margin" data-role="progress" data-value="getUserProgress();" dataz-value="73" style="width:200px;"></div>
 						<br/><br/>
-												
-						<div > 
-							<div class="row category-container" >
-								<span class="category-title">Building the circuit</span>
-								
-								<span class="star-container" >
-									<span class="star circuit"></span>
-									<span class="star halfCircuit"></span>
-									<span class="star "></span>
-									<span class="star "></span>
-									<span class="star"></span>
-								</span>
-							</div>
+							
+						<div class="loadingAnimation"><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+						<div id="AchievementsContainer" class="icon-list"> 
+													
+							<script >
+								function addStars(result, status){
+									console.log(result);
+									var list = JSON.parse(result);
+									var html = "";
+									
+									for (i = 0; i < list.DATA.length; i++) {
+										var riga = list.DATA[i];
+										
+										html += "<div class=\"row no-margin category-container\" ><span class=\"category-title\">"+riga.Name+"</span> <span class=\"star-container\" >";
+										html += "<style>.star.category"+ riga.Id+ " { color: "+ riga.StarsColor+"; }";
+										html += ".star.halfStar-category"+ riga.Id+ "::after { content: '\\2605'; position: absolute; left: 0; right: 50%; top: 0; bottom: 0; overflow: hidden; color: "+ riga.StarsColor+"; } </style>";
+										
+										for(t=0; t < riga.Points; t++){
+											html +="<span class=\"star category"+riga.Id +"\" ></span>";
+										}
 
-							<div class="row no-margin category-container">
-								<span class="category-title">3D Design</span>
-								
-								<span class="star-container">
-									<span class="star design"/></span>
-									<span class="star design"/></span>
-									<span class="star "/></span>
-									<span class="star "/></span>
-									<span class="star"/></span>
-								</span>								
-							</div>
+										if(riga.HalfStar){
+											html+="<span class=\"star halfStar-category"+ riga.Id +"\"></span>"	
+											riga.Points++;										
+										}
 
-							<div class="row  no-margin category-container">
-								<span class="category-title">Programming</span>
-								
-								<span class="star-container ">
-									<span class="star prog"></span>
-									<span class="star prog"></span>
-									<span class="star "></span>
-									<span class="star "></span>
-									<span class="star"></span>
-								</span>
-							</div>
-
-							<div class="row  no-margin category-container">
-								<span class="category-title">Project presentation</span>
-								
-								<span class="star-container">
-									<span class="star prj"></span>
-									<span class="star halfPrj"></span>
-									<span class="star "></span>
-									<span class="star "></span>
-									<span class="star"></span>
-								</span>
-							</div>
-
-							<div class="row  no-margin category-container">
-								<span class="category-title">Collaboration</span>
-								
-								<span class="star-container ">
-									<span class="star collab"></span>
-									<span class="star collab"></span>
-									<span class="star collab"></span>
-									<span class="star "></span>
-									<span class="star"></span>
-								</span>
-							</div>
-
-							<div class="row  no-margin category-container">
-								<span class="category-title">Originality</span>
-								
-								<span class="star-container ">
-									<span class="star org"></span>
-									<span class="star org"></span>
-									<span class="star "></span>
-									<span class="star "></span>
-									<span class="star"></span>
-								</span>
-							</div>
+										for(t=0; t < 5 - riga.Points;t++){
+											html+="<span class=\"star \"></span>";
+										}
+									
+										html+="</span></div>";										
+									}
+									$(".loadingAnimation").hide();
+									$('#AchievementsContainer').append(html);
+								}
+							</script>
+						
+						
 						</div>
 						</br>
 						

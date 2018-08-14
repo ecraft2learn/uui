@@ -64,10 +64,7 @@ function saveSelfEvaluation(selfEvaluation, responseHandler) {
 
     makeAjaxCall(formData, responseHandler);
 }
-/*function submitCategorySelfEvaluation(categoryEvaluation, responseHandler) {
 
-    makeAjaxCall(formData, responseHandler);
-}*/
 
 
 function ping(handler) {
