@@ -86,9 +86,8 @@
         	http.onreadystatechange = function() {
                  
 				if (http.responseText === "") {
-					console.log("No response from " + url + " with " + params);            
+					console.log("No response.");            
 				} else {
-					console.log(http.responseText);
 					ide.rawOpenProjectString(http.responseText);					
 				};
         	};
