@@ -1263,4 +1263,50 @@
 	<!-- The Task Bar at the bottom of the page-->
 	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-index:0;" onmouseenter="Metro.charms.open('#bottomCharm');"></div>
 	<div id="bottomCharm" data-role="charms" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
+
+	(() => {
+
+		setInterval(() => {
+
+			var user = window.sessionStorage.getItem('username');
+			var sessionId = window.sessionStorage.getItem('pilotsite');
+
+			var lastId = window.localStorage.getItem('lastMessageId');
+
+			if (! lastId)
+				lastId = 0;
+			
+			window.localStorage.setItem('lastMessageId', ++lastId);
+
+			if (user && sessionId) {
+
+				$.ajax({
+
+					type: 'POST',
+					url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_student_messages.php',
+					data: 'user=' + user + '&sessionId=' + sessionId + '&lastId=' + lastId,
+					success: (data) => {
+
+						var messages = JSON.parse(data);
+						
+						if (Array.isArray(messages)) {
+
+							for (let i = 0; i < messages.length; i++) {
+							
+								alert(messages[i]);
+											    
+							}
+
+						}
+
+					},
+					error: (error) => { }
+
+				});
+
+			}
+
+		}, 2000);
+
+	})();
 </body>
