@@ -1278,7 +1278,7 @@
 			if (! lastId)
 				lastId = 0;
 			
-			window.localStorage.setItem('lastMessageId', ++lastId);
+			window.localStorage.setItem('lastMessageId', lastId + 1);
 
 			if (user && sessionId) {
 
@@ -1295,7 +1295,7 @@
 
 							for (let i = 0; i < messages.length; i++) {
 							
-								alert(messages[i]);
+								alert(messages[i].message);
 											    
 							}
 
