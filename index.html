@@ -1277,8 +1277,6 @@
 
 			if (! lastId)
 				lastId = 0;
-			
-			window.localStorage.setItem('lastMessageId', lastId + 1);
 
 			if (user && sessionId) {
 
@@ -1288,16 +1286,31 @@
 					url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_student_messages.php',
 					data: 'user=' + user + '&sessionId=' + sessionId + '&lastId=' + lastId,
 					success: (data) => {
-
-						var messages = JSON.parse(data);
 						
+						try {
+
+							var messages = JSON.parse(data);
+						
+						} catch (e) {
+						
+							return;
+							
+						}
+							
 						if (Array.isArray(messages)) {
 
+							var id = lastId;
+							
 							for (let i = 0; i < messages.length; i++) {
 							
+								id = messages[i].id;
+								
 								alert(messages[i].message);
+								
 											    
 							}
+							
+							window.localStorage.setItem('lastMessageId', id);
 
 						}
 
