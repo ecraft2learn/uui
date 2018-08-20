@@ -1305,7 +1305,16 @@
 							
 								id = messages[i].id;
 								
-								alert(messages[i].message);
+								 Metro.dialog.create({
+        								title: "Message from your teacher.",
+        								content: "<div>" + messages[i].message + "</div>",
+        								clsDialog: "bg-dark",
+        								clsTitle: "fg-yellow",
+        								clsContent: "fg-white",
+        								clsDefaultAction: "alert"
+    								});
+								
+								//alert(messages[i].message);
 								
 											    
 							}
