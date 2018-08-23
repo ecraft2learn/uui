@@ -30084,13 +30084,11 @@ video:-webkit-full-screen {
   position: relative;
   margin: 0;
   padding: 0;
-  max-height: 100%;
   background-color: #ffffff;
   color: #1d1d1d;
   list-style: none inside;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
 }
 .listview.view-list,
 .listview.view-content {

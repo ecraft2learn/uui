@@ -1036,7 +1036,7 @@
 					<div class="tiles-area pt-5 pl-10 pr-10" id="divProjects" stylez="display:none;">
 						<div class="tiles-grid tiles-group size-1 fg-white  mb-15" data-group-title="UUI Tools">
 							<!--<span class="tile-group-title">UUI Tools</span><br>-->
-							<div class="tile-large bg-darkBlue fg-white p-5">
+							<div id="#spanPrj_0" class="tile-large bg-darkBlue fg-white p-5 project-tile">
 								<div class="grid">
 									<div class="row">
 										<div class="cell">
@@ -1057,6 +1057,7 @@
 												var userId = window.sessionStorage.getItem("userId");
 												if(userId!=undefined && userId!=-1){
 													getUserProjects(userId, handleGetProjectsResponse);
+													$('.project-tile').data('PROJECTID',0);
 												}
 								
 												function handleGetProjectsResponse(phpResponse){
@@ -1064,7 +1065,7 @@
 													
 													for(i=0; i<jsonData.DATA.length && i<8;i++){
 														var prjId = jsonData.DATA[i].ID;
-														var spanLink = $("<div>").css("width","100%").css("border", "0px").addClass("m-0 p-0").attr("id", "spanPrj_" + prjId);
+														var spanLink = $("<div>").css("width","100%").css("border", "0px").addClass("project m-0 p-0").attr("id", "spanPrj_" + prjId);
 														var alink = $("<a>").addClass("whiteLink").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
 														if(window.sessionStorage.getItem("currentProjectId")==prjId)
 															spanLink.addClass("bg-darkCobalt");
@@ -1088,7 +1089,11 @@
 														curSelectedDiv.removeClass("bg-darkCobalt");
 													if(newSelectedDiv!=null && newSelectedDiv!=undefined)
 														newSelectedDiv.addClass("bg-darkCobalt");
+													getProjectFiles(prjId);
 												}
+												$(document).on('click', '.project-tile', function(){
+													SelectProject();
+												});
 											</script>
 										</div>
 									</div>
@@ -1296,6 +1301,8 @@
 					<!--The following 2 links cannot be opened in a window because of XFrame limitation and HTTP/HTTPS, for now I am opening them in a new tab, until the issue is fixed-->
 					<li><a href="https://forum.arduino.cc/"  target="_blank" onclick_oldold="tileClick('https://forum.arduino.cc/','Arduino Forum', event);">Arduino Forum</a></li>
 					<li><a href="http://playground.arduino.cc/" target="_blank" onclick_old="tileClick('http://playground.arduino.cc/','Arduino Playground', event);">Arduino Wiki</a></li>
+					<!---->
+					<li><a href="#" onclick="tileClick('https://www.createeducation.com/','Ultimaker Create Education', event);">ULTIMAKER Create Education</a></li>
 					<li class="divider"></li>
 				</ul>
 			</li>
@@ -1392,4 +1399,77 @@
 	<!-- The Task Bar at the bottom of the page-->
 	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-index:0;" onmouseenter="Metro.charms.open('#bottomCharm');"></div>
 	<div id="bottomCharm" data-role="charms" data-position="bottom"  class="bg-darkBlue"><span>&nbsp;</span></div>
+
+	<script>
+
+	(() => {
+
+		setInterval(() => {
+
+			var user = window.sessionStorage.getItem('username');
+			var sessionId = window.sessionStorage.getItem('pilotsite');
+
+			var lastId = window.localStorage.getItem('lastMessageId');
+
+			if (! lastId)
+				lastId = 0;
+
+			if (user && sessionId) {
+
+				$.ajax({
+
+					type: 'POST',
+					url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_student_messages.php',
+					data: 'user=' + user + '&sessionId=' + sessionId + '&lastId=' + lastId,
+					success: (data) => {
+						
+						try {
+
+							var messages = JSON.parse(data);
+						
+						} catch (e) {
+						
+							return;
+							
+						}
+							
+						if (Array.isArray(messages)) {
+
+							var id = lastId;
+							
+							for (let i = 0; i < messages.length; i++) {
+							
+								id = messages[i].id;
+								
+								 Metro.dialog.create({
+        								title: "Message from your teacher.",
+        								content: "<div>" + messages[i].message + "</div>",
+        								clsDialog: "bg-dark",
+        								clsTitle: "fg-yellow",
+        								clsContent: "fg-white",
+        								clsDefaultAction: "alert"
+    								});
+								
+											    
+							}
+							
+							id++;
+							
+							window.localStorage.setItem('lastMessageId', id);
+
+						}
+
+					},
+					error: (error) => { }
+
+				});
+
+			}
+
+		}, 2000);
+
+	})();
+		
+	</script>
+		
 </body>

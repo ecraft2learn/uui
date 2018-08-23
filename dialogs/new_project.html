@@ -3,7 +3,7 @@
 <form data-role="validator" action="javascript:"
 	data-on-submit="custom=createNewProject">
 	<label>Project Name</label>
-	<input type="text"
+	<input type="text" id="txtPrjName"
                 data-validate="required custom=createNewProject"
                 placeholder="Enter project name">
 	<span class="invalid_feedback">
@@ -16,17 +16,19 @@
 	function createNewProject() {
 		var prjName = $("#txtPrjName").val();
 		var userId = window.sessionStorage.getItem("userId");
+
+		addProject(userId, prjName);
 		var newPrjId = window.sessionStorage.getItem("projectId");
-		
-		//addProject(userId, prjName);
 		
 		if(newPrjId==undefined || newPrjId==-1 || newPrjId==null) {
 			Metro.toast.create('Could not create new project.', null, 5000, "bg-red fg-white");
 			$('.info-box').last().data('infobox').close();
-			//Metro.notify.create('Could not create new project.', 'Alert', { cls: "alert z-front"});
 			return false;
-		} else
+		} else{
 			Metro.toast.create('Project <i>' + prjName + '</i> successfully created.', null, 5000, "bg-green fg-white");
+			$('.project').each(function(){$(this).remove();});
+			getUserProjects(userId, handleGetProjectsResponse);
+		}	
 		$('.info-box').last().data('infobox').close();
 		return true;
 	}
