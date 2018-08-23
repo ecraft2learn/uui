@@ -1,7 +1,8 @@
 // -----------------------------------------------------------------------------
 // Variables
 // -----------------------------------------------------------------------------
-//window.localStorage.clear();
+window.localStorage.clear();
+
 var settings = new SLAcer.Settings({
     file: {
         panel: {
