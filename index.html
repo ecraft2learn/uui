@@ -689,7 +689,7 @@
 
 
 							function getGroupAchievements(responseHandler){
-								$(".loadingAnimation").show();
+								$("#achievementsLoadingAnimation").show();
 								$("#AchievementsContainer").empty();
 								var formData = new FormData();
 
@@ -732,12 +732,11 @@
 						<div class="progress pull-right no-margin" data-role="progress" data-value="getUserProgress();" dataz-value="73" style="width:200px;"></div>
 						<br/><br/>
 							
-						<div class="loadingAnimation"><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+						<div id="achievementsLoadingAnimation" class="loadingAnimation"><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
 						<div id="AchievementsContainer" class="icon-list"> 
 													
 							<script >
 								function addStars(result, status){
-									console.log(result);
 									var list = JSON.parse(result);
 									var html = "";
 									
@@ -763,7 +762,7 @@
 									
 										html+="</span></div>";										
 									}
-									$(".loadingAnimation").hide();
+									$("#achievementsLoadingAnimation").hide();
 									$('#AchievementsContainer').append(html);
 								}
 							</script>
