@@ -522,7 +522,9 @@
 		
 		function tileClick(toolUrl, winTitle, event){
 			var analyticField;
-			
+		
+			console.log(winTitle);
+	
 			if(winTitle==undefined) {
 				analyticField = getAnalyticFieldName(toolUrl);
 				gotoTileDestination(toolUrl);
@@ -907,6 +909,16 @@
 									Cura to print 3D models
 								</div>
 							</div>
+							<div data-role="tile" class="tile bg-create fg-white no-mobile" data-effect="hover-slide-up">
+                                                                <span class="mif-question badge-medium-top m-0 bg-transparent"></span>
+                                                                <div class="slide-front" onclick="tileClick('./uef/slice/index.html', 'Slicer', event);">
+                                                                        <img class="icon" src="./images/slice.png">
+                                                                        <span class="branding-bar">3D slicing</span>
+                                                                </div>       
+                                                                <div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./uef/slice/index.html', 'Slicer', event);">
+                                                                        Slice 3D modeles for 3D printer
+                                                                </div>       
+                                                        </div>	
 						</div> <!-- End of Create Group-->
 						<!-- PROGRAM GROUP -->
 						<div class="tiles-grid tiles-group size-2 fg-white  mb-15" data-group-title="Program">
