@@ -186,7 +186,7 @@
 
             $("#activityLoadingAnimation").hide();
             $("#activityContainer").show();
-            
+
         }
 
         function groupCriteriaValues(list) {
@@ -289,9 +289,11 @@
         }
 
         function succesfullSave(result, status) {
-            //alert("success!! " + result);
+            $("#saveCompleteModal").modal();
+        }
 
-            console.log(result);
+        function goBack() {
+            window.history.back();
         }
 
     </script>
@@ -369,11 +371,25 @@
                     <button type="button" class="btn btn-primary" onclick="goBack()">Go back!</button>
                 </div>
 
-                <script>
-                    function goBack() {
-                        window.history.back();
-                    }
-                </script>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="saveCompleteModal" tabindex="-1" role="dialog" aria-labelledby="saveCompleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    Saving completed. Do you want to stay here or go back to the list of activities?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Stay here</button>
+                    <button type="button" class="btn btn-primary" onclick="goBack()" data-dismiss="modal">Go back!</button>
+                </div>
+
             </div>
         </div>
     </div>
