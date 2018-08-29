@@ -11,16 +11,16 @@ function setActivityCategories(result, status) {
 
             var html = "<div id=\"category_" + riga.CategoryId + "\" class=\"category row-fluid container-fluid form-horizontal\">";
             html += "<div class=\"row-fluid  container-fluid category-header\">    <div class=\"categoryTitle col-xs-12\">";
-            html += "<h4>" + riga.CategoryName + "</h4>    </div> </div> <div class=\"row-fluid  container-fluid category-body\">";
+            html += "<h3>" + riga.CategoryName + "</h3>    </div> </div> <div class=\"row-fluid  container-fluid category-body\">";
 
             //category criteria
             html += "<div id=\"category_" + riga.CategoryId + "-criterias\" class=\"col-sm-6 col-md-5\" style=\"padding-left: 0px; padding-right:opx;\"> </div>";
 
             //students remarks
-            html += "<div class=\"col-sm-4 col-md-5 form-group\" > <label for=\"category_" + riga.CategoryId + "_remark\">Students remarks:</label>  <textarea name=\"remark\" id=\"category_" + riga.CategoryId + "_remark\" rows=\"5\" class=\"form-control\" placeholder=\"Students remarks\"></textarea>    </div>";
+            html += "<div class=\"col-sm-4 col-md-5 form-group\" > <h4><label for=\"category_" + riga.CategoryId + "_remark\">Students remarks:</label><h4>  <textarea name=\"remark\" id=\"category_" + riga.CategoryId + "_remark\" rows=\"5\" class=\"form-control\" placeholder=\"Students remarks\"></textarea>    </div>";
 
             //self-evaluation
-            html += "<div class=\"col-sm-2 form-group\">  <label for=\"category_" + riga.CategoryId + "_selfEvaluation\">Self-evaluation:</label> <select name=\"selfEvaluation\" class=\"form-control selfevaluation\" id=\"category_" + riga.CategoryId + "_selfEvaluation\" placeholder=\"self-evaluation\" required='true'><option value=''></option> <option value='1'>1</option> <option value='2'>2</option> <option value='3'>3</option> <option value='4'>4</option> <option value='5'>5</option> </select>";
+            html += "<div class=\"col-sm-2 form-group\"> <h4> <label for=\"category_" + riga.CategoryId + "_selfEvaluation\">Self-evaluation:</label></h4> <select name=\"selfEvaluation\" class=\"form-control selfevaluation\" id=\"category_" + riga.CategoryId + "_selfEvaluation\" placeholder=\"self-evaluation\" required='true'><option value=''></option> <option value='1'>1</option> <option value='2'>2</option> <option value='3'>3</option> <option value='4'>4</option> <option value='5'>5</option> </select>";
             html += "</div> </div>";
 
             //teacher evaluation
@@ -70,7 +70,7 @@ function addCriterias(result, status) {
     $.each(gruppedCriterias, function (index, criteria) {
         html += "<div class=\"row-fluid container-fluid form-group\" style=\"width: 100%; padding-bottom: 5px; padding-right: 0px; padding-left: 0px; margin:0px; \">";
         //html += "<div class=\"col-md-8\">" + criteria.Name + "</div>  <div class=\"col-md-4\">  <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "-value\" class=\"form-control\"> <option value=\"\">-</option>";
-        html += "<label for=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "_value\">" + criteria.Name + "</label>  <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "_value\" name=\"criteria\" class=\"form-control\"> <option value=\"\">-</option>";
+        html += "<h4><label for=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "_value\">" + criteria.Name + "</label> </h4> <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "_value\" name=\"criteria\" class=\"form-control\"> <option value=\"\">-</option>";
 
         for (i = 0; i < criteria.CritValues.length; i++) {
             html += "<option value=\"" + criteria.CritValues[i] + "\">" + criteria.CritValues[i] + "</option>";
