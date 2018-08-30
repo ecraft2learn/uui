@@ -40,7 +40,7 @@ function openDialog(toolName, ext) {
 			'<div class="cell">'+
 				'<div class="mt-2 no-p rounded panel-x" data-role="panel" data-height="150">'+
 					'<ul class="files" data-role="listview" data-view="content" data-select-node="true">'+	
-						getCloudFiles(toolId)+
+						//getCloudFiles(toolId)+
 					'</ul>'+
 				'</div>'+
 			'</div>'+
@@ -53,24 +53,29 @@ function openDialog(toolName, ext) {
 		'</div>'+
 	'</form>'
 	;	
-	var box;
+	
+	var box, css = '';
 	if(window.innerWidth < 300){
 		Metro.infobox.create(html, "", {
 			width: $(window).width()
 		});
-		box = $('.info-box').last();
-		box.css('left', '0');
-		box.css('max-width', window.innerWidth);
+		box = $('.info-box');
+		css += "left: 0px !important;";
+		css += "max-width:"+window.innerWidth+";";
 	} else {
 		Metro.infobox.create(html);
-		box = $('.info-box').last();
+		box = $('.info-box');
+		css += "left: 10% !important;";
 	}	
 	if(window.innerHeight < 550){
-		box.css('max-height', window.innerHeight);
-		box.css('height', window.innerHeight);
-		box.css('top', '0');
-	} else
-		box.css('top', '10%');	
+		css += "top: 0px !important;";
+		css += "max-height:"+window.innerHeight+";";
+		css += "height:"+window.innerHeight+";";
+	} else {
+		css += "top: 10% !important;";
+	}
+	box.css("cssText", css);
+		
 	$('.local').hide();
 }
 function toolNameToId(toolName) {
