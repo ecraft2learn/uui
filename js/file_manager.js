@@ -464,7 +464,7 @@ function handleGetProjectFilesResponse(php_script_response) {
     var respObj = JSON.parse(php_script_response);
 
     if (!checkJsonData(respObj)) {
-		window.sessionStorage.removeItem("projectFiles");
+		window.sessionStorage.setItem("projectFiles", 0);
 		window.sessionStorage.setItem("errorStatus", "fail");
 	} else {
         window.sessionStorage.setItem("projectFiles", php_script_response);
