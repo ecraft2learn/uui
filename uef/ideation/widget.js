@@ -645,7 +645,6 @@
 
     var drawHelper = {
         redraw: function() {
-			return;
             tempContext.clearRect(0, 0, 4000, 4000);
             context.clearRect(0, 0, 4000, 4000);
 
