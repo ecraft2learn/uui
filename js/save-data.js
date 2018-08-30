@@ -40,7 +40,7 @@ function openDialog(toolName, ext) {
 			'<div class="cell">'+
 				'<div class="mt-2 no-p rounded panel-x" data-role="panel" data-height="150">'+
 					'<ul class="files" data-role="listview" data-view="content" data-select-node="true">'+	
-						//getCloudFiles(toolId)+
+						getCloudFiles(toolId)+
 					'</ul>'+
 				'</div>'+
 			'</div>'+
