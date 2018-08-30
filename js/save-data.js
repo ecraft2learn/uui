@@ -74,7 +74,8 @@ function openDialog(toolName, ext) {
 	} else {
 		css += "top: 10% !important;";
 	}
-	box.css("cssText", css);
+
+	//box.css("cssText", css);
 		
 	$('.local').hide();
 }
@@ -143,7 +144,7 @@ function toolNameToId(toolName) {
 	}
 }
 function getProjectCloudFiles(toolId) {
-	var projId = (window.sessionStorage.getItem('currentProjectId') || 1);
+	var projId = (window.sessionStorage.getItem('currentProjectId') || 0);
 	getProjectFiles(projId);
 	files = window.sessionStorage.getItem('projectFiles');
 	if(window.sessionStorage.getItem('projectFiles') == null)
@@ -185,7 +186,7 @@ function getAllCloudFilesJSON() {
 	return arr;
 }
 function getAllProjectFilesJSON() {
-	var projId = (window.sessionStorage.getItem('currentProjectId') || 1);
+	var projId = (window.sessionStorage.getItem('currentProjectId') || 0);
 	getProjectFiles(projId);
 	files = window.sessionStorage.getItem('projectFiles');
 	arr = JSON.parse(files);

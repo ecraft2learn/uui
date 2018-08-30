@@ -33,7 +33,7 @@
 	});
 	$(document).ready(function(){
 		$('.project.bg-darkCobalt').removeClass('bg-darkCobalt');
-		window.sessionStorage.setItem("currentProjectId", 1);
+		window.sessionStorage.setItem("currentProjectId", 0);
 		$('#activeProj').text('none');
 		if($(window).width() < 420)
 			$('#bottomCharm').hide();
@@ -1028,6 +1028,8 @@
 
 													var clickedLink = $(event.srcElement);
 													var prjId = clickedLink.data("PROJECTID");
+													if(!prjId)
+														prjId = 0
 													window.sessionStorage.setItem("currentProjectId",prjId);
 													if(prjId > 0)
 														$('#activeProj').text(clickedLink.text());
