@@ -1,0 +1,48 @@
+<html>
+<head><title>Connecting to your Arduinobot</title>
+
+<style> 
+input[type=text] {
+   background-color: #3CBC8D;
+    color: white;
+    padding: 4px 4px;
+    margin: 4px 0;
+    box-sizing: border-box;
+}
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #3CBC8D;
+    border: none;
+    color: white;
+    padding: 4px 4px;
+    text-decoration: none;
+    margin: 4px 0px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+</style>
+</head>
+
+<body>
+<img src="https://evomedia.evothings.com/2017/11/IMG_4265-4.jpg" align="right" width="300" />
+
+	<h2>Do you have an Arduinobot connected?<h2>
+
+		<p>
+			<b>Yes I do</b>, I'll log in using the domain or IP address of the Arduinobot below:
+		</p>
+
+	<form name="forward">
+		adress <input name="url" size="16" type="text" value="raspberrypi.local" />&nbsp;&nbsp;
+		port <input name="port" size="6" type="text" value="8080" />
+		<input type="button" value="Submit" onClick="window.open('http://' + document.forward.url.value + ':' + document.forward.port.value + '/index.html', 'arduinobot', 'height=500,width=800,toolbars=yes');" />
+	</form><br clear="all" />
+	<hr />
+
+			<p>
+			<b>Not yet</b>, but I do want to learn more about <a href="https://evothings.com/decoupling-an-embedded-development-environment/">the Arduinobot</a>
+
+			<!--img width="500" src="https://evomedia.evothings.com/2017/11/Screen-Shot-2017-11-07-at-15.17.05.png" /-->
+		</p>
+
+</body>
+</html>
