@@ -43,14 +43,14 @@ function openFeedbackWindow(toolUrl, toolName, event) {
  * @returns {*}
  */
 function openIframeWindowRightBottom(toolUrl, toolName, event) {
-    docWidth = 320;
+    docWidth = 360;
     // docHeight = 290;
-    docHeight = 350;
+    docHeight = 320;
     //resize window based on the dialog title length
-    var dialogTitle = "Feedback " + toolName;
-    if(dialogTitle.length>25) {
-        docWidth = docWidth + dialogTitle.length +30;
-    }
+    var dialogTitle = "Commenting/Feedback/Reflection";
+    // if(dialogTitle.length>25) {
+    //     docWidth = docWidth + dialogTitle.length +30;
+    // }
 
     //if it opens as external URL in new tab
     if (toolName==undefined){
@@ -73,35 +73,34 @@ function openIframeWindowRightBottom(toolUrl, toolName, event) {
 
 
 
-    activeWindow = Metro.dialog.create({
-        title: "<span class='text-medium fg-white notranslate' style='-ms-user-select: none; -moz-user-select: none; -webkit-user-select: none;user-select: none;' translate='no'> Feedback "+toolName+"</span><span class='btn-min' onclick='minimizeFeedbackWindow(this)'></span> <span class='btn-max' onclick='maximizeFeedbackWindow(this)'></span> <span class='btn-close' onclick='closeWindow(this);'></span>",
-        content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' height='"+(docHeight-60)+"' width="+ (docWidth-20) +" />",
-        padding: 0,
-        overlay: false,
+    Metro.window.create({
+        title: "<span class='text-medium fg-white' translate='no'>"+dialogTitle+"</span>",
+        content: "<iframe id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' height='100%' width='100%' />",
+        draggable: true,
+        resizable: false,
+        top: $(window).height() * 0.1 + $(window).scrollTop(),
+        left: $(window).height() * 0.1,
         width: docWidth,
-        defaultAction: false,
-        options: {
-            modal: false,
-            closeButton: false,
-            width: docWidth,
-            height: docHeight,
-            place:"bottom-right"
-
-        }
-    }).css("background-color", bgColor).css('margin-bottom','65px').css('z-index','10000');
+        height: docHeight,
+        place:"bottom-right",
+        clsWindow: 'p-0'
+    });
+        // .css("background-color", bgColor).css('margin-bottom','65px').css('z-index','10000');
+    activeWindow = $('.window').last();
 
     var toolIcon = toolTile.find('img').attr('src');
-
-    var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, toolIcon, bgColor, "Feedback " + toolName);
-
+    var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, '100%', '100%', toolUrl, toolIcon, bgColor, dialogTitle);
     activeWindow.data('winData', frame);
+    activeWindow.data('winWidth', activeWindow.width());
+    activeWindow.data('winHeight', activeWindow.height());
+    activeWindow.find('.window-caption').css("background-color", bgColor);
 
     addFeedbackWindow(toolName,activeWindow.attr('id'));
-    //using jquery draggable function to make commenting window draggable
-    //NOTE! in Metro UI v.4 this should be removed and used original draggable option of the dialog
-    activeWindow.draggable();
 
     return activeWindow;
+
+    //var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, activeWindow.width(), activeWindow.height(), toolUrl, toolIcon, bgColor, "Feedback " + toolName);
+
 }
 /**
  * Close feedback window
