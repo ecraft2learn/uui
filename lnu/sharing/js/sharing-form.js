@@ -18,7 +18,9 @@ function initSharingForm(){
     });
     document.getElementsByName("title")[0].addEventListener("input", updateCharCount);
     document.getElementsByName("keywords")[0].addEventListener("input", updateCharCount);
-    document.getElementsByName("description")[0].addEventListener("input", updateCharCount);
+    // Temporarily disable the character counter for the description field since the metro upgrade (3 -> 4) broke the behaviour by adding a clear input button
+    // - v.heijler 2018-09-03
+    // document.getElementsByName("description")[0].addEventListener("input", updateCharCount);
 }
 
 // NOTE: This requires the element that holds the counter values in the HTML to be right after the input element like follows.
@@ -54,18 +56,22 @@ function generateHtmlLocalFile() {
                 //event.parent.preventDefault();
                 shareLocalFile(function (result) {
                     if(result === "success"){
-                        $.Notify({
-                            caption: 'Success',
-                            content: 'File was upload and shared successfully',
-                            type:    null
-                        });
+                        Metro.notify.create("File was uploaded and shared successfully!", "Success", {});
+                        // $.Notify({
+                        //     caption: 'Success',
+                        //     content: 'File was upload and shared successfully',
+                        //     type:    null
+                        // });
                     }
                     else{
-                        $.Notify({
-                            caption: 'Error',
-                            content: 'File upload failed, please try again later',
-                            type:    'alert'
+                        Metro.notify.create("File upload failed, please try again later", "Error", {
+                            cls: "alert"
                         });
+                        // $.Notify({
+                        //     caption: 'Error',
+                        //     content: 'File upload failed, please try again later',
+                        //     type:    'alert'
+                        // });
                     }
                     metroDialog.close('#sharing-dialog');
                 })
@@ -244,11 +250,14 @@ function generateFileSelect(callback) {
             callback();
         }
         else{
-            $.Notify({
-                caption: 'Error',
-                content: 'There are no files to be shared',
-                type:    'alert'
-            });
+            Metro.notify.create("There are no files to be shared", "Error", {
+                cls: "alert"
+            })
+            // $.Notify({
+            //     caption: 'Error',
+            //     content: 'There are no files to be shared',
+            //     type:    'alert'
+            // });
         }
     });
 }
@@ -273,18 +282,22 @@ function generateHtmlProjectFile() {
             //console.log(data);
             saveSharing(data,function (result) {
                 if(result === "success"){
-                    $.Notify({
-                        caption: 'Success',
-                        content: 'File was upload and shared successfully',
-                        type:    null
-                    });
+                    Metro.notify.create("File was uploaded and shared successfully", "Success", {});
+                    // $.Notify({
+                    //     caption: 'Success',
+                    //     content: 'File was upload and shared successfully',
+                    //     type:    null
+                    // });
                 }
                 else{
-                    $.Notify({
-                        caption: 'Error',
-                        content: 'File upload failed, please try again later',
-                        type:    'alert'
-                    });
+                    Metro.notify.create("File upload failed, please try again later", "Error", {
+                        cls: "alert"
+                    })
+                    // $.Notify({
+                    //     caption: 'Error',
+                    //     content: 'File upload failed, please try again later',
+                    //     type:    'alert'
+                    // });
                 }
                 metroDialog.close('#sharing-dialog');
             })
