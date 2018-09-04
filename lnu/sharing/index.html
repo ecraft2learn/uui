@@ -29,7 +29,7 @@
  
 </head>
 <body>
-    <div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="dialog"  >
+    <div data-role="dialog" id="sharing-dialog" data-close-action="true" data-width="600" class="dialog"  >
         <div class="dialog-title">Share My Work</div>
 
         <div class="dialog-content">
@@ -37,51 +37,54 @@
                 <hr class="thin">
                 <br>
                 <!--Title-->
-                <label class="block">Title</label>
-                <div class="input-control text full-size">
-                    <input
-                            placeholder="Name of the work"
-                            data-validate-func="required"
-                            data-validate-hint="Title can not be empty and not more then 32 characters"
-                            data-role="input"
-                            type="text"
-                            name="title"
-                            maxlength="32">
-                    <span class="charCount"></span>
-                    <!-- <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span> -->
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" placeholder="Name of the work"
+                           name="title"
+                           maxlength="32"
+                           data-validate="required maxlength=32"
+                           />
+                    <span class="invalid_feedback">
+                            Title can not be empty and not more then 32 characters
+                    </span>
+                    <!--<span class="charCount"></span>-->
+
                 </div>
 
                 <!--Keywords-->
-                <label class="block">Describe your work in several keywords</label>
-                <div class="input-control text full-size">
-                    <input
-                            placeholder="Separate by comas like: keyword1,keyword2,..."
-                            data-validate-func="required"
-                            data-validate-hint="Please enter some keywords"
-                            data-role="input"
-                            type="text"
-                            name="keywords"
-                            maxlength="32">
-                    <span class="charCount"></span>
-                    <!-- <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span> -->
+                <div class="form-group">
+                    <label>Describe your work in several keywords</label>
+                    <input type="text" placeholder="Separate by comas like: keyword1,keyword2,..."
+                           name="keywords"
+                           maxlength="32"
+                           data-validate="required maxlength=32"
+                           />
+                    <span class="invalid_feedback">
+                            Please provide some keywords
+                    </span>
+                    <!--<span class="charCount"></span>-->
+
                 </div>
 
                 <!--Short Description-->
-                <label class="block">Short description about your work</label>
-                <div class="input-control textarea full-size">
-                    <textarea
-                            placeholder="Describe your work here..."
-                            data-validate-func="required"
-                            data-validate-hint="Please describe your work shortly"
-                            data-role="textarea"
-                            name="description"
-                            maxlength="256"> </textarea>
-                    <span class="charCount"></span>
-                    <!-- <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span> -->
+                <div class="form-group">
+                    <label>Short description about your work</label>
+
+                    <textarea data-role="textarea"
+                              data-auto-size="true"
+                              data-max-height="200"
+                              data-prepend="<span class='mif-bubbles'></span>"
+                              data-validate="required maxlength=256"
+                              name="description"
+                              maxlength="256"></textarea>
+                    <span class="invalid_feedback">
+                            Please describe your work shortly
+                    </span>
+                    <!--<span class="charCount"></span>-->
+
+
                 </div>
+
 
 
                 <!--Local or project file?-->

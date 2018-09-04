@@ -92,12 +92,7 @@ function generateUploadButton(){
     labelEl.classList.add("block");
     labelEl.textContent = "Choose a file";
 
-    // var divEl = document.createElement("div");
-    // divEl.classList.add("input-control");
-    // divEl.classList.add("file");
-    // divEl.classList.add("full-size");
-    // divEl.classList.add("required");
-    // divEl.setAttribute("data-role","input");
+
 
     var fileInput = document.createElement("input");
     fileInput.setAttribute("type","file");
@@ -105,39 +100,26 @@ function generateUploadButton(){
     fileInput.setAttribute("data-role", "file");
     fileInput.setAttribute("data-caption", "<span class='mif-folder'></span>");
     fileInput.setAttribute("data-caption-position", "right");
-    fileInput.setAttribute("data-validate-func","required");
+    fileInput.setAttribute("data-validate","required");
 
-    // var buttonFile = document.createElement("button");
-    // buttonFile.classList.add("button");
 
-    // var img = document.createElement("img");
-    // img.setAttribute("src","images/file-icon.png");
-
-    // buttonFile.appendChild(img);
-    // divEl.appendChild(fileInput).appendChild(buttonFile);
-
-    // $("#dynamicContent").append(labelEl).append(divEl);
     $("#dynamicContent").append(labelEl).append(fileInput);
 }
 
 function generateProjectSelect(labelText,callback) {
 
     getProjects(function (projects) {
-        if(projects.length>0){
+        //if(projects.length>0){
+            console.log("here");
             var labelEl = document.createElement("label");
             labelEl.classList.add("block");
             labelEl.textContent = labelText;
 
-            // var divEl = document.createElement("div");
-            // divEl.classList.add("input-control");
-            // divEl.classList.add("select");
-            // divEl.classList.add("full-size");
-            // divEl.classList.add("required");
-            // divEl.setAttribute("data-role","input");
+
 
             var selectEl = document.createElement("select");
 
-            selectEl.setAttribute("data-validate-func","required");
+            selectEl.setAttribute("data-validate","required");
             selectEl.setAttribute("name","projectId");
             selectEl.setAttribute("data-role", "select");
             selectEl.setAttribute("data-filter", "false");
@@ -161,7 +143,7 @@ function generateProjectSelect(labelText,callback) {
             // $("#dynamicContent").append(labelEl).append(divEl);
             $("#dynamicContent").append(labelEl).append(selectEl);
             callback();
-        }
+        //}
     });
 
 }
@@ -175,15 +157,8 @@ function generateToolSelect(callback){
             labelEl.classList.add("block");
             labelEl.textContent = "Which tool did you use to create this file?";
 
-            // var divEl = document.createElement("div");
-            // divEl.classList.add("input-control");
-            // divEl.classList.add("select");
-            // divEl.classList.add("full-size");
-            // divEl.classList.add("required");
-            // divEl.setAttribute("data-role", "input");
-
             var selectEl = document.createElement("select");
-            selectEl.setAttribute("data-validate-func", "required");
+            //selectEl.setAttribute("data-validate", "required");
             selectEl.setAttribute("name", "toolId");
             selectEl.setAttribute("data-role", "select");
             selectEl.setAttribute("data-filter", "false");
@@ -227,7 +202,7 @@ function generateFileSelect(callback) {
 
             var selectEl = document.createElement("select");
 
-            selectEl.setAttribute("data-validate-func","required");
+            selectEl.setAttribute("data-validate","required");
             selectEl.setAttribute("name","fileId");
 
             var option = document.createElement("option");
@@ -250,14 +225,8 @@ function generateFileSelect(callback) {
             callback();
         }
         else{
-            Metro.notify.create("There are no files to be shared", "Error", {
-                cls: "alert"
-            })
-            // $.Notify({
-            //     caption: 'Error',
-            //     content: 'There are no files to be shared',
-            //     type:    'alert'
-            // });
+
+            Metro.toast.create("There are no files to be shared", null, null, "alert");
         }
     });
 }
@@ -282,22 +251,12 @@ function generateHtmlProjectFile() {
             //console.log(data);
             saveSharing(data,function (result) {
                 if(result === "success"){
-                    Metro.notify.create("File was uploaded and shared successfully", "Success", {});
-                    // $.Notify({
-                    //     caption: 'Success',
-                    //     content: 'File was upload and shared successfully',
-                    //     type:    null
-                    // });
+                    Metro.toast.create("File was uploaded and shared successfully", null, null, "success");
+
                 }
                 else{
-                    Metro.notify.create("File upload failed, please try again later", "Error", {
-                        cls: "alert"
-                    })
-                    // $.Notify({
-                    //     caption: 'Error',
-                    //     content: 'File upload failed, please try again later',
-                    //     type:    'alert'
-                    // });
+                    Metro.toast.create("File upload failed, please try again later", null, null, "alert");
+
                 }
                 metroDialog.close('#sharing-dialog');
             })
