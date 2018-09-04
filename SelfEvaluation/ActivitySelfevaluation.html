@@ -114,7 +114,7 @@
             <div class="sk-circle12 sk-circle"></div>
         </div>
     </div>
-    <form id="activityContainer" class="container-fluid" style="display:none;" action="javascript:void(0);">
+    <form id="activityContainer" class="container-fluid" style="display:none; " action="javascript:void(0);" >
 
 
         <div id="categoryContainer" class="row-fluid ">
@@ -136,7 +136,7 @@
 
         <div class="row-fluid ">
             <div class="row-fluid " style="text-align: center; ">
-                <button type="submit" class="btn btn-primary btn-lg m-5" style="margin: 10px;" onclick="save()">Submit</button>
+                <button id="saveBtn" type="submit" class="btn btn-primary btn-lg m-5" style="margin: 10px;" onclick="save()">Submit</button>
                 <button type="button" name="goBack" class="btn btn-danger btn-lg m-5" style="margin: 10px;" data-toggle="modal" data-target="#myModal">Cancel</button>
 
             </div>
@@ -151,11 +151,11 @@
 
                 </div>
                 <div class="modal-body">
-                    Are you sure?
+                    Are you sure you want to leave the self-evaluation?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="goBack()">Go back!</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary" onclick="goBack()">Yes</button>
                 </div>
 
             </div>

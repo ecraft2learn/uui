@@ -9,7 +9,7 @@ function setActivityCategories(result, status) {
         var riga = list.DATA[i];
         if (riga.CategoryId) {
 
-            var html = "<div id=\"category_" + riga.CategoryId + "\" class=\"category row-fluid container-fluid form-horizontal\">";
+            var html = "<div id=\"category_" + riga.CategoryId + "\" class=\"category row-fluid container-fluid form-horizontal\" style='border: 1px solid " + riga.StarsColor + ";'>";
             html += "<div class=\"row-fluid  container-fluid category-header\">    <div class=\"categoryTitle col-xs-12\">";
             html += "<h3>" + riga.CategoryName + "</h3>    </div> </div> <div class=\"row-fluid  container-fluid category-body\">";
 
@@ -102,9 +102,6 @@ function setCategorySelfEvaluation(result, status) {
             //alert("setting eval criterias");
             var gruppedEvaluations = groupEvaluations(list.DATA);
 
-            //$('#whatWeKnow').val(gruppedEvaluations.WhatWeKnow);
-            //$('#notClear').val(gruppedEvaluations.NotClear);
-
             $('#category_' + gruppedEvaluations.Category + '_remark').val(gruppedEvaluations.Remark);
             $('#category_' + gruppedEvaluations.Category + '_selfEvaluation').val(gruppedEvaluations.SelfEvaluation);
             $('#category_' + gruppedEvaluations.Category + '-teacherEvaluation').append(gruppedEvaluations.TeacherEvaluation);
@@ -118,6 +115,9 @@ function setCategorySelfEvaluation(result, status) {
                 var a = selId;
 
             });
+
+            if (gruppedEvaluations.TeacherEvaluation)
+                $('#saveBtn').prop("disabled", true);
         }
     }
 
