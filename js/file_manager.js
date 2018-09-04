@@ -48,8 +48,27 @@ function addFile(projectId, toolId, fileInputObject, responseHandler) {
     formData.append("func", "uploadFile");
     formData.append("toolId", toolId);
     formData.append("projectId", projectId);
+	
+	
 	formData.append("name", fileInputObject.get('name'));
 	formData.append("data", fileInputObject.get('data'));
+	
+	if(fileInputObject.get('data') == null || fileInputObject.get('data') == '') {
+		if (fileInputObject == null || fileInputObject == undefined
+			|| $(fileInputObject) == null || $(fileInputObject) == undefined
+			|| $(fileInputObject).prop('files') == null || $(fileInputObject).prop('files') == undefined) {
+			window.sessionStorage.setItem("errorStatus", "fail");
+			return;
+		}
+		
+		var file_data = $(fileInputObject).prop('files')[0];
+		formData.append('file', file_data);
+		
+		if (file_data == null || file_data == undefined) {
+			window.sessionStorage.setItem("errorStatus", "fail");
+			return;
+		}
+	}
 
     if (responseHandler == undefined)
         responseHandler = handleAddFileResponse;
