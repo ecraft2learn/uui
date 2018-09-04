@@ -1,7 +1,7 @@
 <html>
 <head><title>Connecting to your Arduinobot</title>
-
-<style> 
+	<link rel="stylesheet" href="../libraries/css/metro-all.css">
+<!--<style> 
 input[type=text] {
    background-color: #3CBC8D;
     color: white;
@@ -19,10 +19,59 @@ input[type=button], input[type=submit], input[type=reset] {
     cursor: pointer;
     box-sizing: border-box;
 }
-</style>
+</style>-->
 </head>
 
-<body>
+<body class="m-2">
+	<div class="grid">
+		<div class="row">
+			<div class="cell-8">
+				
+				<h2>Do you have an Arduinobot connected?</h2>
+				<p>
+					<b>Yes I do</b>, I'll log in using the domain or IP address of the Arduinobot below:
+				</p>
+				<br>
+				<form name="forward">
+					<div class="form-group">
+						<div class="grid">
+							<div class="row">
+								<div class="cell">
+									<label><b>Adress</b></label>
+									<input name="url" size="16" type="text" placeholder="Enter adress" value="raspberrypi.local" />
+								</div>
+								<div class="cell">
+									<label><b>Port</b></label>
+									<input name="port" size="6" type="text" placeholder="Enter port" value="8080" />
+								</div>
+								<div class="cell">
+									<br>
+									<input class="button success" type="button" value="Submit" onClick="window.open('http://' + document.forward.url.value + ':' + document.forward.port.value + '/index.html', 'arduinobot', 'height=500,width=800,toolbars=yes');" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="cell-4">
+				<div class="img-container"><img src="https://evomedia.evothings.com/2017/11/IMG_4265-4.jpg" width="300" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="cell">
+				<hr />
+				
+				<p>
+					<b>Not yet</b>, but I do want to learn more about <a href="https://evothings.com/decoupling-an-embedded-development-environment/">the Arduinobot</a>
+
+					<!--img width="500" src="https://evomedia.evothings.com/2017/11/Screen-Shot-2017-11-07-at-15.17.05.png" /-->
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+
+<!--<body>
 <img src="https://evomedia.evothings.com/2017/11/IMG_4265-4.jpg" align="right" width="300" />
 
 	<h2>Do you have an Arduinobot connected?<h2>
@@ -41,8 +90,8 @@ input[type=button], input[type=submit], input[type=reset] {
 			<p>
 			<b>Not yet</b>, but I do want to learn more about <a href="https://evothings.com/decoupling-an-embedded-development-environment/">the Arduinobot</a>
 
-			<!--img width="500" src="https://evomedia.evothings.com/2017/11/Screen-Shot-2017-11-07-at-15.17.05.png" /-->
+			<!--img width="500" src="https://evomedia.evothings.com/2017/11/Screen-Shot-2017-11-07-at-15.17.05.png" /--
 		</p>
 
-</body>
+</body>-->
 </html>
