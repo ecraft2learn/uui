@@ -35,7 +35,7 @@ body {
  * Feedback styles
  *----------------------------------------------------------*/
 
-#feedback-template {
+.feedback-template {
     width: 100%;
     min-height: 100%;
     display: flex;
@@ -105,7 +105,7 @@ body {
     font-size: 15px;
     /*background: hsla(0, 0%, 30%, 0.5);*/
     /*color: white;*/
-    background: #1ba1e2;
+    background: hsla(0, 0%, 20%, 0.5);
     border: none;
     margin-top: 10px;
     padding: 10px;
@@ -136,7 +136,7 @@ body {
     font-size: 15px;
     /*background: hsla(0, 0%, 30%, 0.5);*/
     /*color: white;*/
-    background: #1ba1e2;
+    background: hsla(0, 0%, 20%, 0.5);
     border: none;
     margin-top: 10px;
     padding: 10px;
@@ -158,7 +158,8 @@ body {
     font-size: 15px;
     /*background: hsla(0, 0%, 30%, 0.5);*/
     /*color: white;*/
-    background: #1ba1e2;
+    /*background: #1ba1e2;*/
+    background: hsla(0, 0%, 20%, 0.5);
     border: none;
     margin-top: 10px;
     padding: 10px;
