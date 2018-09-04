@@ -1068,7 +1068,7 @@
 	</div><!--End of Main Content Container-->
 	
 	<!--Login Box and Hidden Data-->
-	<form  id="loginForm" class="login-form p-3 mx-auto border db-default win-shadow" style="z-index:2;" data-overlay="true">		
+	<form  id="loginForm" class="login-form p-3 mx-auto border db-default win-shadow" style="z-index:2; height: 450px;" data-overlay="true">		
         <!--<form>-->
 			<h1 class="text-light mt-4">Login to eCraft2Learn</h1>
 			<hr class="thin"/>
@@ -1086,12 +1086,46 @@
 					<option value='14'>Athens formal pilot site</option>
 				</select>
 			</div>
+			<p>Or</p>
+			<div class='form-group'>
+				<label for='manual-session'>Enter session id:</label>
+				<input type='text' name='manual-session' id='manual-session'>
+			</div>
             <div class="form-group">
                 <button type="button" class="button primary" onclick="HandleUserLogin();">Login</button>
 				<!--<button type="button" class="button link">Cancel</button>-->
 				<script>
 					function HandleUserLogin(){
-						selectUser($("#username").val(), $("#pilotsite").val(), HandleLoginCallback);
+						
+						var sessionId = $('#manual-session').val();
+
+						if (! isNaN(sessionId)) {
+						
+							$.ajax({
+
+								type: 'GET',
+								url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/check_session?sessionId=' + sessionId,
+								success: (data) => {
+
+									if (data === 'ok')
+										selectUser($('#username').val(), sessionId, HandleLoginCallback);
+									else
+										alert('No session with session id ' + sessionId + ' exists.');
+								
+
+								},
+								error: (error) => {
+
+									alert('Error while processing the given session id. Please check your network connectivity');
+
+								}
+
+							});
+	
+							selectUser($('#username').val(), sessionId, HandleLoginCallback);
+						
+						} else
+							selectUser($("#username").val(), $("#pilotsite").val(), HandleLoginCallback);
 					}
 					function HandleLoginCallback(phpResponse){
 						handleSelectUserResponse(phpResponse);
