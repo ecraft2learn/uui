@@ -108,7 +108,11 @@ function shareLocalFile(callback) {
             return field.name ==="toolId";
         });
 
-        if(projectId.value!=""){
+        if(projectId === undefined){
+            projectId = {name:"projectId",value:0};
+        }
+
+
 
             var formData = new FormData();
             formData.append("file", $("#fileInput")[0].files[0]);
@@ -126,13 +130,13 @@ function shareLocalFile(callback) {
                 type: 'post',
                 async: false,
                 success: function (php_script_response) {
-                    //console.log(php_script_response);
+                    console.log(php_script_response);
                     var fileId = JSON.parse(php_script_response)["DATA"]["ID"];
                     data.push({"name":"fileId","value":fileId});
                     saveSharing(data,callback);
                 }
             });
-        }
+
 
     }
 

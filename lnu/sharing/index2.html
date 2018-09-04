@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sharing</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/sharing.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/sharing-form.css" type="text/css" media="screen" charset="utf-8">
+    
+    <!-- Libraries -->
+    <link rel="stylesheet" href="../../libraries/css/metro-all.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../libs/mention/mention.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../../libraries/css/metro-icons.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- JavaScript -->
+    <script src='../../js/file_manager.js'></script>
+    <script src='js/api-calls.js'></script>
+    <script src='js/Gridview.js'></script>
+    <script src='js/my-work-gridview.js'></script>
+    <script src='js/public-work-gridview.js'></script>
+    <script src='js/sharing-form.js'></script>
+
+    <!-- Libraries -->
+    <script src='../libs/jquery/jquery.js'></script>
+    <script src='../libs/bootstrap/js/bootstrap.min.js'></script>
+    <script src="../libs/DataTables/datatables.min.js"></script>
+    <script src='../../libraries/js/metro.js'></script>
+ 
+</head>
+<body>
+    <div data-role="dialog" id="sharing-dialog" data-close-action="true" data-width="600" class="dialog"  >
+        <div class="dialog-title">Share My Work</div>
+
+        <div class="dialog-content">
+            <form data-role="validator" id="sharingForm" action="javascript:">
+                <hr class="thin">
+                <br>
+                <!--Title-->
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" placeholder="Name of the work"
+                           name="title"
+                           maxlength="32"
+                           data-validate="required maxlength=32"
+                           />
+                    <span class="invalid_feedback">
+                            Title can not be empty and not more then 32 characters
+                    </span>
+                    <!--<span class="charCount"></span>-->
+
+                </div>
+
+                <!--Keywords-->
+                <div class="form-group">
+                    <label>Describe your work in several keywords</label>
+                    <input type="text" placeholder="Separate by comas like: keyword1,keyword2,..."
+                           name="keywords"
+                           maxlength="32"
+                           data-validate="required maxlength=32"
+                           />
+                    <span class="invalid_feedback">
+                            Please provide some keywords
+                    </span>
+                    <!--<span class="charCount"></span>-->
+
+                </div>
+
+                <!--Short Description-->
+                <div class="form-group">
+                    <label>Short description about your work</label>
+
+                    <textarea data-role="textarea"
+                              data-auto-size="true"
+                              data-max-height="200"
+                              data-prepend="<span class='mif-bubbles'></span>"
+                              data-validate="required maxlength=256"
+                              name="description"
+                              maxlength="256"></textarea>
+                    <span class="invalid_feedback">
+                            Please describe your work shortly
+                    </span>
+                    <!--<span class="charCount"></span>-->
+
+
+                </div>
+
+
+
+                <!--Local or project file?-->
+                <label class="block">Would you like to share:</label>
+
+                    <label class="input-control radio">
+                        <input type="radio" value="0" name="filesourceradio">
+                        <span class="check"></span>
+                        <span class="caption">Local file in my computer</span>
+                    </label>
+                    <label class="input-control radio">
+                        <input type="radio" value="1" name="filesourceradio">
+                        <span class="check"></span>
+                        <span class="caption">Project file</span>
+                    </label>
+
+                <!--Dynamic content, based on the checked radio button-->
+                <div id="dynamicContent"></div>
+
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <button  class="button" onclick="Metro.dialog.open('#sharing-dialog')"><span class="mif-share"></span> Share</button>
+
+
+
+
+    <div id="sharing-gridview">
+        
+
+    
+            <ul class="tabs-expand-fs" data-role="tabs">
+                <li><a href="#my_work">My work</a></li>
+                <li><a href="#public_work">Public work</a></li>
+            </ul>
+
+            <div class="border bd-default no-border-top p-2">
+                <div class="frame" id="my_work">
+
+                    <table id="myWorkTable"
+                           class="table striped table-border mt-4"
+                           data-role="table"
+                           data-cls-table-top="row flex-nowrap"
+                           data-cls-search="cell-md-8"
+                           data-cls-rows-count="cell-md-4"
+                           data-rows="10"
+                           data-rows-steps="5, 10">
+
+
+                        <thead class="gridview-headers"></thead>
+                        <tbody class="gridview-content"></tbody>
+                    </table>
+
+                </div> <!-- END my_work-->
+
+                <div class="frame" id="public_work">
+
+                    <table id="publicWorkTable" class="dataTable hovered gridview">
+                        <thead class="gridview-headers"></thead>
+                        <tbody class="gridview-content"></tbody>
+                    </table>
+
+                </div><!-- END public_work-->
+
+            </div>
+
+
+    
+
+    
+
+
+    </div> <!-- END #sharing-gridview-->
+
+    <script>
+        $(document).ready(function() {
+            initSharingForm();
+            initGridView();
+            initGridView2()
+        });
+    </script>
+</body>
+</html>

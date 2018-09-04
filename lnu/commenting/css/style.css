@@ -35,7 +35,7 @@ body {
  * Feedback styles
  *----------------------------------------------------------*/
 
-#feedback-template {
+.feedback-template {
     width: 100%;
     min-height: 100%;
     display: flex;
@@ -105,7 +105,7 @@ body {
     font-size: 15px;
     /*background: hsla(0, 0%, 30%, 0.5);*/
     /*color: white;*/
-    background: #1ba1e2;
+    background: hsla(0, 0%, 20%, 0.5);
     border: none;
     margin-top: 10px;
     padding: 10px;
@@ -124,6 +124,52 @@ body {
     width: 100%;
 }
 
+
+
+/*-----------------------------------------------------------
+ * Reflection post button styles
+ *----------------------------------------------------------*/
+
+#reflection-btn {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    /*background: hsla(0, 0%, 30%, 0.5);*/
+    /*color: white;*/
+    background: hsla(0, 0%, 20%, 0.5);
+    border: none;
+    margin-top: 10px;
+    padding: 10px;
+    margin: none;
+}
+
+#reflection-btn:hover {
+    cursor:pointer;
+    background: hsla(0, 0%, 20%, 0.5);
+}
+
+/*-----------------------------------------------------------
+ * Commenting post button styles
+ *----------------------------------------------------------*/
+
+#commenting-btn {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    /*background: hsla(0, 0%, 30%, 0.5);*/
+    /*color: white;*/
+    /*background: #1ba1e2;*/
+    background: hsla(0, 0%, 20%, 0.5);
+    border: none;
+    margin-top: 10px;
+    padding: 10px;
+    margin: none;
+}
+
+#commenting-btn:hover {
+    cursor:pointer;
+    background: hsla(0, 0%, 20%, 0.5);
+}
 
 
 /*!*-----------------------------------------------------------*/
