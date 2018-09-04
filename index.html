@@ -33,7 +33,10 @@
 	});
 	$(document).ready(function(){
 		$('.project.bg-darkCobalt').removeClass('bg-darkCobalt');
-		window.sessionStorage.setItem("currentProjectId", 0);
+		var userId = window.sessionStorage.getItem("userId")
+		window.sessionStorage.setItem("currentProjectId", -userId);
+		
+		window.sessionStorage.removeItem("projectFiles");
 		$('#activeProj').text('none');
 		if($(window).width() < 420)
 			$('#bottomCharm').hide();
@@ -763,17 +766,6 @@
 									Use this to note down your ideas
 								</div>
 							</div>
-							<!-- Trello -->
-							<div data-role="tile" data-size="medium" class="tile bg-plan fg-white" data-effect="hover-slide-up">
-								<span class="mif-question badge-medium-top m-0 bg-transparent" onclick="infoClick('./about/trello-help.html', '#TrelloDialog');"></span>
-								<div class="slide-front" onclick="tileClick('https://trello.com/', undefined, event);">
-									<img class="icon" src="./images/trello-logo.png">
-									<span class="branding-bar">Trello</span>
-								</div>
-								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('https://trello.com/', undefined, event);">
-									Trello helps you plan and work together
-								</div>
-							</div>
 							<!-- eCraft TODO -->
 							<div data-role="tile" data-size="medium" class="tile bg-plan fg-white" data-effect="hover-slide-up">
 								<span class="mif-question badge-medium-top m-0 bg-transparent" onclick="infoClick('./about/ecraft-idea-help.html', '#eCraftIdeaDialog');"></span>
@@ -783,6 +775,16 @@
 								</div>
 								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./uef/plan/index.html', 'eCraft Todo', event);">
 									Use this to plan tasks of the project
+								</div>
+							</div>							
+							<!-- Trello -->
+							<div data-role="tile" data-size="small" class="tile bg-plan fg-white no-mobile" data-effect="hover-slide-up">
+								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/trello-help.html', '#TrelloDialog');"></span>
+								<div class="slide-front" onclick="tileClick('https://trello.com/', undefined, event);">
+									<img class="icon" width="50%" src="./images/trello-logo.png">
+								</div>
+								<div class="slide-back text-extra-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('https://trello.com/', undefined, event);">
+									Trello helps you plan and work together
 								</div>
 							</div>
 						</div> <!--End of group tiles-->
@@ -823,7 +825,7 @@
 							</div>
 							<!-- 3D slincing -->
 							<div data-role="tile" class="tile bg-create fg-white no-mobile" data-effect="hover-slide-up">
-									<span class="mif-question badge-medium-top m-0 bg-transparent"></span>
+									<span class="mif-question badge-medium-top m-0 bg-transparent" onclick="tileClick('./uef/slice/index.html', 'Slicer', event);"></span>
 									<div class="slide-front" onclick="tileClick('./uef/slice/index.html', 'Slicer', event);">
 											<img class="icon" src="./images/slice.png">
 											<span class="branding-bar">3D slicing</span>
@@ -949,11 +951,11 @@
 							</div>
 							<!-- ARDUINOBOT -->
 							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white no-mobile" data-effect="hover-slide-up">
-								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/arduinobot-help.html', '#ArduinoIdeDialog');"></span>
+								<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="tileClick('./about/arduinobot-login.html', '#Arduinobot', event);"></span>
 								<div class="slide-front" onclick="tileClick('./about/arduinobot-login.html', undefined, event);">
 									<img class="icon" src="./images/arduinobot-only.png">
 								</div>
-								<div class="slide-back text-extra-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./about/arduinobot-login.html', undefined, event);">
+								<div class="slide-back text-extra-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./about/arduinobot-login.html', '#Arduinobot', event);">
 									Arduinobot
 								</div>
 							</div>
@@ -973,7 +975,7 @@
 							</div>
 							<!--My Work-->
 							<div data-role="tile" class="tile bg-share fg-white" data-effect="hover-slide-up">
-								<!--<span class="mif-question badge-medium-top m-0 bg-transparent" onclick="infoClick('./about/thingiverse-help.html', '#ThingiverseDialog');"></span>-->
+								<span class="mif-question badge-medium-top m-0 bg-transparent" onclick="infoClick('./about/share-my-work-help.html', '#ShareMyWorkDialog');"></span>
 								<div class="slide-front" onclick="tileClick('./lnu/sharing/index.html','Sharing', event);">
 									<img class="icon" src="./lnu/sharing/images/share-tool-icon.png">
 									<span class="branding-bar">Share My Work</span>
@@ -1012,7 +1014,7 @@
 												var userId = window.sessionStorage.getItem("userId");
 												if(userId!=undefined && userId!=-1){
 													getUserProjects(userId, handleGetProjectsResponse);
-													$('.project-tile').data('PROJECTID',0);
+													$('.project-tile').data('PROJECTID',-userId);
 												}
 								
 												function handleGetProjectsResponse(phpResponse){
@@ -1036,15 +1038,14 @@
 
 													var clickedLink = $(event.srcElement);
 													var prjId = clickedLink.data("PROJECTID");
-													if(!prjId)
-														prjId = 0
+													if(!prjId || prjId == 0)
+														prjId = -userId
 													window.sessionStorage.setItem("currentProjectId",prjId);
 													if(prjId > 0)
 														$('#activeProj').text(clickedLink.text());
 													else 
 														$('#activeProj').text('none');
 													var newSelectedDiv = $("#spanPrj_" + prjId);
-
 													if(curSelectedDiv!=null)
 														curSelectedDiv.removeClass("bg-darkCobalt");
 													if(newSelectedDiv!=null && newSelectedDiv!=undefined)

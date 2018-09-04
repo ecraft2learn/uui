@@ -144,7 +144,7 @@ function toolNameToId(toolName) {
 	}
 }
 function getProjectCloudFiles(toolId) {
-	var projId = (window.sessionStorage.getItem('currentProjectId') || 0);
+	var projId = (window.sessionStorage.getItem('currentProjectId') || -window.sessionStorage.setItem("userId"));
 	getProjectFiles(projId);
 	files = window.sessionStorage.getItem('projectFiles');
 	if(window.sessionStorage.getItem('projectFiles') == null)
