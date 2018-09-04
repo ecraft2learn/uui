@@ -49,10 +49,13 @@ function getAnalyticFieldName(toolName, isHelp) {
 
 }
 
+var idleTime = new Date().getTime();
+
 function sendAnalyticsData(clientId, sessionId, toolName) {
 
 	var obj = {
 	
+		idle: 0,
 		search: 0,
 		sketch: 0,
 		trello: 0,
@@ -68,14 +71,37 @@ function sendAnalyticsData(clientId, sessionId, toolName) {
 
 	};
 
+	obj.idle = (new Date().getTime() - idleTime) / 1000;
+
+	idleTime = new Date().getTime();
+
+	var users = window.sessionStorage.getItem('username');
+        var sessionId = window.sessionStorage.getItem('pilotsite');
+
+	obj['users'] = users;
+
+        var data = JSON.stringify(obj);
+
+        $.ajax({
+
+                type: 'POST',
+                url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/put_uui_vectors_pilot_2.php',
+                data: 'data=' + data + '&users=' + users + '&sessionId=' + sessionId,
+                success: function(data) {
+                        console.log(data);
+                },  
+                error: function(error) {
+                        console.log(error);
+                }   
+        });	
+
 	obj[toolName]++;
+
+	obj.idle = 0;
 
 	var users = window.sessionStorage.getItem('username');
 	var sessionId = window.sessionStorage.getItem('pilotsite');
 	
-	obj['users'] = users;
-
-		
 	var data = JSON.stringify(obj);
 
 	$.ajax({

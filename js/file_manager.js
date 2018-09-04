@@ -42,15 +42,28 @@
         <handleAddFileResponse>
 */
 function addFile(projectId, toolId, fileInputObject, responseHandler) {
+	var name = fileInputObject.get('name');
+	var data = JSON.stringify(fileInputObject);
     var formData = new FormData();
     formData.append("func", "uploadFile");
     formData.append("toolId", toolId);
     formData.append("projectId", projectId);
+	formData.append("name", fileInputObject.get('name'));
+	formData.append("data", fileInputObject.get('data'));
 
     if (responseHandler == undefined)
         responseHandler = handleAddFileResponse;
-
+	
     makeAjaxCall(formData, responseHandler);
+}
+
+function removeFile(fileId, responseHandler) {
+	var formData = new FormData();
+    formData.append("func", "removeFile");
+    formData.append("fileId", fileId);
+	if (responseHandler == undefined)
+        responseHandler = handleRemoveFileResponse;
+	makeAjaxCall(formData, responseHandler);
 }
 
 /*  Function: addProject
@@ -224,7 +237,7 @@ function selectUser(username, pilotsiteId, responseHandler) {
     formData.append("func", "selectUser");
     formData.append("username", username);
     formData.append("sessionId", pilotsiteId);
-
+	
     if (responseHandler == undefined)
         responseHandler = handleSelectUserResponse;
 
@@ -268,8 +281,68 @@ function handleAddFileResponse(php_script_response) {
     if (!checkJsonData(respObj))
         window.sessionStorage.setItem("errorStatus", "fail");
     else {
-        var fileId = parseInt(respObj.DATA[0].ID);
+        var fileId = parseInt(respObj.DATA.ID);
         window.sessionStorage.setItem("uploadedFileId", fileId);
+        window.sessionStorage.setItem("errorStatus", "success");
+    }
+}
+
+//##################################################################################
+//##################################################################################
+//
+// R E S P O N S E   H A N D L E R S 
+//
+//##################################################################################
+//##################################################################################
+
+/*  Function: handleRemoveFileResponse
+   
+    Handles the response from the AJAX call to the *<addFile>* function. You will not be directly making calls to this function unless you want to implement your own responseHandler which improves
+    the functionality of this function. 
+
+    Parameters:
+        php_script_response - The response string received from AJAX call.
+
+    Returns:
+        This function does not return any value. It removes the file from the *window.sessionStorage* object.
+        
+    Remarks:
+        Upon success the *errorStatus* field in *window.sessionStorage* is set to *success* and the following are also set:
+
+        - *projectFiles*: Updated list with the existing project files.
+                
+        If the call fails or the response is not parsable the *errorStatus* field in *window.sessionStorage* is set to *fail* and the following are also set:
+
+        - *userFiles*: Updated list with the existing user files.
+
+    See Also:
+        <addFile>
+*/
+function handleRemoveFileResponse(php_script_response) {
+    var respObj = JSON.parse(php_script_response);
+	
+    if (!checkJsonData(respObj))
+        window.sessionStorage.setItem("errorStatus", "fail");
+    else {
+        var fileId = parseInt(respObj.DATA.ID);
+        var files = JSON.parse(window.sessionStorage.getItem("projectFiles"));
+		for(var i = 0; i < files.length; ++i) {
+			if(files.DATA[i].ID == fileId) {
+				delete files.DATA[i];
+				break;
+			}
+		}
+		window.sessionStorage.setItem("userFiles", JSON.stringify(files));
+		
+		files = JSON.parse(window.sessionStorage.getItem("userFiles"));
+		for(var i = 0; i < files.length; ++i) {
+			if(files.DATA[i].ID == fileId) {
+				delete files.DATA[i];
+				break;
+			}
+		}
+		window.sessionStorage.setItem("userFiles", JSON.stringify(files));
+		
         window.sessionStorage.setItem("errorStatus", "success");
     }
 }
@@ -391,7 +464,7 @@ function handleGetProjectFilesResponse(php_script_response) {
     var respObj = JSON.parse(php_script_response);
 
     if (!checkJsonData(respObj)) {
-		window.sessionStorage.removeItem("projectFiles");
+		window.sessionStorage.setItem("projectFiles", 0);
 		window.sessionStorage.setItem("errorStatus", "fail");
 	} else {
         window.sessionStorage.setItem("projectFiles", php_script_response);

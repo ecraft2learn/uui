@@ -192,14 +192,15 @@ Cloud.prototype.withCredentialsRequest = function (
 
 Cloud.prototype.initSession = function (onSuccess) {
     var myself = this;
-    this.request(
+	myself.checkCredentials(onSuccess);
+    /*this.request(
         'POST',
         '/init',
         function () { myself.checkCredentials(onSuccess); },
         nop,
         null,
         true
-    );
+    );*/
 };
 
 Cloud.prototype.checkCredentials = function (onSuccess, onError, response) {
@@ -223,13 +224,15 @@ Cloud.prototype.checkCredentials = function (onSuccess, onError, response) {
 };
 
 Cloud.prototype.getCurrentUser = function (onSuccess, onError) {
-    this.request(
+	var user = {isadmin: false, username: window.sessionStorage.getItem("userId"), verified: true};
+	onSuccess.call(null, user);
+    /*this.request(
     	'GET',
         '/users/c',
         onSuccess,
         onError,
         'Could not retrieve current user'
-    );
+    );*/
 };
 
 Cloud.prototype.getUser = function (username, onSuccess, onError) {
@@ -343,6 +346,7 @@ Cloud.prototype.resendVerification = function (username, onSuccess, onError) {
 
 Cloud.prototype.saveProject = function (ide, onSuccess, onError) {
     var myself = this;
+
     this.checkCredentials(
         function (username) {
             if (username) {
@@ -406,8 +410,9 @@ Cloud.prototype.saveProject = function (ide, onSuccess, onError) {
                 ide.showMessage(
                 	'Uploading ' + Math.round(size / 1024) + ' KB...'
                 );
-
-                myself.request(
+				saveDataToCloud(JSON.stringify(body), ide.projectName, 'snap4Arduino')
+				onSuccess.call();
+                /*myself.request(
                     'POST',
                     '/projects/' + encodeURIComponent(username) + '/' + encodeURIComponent(ide.projectName),
                     onSuccess,
@@ -415,7 +420,7 @@ Cloud.prototype.saveProject = function (ide, onSuccess, onError) {
                     'Project could not be saved',
                     false,
                     JSON.stringify(body) // POST body
-                );
+                );*/
             } else {
                 onError.call(this, 'You are not logged in', 'Snap!Cloud');
             }
@@ -423,8 +428,33 @@ Cloud.prototype.saveProject = function (ide, onSuccess, onError) {
     );
 };
 
-Cloud.prototype.getProjectList = function (onSuccess, onError, withThumbnail) {
-    var path = '/projects/%username?updatingnotes=true';
+Cloud.prototype.getProjectList = function (type, onSuccess, onError, withThumbnail) {
+	var response = {projects:[]};
+	
+	if(type == 'all')
+		var data = getAllCloudFilesJSON();
+	else 
+		var data = getAllProjectFilesJSON();
+
+	for(var i = 0; i < data.DATA.length; ++i) {
+		if(data.DATA[i]['TOOLID'] != 11)
+			continue;
+		var proj = {};
+		proj.projectname = data.DATA[i]['ORIG_NAME'];
+		proj.notes = '';
+		proj.lastupdated = '';
+		proj.id = data.DATA[i]['ID'];
+		proj.ispublic = false;
+		proj.ispublished = false;
+		proj.username = window.sessionStorage.getItem("userId");
+		response.projects.push(proj);
+	}
+
+	if(window.sessionStorage.getItem("errorStatus") == "success")
+		onSuccess.call(null, response.message || response);
+	else
+		onError.call(null, 'Could not fetch projects');
+    /*var path = '/projects/%username?updatingnotes=true';
 
     if (withThumbnail) {
         path += '&withthumbnail=true';
@@ -436,7 +466,7 @@ Cloud.prototype.getProjectList = function (onSuccess, onError, withThumbnail) {
         onSuccess,
         onError,
         'Could not fetch projects'
-    );
+    );*/
 };
 
 Cloud.prototype.getPublishedProjectList = function (
@@ -479,7 +509,20 @@ Cloud.prototype.getThumbnail = function (
     onSuccess,
     onError
 ) {
-    this[username ? 'request' : 'withCredentialsRequest'](
+	var files = JSON.parse(window.sessionStorage.getItem('projectFiles'));
+
+	for(var i = 0; i < files.DATA.length; ++i) {
+		if(files.DATA[i].TOOLID != 11)
+			continue;
+		if(files.DATA[i].ORIG_NAME != projectName)
+			continue;
+		var file = JSON.parse(files.DATA[i].FILE_PATH);
+		var thumbnail = file['thumbnail'];
+		onSuccess.call(null, thumbnail);
+		return;
+	}
+	onError.call(null, 'Could not fetch thumbnail');
+    /*this[username ? 'request' : 'withCredentialsRequest'](
         'GET',
         '/projects/' +
             (username ? encodeURIComponent(username) : '%username') +
@@ -490,18 +533,32 @@ Cloud.prototype.getThumbnail = function (
         onError,
         'Could not fetch thumbnail',
         true
-    );
+    );*/
 };
 
 Cloud.prototype.getProject = function (projectName, onSuccess, onError) {
-    this.withCredentialsRequest(
+    var files = JSON.parse(window.sessionStorage.getItem('projectFiles'));
+
+	for(var i = 0; i < files.DATA.length; ++i) {
+		if(files.DATA[i].TOOLID != 11)
+			continue;
+		if(files.DATA[i].ORIG_NAME != projectName)
+			continue;
+		var file = JSON.parse(files.DATA[i].FILE_PATH);
+		var projectData = '<snapdata>'+file['xml']+file['media']+'</snapdata>';
+
+		onSuccess.call(null, projectData);
+		return;
+	}
+	onError.call(null, 'Could not fetch project ' + projectName);
+	/*this.withCredentialsRequest(
         'GET',
         '/projects/%username/' + encodeURIComponent(projectName),
         onSuccess,
         onError,
         'Could not fetch project ' + projectName,
         true
-    );
+    );*/
 };
 
 Cloud.prototype.getPublicProject = function (
@@ -510,14 +567,28 @@ Cloud.prototype.getPublicProject = function (
     onSuccess,
     onError
 ) {
-    this.request(
+	var files = JSON.parse(window.sessionStorage.getItem('projectFiles'));
+
+	for(var i = 0; i < files.DATA.length; ++i) {
+		if(files.DATA[i].TOOLID != 11)
+			continue;
+		if(files.DATA[i].ORIG_NAME != projectName)
+			continue;
+		var file = JSON.parse(files.DATA[i].FILE_PATH);
+		var projectData = file['xml'];
+		
+		onSuccess.call(null, projectData);
+		return;
+	}
+	onError.call(null, 'Could not fetch project ' + projectName);
+    /*this.request(
         'GET',
         '/projects/' + encodeURIComponent(username) + '/' + encodeURIComponent(projectName),
         onSuccess,
         onError,
         'Could not fetch project ' + projectName,
         true
-    );
+    );*/
 };
 
 Cloud.prototype.getProjectMetadata = function (
@@ -541,14 +612,30 @@ Cloud.prototype.deleteProject = function (
     onSuccess,
     onError
 ) {
-    this[username ? 'request' : 'withCredentialsRequest'](
+	window.sessionStorage.setItem("errorStatus", "error");
+	var files = JSON.parse(window.sessionStorage.getItem("projectFiles"));
+
+	for(var i = 0; i < files.DATA.length; ++i) {
+		if(files.DATA[i].TOOLID != 11)
+			continue;
+		if(files.DATA[i].ORIG_NAME == projectName) {
+			removeFile(files.DATA[i].ID);
+			break;
+		}
+	}
+	
+	if(window.sessionStorage.getItem("errorStatus") == "success")
+		onSuccess.call(null, '');
+	else 
+		onError.call(null, 'Could not delete project');
+    /*this[username ? 'request' : 'withCredentialsRequest'](
         'DELETE',
         '/projects/' + (username ? encodeURIComponent(username) : '%username') +
         '/' + encodeURIComponent(projectName),
         onSuccess,
         onError,
         'Could not delete project'
-    );
+    );*/
 };
 
 Cloud.prototype.shareProject = function (

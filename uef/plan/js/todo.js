@@ -250,7 +250,7 @@ data = data || {};
 			break;
 		}
 	}
-	return;
+	//return;
 
     $.ajax({
 
@@ -262,6 +262,7 @@ data = data || {};
 		var tasks = JSON.parse(data);
 
 		tasks = JSON.parse(tasks[0].data);
+
 		
 		for (let i = 0; i < tasks.length; i++)
 			todo.generateElement(tasks[i]);

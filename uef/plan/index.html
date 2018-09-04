@@ -17,10 +17,20 @@
 			.task-list, .ui-droppable, form, input, textarea {
 				position: initial !important;
 			}
+			.ui-draggable-dragging {
+				z-index: 9999 !important;
+			}
+			html, body {
+				position: initial !important;
+				-webkit-overflow-scrolling: touch;
+				overflow: auto !important;
+				min-width: fit-content !important;
+				min-heigth: fit-content !important;
+			}
 		</style>
     </head>
 
-    <body class="well">
+    <body class="well m-0">
         <div id="container">
 	    <img src='img/eCraftLogo.png'>
 	    <h5>You can drag & drop the tasks between "pending", "in progress" and "completed"</h5>
@@ -40,15 +50,15 @@
 
             <div class="task-list">
                 <h3>Add a task</h3>
-                <form id="todo-form">
+                <form class="mb-0" id="todo-form">
                     <input type="text" placeholder="Title" />
                     <textarea placeholder="Description"></textarea>
                     <input type="text" id="datepicker" placeholder="Due Date (dd/mm/yyyy)" />
-		    <input type='text' placeholder='Assigned to who' />
-		    <input type="button" class="btn btn-primary" value="Add Task" onclick="todo.add();" />
-		    <!--<input type='button' class='btn btn-primary' value='Save' onclick='todo.save();' />-->
-			<input type='button' id="save" class='btn btn-primary' value='Save' />
-		</form>
+					<input type='text' placeholder='Assigned to who' />
+					<input type="button" class="btn btn-primary" value="Add Task" onclick="todo.add();" />
+					<!--<input type='button' class='btn btn-primary' value='Save' onclick='todo.save();' />-->
+					<input type='button' id="save" class='btn btn-primary' value='Save' />
+				</form>
                 <div id="delete-div">
                     Drag Here to Delete
                 </div>

@@ -64,8 +64,8 @@
         var canv = find(id),
             ctx = canv.getContext('2d');
 
-        canv.setAttribute('width', innerWidth);
-        canv.setAttribute('height', innerHeight);
+        canv.setAttribute('width', 4000);
+        canv.setAttribute('height', 4000);
 
         ctx.lineWidth = lineWidth;
         ctx.strokeStyle = strokeStyle;
@@ -645,8 +645,8 @@
 
     var drawHelper = {
         redraw: function() {
-            tempContext.clearRect(0, 0, innerWidth, innerHeight);
-            context.clearRect(0, 0, innerWidth, innerHeight);
+            tempContext.clearRect(0, 0, 4000, 4000);
+            context.clearRect(0, 0, 4000, 4000);
 
             var i, point, length = points.length;
             for (i = 0; i < length; i++) {
@@ -919,8 +919,8 @@
             var g = this.global;
 
             if (is.isDragLastPath) {
-                tempContext.clearRect(0, 0, innerWidth, innerHeight);
-                context.clearRect(0, 0, innerWidth, innerHeight);
+                tempContext.clearRect(0, 0, 4000, 4000);
+                context.clearRect(0, 0, 4000, 4000);
                 this.end();
             }
 
@@ -1102,7 +1102,7 @@
         dragShape: function(x, y) {
             if (!this.global.ismousedown) return;
 
-            tempContext.clearRect(0, 0, innerWidth, innerHeight);
+            tempContext.clearRect(0, 0, 4000, 4000);
 
             if (is.isDragLastPath) {
                 this.dragLastPath(x, y);
@@ -1120,7 +1120,7 @@
         end: function() {
             if (!points.length) return;
 
-            tempContext.clearRect(0, 0, innerWidth, innerHeight);
+            tempContext.clearRect(0, 0, 4000, 4000);
 
             var point = points[points.length - 1];
             drawHelper[point[0]](context, point[1], point[2]);
@@ -1922,7 +1922,7 @@
                 var p = points[points.length - 1],
                     point = p[1];
 
-                tempContext.clearRect(0, 0, innerWidth, innerHeight);
+                tempContext.clearRect(0, 0, 4000, 4000);
                 drawHelper.arc(tempContext, [point[0], point[1], point[2], point[3], point[4]]);
             });
 
@@ -2004,7 +2004,7 @@
             var t = this;
 
             if (t.ismousedown) {
-                tempContext.clearRect(0, 0, innerWidth, innerHeight);
+                tempContext.clearRect(0, 0, 4000, 4000);
 
                 drawHelper.line(tempContext, [t.prevX, t.prevY, x, y]);
             }
@@ -2045,7 +2045,7 @@
             var t = this;
 
             if (t.ismousedown) {
-                tempContext.clearRect(0, 0, innerWidth, innerHeight);
+                tempContext.clearRect(0, 0, 4000, 4000);
 
                 drawHelper.arrow(tempContext, [t.prevX, t.prevY, x, y]);
             }
@@ -2085,7 +2085,7 @@
 
             var t = this;
             if (t.ismousedown) {
-                tempContext.clearRect(0, 0, innerWidth, innerHeight);
+                tempContext.clearRect(0, 0, 4000, 4000);
 
                 drawHelper.rect(tempContext, [t.prevX, t.prevY, x - t.prevX, y - t.prevY]);
             }
@@ -2139,7 +2139,7 @@
 
             var g = this.global;
 
-            tempContext.clearRect(0, 0, innerWidth, innerHeight);
+            tempContext.clearRect(0, 0, 4000, 4000);
 
             if (g.ismousedown && g.isFirstStep) {
                 drawHelper.quadratic(tempContext, [g.prevX, g.prevY, x, y, x, y]);
@@ -2226,7 +2226,7 @@
 
             var g = this.global;
 
-            tempContext.clearRect(0, 0, innerWidth, innerHeight);
+            tempContext.clearRect(0, 0, 4000, 4000);
 
             if (g.ismousedown && g.isFirstStep) {
                 drawHelper.bezier(tempContext, [g.prevX, g.prevY, x, y, x, y, x, y]);
@@ -2380,7 +2380,7 @@
 
             var t = this;
             if (t.ismousedown) {
-                tempContext.clearRect(0, 0, innerWidth, innerHeight);
+                tempContext.clearRect(0, 0, 4000, 4000);
 
                 drawHelper.image(tempContext, [imageHandler.lastImageURL, t.prevX, t.prevY, x - t.prevX, y - t.prevY, imageHandler.lastImageIndex]);
             }
@@ -2544,7 +2544,7 @@
         }
 
         var toolBox = find('tool-box');
-        toolBox.style.height = (innerHeight /* - toolBox.offsetTop - 77 */ ) + 'px';
+        toolBox.style.height = (4000 /* - toolBox.offsetTop - 77 */ ) + 'px';
 
         function decorateDragLastPath() {
             var context = getContext('drag-last-path');
@@ -3206,11 +3206,11 @@
             optionsContainer = find('options-container');
 
         function setHeightForCodeAndOptionsContainer() {
-            codeText.style.width = (innerWidth - optionsContainer.clientWidth - 30) + 'px';
-            codeText.style.height = (innerHeight - 40) + 'px';
+            codeText.style.width = (4000 - optionsContainer.clientWidth - 30) + 'px';
+            codeText.style.height = (4000 - 40) + 'px';
 
             codeText.style.marginLeft = (optionsContainer.clientWidth) + 'px';
-            optionsContainer.style.height = (innerHeight) + 'px';
+            optionsContainer.style.height = (4000) + 'px';
         }
 
         var isAbsolute = find('is-absolute-points'),
@@ -3240,8 +3240,18 @@
 
     var canvas = tempContext.canvas,
         isTouch = 'createTouch' in document;
-
+	if(navigator.userAgent.match(/Android/i)
+	 || navigator.userAgent.match(/webOS/i)
+	 || navigator.userAgent.match(/iPhone/i)
+	 || navigator.userAgent.match(/iPad/i)
+	 || navigator.userAgent.match(/iPod/i)
+	 || navigator.userAgent.match(/BlackBerry/i)
+	 || navigator.userAgent.match(/Windows Phone/i)) {
+		isTouch = true;
+	}
+		
     addEvent(canvas, isTouch ? 'touchstart mousedown' : 'mousedown', function(e) {
+		window.parent.postMessage("drawing", "*");
         if (isTouch) e = e.pageX ? e : e.touches.length ? e.touches[0] : {
             pageX: 0,
             pageY: 0
@@ -3280,8 +3290,9 @@
             e.stopPropagation();
         }
     }
-
+	
     addEvent(canvas, isTouch ? 'touchend touchcancel mouseup' : 'mouseup', function(e) {
+		window.parent.postMessage("stopdrawing", "*");
         if (isTouch && (!e || !('pageX' in e))) {
             if (e && e.touches && e.touches.length) {
                 e = e.touches[0];
