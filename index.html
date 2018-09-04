@@ -504,7 +504,7 @@
 			sendAnalyticsData(hashFnv32a(username), 0, analyticField);
 			//sendAnalyticsData(hashFnv32a($("username")), 0, analyticField);
 
-            openFeedbackWindow("./lnu/commenting/index.html",winTitle,event);
+
 
 
 		}
@@ -650,6 +650,17 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="cell">
+								<button class="image-button button fg-white bg-transparent large-text mt-0" onclick="openFeedbackWindow('./lnu/commenting/index.html');">
+									<span class="mif-pencil icon"></span>
+									<span class="caption">Commenting</span>
+								</button>
+							</div>
+						</div>
+
+
+
 					</div>
 					<div id="userMenu" class="m-2 p-4 bg-darkGray" style="position:absolute; right:0; top:0; display:none; z-index:1;">
 						
@@ -1252,6 +1263,9 @@
 
 		</div>
 	</div>
+
+
+
 	
 	<!-- The Task Bar at the bottom of the page-->
 	<div id="charmCatcher" style="height:20px; position:fixed; bottom:0%; width:100%; opacity:0; background-color:red; z-index:0;" onmouseenter="Metro.charms.open('#bottomCharm');"></div>

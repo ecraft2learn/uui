@@ -18,7 +18,9 @@ function initSharingForm(){
     });
     document.getElementsByName("title")[0].addEventListener("input", updateCharCount);
     document.getElementsByName("keywords")[0].addEventListener("input", updateCharCount);
-    document.getElementsByName("description")[0].addEventListener("input", updateCharCount);
+    // Temporarily disable the character counter for the description field since the metro upgrade (3 -> 4) broke the behaviour by adding a clear input button
+    // - v.heijler 2018-09-03
+    // document.getElementsByName("description")[0].addEventListener("input", updateCharCount);
 }
 
 // NOTE: This requires the element that holds the counter values in the HTML to be right after the input element like follows.
@@ -54,18 +56,22 @@ function generateHtmlLocalFile() {
                 //event.parent.preventDefault();
                 shareLocalFile(function (result) {
                     if(result === "success"){
-                        $.Notify({
-                            caption: 'Success',
-                            content: 'File was upload and shared successfully',
-                            type:    null
-                        });
+                        Metro.notify.create("File was uploaded and shared successfully!", "Success", {});
+                        // $.Notify({
+                        //     caption: 'Success',
+                        //     content: 'File was upload and shared successfully',
+                        //     type:    null
+                        // });
                     }
                     else{
-                        $.Notify({
-                            caption: 'Error',
-                            content: 'File upload failed, please try again later',
-                            type:    'alert'
+                        Metro.notify.create("File upload failed, please try again later", "Error", {
+                            cls: "alert"
                         });
+                        // $.Notify({
+                        //     caption: 'Error',
+                        //     content: 'File upload failed, please try again later',
+                        //     type:    'alert'
+                        // });
                     }
                     metroDialog.close('#sharing-dialog');
                 })
@@ -86,49 +92,37 @@ function generateUploadButton(){
     labelEl.classList.add("block");
     labelEl.textContent = "Choose a file";
 
-    var divEl = document.createElement("div");
-    divEl.classList.add("input-control");
-    divEl.classList.add("file");
-    divEl.classList.add("full-size");
-    divEl.classList.add("required");
-    divEl.setAttribute("data-role","input");
+
 
     var fileInput = document.createElement("input");
     fileInput.setAttribute("type","file");
     fileInput.setAttribute("id","fileInput");
-    fileInput.setAttribute("data-validate-func","required");
+    fileInput.setAttribute("data-role", "file");
+    fileInput.setAttribute("data-caption", "<span class='mif-folder'></span>");
+    fileInput.setAttribute("data-caption-position", "right");
+    fileInput.setAttribute("data-validate","required");
 
-    var buttonFile = document.createElement("button");
-    buttonFile.classList.add("button");
 
-    var img = document.createElement("img");
-    img.setAttribute("src","images/file-icon.png");
-
-    buttonFile.appendChild(img);
-    divEl.appendChild(fileInput).appendChild(buttonFile);
-
-    $("#dynamicContent").append(labelEl).append(divEl);
+    $("#dynamicContent").append(labelEl).append(fileInput);
 }
 
 function generateProjectSelect(labelText,callback) {
 
     getProjects(function (projects) {
         //if(projects.length>0){
+            console.log("here");
             var labelEl = document.createElement("label");
             labelEl.classList.add("block");
             labelEl.textContent = labelText;
 
-            var divEl = document.createElement("div");
-            divEl.classList.add("input-control");
-            divEl.classList.add("select");
-            divEl.classList.add("full-size");
-            divEl.classList.add("required");
-            divEl.setAttribute("data-role","input");
+
 
             var selectEl = document.createElement("select");
 
-            selectEl.setAttribute("data-validate-func","required");
+            selectEl.setAttribute("data-validate","required");
             selectEl.setAttribute("name","projectId");
+            selectEl.setAttribute("data-role", "select");
+            selectEl.setAttribute("data-filter", "false");
 
             var option = document.createElement("option");
             option.textContent = "None";
@@ -145,8 +139,9 @@ function generateProjectSelect(labelText,callback) {
                 selectEl.appendChild(option);
             }
 
-            divEl.appendChild(selectEl);
-            $("#dynamicContent").append(labelEl).append(divEl);
+            // divEl.appendChild(selectEl);
+            // $("#dynamicContent").append(labelEl).append(divEl);
+            $("#dynamicContent").append(labelEl).append(selectEl);
             callback();
         //}
     });
@@ -162,16 +157,11 @@ function generateToolSelect(callback){
             labelEl.classList.add("block");
             labelEl.textContent = "Which tool did you use to create this file?";
 
-            var divEl = document.createElement("div");
-            divEl.classList.add("input-control");
-            divEl.classList.add("select");
-            divEl.classList.add("full-size");
-            divEl.classList.add("required");
-            divEl.setAttribute("data-role", "input");
-
             var selectEl = document.createElement("select");
-            selectEl.setAttribute("data-validate-func", "required");
+            //selectEl.setAttribute("data-validate", "required");
             selectEl.setAttribute("name", "toolId");
+            selectEl.setAttribute("data-role", "select");
+            selectEl.setAttribute("data-filter", "false");
 
             var option = document.createElement("option");
             option.textContent = "None";
@@ -187,8 +177,9 @@ function generateToolSelect(callback){
                 selectEl.appendChild(option);
             }
 
-            divEl.appendChild(selectEl);
-            $("#dynamicContent").append(labelEl).append(divEl);
+            // divEl.appendChild(selectEl);
+            // $("#dynamicContent").append(labelEl).append(divEl);
+            $("#dynamicContent").append(labelEl).append(selectEl);
             callback();
         }
     });
@@ -211,7 +202,7 @@ function generateFileSelect(callback) {
 
             var selectEl = document.createElement("select");
 
-            selectEl.setAttribute("data-validate-func","required");
+            selectEl.setAttribute("data-validate","required");
             selectEl.setAttribute("name","fileId");
 
             var option = document.createElement("option");
@@ -234,11 +225,8 @@ function generateFileSelect(callback) {
             callback();
         }
         else{
-            $.Notify({
-                caption: 'Error',
-                content: 'There are no files to be shared',
-                type:    'alert'
-            });
+
+            Metro.toast.create("There are no files to be shared", null, null, "alert");
         }
     });
 }
@@ -247,7 +235,7 @@ function generateFileSelect(callback) {
 
 function generateHtmlProjectFile() {
 
-    //generate list of files
+   //generate list of files
     generateFileSelect(function () {
 
         //share button
@@ -263,18 +251,12 @@ function generateHtmlProjectFile() {
             //console.log(data);
             saveSharing(data,function (result) {
                 if(result === "success"){
-                    $.Notify({
-                        caption: 'Success',
-                        content: 'File was upload and shared successfully',
-                        type:    null
-                    });
+                    Metro.toast.create("File was uploaded and shared successfully", null, null, "success");
+
                 }
                 else{
-                    $.Notify({
-                        caption: 'Error',
-                        content: 'File upload failed, please try again later',
-                        type:    'alert'
-                    });
+                    Metro.toast.create("File upload failed, please try again later", null, null, "alert");
+
                 }
                 metroDialog.close('#sharing-dialog');
             })
@@ -284,3 +266,4 @@ function generateHtmlProjectFile() {
     });
 
 }
+
