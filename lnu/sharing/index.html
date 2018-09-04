@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/sharing-form.css" type="text/css" media="screen" charset="utf-8">
     
     <!-- Libraries -->
-    <link rel="stylesheet" href="../libs/metro/metro.4.2.20.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../../libraries/css/metro-all.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="../libs/mention/mention.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="../../libraries/css/metro-icons.min.css" type="text/css" media="screen" charset="utf-8">
 
@@ -25,15 +25,15 @@
     <script src='../libs/jquery/jquery.js'></script>
     <script src='../libs/bootstrap/js/bootstrap.min.js'></script>
     <script src="../libs/DataTables/datatables.min.js"></script>
-    <script src='../libs/metro/metro.4.2.20.min.js'></script>
+    <script src='../../libraries/js/metro.js'></script>
  
 </head>
 <body>
-    <div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="padding20"  >
+    <div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="dialog"  >
+        <div class="dialog-title">Share My Work</div>
 
-
+        <div class="dialog-content">
             <form data-role="validator" id="sharingForm" action="javascript:">
-                <h1 class="text-light">Share My Work</h1>
                 <hr class="thin">
                 <br>
                 <!--Title-->
@@ -102,6 +102,8 @@
                 <div id="dynamicContent"></div>
 
             </form>
+        </div>
+    </div>
     </div>
 
     <button  class="button" onclick="Metro.dialog.open('#sharing-dialog')"><span class="mif-share"></span> Share</button>
@@ -111,35 +113,48 @@
 
     <div id="sharing-gridview">
         
-        <div class="tabcontrol" id="tabcontrol" data-role="tabcontrol">
+
     
-            <ul class="tabs" data-role="tabs" data-expand="fs">
+            <ul class="tabs-expand-fs" data-role="tabs">
                 <li><a href="#my_work">My work</a></li>
                 <li><a href="#public_work">Public work</a></li>
             </ul>
-    
-            <div class="frames">
+
+            <div class="border bd-default no-border-top p-2">
                 <div class="frame" id="my_work">
 
-                    <table id="myWorkTable" class="dataTable hovered gridview">
+                    <table id="myWorkTable"
+                           class="table striped table-border mt-4"
+                           data-role="table"
+                           data-cls-table-top="row flex-nowrap"
+                           data-cls-search="cell-md-8"
+                           data-cls-rows-count="cell-md-4"
+                           data-rows="10"
+                           data-rows-steps="5, 10">
+
+
                         <thead class="gridview-headers"></thead>
                         <tbody class="gridview-content"></tbody>
                     </table>
-    
+
                 </div> <!-- END my_work-->
-    
+
                 <div class="frame" id="public_work">
 
                     <table id="publicWorkTable" class="dataTable hovered gridview">
                         <thead class="gridview-headers"></thead>
                         <tbody class="gridview-content"></tbody>
                     </table>
-    
+
                 </div><!-- END public_work-->
+
+            </div>
+
+
     
-            </div> <!-- END frames-->
+
     
-        </div> <!-- END tabControl -->
+
 
     </div> <!-- END #sharing-gridview-->
 
