@@ -38,11 +38,18 @@ function createCommentingForm() {
 }
 
 function onSendComment(event) {
+
+
+
+
     //avoid page refresh after form submit
     event.preventDefault();
 
     var formId = $(event.target).closest("form").attr('id');
     clearForm(formId);
+
+
+
 
     showNotification(true,"Comment was sent successfully!");
     //TODO:save it in database

@@ -5,16 +5,12 @@
  * @param message - message to display
  */
 function showNotification(isSuccess, message){
-
-    var notify = Metro.notify;
-
+    console.log(Metro);
     if(isSuccess){
+        Metro.toast.create(message, null, null, "success");
 
-        notify.create(message, null, {});
     }
     else{
-        notify.create(message, null, {
-            cls: "alert"
-        });
+        Metro.toast.create(message, null, null, "alert");
     }
 }

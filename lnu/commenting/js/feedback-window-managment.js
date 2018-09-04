@@ -27,6 +27,7 @@ function openFeedbackWindow(toolUrl) {
  * @returns {*}
  */
 function openIframeWindowRightBottom(toolUrl) {
+
     docWidth = 360;
 
     docHeight = 320;
