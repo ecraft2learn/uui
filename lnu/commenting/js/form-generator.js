@@ -178,7 +178,7 @@ function m_createSelectOptions(options) {
 function m_createTextfield(options) {
     var el;
     el = document.createElement("textarea");
-    el.id = "feedback-freetext";
+    el.id = options.id;
     return el;
 }
 

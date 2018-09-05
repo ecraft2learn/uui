@@ -6,15 +6,16 @@ var formId="reflection-form";
  */
 function createReflectionForm(question) {
 
-
-    if(question[0].content!="") {
+    //check if question is not empty
+    if(question.length>0) {
 
          //generate reflection form
 
         // Free text
         var freeText = {
             label: question[0].content,
-            input: "textfield"
+            input: "textfield",
+            id:"reflection"
         };
 
 
@@ -52,18 +53,32 @@ function createReflectionForm(question) {
 }
 
 
-function onSendReflection() {
+function onSendReflection(event) {
     //avoid page refresh after form submit
     event.preventDefault();
 
-    //clear the form
-    var formId = $(event.target).closest("form").attr('id');
-    clearForm(formId);
+    var answer = $('#reflection').val();
+    var question = $('#reflection').parent().find('label').text();
 
-    //show notification result
-    showNotification(true,"Reflection message was sent successfully!");
+    if (answer!=""){
 
-    //TODO:save reflection to database
 
+        //clear the form
+        var formId = $(event.target).closest("form").attr('id');
+        clearForm(formId);
+
+        //save data in database
+        saveReflection(question,answer, function (result) {
+            if(result!="error"){
+                showNotification(true,"Reflection message was sent successfully!");
+            }
+            else{
+                showNotification(false,"Please try again later.");
+            }
+        });
+    }
+    else{
+        showNotification(false,"Please provide some reflection text.");
+    }
 
 }
