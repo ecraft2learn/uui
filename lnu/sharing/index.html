@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Sharing</title>
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/sharing.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="css/sharing-form.css" type="text/css" media="screen" charset="utf-8">
-    
+
     <!-- Libraries -->
-    <link rel="stylesheet" href="css/metro.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/metro.v3.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="../libs/mention/mention.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="../../libraries/css/metro-icons.min.css" type="text/css" media="screen" charset="utf-8">
 
@@ -25,127 +25,127 @@
     <script src='../libs/jquery/jquery.js'></script>
     <script src='../libs/bootstrap/js/bootstrap.min.js'></script>
     <script src="../libs/DataTables/datatables.min.js"></script>
-    <script src='../libs/metro/metro.js'></script>
- 
+    <script src='../libs/metro/metro.v3.js'></script>
+
 </head>
 <body>
-    <div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="padding20"  >
+<div data-role="dialog" id="sharing-dialog" data-close-button="true" data-width="600" class="padding20"  >
 
 
-            <form data-role="validator" id="sharingForm">
-                <h1 class="text-light">Share My Work</h1>
-                <hr class="thin">
-                <br>
-                <!--Title-->
-                <label class="block">Title</label>
-                <div class="input-control text full-size">
-                    <input
-                            placeholder="Name of the work"
-                            data-validate-func="required"
-                            data-validate-hint="Title can not be empty and not more then 32 characters"
-                            type="text"
-                            name="title"
-                            maxlength="32">
-                    <span class="charCount"></span>
-                    <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span>
-                </div>
+    <form data-role="validator" id="sharingForm">
+        <h1 class="text-light">Share My Work</h1>
+        <hr class="thin">
+        <br>
+        <!--Title-->
+        <label class="block">Title</label>
+        <div class="input-control text full-size">
+            <input
+                    placeholder="Name of the work"
+                    data-validate-func="required"
+                    data-validate-hint="Title can not be empty and not more then 32 characters"
+                    type="text"
+                    name="title"
+                    maxlength="32">
+            <span class="charCount"></span>
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
 
-                <!--Keywords-->
-                <label class="block">Describe your work in several keywords</label>
-                <div class="input-control text full-size">
-                    <input
-                            placeholder="Separate by comas like: keyword1,keyword2,..."
-                            data-validate-func="required"
-                            data-validate-hint="Please enter some keywords"
-                            type="text"
-                            name="keywords"
-                            maxlength="32">
-                    <span class="charCount"></span>
-                    <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span>
-                </div>
+        <!--Keywords-->
+        <label class="block">Describe your work in several keywords</label>
+        <div class="input-control text full-size">
+            <input
+                    placeholder="Separate by comas like: keyword1,keyword2,..."
+                    data-validate-func="required"
+                    data-validate-hint="Please enter some keywords"
+                    type="text"
+                    name="keywords"
+                    maxlength="32">
+            <span class="charCount"></span>
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
 
-                <!--Short Description-->
-                <label class="block">Short description about your work</label>
-                <div class="input-control textarea full-size">
+        <!--Short Description-->
+        <label class="block">Short description about your work</label>
+        <div class="input-control textarea full-size">
                     <textarea
                             placeholder="Describe your work here..."
                             data-validate-func="required"
                             data-validate-hint="Please describe your work shortly"
                             name="description"
                             maxlength="256"> </textarea>
-                    <span class="charCount"></span>
-                    <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span>
-                </div>
+            <span class="charCount"></span>
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
 
 
-                <!--Local or project file?-->
-                <label class="block">Would you like to share:</label>
+        <!--Local or project file?-->
+        <label class="block">Would you like to share:</label>
 
-                    <label class="input-control radio">
-                        <input type="radio" value="0" name="filesourceradio">
-                        <span class="check"></span>
-                        <span class="caption">Local file in my computer</span>
-                    </label>
-                    <label class="input-control radio">
-                        <input type="radio" value="1" name="filesourceradio">
-                        <span class="check"></span>
-                        <span class="caption">Project file</span>
-                    </label>
+        <label class="input-control radio">
+            <input type="radio" value="0" name="filesourceradio">
+            <span class="check"></span>
+            <span class="caption">Local file in my computer</span>
+        </label>
+        <label class="input-control radio">
+            <input type="radio" value="1" name="filesourceradio">
+            <span class="check"></span>
+            <span class="caption">Project file</span>
+        </label>
 
-                <!--Dynamic content, based on the checked radio button-->
-                <div id="dynamicContent"></div>
+        <!--Dynamic content, based on the checked radio button-->
+        <div id="dynamicContent"></div>
 
-            </form>
-    </div>
+    </form>
+</div>
 
-    <button  class="button" onclick="metroDialog.open('#sharing-dialog')"><span class="mif-share"></span> Share</button>
-
-
+<button  class="button" onclick="metroDialog.open('#sharing-dialog')"><span class="mif-share"></span> Share</button>
 
 
-    <div id="sharing-gridview">
-        
-        <div class="tabcontrol" id="tabcontrol" data-role="tabcontrol">
-    
-            <ul class="tabs">
-                <li><a href="#my_work">My work</a></li>
-                <li><a href="#public_work">Public work</a></li>
-            </ul>
-    
-            <div class="frames">
-                <div class="frame" id="my_work">
 
-                    <table id="myWorkTable" class="dataTable hovered gridview">
-                        <thead class="gridview-headers"></thead>
-                        <tbody class="gridview-content"></tbody>
-                    </table>
-    
-                </div> <!-- END my_work-->
-    
-                <div class="frame" id="public_work">
 
-                    <table id="publicWorkTable" class="dataTable hovered gridview">
-                        <thead class="gridview-headers"></thead>
-                        <tbody class="gridview-content"></tbody>
-                    </table>
-    
-                </div><!-- END public_work-->
-    
-            </div> <!-- END frames-->
-    
-        </div> <!-- END tabControl -->
+<div id="sharing-gridview">
 
-    </div> <!-- END #sharing-gridview-->
+    <div class="tabcontrol" id="tabcontrol" data-role="tabcontrol">
 
-    <script>
-        $(document).ready(function() {
-            initSharingForm();
-            initGridView();
-            initGridView2()
-        });
-    </script>
+        <ul class="tabs">
+            <li><a href="#my_work">My work</a></li>
+            <li><a href="#public_work">Public work</a></li>
+        </ul>
+
+        <div class="frames">
+            <div class="frame" id="my_work">
+
+                <table id="myWorkTable" class="dataTable hovered gridview">
+                    <thead class="gridview-headers"></thead>
+                    <tbody class="gridview-content"></tbody>
+                </table>
+
+            </div> <!-- END my_work-->
+
+            <div class="frame" id="public_work">
+
+                <table id="publicWorkTable" class="dataTable hovered gridview">
+                    <thead class="gridview-headers"></thead>
+                    <tbody class="gridview-content"></tbody>
+                </table>
+
+            </div><!-- END public_work-->
+
+        </div> <!-- END frames-->
+
+    </div> <!-- END tabControl -->
+
+</div> <!-- END #sharing-gridview-->
+
+<script>
+    $(document).ready(function() {
+        initSharingForm();
+        initGridView();
+        initGridView2()
+    });
+</script>
 </body>
 </html>

@@ -5,47 +5,61 @@
     <title>Commenting</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
      <!--<link rel='stylesheet' href='lib/bootstrap/css/bootstrap.min.css' type='text/css'>-->
-    <link rel="stylesheet" href="css/metro.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../../libraries/css/metro-all.css" type="text/css" media="screen" charset="utf-8">
 
     <link rel="stylesheet" type="text/css" href="../libs/mention/mention.css">
+
+
+    <script src="js/api-calls.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/form-generator.js"></script>
+    <script src="js/commenting-create.js"></script>
     <script src="js/feedback-create.js"></script>
-    <script src="js/feedback-main.js"></script>
-    <script src="js/reflection-main.js"></script>
+    <script src="js/reflection-create.js"></script>
+    <script src="js/main.js"></script>
+
+
     <script src='../libs/jquery/jquery.js'></script>
     <script src='../libs/bootstrap/js/bootstrap.min.js'></script>
-    <script src='../libs/metro/metro.js'></script>
-
-
+    <script src='../../libraries/js/metro.js'></script>
 </head>
 <body>
 
-
-    <div class="tabcontrol" id="tab-control">
-        <ul class="tabs">
+        <ul data-role="tabs" class="tabs-expand-fs" >
+            <li><a href="#commenting-tab">Commenting</a></li>
             <li><a href="#feedback-tab">Feedback</a></li>
-
             <li><a href="#reflection-tab">Reflection</a></li>
         </ul>
-        <div class="frames">
-            <div class="frame" id="feedback-tab">
+        <div class="border bd-default p-2">
+            <div id="commenting-tab">
+
+                <!-- Commenting template -->
+                <div id="uui-commenting"></div>
+
+            </div>
+            <div id="feedback-tab">
+
                 <!-- Feedback template -->
                 <div id="uui-feedback"></div>
-            </div>
 
-            <div class="frame" id="reflection-tab">
+            </div>
+            <div id="reflection-tab">
 
                 <!-- Reflection template -->
                 <div id="uui-reflection"></div>
+
             </div>
         </div>
-    </div>
 
 
     <script>
+
         $(document).ready(function() {
+
+            initCommenting();
             initFeedback();
             initReflection();
-            $("#tab-control").tabcontrol();
+
         })
     </script>
 </body>
