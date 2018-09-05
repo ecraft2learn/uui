@@ -7,7 +7,8 @@ function createCommentingForm() {
     // Free text
     var freeText = {
         label: "Comment:",
-        input: "textfield"
+        input: "textfield",
+        id:"comment"
     };
 
     // Send button
@@ -40,20 +41,29 @@ function createCommentingForm() {
 function onSendComment(event) {
 
 
-
-
     //avoid page refresh after form submit
     event.preventDefault();
 
-    var formId = $(event.target).closest("form").attr('id');
-    clearForm(formId);
+    var comment = $('#comment').val();
 
+    if(comment!=""){
+        //clear comment textarea
+        var formId = $(event.target).closest("form").attr('id');
+        clearForm(formId);
 
-
-
-    showNotification(true,"Comment was sent successfully!");
-    //TODO:save it in database
-
+        //save comment in database
+        saveComment(comment, function (result) {
+            if(result!="error"){
+                showNotification(true,"Comment was sent successfully!");
+            }
+            else{
+                showNotification(false,"Please try again later.");
+            }
+        });
+    }
+    else{
+        showNotification(false,"Please provide your comment");
+    }
 
 
 
