@@ -4,7 +4,8 @@
 
 
 //"https://cs.uef.fi/~ec2l/lnu.php"
-var LOCAL_SERVER_URL   = "https://localhost/lnu.php";
+//var LOCAL_SERVER_URL   = "https://localhost/lnu.php";
+var SERVER_URL = "https://cs.uef.fi/~ec2l/lnu.php";
 /**
  * Ajax post request - first test
  * @param data - json data
@@ -42,7 +43,7 @@ function saveComment(comment,callback){
 
     var data = {"pilotsite":pilotsite,"userId":userId,"comment":comment,"timestamp":timestamp,"func":func};
 
-    postAjaxRequest(LOCAL_SERVER_URL,data,callback);
+    postAjaxRequest(SERVER_URL,data,callback);
 
 }
 
@@ -62,5 +63,5 @@ function saveReflection(question,answer,callback) {
     console.log(userId);
     var data = {"pilotsite":pilotsite,"userId":userId,"answer":answer,"question":question,"timestamp":timestamp,"func":func};
 
-    postAjaxRequest(LOCAL_SERVER_URL,data,callback);
+    postAjaxRequest(SERVER_URL,data,callback);
 }
