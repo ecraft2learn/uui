@@ -66,16 +66,26 @@ function onSendReflection(event) {
         //clear the form
         var formId = $(event.target).closest("form").attr('id');
         clearForm(formId);
+        var toolName = getToolName();
 
-        //save data in database
-        saveReflection(question,answer, function (result) {
-            if(result!="error"){
-                showNotification(true,"Reflection message was sent successfully!");
-            }
-            else{
-                showNotification(false,"Please try again later.");
+        getToolId(toolName,function (result) {
+            if (result["DATA"].length > 0) {
+
+                var toolId = parseInt(result["DATA"][0]["TOOLID"]);
+
+                //save data in database
+                saveReflection(question,answer,toolId, function (result) {
+                    if(result!="error"){
+                        showNotification(true,"Reflection message was sent successfully!");
+                    }
+                    else{
+                        showNotification(false,"Please try again later.");
+                    }
+                });
             }
         });
+
+
     }
     else{
         showNotification(false,"Please provide some reflection text.");

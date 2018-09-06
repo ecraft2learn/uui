@@ -5,7 +5,7 @@
  */
 
 
-
+var feedbackWindows = {};
 
 
 /**
@@ -13,8 +13,8 @@
  * @param toolUrl: String
  * @param event
  */
-function openFeedbackWindow(toolUrl) {
-         openIframeWindowRightBottom(toolUrl);
+function openFeedbackWindow(toolUrl, toolName) {
+         openIframeWindowRightBottom(toolUrl, toolName);
 }
 
 
@@ -26,15 +26,17 @@ function openFeedbackWindow(toolUrl) {
  * @param event
  * @returns {*}
  */
-function openIframeWindowRightBottom(toolUrl) {
+function openIframeWindowRightBottom(toolUrl,toolName) {
 
     docWidth = 360;
 
     docHeight = 320;
 
-    var dialogTitle = "Commenting/Feedback/Reflection";
+    var dialogTitle = "Commenting " + toolName;
 
-    var bgColor="rgb(64,64,64)";
+    var toolTile = $(event.srcElement).closest('[data-role], tile');
+    var bgColor = toolTile.css("background-color");
+
 
     Metro.window.create({
         title: "<span class='text-medium' translate='no'>"+dialogTitle+"</span>",
@@ -55,6 +57,9 @@ function openIframeWindowRightBottom(toolUrl) {
     activeWindow.data('winWidth', activeWindow.width());
     activeWindow.data('winHeight', activeWindow.height());
     activeWindow.find('.window-caption').css("background-color", bgColor);
+
+    console.log(activeWindow.attr('id'));
+    feedbackWindows[activeWindow.attr('id')] = toolName;
 
     return activeWindow;
 
