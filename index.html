@@ -804,7 +804,8 @@
 									for (i = 0; i < list.DATA.length; i++) {
 										var riga = list.DATA[i];
 										
-										html += "<div class=\"row no-margin category-container\" ><span class=\"category-title\">"+riga.Name+"</span> <span class=\"star-container\" >";
+										html += "<div class=\"row no-margin category-container\" ><span class=\"category-title\">"+riga.Name+"</span>";
+										html+="<div class='mobile-only'> <br> </div> <span class=\"star-container\" >";
 										html += "<style>.star.category"+ riga.Id+ " { color: "+ riga.StarsColor+"; }";
 										html += ".star.halfStar-category"+ riga.Id+ "::after { content: '\\2605'; position: absolute; left: 0; right: 50%; top: 0; bottom: 0; overflow: hidden; color: "+ riga.StarsColor+"; } </style>";
 										
