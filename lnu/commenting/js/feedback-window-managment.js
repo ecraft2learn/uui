@@ -35,6 +35,7 @@ function openIframeWindowRightBottom(toolUrl,toolName) {
     var dialogTitle = "Commenting " + toolName;
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
+    
     var bgColor = toolTile.css("background-color");
 
 

@@ -1129,7 +1129,7 @@
 						
 						var sessionId = $('#manual-session').val();
 
-						if (! isNaN(sessionId)) {
+						if (sessionId.trim() !== '') {
 						
 							$.ajax({
 
