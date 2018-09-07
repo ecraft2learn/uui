@@ -94,7 +94,7 @@ function markTaskCompleted(event) {
 	var undoIcon   = document.createElement("span");
 
 	removeBtn.classList.add("button", "link", "float-left", "fg-white", "task-remove-btn");
-	undoBtn.classList.add("button", "info", "float-right", "task-undo-btn");
+	undoBtn.classList.add("button", "secondary", "float-right", "task-undo-btn");
 	removeIcon.classList.add("mif-cross");
 	undoIcon.classList.add("mif-undo");
 
@@ -131,13 +131,13 @@ function markTaskUncompleted(event) {
 	var completeBtn = document.createElement("button");
 	var completeIcon = document.createElement("span");
 	completeIcon.classList.add("mif-checkmark");
-	completeBtn.classList.add("button", "success", "float-right", "task-complete-btn");
+	completeBtn.classList.add("button", "primary", "float-right", "task-complete-btn");
 	completeBtn.dataset.role = "hint";
 	completeBtn.dataset.hintText = "Mark task as completed";
 	completeBtn.dataset.clsHint = "bg-cyan fg-white drop-shadow";
 
 	completeBtn.appendChild(completeIcon);
-	completeBtn.innerHTML += " Task completed";
+	completeBtn.innerHTML += " Complete task";
 
 	completeBtn.addEventListener("click", markTaskCompleted);
 
