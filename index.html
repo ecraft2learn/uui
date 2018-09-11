@@ -1129,7 +1129,7 @@
 						
 						var sessionId = $('#manual-session').val();
 
-						if (sessionId.trim() !== '') {
+						if (sessionId && sessionId.trim() !== '') {
 						
 							$.ajax({
 
@@ -1160,8 +1160,14 @@
 					function HandleLoginCallback(phpResponse){
 						handleSelectUserResponse(phpResponse);
 						if(window.sessionStorage.getItem("errorStatus")=="fail"){
+
+							var sessionId = $('#manual-session').val();
+
+							if (sessionId && sessionId.trim() !== '')
+								addUser($('#username').val(), sessionId, 1);
+							else
 							//TODO: I am assuming that the new user IS a group user. Later we should ask the user and act accordingly
-							addUser($("#username").val(), $("#pilotsite").val(), 1);
+								addUser($("#username").val(), $("#pilotsite").val(), 1);
 							location.reload();
 						}
 						else{

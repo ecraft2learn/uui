@@ -610,8 +610,9 @@ function handleGetUserProjectsResponse(php_script_response) {
 function handleSelectUserResponse(php_script_response) {
     var userObj = JSON.parse(php_script_response);
     var userId = -1;
+    
 
-    if (!checkJsonData(userObj)) {
+    if (! checkJsonData(userObj) || ! userObj.DATA.length) {
         window.sessionStorage.setItem("userId", -1);
         window.sessionStorage.setItem("errorStatus", "fail");
     }
