@@ -43,15 +43,15 @@
 */
 function addFile(projectId, toolId, fileInputObject, responseHandler) {
 	var name = fileInputObject.get('name');
-	var data = JSON.stringify(fileInputObject);
+	var data = fileInputObject.get('data');
     var formData = new FormData();
     formData.append("func", "uploadFile");
     formData.append("toolId", toolId);
     formData.append("projectId", projectId);
 	
 	
-	formData.append("name", fileInputObject.get('name'));
-	formData.append("data", fileInputObject.get('data'));
+	formData.append("name", name);
+	formData.append("data", data);
 	
 	if(fileInputObject.get('data') == null || fileInputObject.get('data') == '') {
 		if (fileInputObject == null || fileInputObject == undefined
@@ -610,9 +610,8 @@ function handleGetUserProjectsResponse(php_script_response) {
 function handleSelectUserResponse(php_script_response) {
     var userObj = JSON.parse(php_script_response);
     var userId = -1;
-    
 
-    if (! checkJsonData(userObj) || ! userObj.DATA.length) {
+    if (!checkJsonData(userObj)) {
         window.sessionStorage.setItem("userId", -1);
         window.sessionStorage.setItem("errorStatus", "fail");
     }
@@ -659,8 +658,8 @@ function checkJsonData(jsonData) {
         return false;
     if (jsonData.DATA == null || jsonData.DATA == undefined)
         return false;
-    /*if (jsonData.DATA[0] == null || jsonData.DATA[0] == undefined)
-        return false;*/
+    if ((jsonData.DATA[0] == null || jsonData.DATA[0] == undefined) && $.isArray(jsonData.DATA))
+        return false;
 
     return true;
 }

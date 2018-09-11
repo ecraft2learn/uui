@@ -150,6 +150,8 @@ function getProjectCloudFiles(toolId) {
 	if(window.sessionStorage.getItem('projectFiles') == null)
 		return '';
 	arr = JSON.parse(files);
+	if(arr == 0 || arr == null)
+	    return '';
 	var html = '';
 	html += '<li data-caption="Project file(s)"><ul>';
 	for(var i = 0; i < arr.DATA.length; ++i) {
@@ -166,6 +168,8 @@ function getAllCloudFiles(toolId) {
 	getUserFiles(window.sessionStorage.getItem('userId'));
 	files = window.sessionStorage.getItem('userFiles');
 	arr = JSON.parse(files);
+	if(arr == 0 || arr == null)
+	    return '';
 	var html = '';
 	html += '<li data-caption="All file(s)"><ul>';
 	for(var i = 0; i < arr.DATA.length; ++i) {
