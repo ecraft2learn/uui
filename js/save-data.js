@@ -218,6 +218,7 @@ function saveDataToCloud(data, name, toolName) {
 	//formData.append("toolId", toolId);
 	//formData.append('projectId', projId);
 	addFile(projId, toolId, formData);
+	$('.info-box').data('infobox').close();
 }
 function saveDataToLocal(data, name, toolName, ext) {
 	var a = document.createElement('a');
@@ -240,7 +241,7 @@ $(document).on('click', 'button', function(e){
 	e.preventDefault();
 });
 $(document).on('click', '#save_file', function(){
-	$(this).closest('.info-box').data('infobox').close()
+	//$(this).closest('.info-box').data('infobox').close()
 });
 $(document).on('click', '.loc_btn', function(e){
 	$('.loc_btn').removeClass('active');
