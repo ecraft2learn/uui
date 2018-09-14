@@ -53,7 +53,7 @@ function openDialog(toolName, ext) {
 		'</div>'+
 	'</form>'
 	;	
-	
+	//Fix size and positions depending on device size
 	var box, css = '';
 	if(window.innerWidth < 300){
 		Metro.infobox.create(html, "", {
@@ -210,13 +210,8 @@ function saveDataToCloud(data, name, toolName) {
 	var toolId = toolNameToId(toolName);
 	var projId = (window.sessionStorage.getItem("currentProjectId") || -window.sessionStorage.getItem('username'));
 	var formData = new FormData();
-	//formData.append('func', 'uploadFile');
 	formData.append('data', data);
-	//formData.append('users', window.sessionStorage.getItem('username'));
-	//formData.append('sessionId', window.sessionStorage.getItem('pilotsite'));
 	formData.append('name', name);
-	//formData.append("toolId", toolId);
-	//formData.append('projectId', projId);
 	addFile(projId, toolId, formData);
 	$('.info-box').data('infobox').close();
 }
@@ -239,9 +234,6 @@ function saveDataToLocal(data, name, toolName, ext) {
 }
 $(document).on('click', 'button', function(e){
 	e.preventDefault();
-});
-$(document).on('click', '#save_file', function(){
-	//$(this).closest('.info-box').data('infobox').close()
 });
 $(document).on('click', '.loc_btn', function(e){
 	$('.loc_btn').removeClass('active');

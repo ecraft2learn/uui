@@ -23,24 +23,27 @@
 <!--     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script> -->
     <script>
 	$(document).on('keypress', '.input input', function(e){
-		if(e.which == 13) //Disable refresh on enterkey at login form
+		if(e.which == 13) //Disable refresh on enterkey at login form, also for other userinputs
 			e.preventDefault();
 	});
+	//Close bottom charm when exit if there are no apps minimized.
 	$(document).on('mouseout', '#bottomCharm', function(){
 		if($('#bottomCharm button').length == 0) {
 			$(this).data('charms').close();
 		}
 	});
 	$(document).ready(function(){
-		$('.project.bg-darkCobalt').removeClass('bg-darkCobalt');
+		$('.project.bg-darkCobalt').removeClass('bg-darkCobalt'); //Make sure no visual indication of a project is selected
 		var userId = window.sessionStorage.getItem("userId")
-		window.sessionStorage.setItem("currentProjectId", -userId);
+		window.sessionStorage.setItem("currentProjectId", -userId); //set users default project id (none) to negative userid.
 		
-		window.sessionStorage.removeItem("projectFiles");
+		window.sessionStorage.removeItem("projectFiles"); //Empty sessionstorage project files
 		$('#activeProj').text('none');
+		//For mobile devices, hide the bottom charm to prevent it randomly poping up while scrolling
 		if($(window).width() < 420)
 			$('#bottomCharm').hide();
 	});
+	//hide the bottom charm while scrolling on mobile devices.
 	$(window).scroll(function(event){
 		if($(window).width() > 420)
 			return;
@@ -385,18 +388,21 @@
 	</script>
 	
 	<script>
+		//Listener for eCraft Idea, disables scrolling while painting (Mostly needed for mobile devices)
 		window.addEventListener('message', function (e) {
 			console.log(e.data);
 			if(e.data === 'drawing') {
 				$('body').css('overflow', 'hidden');
 				$('html').css('overflow', 'hidden');
-				$('body').css('overscroll-behavior', 'none');
+				$('body').css('overscroll-behavior', 'none'); //Disable refresh on top-scroll on mobile devices
 			} else if(e.data === 'stopdrawing') {
 				$('body').css('overflow', 'auto');
 				$('html').css('overflow', 'auto');
 				$('body').css('overscroll-behavior', 'auto');
 			}
 		});
+		
+		//Hide/show apps on mobile devices that aren't supported for mobiles. 
 		$(document).on('click', '#hidden_apps', function(){
 			if($(this).is(':checked')) {
 				$('.no-mobile').each(function(){
@@ -419,6 +425,7 @@
 				});
 			}
 		});
+		//Automatically hide all apps on mobile devices that aren't supported for mobile
 		$(document).ready(function(){
 			if(window.innerWidth < 420) { //mobile
 				$('.no-mobile').each(function(){
@@ -431,6 +438,7 @@
 				}
 			});
 		});
+		//Disable scrolling on smaller devices (mobile/tablets) while moving a window
 		$(document).on('mousedown touchstart touchmove', '.window-caption', function(e)
 		{
 			if(window.innerWidth < 640) {
@@ -439,6 +447,7 @@
 				$('body').css('overscroll-behavior', 'none');
 			}
 		});
+		//Enable scrolling on smaller devices (mobile/tablets) while moving a window
 		$(document).on('mouseup touchend', '.window-caption', function()
 		{
 			if(window.innerWidth < 640) {
@@ -734,6 +743,11 @@
 				</div>
 			</div>
 		</div>
+		<!-- 
+		When adding new app to the tile area, Make sure you edit these lines:
+		- infoClick('PATH TO THE HELP PAGE', 'TILE NAME', event); Path to the help page (?)
+		- tileClick(PATH TO THE APPLICATION, 'APPLICATION NAME', event); !!! There are 2 places in the code, make to edit both and make them the same. Replace 'APPLICATION NAME' with undefined to open the app in a new window/tab instead of integrated window.
+		-->
 		<div class="grid">
 			<div class="row">
 				<div class="cell">
