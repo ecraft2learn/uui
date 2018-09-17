@@ -74,6 +74,7 @@
 	<!-- LNU Task List styling and script -->
 	<link rel="stylesheet" type="text/css" href="lnu/tasklist/css/tasklist.css" />
 	<script src="lnu/tasklist/js/tasklist.js"></script>
+	<script src="lnu/tasklist/js/api-calls.js"></script>
 	
 	<script src="js/window-management.js"></script>
 	<script src="js/helper-functions.js"></script>
@@ -1093,65 +1094,34 @@
 											
 										</div>
 									</div>
-									<div class="row">
-										<div id="tasklist-accordion-content" data-role="accordion" data-one-frame="true" data-show-active="true">
-										    <div class="frame task-completed" data-task-id="1">
-										        <div class="heading">Task title 1<span class="task-icon mif-checkmark float-right"></span></div>
-										        <div class="content fg-white">
-										            <div class="p-2">Cur luba manducare? Pol, a bene ionicis tormento Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-										            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-										            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-										            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-										            <button class="button link float-left fg-white task-remove-btn"><span class="mif-cross"></span>  Remove task</button>
-										            <button class="button secondary float-right task-undo-btn" data-role="hint" data-hint-text="Mark task as pending" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-undo"></span> Undo</button>
-										        </div>
-										    </div>
-										    <div class="frame task-completed" data-task-id="2">
-										        <div class="heading">Task title 2<span class="task-icon mif-checkmark float-right"></span></div>
-										        <div class="content fg-white">
-										            <div class="p-2">Wildly open a starship. Belay, ye small wench- set...</div>
-										            <button class="button link float-left fg-white task-remove-btn"><span class="mif-cross"></span>  Remove task</button>
-										            <button class="button secondary float-right task-undo-btn" data-role="hint" data-hint-text="Mark task as pending" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-undo"></span> Undo</button>
-										        </div>
-										    </div>
-										    <div class="frame" data-task-id="3">
-										        <div class="heading">Task title 3<span class="task-icon float-right"></span></div>
-										        <div class="content fg-white">
-										            <div class="p-2">Bitter turkey can be made tasty by brushing with...</div>
-										            <button class="button primary float-right task-complete-btn" data-role="hint" data-hint-text="Mark task as completed" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-checkmark"></span> Complete task</button>
-										        </div>
-										    </div>
-										    <div class="frame" data-task-id="4">
-										        <div class="heading">Task title 4<span class="task-icon float-right"></span></div>
-										        <div class="content fg-white">
-										            <div class="p-2">Bitter turkey can be made tasty by brushing with...</div>
-										            <button class="button primary float-right task-complete-btn" data-role="hint" data-hint-text="Mark task as completed" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-checkmark"></span> Complete task</button>
-										        </div>
-										    </div>
-										    <div class="frame" data-task-id="5">
-										        <div class="heading">Task title 5<span class="task-icon float-right"></span></div>
-										        <div class="content fg-white">
-										            <div class="p-2">Bitter turkey can be made tasty by brushing with...</div>
-										            <button class="button primary float-right task-complete-btn" data-role="hint" data-hint-text="Mark task as completed" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-checkmark"></span> Complete task</button>
-										        </div>
-										    </div>
-										    <div class="frame" data-task-id="6">
-										        <div class="heading">Task title 6<span class="task-icon float-right"></span></div>
-										        <div class="content fg-white">
-										            <div class="p-2">Bitter turkey can be made tasty by brushing with...</div>
-										            <button class="button primary float-right task-complete-btn" data-role="hint" data-hint-text="Mark task as completed" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-checkmark"></span> Complete task</button>
-										        </div>
-										    </div>
-										    <div class="frame" data-task-id="7">
-										        <div class="heading">Task title 7<span class="task-icon float-right"></span></div>
-										        <div class="content fg-white">
-										            <div class="p-2">Bitter turkey can be made tasty by brushing with...</div>
-										            <button class="button primary float-right task-complete-btn" data-role="hint" data-hint-text="Mark task as completed" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-checkmark"></span> Complete task</button>
-										        </div>
-										    </div>
-										</div>
+									<div class="row" id ="accordionRow">
+										<!--<div id="tasklist-accordion-content" data-role="accordion" data-one-frame="true" data-show-active="true">-->
+
+												<!--<div class="frame task-completed" data-task-id="1_a" id="sampleDoneTask" >-->
+													<!--<div class="heading">Task title 1<span class="task-icon mif-checkmark float-right"></span></div>-->
+													<!--<div class="content fg-white">-->
+														<!--<div class="p-2">Cur luba manducare? Pol, a bene ionicis tormento Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
+															<!--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+															<!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+															<!--consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+															<!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
+															<!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>-->
+														<!--<button class="button link float-left fg-white task-remove-btn"><span class="mif-cross"></span>  Remove task</button>-->
+														<!--<button class="button secondary float-right task-undo-btn" data-role="hint" data-hint-text="Mark task as pending" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-undo"></span> Undo</button>-->
+													<!--</div>-->
+												<!--</div>-->
+
+
+												<!--<div class="frame" data-task-id="1_b" id="sampleNewTask" >-->
+													<!--<div class="heading">Task title 6<span class="task-icon float-right"></span></div>-->
+													<!--<div class="content fg-white">-->
+														<!--<div class="p-2">Bitter turkey can be made tasty by brushing with...</div>-->
+														<!--<button class="button primary float-right task-complete-btn" data-role="hint" data-hint-text="Mark task as completed" data-cls-hint="bg-cyan fg-white drop-shadow"><span class="mif-checkmark"></span> Complete task</button>-->
+													<!--</div>-->
+												<!--</div>-->
+
+										<!--</div>-->
+
 									</div>
 								</div>
 							</div> <!-- End of Task List tile -->

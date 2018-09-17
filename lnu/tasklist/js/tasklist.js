@@ -8,6 +8,7 @@
 // Tasklist init
 //-----------------------------------------------------------
 window.addEventListener("load", function(){
+    //dynamicallyLoadScript("lnu/tasklist/js/api-calls.js");
 	taskListInit();
 });
 
@@ -21,15 +22,18 @@ window.addEventListener("load", function(){
  * Initializes the tasklist
  */
 function taskListInit() {
+
+    loadTasks();
+
 	document.getElementById("tasklist-refresh").addEventListener("click", refreshTaskList);
 
-	var removeBtns   = document.getElementsByClassName("task-remove-btn");
-	var undoBtns     = document.getElementsByClassName("task-undo-btn");
-	var completeBtns = document.getElementsByClassName("task-complete-btn");
-
-	addEvt(removeBtns, removeTaskElement);
-	addEvt(undoBtns, markTaskUncompleted);
-	addEvt(completeBtns, markTaskCompleted);
+	// var removeBtns   = document.getElementsByClassName("task-remove-btn");
+	// var undoBtns     = document.getElementsByClassName("task-undo-btn");
+	// var completeBtns = document.getElementsByClassName("task-complete-btn");
+    //
+	// addEvt(removeBtns, removeTaskElement);
+	// addEvt(undoBtns, markTaskUncompleted);
+	// addEvt(completeBtns, markTaskCompleted);
 }
 
 
@@ -51,22 +55,146 @@ function addEvt(els, callback) {
  */
 function refreshTaskList(event) {
 	document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.toggle("ani-spin");
+	loadTasks();
+}
+
+/**
+ * Load tasks from database
+ */
+function loadTasks(){
+
+    getTasks(function(tasks){
+        renderTasks(tasks);
+    });
+}
+
+/**
+ * 
+ */
+function renderTasks(tasks) {
+
+    //clear the task list
+    /*var $container = $('#tasklist-accordion-content'),
+        $noRemove = $container.find('#sampleNewTask,#sampleDoneTask');
+    $container.html($noRemove);*/
+
+    document.getElementById("accordionRow").innerHTML = "";
+
+    //create according
+    var tasklist_accordion_content = document.createElement("div");
+    tasklist_accordion_content.setAttribute("id","tasklist-accordion-content");
+    tasklist_accordion_content.setAttribute("data-role","accordion");
+
+
+
+    $.each(tasks,function(index){
+        var status = 0;
+
+        if (this["STATUS"]!=null && this["USERID"]===window.sessionStorage.getItem("userId")){
+            status =this["STATUS"];
+        }
+
+        renderTask(tasklist_accordion_content,this["ID"],this["TITLE"],this["DESCRIPTION"],status);
+    });
+
+    var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
+
+
 }
 
 
 /**
  * 
  */
-function renderTasks() {
+function renderTask(according_element,taskId, title, description,status) {
 
-}
+	//not completed task
+    if(status === "0"){
+
+        var taskItem =  document.createElement("div");
+        taskItem.setAttribute("id",taskId);
+        taskItem.setAttribute("data-task-id",taskId);
+        taskItem.classList.add("frame");
+
+        var taskHeading = document.createElement("div");
+        taskHeading.innerHTML= title+ '<span class="task-icon float-right"></span>';
+        taskHeading.classList.add("heading");
+
+        var taskContent = document.createElement("div");
+        taskContent.classList.add("content","fg-white");
+
+        var taskContentP = document.createElement("div");
+        taskContentP.textContent=description;
+        taskContentP.classList.add("p-2");
 
 
-/**
- * 
- */
-function renderTask(taskId, title, description) {
 
+        //Completed button
+        var completBtn = document.createElement("button");
+        completBtn.innerHTML='<span class="mif-checkmark"></span> Complete task';
+        completBtn.classList.add("button", "primary", "float-right", "task-complete-btn");
+        completBtn.setAttribute("data-role","hint");
+        completBtn.setAttribute("data-hint-text","Mark task as completed");
+        completBtn.setAttribute("data-cls-hint","bg-cyan fg-white drop-shadow");
+
+        completBtn.addEventListener("click", markTaskCompleted);
+
+
+        taskContent.appendChild(taskContentP);
+        taskContent.appendChild(completBtn);
+
+        taskItem.appendChild(taskHeading);
+        taskItem.appendChild(taskContent);
+
+        according_element.appendChild(taskItem);
+	}
+	else{
+    	//completed task
+        var taskItem =  document.createElement("div");
+        taskItem.setAttribute("id",taskId);
+        taskItem.setAttribute("data-task-id",taskId);
+        taskItem.classList.add("frame","task-completed");
+
+        var taskHeading = document.createElement("div");
+        taskHeading.innerHTML= title+ '<span class="task-icon mif-checkmark float-right"></span>';
+        taskHeading.classList.add("heading");
+
+        var taskContent = document.createElement("div");
+        taskContent.classList.add("content","fg-white");
+
+        var taskContentP = document.createElement("div");
+        taskContentP.textContent=description;
+        taskContentP.classList.add("p-2");
+
+        //Undo button
+        var unduBtn = document.createElement("button");
+        unduBtn.innerHTML='<span class="mif-undo"></span>Undo';
+        unduBtn.classList.add("button", "secondary", "float-right", "task-undo-btn");
+        unduBtn.setAttribute("data-role","hint");
+        unduBtn.setAttribute("data-hint-text","Mark task as pending");
+        unduBtn.setAttribute("data-cls-hint","bg-cyan fg-white drop-shadow");
+        unduBtn.addEventListener("click", markTaskUncompleted);
+
+
+        //Remove button
+        var removeBtn = document.createElement("button");
+        removeBtn.innerHTML='<span class="mif-cross"></span>  Remove task';
+        removeBtn.classList.add("button", "link", "float-left","fg-white", "task-remove-btn");
+        removeBtn.addEventListener("click", removeTaskElement);
+
+
+
+        taskContent.appendChild(taskContentP);
+        taskContent.appendChild(removeBtn);
+        taskContent.appendChild(unduBtn);
+
+        taskItem.appendChild(taskHeading);
+        taskItem.appendChild(taskContent);
+
+        according_element.appendChild(taskItem);
+
+
+	}
 }
 
 
@@ -83,6 +211,12 @@ function refreshTask(taskId) {
  * @param event : MouseEvent
  */
 function markTaskCompleted(event) {
+
+
+
+    var task = {"id":event.target.parentNode.parentNode.dataset.taskId,"status":1,"isVisible":1};
+    updateTaskStatus(task);
+
 	event.target.parentNode.parentNode.classList.add("task-completed");
 	event.target.removeEventListener("click", markTaskCompleted);
 
@@ -115,6 +249,8 @@ function markTaskCompleted(event) {
 	event.target.parentNode.appendChild(removeBtn);
 	event.target.parentNode.appendChild(undoBtn);
 	event.target.parentNode.removeChild(event.target);
+
+	//var task = {"id":event.target}
 }
 
 
@@ -123,6 +259,11 @@ function markTaskCompleted(event) {
  * @param event : MouseEvent
  */
 function markTaskUncompleted(event) {
+
+
+    var task = {"id":event.target.parentNode.parentNode.dataset.taskId,"status":0,"isVisible":1};
+    updateTaskStatus(task);
+
 	event.target.parentNode.parentNode.classList.remove("task-completed");
 	event.target.parentNode.parentNode.getElementsByClassName("task-icon")[0].classList.remove("mif-checkmark");
 	event.target.removeEventListener("click", markTaskUncompleted);
@@ -153,6 +294,9 @@ function markTaskUncompleted(event) {
  * @param event: MouseEvent
  */
 function removeTaskElement(event) {
+    var task = {"id":event.target.parentNode.parentNode.dataset.taskId,"status":1,"isVisible":0};
+    updateTaskStatus(task);
+
 	var taskId = event.target.parentNode.parentNode.dataset.taskId;
 	var tasks = document.getElementById("tasklist-accordion-content").children;
 	for (var i = 0; i < tasks.length; i++) {
@@ -169,3 +313,5 @@ function removeTaskElement(event) {
 function removeAllTaskElements() {
 	document.getElementById("tasklist-accordion-content").innerHTML = "";
 }
+
+
