@@ -78,28 +78,28 @@ function renderTasks(tasks) {
         $noRemove = $container.find('#sampleNewTask,#sampleDoneTask');
     $container.html($noRemove);*/
 
-    document.getElementById("accordionRow").innerHTML = "";
+    // This makes the refresh icon stop spinning once retrieving of tasks have been attempted.
+    document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.remove("ani-spin");
 
     //create according
     var tasklist_accordion_content = document.createElement("div");
     tasklist_accordion_content.setAttribute("id","tasklist-accordion-content");
     tasklist_accordion_content.setAttribute("data-role","accordion");
 
+    if (tasks.length > 0) {
+        document.getElementById("accordionRow").innerHTML = "";
+        $.each(tasks,function(index){
+                var status = 0;
 
+                if (this["STATUS"]!=null && this["USERID"]===window.sessionStorage.getItem("userId")){
+                    status =this["STATUS"];
+                }
 
-    $.each(tasks,function(index){
-        var status = 0;
+                renderTask(tasklist_accordion_content,this["ID"],this["TITLE"],this["DESCRIPTION"],status);
+            });
 
-        if (this["STATUS"]!=null && this["USERID"]===window.sessionStorage.getItem("userId")){
-            status =this["STATUS"];
-        }
-
-        renderTask(tasklist_accordion_content,this["ID"],this["TITLE"],this["DESCRIPTION"],status);
-    });
-
-    var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
-
-
+            var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
+    }
 }
 
 

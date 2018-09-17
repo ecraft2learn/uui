@@ -8,11 +8,12 @@
  *----------------------------------------------------------*/
 
  #tasklist {
- 	overflow-y: scroll;
+ 	overflow-y: auto;
  }
 
  #tasklist .heading {
  	background-color: #113978;
+ 	white-space: normal;
  }
 
  #tasklist .heading span {
@@ -29,5 +30,25 @@
 
  #tasklist-refresh {
  	padding: 5px;
+ }
+
+ #tasklist-empty-state img {
+ 	display:block;
+ 	height: auto;
+ 	width: 100px;
+ 	margin: 0 auto;
+ }
+
+ #tasklist-empty-state h4 {
+ 	width: 100%;
+ 	text-align: center;
+ 	padding-top:20px;
+ 	color: #357cf6;;
+ }
+
+ #tasklist-empty-state p {
+ 	width:150px;
+ 	margin: 0 auto;
+ 	color: #357cf6;
  }
  
