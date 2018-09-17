@@ -13,8 +13,8 @@ var feedbackWindows = {};
  * @param toolUrl: String
  * @param event
  */
-function openFeedbackWindow(toolUrl, toolName) {
-         openIframeWindowRightBottom(toolUrl, toolName);
+function openFeedbackWindow(toolUrl, toolName,event) {
+         openIframeWindowRightBottom(toolUrl, toolName,event);
 }
 
 
@@ -26,7 +26,7 @@ function openFeedbackWindow(toolUrl, toolName) {
  * @param event
  * @returns {*}
  */
-function openIframeWindowRightBottom(toolUrl,toolName) {
+function openIframeWindowRightBottom(toolUrl,toolName,event) {
 
     docWidth = 360;
 
