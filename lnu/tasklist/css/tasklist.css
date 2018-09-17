@@ -1,0 +1,33 @@
+/**
+ * This file contains styles for the task list feature
+ */
+
+
+/*-----------------------------------------------------------
+ * Task List
+ *----------------------------------------------------------*/
+
+ #tasklist {
+ 	overflow-y: scroll;
+ }
+
+ #tasklist .heading {
+ 	background-color: #113978;
+ }
+
+ #tasklist .heading span {
+ 	margin-top: 5px;
+ }
+
+ .task-completed {
+ 	opacity: 0.65;
+ } 
+
+ .task-completed .heading {
+ 	text-decoration: line-through;
+ }
+
+ #tasklist-refresh {
+ 	padding: 5px;
+ }
+ 
