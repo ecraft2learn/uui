@@ -39,7 +39,7 @@ function openDialog(toolName, ext) {
 		'<div class="row cloud">'+
 			'<div class="cell">'+
 				'<div class="mt-2 no-p rounded panel-x" data-role="panel" data-height="150">'+
-					'<ul class="files" data-role="listview" data-view="content" data-select-node="true">'+	
+					'<ul class="files" data-role="listview" data-view="content" data-select-node="true">'+
 						getCloudFiles(toolId)+
 					'</ul>'+
 				'</div>'+
@@ -52,7 +52,7 @@ function openDialog(toolName, ext) {
 			'</div>'+
 		'</div>'+
 	'</form>'
-	;	
+	;
 	//Fix size and positions depending on device size
 	var box, css = '';
 	if(window.innerWidth < 300){
@@ -66,7 +66,7 @@ function openDialog(toolName, ext) {
 		Metro.infobox.create(html);
 		box = $('.info-box');
 		css += "left: 10% !important;";
-	}	
+	}
 	if(window.innerHeight < 550){
 		css += "top: 0px !important;";
 		css += "max-height:"+window.innerHeight+";";
@@ -74,9 +74,9 @@ function openDialog(toolName, ext) {
 	} else {
 		css += "top: 10% !important;";
 	}
-
+	css += 'overflow:auto;';
 	//box.css("cssText", css);
-		
+
 	$('.local').hide();
 }
 function toolNameToId(toolName) {
@@ -200,10 +200,10 @@ function getCloudFiles(toolId){
 	//Project files
 	var html = '';
 	html += getProjectCloudFiles(toolId);
-	
+
 	//All files
 	html += getAllCloudFiles(toolId);
-	
+
 	return html;
 }
 function saveDataToCloud(data, name, toolName) {
@@ -213,6 +213,11 @@ function saveDataToCloud(data, name, toolName) {
 	formData.append('data', data);
 	formData.append('name', name);
 	addFile(projId, toolId, formData);
+	if(window.sessionStorage.getItem("errorStatus") != 'fail'){
+		Metro.toast.create("File saved to cloud.", null, null, "success");
+	} else {
+		Metro.toast.create("File could not be saved to cloud.", null, null, "alert");
+	}
 	$('.info-box').data('infobox').close();
 }
 function saveDataToLocal(data, name, toolName, ext) {
@@ -231,6 +236,9 @@ function saveDataToLocal(data, name, toolName, ext) {
 	a.href = URL.createObjectURL(file);
 	a.download = name+ext;
 	a.click();
+	$('.info-box').data('infobox').close();
+	Metro.toast.create("Saving file.", null, null, "info");
+	a.remove();
 }
 $(document).on('click', 'button', function(e){
 	e.preventDefault();
