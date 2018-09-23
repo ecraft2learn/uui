@@ -50,16 +50,26 @@ function onSendComment(event) {
         //clear comment textarea
         var formId = $(event.target).closest("form").attr('id');
         clearForm(formId);
+        var toolName = getToolName();
 
-        //save comment in database
-        saveComment(comment, function (result) {
-            if(result!="error"){
-                showNotification(true,"Comment was sent successfully!");
-            }
-            else{
-                showNotification(false,"Please try again later.");
+        getToolId(toolName,function (result) {
+            if (result["DATA"].length > 0) {
+
+                var toolId = parseInt(result["DATA"][0]["TOOLID"]);
+                console.log(toolId);
+                //save comment in database
+                saveComment(comment,toolId, function (result) {
+                    if(result!="error"){
+                        showNotification(true,"Comment was sent successfully!");
+                    }
+                    else{
+                        showNotification(false,"Please try again later.");
+                    }
+                });
             }
         });
+
+
     }
     else{
         showNotification(false,"Please provide your comment");

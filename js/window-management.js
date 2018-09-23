@@ -18,7 +18,7 @@ class WinIFrame {
 }
 
 function getAnalyticFieldName(toolName, isHelp) {
-	
+
 	switch (toolName) {
 
 		case './uef/search/index.html':
@@ -54,7 +54,7 @@ var idleTime = new Date().getTime();
 function sendAnalyticsData(clientId, sessionId, toolName) {
 
 	var obj = {
-	
+
 		idle: 0,
 		search: 0,
 		sketch: 0,
@@ -89,11 +89,11 @@ function sendAnalyticsData(clientId, sessionId, toolName) {
                 data: 'data=' + data + '&users=' + users + '&sessionId=' + sessionId,
                 success: function(data) {
                         console.log(data);
-                },  
+                },
                 error: function(error) {
                         console.log(error);
-                }   
-        });	
+                }
+        });
 
 	obj[toolName]++;
 
@@ -101,7 +101,7 @@ function sendAnalyticsData(clientId, sessionId, toolName) {
 
 	var users = window.sessionStorage.getItem('username');
 	var sessionId = window.sessionStorage.getItem('pilotsite');
-	
+
 	var data = JSON.stringify(obj);
 
 	$.ajax({
@@ -116,7 +116,7 @@ function sendAnalyticsData(clientId, sessionId, toolName) {
 			console.log(error);
 		}
 	});
-	
+
 }
 
 
@@ -126,10 +126,10 @@ function gotoTileDestination(dest){
 }
 
 //This function is responsible for opening a new Infobox.
-var alreadyOpenInfobox = null;		
+var alreadyOpenInfobox = null;
 function openInfobox(helpUrl, event){
     event.stopPropagation();
-	
+
 	Metro.infobox.open(helpUrl);
 	if(alreadyOpenInfobox!=null && alreadyOpenInfobox!=helpUrl)
 		Metro.infobox.close(alreadyOpenInfobox);
@@ -137,10 +137,10 @@ function openInfobox(helpUrl, event){
 }
 
 //This function is responsible for opening a new HELP DIALOG.
-var alreadyOpenDialog = null;		
+var alreadyOpenDialog = null;
 function openHelpDialog(helpUrl, event){
     event.stopPropagation();
-	
+
 	Metro.dialog.open(helpUrl);
 	if(alreadyOpenDialog!=null && alreadyOpenDialog!=helpUrl)
 		Metro.dialog.close(alreadyOpenDialog);
@@ -160,7 +160,7 @@ function openIframeWindow(toolUrl, toolName, event) {
 	var tIcon = $(event.srcElement).closest('.tile').find('.slide-front').find('.icon').attr('src');
 	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
 		bgColor="rgb(64,64,64)";
-	
+
 	Metro.window.create({
 		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span>",
 		content: "<iframe class='iframeWindow m-0 p-0' id='iframeWindow' src='"+toolUrl+"' frameborder='0' allowfullscreen width='100%' height='100%'  />",
@@ -192,7 +192,7 @@ function openIframeWindowP(toolUrl, toolName, event) {
 	var tIcon = $(event.srcElement).prev('.slide-front').find('.icon').attr('src');
 	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
 		bgColor="rgb(64,64,64)";
-	
+
 	Metro.window.create({
 		title: "<span class='text-medium fg-white notranslate' translate='no'>"+toolName+"</span>",
 		content: "<iframe class='iframeWindow' id='iframeWindow' src='"+toolUrl+"' frameborder='0' style='margin:0px;' allowfullscreen width='100%' height='100%'  />",
@@ -233,7 +233,7 @@ function maximizeWindow(iFrame){
 	var winData = winDiv.data('winData');
 	docWidth = $(window).width();
 	docHeight = $(window).height();
-	
+
 	if(winDiv.position().left>0){
 		winDiv.animate({
 				top: 0,
@@ -260,22 +260,22 @@ $(document).on('click', '.btn-min', function(){
 	minimizeWindow(this);
 });
 //Given the clicked minimize button of a window, it finds the window object and minimizes it. This includes creating a small button and the bottom charm and storing the WinData struct in it.
-function minimizeWindow(minBtn){	
+function minimizeWindow(minBtn){
 	var winDiv = $(minBtn).closest('.window');//getWindowFromBtn(minBtn);
 	var winData = winDiv.data('winData');
 	var icon = winData.iconUrl;
 	var color = winData.color;
 	//$('#bottomCharm').append("<img src='"+icon+"' width='30px' height='30px' />");
-	
+
 	//Image Button Style
 	//$('#bottomCharm').append("<button class='image-button fg-white icon-left' style='margin-right:10px; background-color:"+color+";'>TinkerCad<img src='"+icon+"' class='icon' style='background-color:"+color+";'/></button>");
-	
+
 	//Button Style
 	//$('#bottomCharm').append("<button class='button fg-white fg-active-black icon-left' style='margin-right:10px; background-color:"+color+";'><img src='"+icon+"' class='icosn' style='align:left; vertical-align:middle; background-color:"+color+";'/>TinkerCad</button>");
-	
+
 	//Tile Style
 	//$('#bottomCharm').append("<button class='shortcut-button fg-white icon-left' style='margin-right:10px; background-color:"+color+";'><img src='"+icon+"' class='icon' style='background-color:"+color+";'/><span class='title'>TinkerCad</span></button>");
-	
+
 	var $button = createMinimizedTab(winData);
 	$button.data('winDiv', winDiv);
 	$button.data('winTop', winDiv.position().top); //Store width of window
@@ -283,9 +283,9 @@ function minimizeWindow(minBtn){
 	$button.data('winHeight', winDiv.data('winHeight')); //Store height of window
 	$button.attr('id', $(winDiv).attr('id')+"_btn");
 	$('#bottomCharm').append($button);
-	
+
 	Metro.charms.open('#bottomCharm');
-	
+
 	//var winDiv = $(minBtn).parent().closest('[data-role], .dialog');
 	winDiv.animate({
 		top: $('#bottomCharm').position().top,
@@ -302,35 +302,35 @@ function unminimizeWindow() {
 	if (typeof event === 'undefined') {
 		return; // needs to be fixed
 	}
-	
+
 	var $buttonElem = typeof event !== 'undefined' && $(event.srcElement).closest('button');
 	var $winData = $buttonElem.data('winData');
 	var $winDiv = $buttonElem.data('winDiv');
-	
+
 	$winDiv.removeClass('minimized');
 	resizeWindow2Normal($winDiv, $winData, $buttonElem.data('winWidth'), $buttonElem.data('winHeight'), $buttonElem.data('winTop'));
-	
+
 	$($buttonElem).remove();
-	
+
 	 if($('#bottomCharm').find('button').length==0){
 		Metro.charms.close('#bottomCharm');
-	} 
+	}
 }
 //Does as the unminimizeWindow function, except that this one is trigerred from JS code
 function unminimizeWindowFromJS(minButton){
-	if(typeof minButton === 'undefined') 
+	if(typeof minButton === 'undefined')
 		return;
-	
+
 	var $winData = $(minButton).data('winData');
 	var $winDiv = $(minButton).data('winDiv');
-	
+
 	resizeWindow2Normal($winDiv, $winData);
 	$($winDiv).show();
 	$(minButton).remove();
-	
+
 	 if($('#bottomCharm').find('button').length==0){
 		Metro.charms.close('#bottomCharm');
-	} 
+	}
 }
 
 //Create a small button which represents the minimized window. The button is added to the bottom charm.
@@ -339,17 +339,17 @@ function createMinimizedTab(winData) {
 							class: "image-button fg-white icon-left minimized-window-tab mt-1 mb-1",
 							style: "background-color:"+winData.color+"; margin-right:5px;"
 	});
-	
+
 	var $buttonImage = $("<img/>", {
 							src: winData.iconUrl,
 							class: "icon",
-							style: "background-color:"+winData.color	
+							style: "background-color:"+winData.color
 	});
-	
+
 	$button.append($buttonImage).append(winData.title);
 	$button.data('winData', winData);
 	$button.click(unminimizeWindow);
-	
+
 	return $button;
 }
 
@@ -384,6 +384,10 @@ function resizeWindow2Normal($winDiv, $winData, width, height, winTop){
 		height: $winData.height-60,
 		opacity: 1
 	}, 300);*/
-	 
+
 	$winDiv.show();
 }
+$(document).on('click', '.window', function(){
+	$('.active-win').removeClass('active-win');
+	$(this).addClass('active-win');
+});

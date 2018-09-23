@@ -58,6 +58,7 @@ function m_parseOptions(configuration,formId) {
 
         if (configuration.inputs[i].label != null) {
             var label = m_createTitle(input.id, configuration.inputs[i].label);
+
             wrapper.appendChild(label);
         }
 
@@ -89,8 +90,30 @@ function m_createTitle(id, title) {
     // var el = document.createElement("label");
     el.classList.add("feedback-component-title");
     // el.htmlFor = id;
-    el.textContent = title;
+    
+    if (isHTML(title))
+	el.innerHTML = title;
+    else
+        el.textContent = title;
+    
     return el;
+
+}
+
+function isHTML(str) {
+  
+	var a = document.createElement('div');
+  
+	a.innerHTML = str;
+
+  	for (var c = a.childNodes, i = c.length; i--; ) {
+    
+		if (c[i].nodeType == 1) return true; 
+  
+	}
+
+  	return false;
+
 }
 
 

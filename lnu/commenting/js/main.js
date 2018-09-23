@@ -100,25 +100,14 @@ function getToolId(toolname, callback) {
 function getToolName() {
 
     var iframeId = window.parent.activeWindow.attr('id');
+
     var feedbackWindows = parent.feedbackWindows;
 
-    for (var key in feedbackWindows) {
-        if(feedbackWindows[key].toString() == iframeId.toString()){
-            var toolName = key;
-            //this is temporal fix of inconsistency of the tool names
-            switch (toolName){
-                case "eCraft Idea":
-                    toolName = "eCraft Plan";
-                    break;
-                case "TinkerCad 3D Dsign":
-                    toolName = "TinkerCad 3D Design";
-                    break;
-                case "TinkerCad Circuit Design":
-                    toolName = "TinkerCad Circuits";
-                    break;
-                default: break;
-            }
-            return toolName;
+      for (var key in feedbackWindows) {
+
+          if(key.toString() === iframeId.toString()){
+
+            return feedbackWindows[key];
         }
     }
 }

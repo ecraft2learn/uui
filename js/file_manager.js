@@ -8,7 +8,7 @@
         fileInputObject - The JS DOM object of the type <input type="file"> that contains the file information. (Type: Object)
         responseHandler - [optional] A *function* which is responsible for handling the response from the AJAX call. If omitted, the function
                           will use the default response handler for addFile which is <handleAddFileResponse>.
-
+		data - The data from the application that will be saved. (Type: String)
     Returns:
         This function does not return any value. It uses the <handleGetUserProjectsResponse> or responseHandler (the last parameter to this function) callback functions to parse the data received from the server. 
         If this function fails before making the AJAX call, then the *errorStatus* field in the *window.sessionStorage* is set to "fail".
@@ -43,16 +43,18 @@
 */
 function addFile(projectId, toolId, fileInputObject, responseHandler) {
 	var name = fileInputObject.get('name');
-	var data = JSON.stringify(fileInputObject);
+	var data = fileInputObject.get('data');
     var formData = new FormData();
     formData.append("func", "uploadFile");
     formData.append("toolId", toolId);
     formData.append("projectId", projectId);
 	
 	
-	formData.append("name", fileInputObject.get('name'));
-	formData.append("data", fileInputObject.get('data'));
+	formData.append("name", name);
+	formData.append("data", data);
 	
+	//Data and name is only used for when using the save to cloud function in applications.
+	//If data is empty, the addFile function is used by Share my work.
 	if(fileInputObject.get('data') == null || fileInputObject.get('data') == '') {
 		if (fileInputObject == null || fileInputObject == undefined
 			|| $(fileInputObject) == null || $(fileInputObject) == undefined
@@ -658,8 +660,8 @@ function checkJsonData(jsonData) {
         return false;
     if (jsonData.DATA == null || jsonData.DATA == undefined)
         return false;
-    /*if (jsonData.DATA[0] == null || jsonData.DATA[0] == undefined)
-        return false;*/
+    if ((jsonData.DATA[0] == null || jsonData.DATA[0] == undefined) && $.isArray(jsonData.DATA))
+        return false;
 
     return true;
 }

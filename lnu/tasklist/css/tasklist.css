@@ -1,0 +1,54 @@
+/**
+ * This file contains styles for the task list feature
+ */
+
+
+/*-----------------------------------------------------------
+ * Task List
+ *----------------------------------------------------------*/
+
+ #tasklist {
+ 	overflow-y: auto;
+ }
+
+ #tasklist .heading {
+ 	background-color: #113978;
+ 	white-space: normal;
+ }
+
+ #tasklist .heading span {
+ 	margin-top: 5px;
+ }
+
+ .task-completed {
+ 	opacity: 0.65;
+ } 
+
+ .task-completed .heading {
+ 	text-decoration: line-through;
+ }
+
+ #tasklist-refresh {
+ 	padding: 5px;
+ }
+
+ #tasklist-empty-state img {
+ 	display:block;
+ 	height: auto;
+ 	width: 100px;
+ 	margin: 0 auto;
+ }
+
+ #tasklist-empty-state h4 {
+ 	width: 100%;
+ 	text-align: center;
+ 	padding-top:20px;
+ 	color: #357cf6;;
+ }
+
+ #tasklist-empty-state p {
+ 	width:150px;
+ 	margin: 0 auto;
+ 	color: #357cf6;
+ }
+ 
