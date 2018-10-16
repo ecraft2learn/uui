@@ -8,7 +8,7 @@ function createFeedbackForm() {
 
     // Free text
     var freeText = {
-        label: "What do you think about the tool?",
+        label: "Provide your feedback:",
         input: "textfield",
         id:"feedback-freetext"
     };
