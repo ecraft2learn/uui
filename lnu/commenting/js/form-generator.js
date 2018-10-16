@@ -36,6 +36,7 @@ function initCreation(configuration,formId,parentDivId) {
 
     var feedbackElements = m_parseOptions(configuration,formId);
     document.getElementById(parentDivId).appendChild(feedbackElements);
+
 }
 
 

@@ -73,32 +73,36 @@ function loadTasks(){
  */
 function renderTasks(tasks) {
 
-    //clear the task list
-    /*var $container = $('#tasklist-accordion-content'),
-        $noRemove = $container.find('#sampleNewTask,#sampleDoneTask');
-    $container.html($noRemove);*/
+    if(tasks != undefined){
 
-    // This makes the refresh icon stop spinning once retrieving of tasks have been attempted.
-    document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.remove("ani-spin");
 
-    //create according
-    var tasklist_accordion_content = document.createElement("div");
-    tasklist_accordion_content.setAttribute("id","tasklist-accordion-content");
-    tasklist_accordion_content.setAttribute("data-role","accordion");
+            //clear the task list
+            /*var $container = $('#tasklist-accordion-content'),
+                $noRemove = $container.find('#sampleNewTask,#sampleDoneTask');
+            $container.html($noRemove);*/
 
-    if (tasks.length > 0) {
-        document.getElementById("accordionRow").innerHTML = "";
-        $.each(tasks,function(index){
-                var status = 0;
+            // This makes the refresh icon stop spinning once retrieving of tasks have been attempted.
+            document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.remove("ani-spin");
 
-                if (this["STATUS"]!=null && this["USERID"]===window.sessionStorage.getItem("userId")){
-                    status =this["STATUS"];
-                }
+            //create according
+            var tasklist_accordion_content = document.createElement("div");
+            tasklist_accordion_content.setAttribute("id","tasklist-accordion-content");
+            tasklist_accordion_content.setAttribute("data-role","accordion");
 
-                renderTask(tasklist_accordion_content,this["ID"],this["TITLE"],this["DESCRIPTION"],status);
-            });
+            if (tasks.length > 0) {
+                document.getElementById("accordionRow").innerHTML = "";
+                $.each(tasks,function(index){
+                        var status = 0;
 
-            var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
+                        if (this["STATUS"]!=null && this["USERID"]===window.sessionStorage.getItem("userId")){
+                            status =this["STATUS"];
+                        }
+
+                        renderTask(tasklist_accordion_content,this["ID"],this["TITLE"],this["DESCRIPTION"],status);
+                    });
+
+                    var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
+            }
     }
 }
 

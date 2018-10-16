@@ -8,13 +8,14 @@ function createFeedbackForm() {
 
     // Free text
     var freeText = {
-        label: "Feedback:",
-        input: "textfield"
+        label: "What do you think about the tool?",
+        input: "textfield",
+        id:"feedback-freetext"
     };
 
     // Ratings
     var ratings = {
-        label: "Rating:",
+        label: "Rate:",
         input: "rating",
         inputSettings: [
             {
@@ -58,6 +59,7 @@ function createFeedbackForm() {
                 callback: onSendFeedback,
                 //Button Id
                 btnId:"feedback-btn"
+
             }
         ]
     };
