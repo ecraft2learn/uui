@@ -65,6 +65,8 @@ class Gridview {
             var rowData = [];
             for (var j = 0; j < this.columns.length; j++) {
                 if (this.columns[j].dataMapping != null && this.data[i].hasOwnProperty(this.columns[j].dataMapping)) {
+					if(this.data[i]['PRJ_NAME'] == null)
+						this.data[i]['PRJ_NAME'] = 'none';
                     rowData.push(
                         this.m_parseData(
                             this.data[i][this.columns[j].dataMapping], 

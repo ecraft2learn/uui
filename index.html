@@ -445,6 +445,8 @@
 				$('.no-mobile').each(function(){
 					$(this).hide();
 				});
+				$('.tools-grid').removeClass('size-5');
+				$('.tools-grid').addClass('size-1');
 			}
 			$('.tiles-grid').each(function(){
 				if(!$(this).children().is(':visible')) {
@@ -1049,7 +1051,7 @@
 			<div class="row">
 				<div class="cell">
 					<div class="tiles-area pt-5 pl-10 pr-10" id="divProjects" stylez="display:none;">
-						<div class="tiles-grid tiles-group size-5 fg-white  mb-15" data-group-title="UUI Tools">
+						<div class="tools-grid tiles-grid tiles-group size-5 fg-white mb-15" data-group-title="UUI Tools">
 							<!--<span class="tile-group-title">UUI Tools</span><br>-->
 
 							<!-- Project tile -->
