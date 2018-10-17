@@ -152,22 +152,22 @@ function stopSharingDialog(id,message) {
     stopSharing(id,function (result) {
         // console.log(result);
          if(result==="success"){
-            Metro.notify.create(message, "Success", {});
-             // $.Notify({
-             //     caption: 'Success',
-             //     content: message,
-             //     type:    null
-             // });
+            //Metro.notify.create(message, "Success", {});
+              $.Notify({
+                  caption: 'Success',
+                  content: message,
+                  type:    null
+              });
          }
          else{
-            Metro.notify.create("Work could not be unshared, some issue occurred, please try again later", "Error", {
-                cls: "alert"
-            })
-             // $.Notify({
-             //     caption: 'Error',
-             //     content: 'Some issues occur, please try again later.',
-             //     type:    'alert'
-             // });
+            //Metro.notify.create("Work could not be unshared, some issue occurred, please try again later", "Error", {
+            //    cls: "alert"
+            //})
+              $.Notify({
+                  caption: 'Error',
+                  content: 'Some issues occur, please try again later.',
+                  type:    'alert'
+              });
          }
     });
 }
