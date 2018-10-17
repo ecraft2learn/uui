@@ -7,9 +7,9 @@
  *
  */
 
-//var SERVER_URL   = "https://localhost/lnu.php";
+var SERVER_URL   = "https://localhost/lnu.php";
 //var SERVER_URL_2 = "https://localhost/fileman.php";
- var SERVER_URL   = "https://cs.uef.fi/~ec2l/lnu.php";
+// var SERVER_URL   = "https://cs.uef.fi/~ec2l/lnu.php";
 // var SERVER_URL_2 = "https://cs.uef.fi/~ec2l/fileman.php";
 
 
@@ -19,8 +19,8 @@
  * @param callback - return array of tasks
  */
 function getTasks(callback){
-
-    var data = {"pilotsite":window.sessionStorage.getItem("pilotsite"),"func":"getTasks"};
+    //console.log(window.sessionStorage.getItem("userId"));
+    var data = {"userID":window.sessionStorage.getItem("userId"),"func":"getTasks"};
 
     $.ajax({
         type: "POST",

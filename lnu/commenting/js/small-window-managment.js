@@ -13,8 +13,9 @@ var feedbackWindows = {};
  * @param toolUrl: String
  * @param event
  */
-function openFeedbackWindow(toolUrl, toolName,event) {
-         openIframeWindowRightBottom(toolUrl, toolName,event);
+function openSmallWindow(toolUrl, title, event) {
+    console.log("here");
+         openIframeWindowRightBottom(toolUrl, title,event);
 }
 
 
@@ -26,13 +27,13 @@ function openFeedbackWindow(toolUrl, toolName,event) {
  * @param event
  * @returns {*}
  */
-function openIframeWindowRightBottom(toolUrl,toolName,event) {
+function openIframeWindowRightBottom(toolUrl,title,event) {
 
     docWidth = 360;
 
     docHeight = 320;
 
-    var dialogTitle = "Feedback";
+    var dialogTitle = title;
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
     
@@ -62,7 +63,7 @@ function openIframeWindowRightBottom(toolUrl,toolName,event) {
     activeWindow.find('.window-caption').css("background-color", "rgb(23, 119, 179)");
 
     //console.log(activeWindow.attr('id'));
-    feedbackWindows[activeWindow.attr('id')] = toolName;
+    //feedbackWindows[activeWindow.attr('id')] = toolName;
 
     return activeWindow;
 

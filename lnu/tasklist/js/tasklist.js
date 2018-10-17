@@ -93,12 +93,15 @@ function renderTasks(tasks) {
                 document.getElementById("accordionRow").innerHTML = "";
                 $.each(tasks,function(index){
                         var status = 0;
-
-                        if (this["STATUS"]!=null && this["USERID"]===window.sessionStorage.getItem("userId")){
+                        console.log(this["STATUS"]);
+                        if (this["STATUS"]!=null && this["STUDENTID"]===window.sessionStorage.getItem("userId")){
                             status =this["STATUS"];
+
                         }
 
-                        renderTask(tasklist_accordion_content,this["ID"],this["TITLE"],this["DESCRIPTION"],status);
+                        if(this["IS_VISIBLE"]==="1"){
+                            renderTask(tasklist_accordion_content,this,status);
+                        }
                     });
 
                     var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
@@ -110,25 +113,33 @@ function renderTasks(tasks) {
 /**
  * 
  */
-function renderTask(according_element,taskId, title, description,status) {
+function renderTask(according_element,task,status) {
 
 	//not completed task
-    if(status === "0"){
+    if(status === 0 || status === "0"){
 
         var taskItem =  document.createElement("div");
-        taskItem.setAttribute("id",taskId);
-        taskItem.setAttribute("data-task-id",taskId);
+        taskItem.setAttribute("id",task["ID"]);
+        taskItem.setAttribute("data-task-id",task["ID"]);
         taskItem.classList.add("frame");
 
         var taskHeading = document.createElement("div");
-        taskHeading.innerHTML= title+ '<span class="task-icon float-right"></span>';
+        taskHeading.innerHTML= task["TITLE"]+ '<span class="task-icon float-right"></span>';
         taskHeading.classList.add("heading");
+
+
 
         var taskContent = document.createElement("div");
         taskContent.classList.add("content","fg-white");
 
+        //check if task is reflection task
+        var taskDescription = task["DESCRIPTION"];
+        if(task["IS_REFLECTION"]){
+            taskDescription+="<p>Use this " + generateReflectionLink() + " to do reflection</p>";
+        }
+
         var taskContentP = document.createElement("div");
-        taskContentP.textContent=description;
+        taskContentP.innerHTML=taskDescription;
         taskContentP.classList.add("p-2");
 
 
@@ -155,19 +166,26 @@ function renderTask(according_element,taskId, title, description,status) {
 	else{
     	//completed task
         var taskItem =  document.createElement("div");
-        taskItem.setAttribute("id",taskId);
-        taskItem.setAttribute("data-task-id",taskId);
+        taskItem.setAttribute("id",task["ID"]);
+        taskItem.setAttribute("data-task-id",task["ID"]);
         taskItem.classList.add("frame","task-completed");
 
         var taskHeading = document.createElement("div");
-        taskHeading.innerHTML= title+ '<span class="task-icon mif-checkmark float-right"></span>';
+        taskHeading.innerHTML= task["TITLE"]+ '<span class="task-icon mif-checkmark float-right"></span>';
         taskHeading.classList.add("heading");
 
         var taskContent = document.createElement("div");
         taskContent.classList.add("content","fg-white");
 
+
+        //check if task is reflection task
+        var taskDescription = task["DESCRIPTION"];
+        if(task["IS_REFLECTION"]){
+            taskDescription+=" <p>Use this " + generateReflectionLink() + " to do reflection</p>";
+        }
+
         var taskContentP = document.createElement("div");
-        taskContentP.textContent=description;
+        taskContentP.innerHTML=taskDescription;
         taskContentP.classList.add("p-2");
 
         //Undo button
@@ -200,6 +218,12 @@ function renderTask(according_element,taskId, title, description,status) {
 
 	}
 }
+
+function generateReflectionLink() {
+    var link = "<a href='#' onclick=\"openSmallWindow('./lnu/reflection/index.html','Reflection',event);\"> link </a>";
+    return link;
+}
+
 
 
 /**
