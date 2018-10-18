@@ -114,7 +114,7 @@ function renderTasks(tasks) {
  * 
  */
 function renderTask(according_element,task,status) {
-
+    console.log(task);
 	//not completed task
     if(status === 0 || status === "0"){
 
@@ -137,6 +137,9 @@ function renderTask(according_element,task,status) {
         if(task["IS_REFLECTION"]>0){
             taskDescription+="<p>Use this " + generateReflectionLink() + " to do reflection</p>";
         }
+        if(task["SUBTITLE"]!=""){
+            taskDescription+="<p> " + task["SUBTITLE"] + " </p>";
+        }
 
         var taskContentP = document.createElement("div");
         taskContentP.innerHTML=taskDescription;
@@ -153,6 +156,11 @@ function renderTask(according_element,task,status) {
         completBtn.setAttribute("data-cls-hint","bg-cyan fg-white drop-shadow");
 
         completBtn.addEventListener("click", markTaskCompleted);
+
+        if(task["SUBTITLE"]!=""){
+            completBtn.disabled = true
+        }
+
 
 
         taskContent.appendChild(taskContentP);
