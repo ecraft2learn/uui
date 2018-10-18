@@ -235,7 +235,7 @@ data = data || {};
 		}
 
 	});
-
+saveDataToCloud(data, 'eCraft Todo', 'eCraft Todo');
     };
 	
 	getProjectFiles(window.sessionStorage.getItem('currentProjectId'));
