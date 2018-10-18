@@ -134,7 +134,7 @@ function renderTask(according_element,task,status) {
 
         //check if task is reflection task
         var taskDescription = task["DESCRIPTION"];
-        if(task["IS_REFLECTION"]){
+        if(task["IS_REFLECTION"]>0){
             taskDescription+="<p>Use this " + generateReflectionLink() + " to do reflection</p>";
         }
 
@@ -180,7 +180,8 @@ function renderTask(according_element,task,status) {
 
         //check if task is reflection task
         var taskDescription = task["DESCRIPTION"];
-        if(task["IS_REFLECTION"]){
+
+        if(task["IS_REFLECTION"]>0){
             taskDescription+=" <p>Use this " + generateReflectionLink() + " to do reflection</p>";
         }
 
