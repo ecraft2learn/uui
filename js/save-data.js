@@ -159,7 +159,7 @@ function getProjectCloudFiles(toolId) {
 			continue;
 		html += '<li data-icon="<span class=\'mif-file-empty\'>"'+
 				'data-caption="'+arr.DATA[i]['ORIG_NAME']+'"'+
-				'data-content="<span class=\'text-muted\'>eCraft Idea</span>"><input class="file_id" type="hidden" name="proj" value="'+i+'"></li>';
+				'data-content="<span class=\'text-muted\'>eCraft Plan</span>"><input class="file_id" type="hidden" name="proj" value="'+i+'"></li>';
 	}
 	html += '</ul></li>';
 	return html;
@@ -177,7 +177,7 @@ function getAllCloudFiles(toolId) {
 			continue;
 		html += '<li data-icon="<span class=\'mif-file-empty\'>"'+
 				'data-caption="'+arr.DATA[i]['ORIG_NAME']+'"'+
-				'data-content="<span class=\'text-muted\'>eCraft Idea</span>"><input class="file_id" type="hidden" name="all" value="'+i+'"></li>';
+				'data-content="<span class=\'text-muted\'>eCraft Plan</span>"><input class="file_id" type="hidden" name="all" value="'+i+'"></li>';
 	}
 	html += '</ul></li>';
 	return html;
