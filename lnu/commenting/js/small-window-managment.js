@@ -13,8 +13,9 @@ var feedbackWindows = {};
  * @param toolUrl: String
  * @param event
  */
-function openFeedbackWindow(toolUrl, toolName,event) {
-         openIframeWindowRightBottom(toolUrl, toolName,event);
+function openSmallWindow(toolUrl, title, event) {
+    console.log("here");
+         openIframeWindowRightBottom(toolUrl, title,event);
 }
 
 
@@ -26,18 +27,20 @@ function openFeedbackWindow(toolUrl, toolName,event) {
  * @param event
  * @returns {*}
  */
-function openIframeWindowRightBottom(toolUrl,toolName,event) {
+function openIframeWindowRightBottom(toolUrl,title,event) {
 
     docWidth = 360;
 
     docHeight = 320;
 
-    var dialogTitle = "Commenting " + toolName;
+    var dialogTitle = title;
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
     
     var bgColor = toolTile.css("background-color");
-
+    console.log(bgColor);
+    //var bgColor = toolTile.css("background-color");
+    //hsla(0, 0%, 30%, 0.15)
 
     Metro.window.create({
         title: "<span class='text-medium' translate='no'>"+dialogTitle+"</span>",
@@ -53,14 +56,14 @@ function openIframeWindowRightBottom(toolUrl,toolName,event) {
     });
     activeWindow = $('.window').last();
 
-    var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, '100%', '100%', toolUrl, null, bgColor, dialogTitle);
+    var frame = new WinIFrame(activeWindow.position().left, activeWindow.position().top, '100%', '100%', toolUrl, null, "rgb(204,211,214)", dialogTitle);
     activeWindow.data('winData', frame);
     activeWindow.data('winWidth', activeWindow.width());
     activeWindow.data('winHeight', activeWindow.height());
-    activeWindow.find('.window-caption').css("background-color", bgColor);
+    activeWindow.find('.window-caption').css("background-color", "rgb(23, 119, 179)");
 
-    console.log(activeWindow.attr('id'));
-    feedbackWindows[activeWindow.attr('id')] = toolName;
+    //console.log(activeWindow.attr('id'));
+    //feedbackWindows[activeWindow.attr('id')] = toolName;
 
     return activeWindow;
 

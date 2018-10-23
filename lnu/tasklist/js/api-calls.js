@@ -19,8 +19,8 @@
  * @param callback - return array of tasks
  */
 function getTasks(callback){
-
-    var data = {"pilotsite":window.sessionStorage.getItem("pilotsite"),"func":"getTasks"};
+    //console.log(window.sessionStorage.getItem("userId"));
+    var data = {"userID":window.sessionStorage.getItem("userId"),"func":"getTasks"};
 
     $.ajax({
         type: "POST",

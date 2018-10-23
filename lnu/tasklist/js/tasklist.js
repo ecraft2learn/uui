@@ -73,32 +73,39 @@ function loadTasks(){
  */
 function renderTasks(tasks) {
 
-    //clear the task list
-    /*var $container = $('#tasklist-accordion-content'),
-        $noRemove = $container.find('#sampleNewTask,#sampleDoneTask');
-    $container.html($noRemove);*/
+    if(tasks != undefined){
 
-    // This makes the refresh icon stop spinning once retrieving of tasks have been attempted.
-    document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.remove("ani-spin");
 
-    //create according
-    var tasklist_accordion_content = document.createElement("div");
-    tasklist_accordion_content.setAttribute("id","tasklist-accordion-content");
-    tasklist_accordion_content.setAttribute("data-role","accordion");
+            //clear the task list
+            /*var $container = $('#tasklist-accordion-content'),
+                $noRemove = $container.find('#sampleNewTask,#sampleDoneTask');
+            $container.html($noRemove);*/
 
-    if (tasks.length > 0) {
-        document.getElementById("accordionRow").innerHTML = "";
-        $.each(tasks,function(index){
-                var status = 0;
+            // This makes the refresh icon stop spinning once retrieving of tasks have been attempted.
+            document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.remove("ani-spin");
 
-                if (this["STATUS"]!=null && this["USERID"]===window.sessionStorage.getItem("userId")){
-                    status =this["STATUS"];
-                }
+            //create according
+            var tasklist_accordion_content = document.createElement("div");
+            tasklist_accordion_content.setAttribute("id","tasklist-accordion-content");
+            tasklist_accordion_content.setAttribute("data-role","accordion");
 
-                renderTask(tasklist_accordion_content,this["ID"],this["TITLE"],this["DESCRIPTION"],status);
-            });
+            if (tasks.length > 0) {
+                document.getElementById("accordionRow").innerHTML = "";
+                $.each(tasks,function(index){
+                        var status = 0;
+                        console.log(this["STATUS"]);
+                        if (this["STATUS"]!=null && this["STUDENTID"]===window.sessionStorage.getItem("userId")){
+                            status =this["STATUS"];
 
-            var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
+                        }
+
+                        if(this["IS_VISIBLE"]==="1"){
+                            renderTask(tasklist_accordion_content,this,status);
+                        }
+                    });
+
+                    var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
+            }
     }
 }
 
@@ -106,25 +113,36 @@ function renderTasks(tasks) {
 /**
  * 
  */
-function renderTask(according_element,taskId, title, description,status) {
-
+function renderTask(according_element,task,status) {
+    console.log(task);
 	//not completed task
-    if(status === "0"){
+    if(status === 0 || status === "0"){
 
         var taskItem =  document.createElement("div");
-        taskItem.setAttribute("id",taskId);
-        taskItem.setAttribute("data-task-id",taskId);
+        taskItem.setAttribute("id",task["ID"]);
+        taskItem.setAttribute("data-task-id",task["ID"]);
         taskItem.classList.add("frame");
 
         var taskHeading = document.createElement("div");
-        taskHeading.innerHTML= title+ '<span class="task-icon float-right"></span>';
+        taskHeading.innerHTML= task["TITLE"]+ '<span class="task-icon float-right"></span>';
         taskHeading.classList.add("heading");
+
+
 
         var taskContent = document.createElement("div");
         taskContent.classList.add("content","fg-white");
 
+        //check if task is reflection task
+        var taskDescription = task["DESCRIPTION"];
+        if(task["IS_REFLECTION"]>0){
+            taskDescription+="<p>Use this " + generateReflectionLink() + " to do reflection</p>";
+        }
+        if(task["SUBTITLE"]!=""){
+            taskDescription+="<p> " + task["SUBTITLE"] + " </p>";
+        }
+
         var taskContentP = document.createElement("div");
-        taskContentP.textContent=description;
+        taskContentP.innerHTML=taskDescription;
         taskContentP.classList.add("p-2");
 
 
@@ -139,6 +157,11 @@ function renderTask(according_element,taskId, title, description,status) {
 
         completBtn.addEventListener("click", markTaskCompleted);
 
+        if(task["SUBTITLE"]!=""){
+            completBtn.disabled = true
+        }
+
+
 
         taskContent.appendChild(taskContentP);
         taskContent.appendChild(completBtn);
@@ -151,19 +174,27 @@ function renderTask(according_element,taskId, title, description,status) {
 	else{
     	//completed task
         var taskItem =  document.createElement("div");
-        taskItem.setAttribute("id",taskId);
-        taskItem.setAttribute("data-task-id",taskId);
+        taskItem.setAttribute("id",task["ID"]);
+        taskItem.setAttribute("data-task-id",task["ID"]);
         taskItem.classList.add("frame","task-completed");
 
         var taskHeading = document.createElement("div");
-        taskHeading.innerHTML= title+ '<span class="task-icon mif-checkmark float-right"></span>';
+        taskHeading.innerHTML= task["TITLE"]+ '<span class="task-icon mif-checkmark float-right"></span>';
         taskHeading.classList.add("heading");
 
         var taskContent = document.createElement("div");
         taskContent.classList.add("content","fg-white");
 
+
+        //check if task is reflection task
+        var taskDescription = task["DESCRIPTION"];
+
+        if(task["IS_REFLECTION"]>0){
+            taskDescription+=" <p>Use this " + generateReflectionLink() + " to do reflection</p>";
+        }
+
         var taskContentP = document.createElement("div");
-        taskContentP.textContent=description;
+        taskContentP.innerHTML=taskDescription;
         taskContentP.classList.add("p-2");
 
         //Undo button
@@ -196,6 +227,12 @@ function renderTask(according_element,taskId, title, description,status) {
 
 	}
 }
+
+function generateReflectionLink() {
+    var link = "<a href='#' onclick=\"openSmallWindow('./lnu/reflection/index.html','Reflection',event);\"> link </a>";
+    return link;
+}
+
 
 
 /**
