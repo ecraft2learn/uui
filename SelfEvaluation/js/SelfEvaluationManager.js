@@ -74,7 +74,9 @@ function ping(handler) {
     makeAjaxCall(formData, handler);
 }
 
-var url = "http://localhost/php/selfEvaluationManager.php"; //'https://cs.uef.fi/~ec2l/WebDocs/SelfEvaluationManger.php'
+var url ="https://cs.uef.fi/~ec2l/selfEvaluationManager.php";
+//var url= "http://localhost/php/selfEvaluationManager.php";
+//var url='https://cs.uef.fi/~ec2l/WebDocs/SelfEvaluationManger.php'
 function makeAjaxCall(formData, handler, async = true) {
     $.ajax({
         url: url,
