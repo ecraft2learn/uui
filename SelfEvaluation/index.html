@@ -1,0 +1,158 @@
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" type="text/css" href="../themes/theme-3.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../libraries/js/jquery-3.2.1.min.js"></script>
+    <script src="../libraries/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../libraries/css/bootstrap.min.css">
+
+
+    <link rel="stylesheet" href="../libraries/css/metro-all.css">
+    <script src="../libraries/js/metro.js"></script>
+
+    <!-- This links to the css file that we use for coloring of the tiles. The themes are stored in the "themes" folder. Change this to see other themes-->
+    <link rel="stylesheet" type="text/css" href="../themes/theme-3.css" />
+    <link rel="stylesheet" type="text/css" href="../extra-btn.css" />
+    <link rel="stylesheet" type="text/css" href="css/loadingAnimation.css" />
+    <script src="js/SelfEvaluationManager.js"></script>
+
+
+    <style>
+        .grid-item {
+            width: 300px;
+            height: 300px;
+            margin: 1em;
+            border: 1px solid #ddd;
+            border: 1px solid #ff961e
+        }
+
+        .grid-item:hover {
+            box-shadow: 0 0 20px rgba(33, 33, 33, .2);
+            cursor: pointer;
+        }
+
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Ubuntu", "Helvetica Neue", sans-serif;
+            line-height: 1.5;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+
+        .activity {
+            transition: all .5s;
+            margin-bottom: 25px;
+            height: auto;
+
+        }
+
+        .activity .activityHeader img {
+            width: 100%;
+        }
+
+        .activity .activityBody,
+        .activity {
+            padding: 15px;
+        }
+
+        .activity .activityBody {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+        }
+
+
+        .activity .activityBody a:hover {
+            text-decoration: none;
+        }
+
+
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        h4 {
+            margin-top: 25px;
+        }
+
+
+
+        #tileGrid {
+            align-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .loadingAnimation {
+            height: 75%;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#activityLoadingAnimation").show();
+            getActivities(window.sessionStorage.getItem('pilotsite'), function (result, status) {
+
+                var list = JSON.parse(result);
+
+                for (i = 0; i < list.DATA.length; i++) {
+                    var riga = list.DATA[i];
+                    $("<div class=\"grid-item \" onClick=\"divClick(" + riga.Id + ") \"/>")
+                        .append("<div class=\"activity\" >  <div class=\"activityHeader\" > <h5>" + riga.Title + "</h5> <div class=\"activityBody\">" + riga.Description)
+                        .appendTo("#tileGrid");
+                }
+
+                $("#activityLoadingAnimation").hide();
+            });
+        });
+
+        function divClick(activityId) {
+            window.location = "ActivitySelfevaluation.html?activity=" + activityId;
+            return false;
+        };
+    </script>
+
+</head>
+
+
+<body>
+    <div id="activityLoadingAnimation" class="loadingAnimation">
+        <div class="sk-fading-circle">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+        </div>
+    </div>
+    <div class="container-fluid ">
+        <div class="row-fluid">
+            <br/>
+        </div>
+        <div class="container-fluid">
+            <div id="tileGrid" class="row row-eq-height container-fluid">
+                <!--dynamicaly generated activities cards-->
+            </div>
+        </div>
+    </div>
+
+
+</body>
