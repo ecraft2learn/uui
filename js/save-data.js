@@ -159,7 +159,7 @@ function getProjectCloudFiles(toolId) {
 			continue;
 		html += '<li data-icon="<span class=\'mif-file-empty\'>"'+
 				'data-caption="'+arr.DATA[i]['ORIG_NAME']+'"'+
-				'data-content="<span class=\'text-muted\'>eCraft Idea</span>"><input class="file_id" type="hidden" name="proj" value="'+i+'"></li>';
+				'data-content="<span class=\'text-muted\'>eCraft Plan</span>"><input class="file_id" type="hidden" name="proj" value="'+i+'"></li>';
 	}
 	html += '</ul></li>';
 	return html;
@@ -177,7 +177,7 @@ function getAllCloudFiles(toolId) {
 			continue;
 		html += '<li data-icon="<span class=\'mif-file-empty\'>"'+
 				'data-caption="'+arr.DATA[i]['ORIG_NAME']+'"'+
-				'data-content="<span class=\'text-muted\'>eCraft Idea</span>"><input class="file_id" type="hidden" name="all" value="'+i+'"></li>';
+				'data-content="<span class=\'text-muted\'>eCraft Plan</span>"><input class="file_id" type="hidden" name="all" value="'+i+'"></li>';
 	}
 	html += '</ul></li>';
 	return html;
@@ -218,7 +218,8 @@ function saveDataToCloud(data, name, toolName) {
 	} else {
 		Metro.toast.create("File could not be saved to cloud.", null, null, "alert");
 	}
-	$('.info-box').data('infobox').close();
+	if($('.info-box').data('infobox') != undefined)
+		$('.info-box').data('infobox').close();
 }
 function saveDataToLocal(data, name, toolName, ext) {
 	var a = document.createElement('a');
@@ -236,7 +237,8 @@ function saveDataToLocal(data, name, toolName, ext) {
 	a.href = URL.createObjectURL(file);
 	a.download = name+ext;
 	a.click();
-	$('.info-box').data('infobox').close();
+	if($('.info-box').data('infobox') != undefined)
+		$('.info-box').data('infobox').close();
 	Metro.toast.create("Saving file.", null, null, "info");
 	a.remove();
 }

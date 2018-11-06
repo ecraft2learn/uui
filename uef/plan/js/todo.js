@@ -235,7 +235,7 @@ data = data || {};
 		}
 
 	});
-
+saveDataToCloud(data, 'eCraft Todo', 'eCraft Todo');
     };
 	
 	getProjectFiles(window.sessionStorage.getItem('currentProjectId'));
@@ -246,11 +246,11 @@ data = data || {};
 		if(arr.DATA[i].TOOLID == 20) {
 			var tasks = JSON.parse(arr.DATA[i]['FILE_PATH']);
 			for (let x = 0; x < tasks.length; x++)
-				todo.generateElement(tasks[x]);
+				data[tasks[x].id] = tasks[x];
 			break;
 		}
 	}
-	//return;
+	return;
 
     $.ajax({
 
