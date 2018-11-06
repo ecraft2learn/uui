@@ -5613,6 +5613,7 @@ IDE_Morph.prototype.getURL = function (url, callback) {
 // IDE_Morph user dialog shortcuts
 
 IDE_Morph.prototype.showMessage = function (message, secs) {
+    console.log(message);
     var m = new MenuMorph(null, message),
         intervalHandle;
     m.popUpCenteredInWorld(this.world());
@@ -5626,6 +5627,7 @@ IDE_Morph.prototype.showMessage = function (message, secs) {
 };
 
 IDE_Morph.prototype.inform = function (title, message) {
+    console.log(message);
     new DialogBoxMorph().inform(
         title,
         localize(message),

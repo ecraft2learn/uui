@@ -872,12 +872,12 @@
 							<!-- 3D slincing -->
 							<div data-role="tile" class="tile bg-create fg-white no-mobile" data-effect="hover-slide-up">
 									<span class="mif-question badge-medium-top m-0 bg-transparent" onclick="infoClick('./about/3d-slice-help.html', 'Slicer', event);"></span>
-									<div class="slide-front" onclick="tileClick('./uef/slice/index.html', 'Slicer', event);">
+									<div class="slide-front" onclick="tileClick('./uef/3Dmodelling/three.js/editor/index.html', '3D modelling', event);">
 											<img class="icon" src="./images/slice.png">
-											<span class="branding-bar">3D slicing</span>
+											<span class="branding-bar">3D modelling and slicing</span>
 									</div>
-									<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./uef/slice/index.html', 'Slicer', event);">
-											Slice 3D modeles for 3D printer
+									<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./uef/3Dmodelling/three.js/editor/index.html', '3D modelling', event);">
+											3D modelling and slicing
 									</div>
 							</div>
 							<!-- 3D Slah -->
@@ -1416,6 +1416,12 @@
 					<li><a href="#">No material available . . . </a></li>
 				</ul>
 			</li>
+			<li>
+				<a href="javascript:void(0)" id='student-upload'>
+                                	<span class="icon mif-organization mif-ani-hover-spanner"></span>
+                                	<span class="title">Upload as a student</span>
+                        	</a>
+			</li>	
 		</ul>
 
 		<br/>
@@ -1530,6 +1536,16 @@
 			}
 
 		}, 2000);
+
+	})();
+
+
+	(() => {
+
+		$('#student-upload').on('click', (event) => {
+
+
+		});
 
 	})();
 
