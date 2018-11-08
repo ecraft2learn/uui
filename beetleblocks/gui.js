@@ -2278,7 +2278,7 @@ IDE_Morph.prototype.cloudMenu = function () {
             'Reset Password...',
             'resetCloudPassword'
         );
-    } else {
+    }/* else {
         menu.addItem(
             localize('Logout') + ' ' + SnapCloud.username,
             'logout'
@@ -2287,7 +2287,7 @@ IDE_Morph.prototype.cloudMenu = function () {
             'Change Password...',
             'changeCloudPassword'
         );
-    }
+    }*/
     if (shiftClicked) {
         menu.addLine();
         menu.addItem(
@@ -2970,7 +2970,7 @@ IDE_Morph.prototype.getMediaList = function (dirname, callback) {
     // based on the contents file.
     // If no callback is specified, synchronously return the list of files
     // Note: Synchronous fetching has been deprecated and should be switched
-    var url = this.resourceURL(dirname, dirname.toUpperCase()),
+    var url = dirname,//this.resourceURL(dirname, dirname.toUpperCase()),
         async = callback instanceof Function,
         myself = this,
         data;
@@ -3015,6 +3015,7 @@ IDE_Morph.prototype.parseResourceFile = function (text) {
         items.push({
             fileName: parts[0],
             name: parts[1],
+			path: "beetleblocks/examples/"+parts[0],
             description: parts.length > 2 ? parts[2] : ''
         });
     });
@@ -5340,8 +5341,8 @@ ProjectDialogMorph.prototype.init = function (ide, task) {
     this.notesText = null;
     this.notesField = null;
     this.deleteButton = null;
-    this.shareButton = null;
-    this.unshareButton = null;
+    //this.shareButton = null;
+    //this.unshareButton = null;
 
     // initialize inherited properties:
     ProjectDialogMorph.uber.init.call(
@@ -5389,7 +5390,7 @@ ProjectDialogMorph.prototype.buildContents = function () {
     }
 
     this.addSourceButton('cloud', localize('Cloud'), 'cloud');
-    this.addSourceButton('local', localize('Browser'), 'storage');
+    //this.addSourceButton('local', localize('Browser'), 'storage');
     if (this.task === 'open') {
         this.buildFilterField();
         this.addSourceButton('examples', localize('Examples'), 'poster');
@@ -5482,10 +5483,10 @@ ProjectDialogMorph.prototype.buildContents = function () {
         this.addButton('saveProject', 'Save');
         this.action = 'saveProject';
     }
-    this.shareButton = this.addButton('shareProject', 'Share');
-    this.unshareButton = this.addButton('unshareProject', 'Unshare');
-    this.shareButton.hide();
-    this.unshareButton.hide();
+    //this.shareButton = this.addButton('shareProject', 'Share');
+    //this.unshareButton = this.addButton('unshareProject', 'Unshare');
+    //this.shareButton.hide();
+    //this.unshareButton.hide();
     this.deleteButton = this.addButton('deleteProject', 'Delete');
     this.addButton('cancel', 'Cancel');
 
@@ -5768,8 +5769,8 @@ ProjectDialogMorph.prototype.setSource = function (source) {
         };
     }
     this.body.add(this.listField);
-    this.shareButton.hide();
-    this.unshareButton.hide();
+    //this.shareButton.hide();
+    //this.unshareButton.hide();
     if (this.source === 'local') {
         this.deleteButton.show();
     } else { // examples
@@ -5863,20 +5864,20 @@ ProjectDialogMorph.prototype.installCloudProjectList = function (pl) {
                 myself.preview.rightCenter().add(new Point(2, 0))
             );
         }
-        if (item.Public === 'true') {
+        /*if (item.Public === 'true') {
             myself.shareButton.hide();
             myself.unshareButton.show();
         } else {
             myself.unshareButton.hide();
             myself.shareButton.show();
-        }
+        }*/
         myself.buttons.fixLayout();
         myself.fixLayout();
         myself.edit();
     };
     this.body.add(this.listField);
-    this.shareButton.show();
-    this.unshareButton.hide();
+    //this.shareButton.show();
+    //this.unshareButton.hide();
     this.deleteButton.show();
     this.buttons.fixLayout();
     this.fixLayout();

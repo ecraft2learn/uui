@@ -113,7 +113,7 @@ BeetleCloud.prototype.post = function (path, body, callBack, errorCall, errorMsg
 };
 
 BeetleCloud.prototype.getCurrentUser = function (callback, errorCallback) {
-    this.get('/user', callback, errorCallback, 'Could not retrieve current user');
+    callback.call(null, {username:"user"});
 };
 
 BeetleCloud.prototype.checkCredentials = function (callback, errorCallback) {
@@ -170,9 +170,33 @@ BeetleCloud.prototype.saveProject = function (ide, callBack, errorCall) {
                     }
 
                     ide.showMessage('Uploading project...'); 
-
+					var data = {};
+					data.contents = pdata;
+					data.id = 0;
+					data.ispublic = false;
+					data.notes = ide.projectNotes;
+					data.projectname = ide.projectName;
+					var n = pdata.indexOf("<thumbnail>")+11;
+					var m = pdata.indexOf("</thumbnail>");
+					data.thumbnail = pdata.substr(n, m-n);
+					console.log(data.thumbnail);
+					var today = new Date();
+					var dd = today.getDate(), mm = today.getMonth()+1, yyyy = today.getFullYear();
+					if(dd<10)
+						dd = '0'+dd
+					if(mm<10)	
+						mm = '0'+mm
+					data.updated = yyyy+'-'+mm+'-'+dd+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+					data.user = myself.username
+					data = JSON.stringify(data);
+					saveDataToCloud(data, ide.projectName, "beetleblocks");
+					callBack.call(
+                            null,
+                            "project "+ide.projectName+" updated",
+                            'BeetleCloud'
+                        );
                     //(path, body, callBack, errorCall, errorMsg)
-                    myself.post(
+                    /*myself.post(
                             '/projects/save?projectname='
                             + encodeURIComponent(ide.projectName)
                             + '&username='
@@ -182,7 +206,7 @@ BeetleCloud.prototype.saveProject = function (ide, callBack, errorCall) {
                             callBack,
                             errorCall,
                             'Project could not be saved' // error message
-                            )
+                            )*/
 
                 } else {
                     errorCall.call(this, 'You are not logged in', 'BeetleCloud');
@@ -270,7 +294,30 @@ BeetleCloud.prototype.getProjectList = function (callBack, errorCall) {
                     errorCall.call(this, 'You are not logged in', 'BeetleCloud');
                     return;
                 } else {
-                    myself.get(
+					var response = getAllCloudFilesJSON();
+					var tmp = {}, res = Array();
+					var i = 0;
+					if (Object.keys(response.DATA).length > 0) {
+						response.DATA.forEach(function(eachProject) {
+							if(eachProject.TOOLID == 21){
+								var data = JSON.parse(eachProject.FILE_PATH);
+								// This looks absurd, but PostgreSQL doesn't respect case
+								tmp.Public = data.ispublic ? 'true' : 'false'; // compatibility with old cloud
+								tmp.ProjectName = data.projectname;
+								tmp.Thumbnail = data.thumbnail;
+								tmp.Updated = data.updated;
+								tmp.Notes = data.notes;
+								tmp.Data = data.contents;
+								tmp.ProjectId = eachProject.ID;
+								res[i] = tmp;
+								i++;
+							}
+						});
+						callBack.call(null, res);
+					} else {
+						callBack.call(null, []);
+					} 
+                    /*myself.get(
                             '/users/'
                             + encodeURIComponent(myself.username)
                             + '/projects',
@@ -291,7 +338,7 @@ BeetleCloud.prototype.getProjectList = function (callBack, errorCall) {
                             },
                             errorCall,
                             'Could not fetch project list'
-                            );
+                            );*/
                 }
             },
             errorCall

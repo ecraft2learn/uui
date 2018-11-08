@@ -106,13 +106,14 @@ IDE_Morph.prototype.projectMenu = function () {
 
     if (SnapCloud.username) {
         menu.addLine();
-        menu.addItem('My Profile', function () { window.open('/users/' + SnapCloud.username, true) });
-        menu.addItem('My Projects', function () { window.open('/myprojects', true) });
+		menu.addItem('Load from cloud', 'openProjectsBrowser');
+        //menu.addItem('My Profile', function () { window.open('/users/' + SnapCloud.username, true) });
+        //menu.addItem('Load from cloud', function () { window.open('/myprojects', true) });
     }
-    menu.addItem(
+    /*menu.addItem(
             'Migrate from the old cloud', 
             function () { window.open('/migration', true) },
-            'Attempt to perform an automatic\nmigration of all your projects\nin the old cloud');
+            'Attempt to perform an automatic\nmigration of all your projects\nin the old cloud');*/
 
     menu.addLine();
     menu.addItem('Save                                       Ctrl+S', 'save');
@@ -187,7 +188,7 @@ IDE_Morph.prototype.projectMenu = function () {
                 );
         menu.addLine();
     }
-    if (!SnapCloud.username) {
+    /*if (!SnapCloud.username) {
         menu.addItem(
                 'Login',
                 function () { window.open('/login'); }
@@ -205,7 +206,7 @@ IDE_Morph.prototype.projectMenu = function () {
                 localize('Logout') + ' / ' + SnapCloud.username,
                 'logout'
                 );
-    }
+    }*/
     menu.addItem(
             'Start tutorial',
             function () {
@@ -371,7 +372,12 @@ ProjectDialogMorph.prototype.deleteProject = function () {
                         ) + '\n"' + proj.ProjectName + '"?',
                     'Delete Project',
                     function () {
-                        SnapCloud.deleteProject(
+						removeFile(proj.ProjectId);
+						myself.ide.hasChangedMedia = true;
+						idx = myself.projectList.indexOf(proj);
+						myself.projectList.splice(idx, 1);
+						myself.installCloudProjectList(myself.projectList);
+                        /*SnapCloud.deleteProject(
                                 proj.ProjectName,
                                 function () {
                                     myself.ide.hasChangedMedia = true;
@@ -382,7 +388,7 @@ ProjectDialogMorph.prototype.deleteProject = function () {
                                 function (err, lbl) {
                                     myself.ide.cloudError().call(null, err, lbl);
                                 }
-                                );
+                                );*/
                     }
                     );
         }
@@ -422,8 +428,8 @@ ProjectDialogMorph.prototype.shareProject = function () {
                             proj.ProjectName,
                             function () {
                                 proj.Public = 'true';
-                                myself.unshareButton.show();
-                                myself.shareButton.hide();
+                                //myself.unshareButton.show();
+                                //myself.shareButton.hide();
                                 entry.label.isBold = true;
                                 entry.label.drawNew();
                                 entry.label.changed();
@@ -466,8 +472,8 @@ ProjectDialogMorph.prototype.unshareProject = function () {
                             proj.ProjectName,
                             function () {
                                 proj.Public = 'false';
-                                myself.shareButton.show();
-                                myself.unshareButton.hide();
+                                //myself.shareButton.show();
+                                //myself.unshareButton.hide();
                                 entry.label.isBold = false;
                                 entry.label.drawNew();
                                 entry.label.changed();
@@ -994,12 +1000,21 @@ IDE_Morph.prototype.setStageExtent = function (ext) {
     this.stage.reRender();
 };
 
+IDE_Morph.prototype.resourceURL = function () {
+    // Take in variadic inputs that represent an a nested folder structure.
+    // Method can be easily overridden if running in a custom location.
+    // Default Snap! simply returns a path (relative to snap.html)
+    var args = Array.prototype.slice.call(arguments, 0);
+    return args.join('/');
+};
+
 // Examples now pulls from local
 ProjectDialogMorph.prototype.getExamplesProjectList = function () {
-    var dir,
+	return this.ide.getMediaList('beetleblocks/examples/EXAMPLES');
+    /*var dir,
         projects = [];
 
-    dir = JSON.parse(this.ide.getURL('https://api.github.com/repos/ericrosenbaum/BeetleBlocks/contents/run/beetleblocks/examples'));
+    dir = JSON.parse(this.ide.getURL('./examples'));
     dir.forEach(function (each){
         var dta = {
             name: each.name.replace('.xml',''),
@@ -1012,7 +1027,7 @@ ProjectDialogMorph.prototype.getExamplesProjectList = function () {
     projects.sort(function (x, y) {
         return x.name < y.name ? -1 : 1;
     });
-    return projects;
+    return projects;*/
 };
 
 ProjectDialogMorph.prototype.setSource = function (source) {
@@ -1115,8 +1130,8 @@ ProjectDialogMorph.prototype.setSource = function (source) {
         };
     }
     this.body.add(this.listField);
-    this.shareButton.hide();
-    this.unshareButton.hide();
+    //this.shareButton.hide();
+    //this.unshareButton.hide();
     if (this.source === 'local') {
         this.deleteButton.show();
     } else { // examples
@@ -1173,6 +1188,9 @@ IDE_Morph.prototype.rawOpenCloudDataString = function (str) {
 
 ProjectDialogMorph.prototype.rawOpenCloudProject = function (proj) {
     var myself = this;
+	myself.ide.source = 'cloud';
+	myself.ide.droppedText(proj.Data);
+	/*
     SnapCloud.reconnect(
         function () {
             SnapCloud.callService(
@@ -1200,7 +1218,7 @@ ProjectDialogMorph.prototype.rawOpenCloudProject = function (proj) {
             );
         },
         myself.ide.cloudError()
-    );
+    );*/
     this.destroy();
 };
 
