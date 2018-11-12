@@ -315,11 +315,13 @@ function download(filename) {
     document.body.removeChild(element);
 }
 
-//REMOVE FILE FROM SHARING TABLE
+//REQUEST PERMISSION IN TEACHER TO STOP SHARE FILE
 function stopSharing(ID,callback) {
     var formData = new FormData();
-    formData.append("id",ID);
-    formData.append("func","stopSharing");
+    formData.append("sharingId",ID);
+    formData.append("status",3);
+    formData.append("func","updateSharingFileStatus");
+
 
     $.ajax({
         type: "POST",
