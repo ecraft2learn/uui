@@ -32,7 +32,7 @@ function setActivityCategories(result, status) {
 
             $('#categoryContainer').append(html);
 
-            getCategoryCriterias(riga.CategoryId, addCriterias);
+            getCategoryCriterias(getActivityId(), riga.CategoryId, addCriterias);
         }
     }
 
