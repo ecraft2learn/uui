@@ -138,6 +138,9 @@ function toolNameToId(toolName) {
 		case 'eCraft Todo':
 			return 20;
 			break;
+		case 'beetleblocks':
+			return 21;
+			break;
 		default:
 			return 1;
 			break;
@@ -213,13 +216,15 @@ function saveDataToCloud(data, name, toolName) {
 	formData.append('data', data);
 	formData.append('name', name);
 	addFile(projId, toolId, formData);
-	if(window.sessionStorage.getItem("errorStatus") != 'fail'){
-		Metro.toast.create("File saved to cloud.", null, null, "success");
-	} else {
-		Metro.toast.create("File could not be saved to cloud.", null, null, "alert");
+	if(toolId != 21) {
+		if(window.sessionStorage.getItem("errorStatus") != 'fail'){
+			Metro.toast.create("File saved to cloud.", null, null, "success");
+		} else {
+			Metro.toast.create("File could not be saved to cloud.", null, null, "alert");
+		}
+		if($('.info-box').data('infobox') != undefined)
+			$('.info-box').data('infobox').close();
 	}
-	if($('.info-box').data('infobox') != undefined)
-		$('.info-box').data('infobox').close();
 }
 function saveDataToLocal(data, name, toolName, ext) {
 	var a = document.createElement('a');

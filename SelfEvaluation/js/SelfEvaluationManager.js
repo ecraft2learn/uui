@@ -25,11 +25,12 @@ function getActivityCategories(activityId, responseHandler) {
     makeAjaxCall(formData, responseHandler);
 }
 
-function getCategoryCriterias(categoryId, responseHandler) {
+function getCategoryCriterias(activityId, categoryId, responseHandler) {
     var formData = new FormData();
 
     formData.append("func", "getCategoryCriterias");
     formData.append("category", categoryId);
+    formData.append("activity", activityId);
 
     makeAjaxCall(formData, responseHandler);
 }
@@ -75,7 +76,7 @@ function ping(handler) {
 }
 
 var url ="https://cs.uef.fi/~ec2l/selfEvaluationManager.php";
-//var url= "http://localhost/php/selfEvaluationManager.php";
+//var url = "http://localhost/php/selfEvaluationManager.php";
 //var url='https://cs.uef.fi/~ec2l/WebDocs/SelfEvaluationManger.php'
 function makeAjaxCall(formData, handler, async = true) {
     $.ajax({
