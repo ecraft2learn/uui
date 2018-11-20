@@ -102,6 +102,7 @@
 
         $(document).ready(function () {
             $("#activityLoadingAnimation").show();
+		console.log(window.sessionStorage.getItem('pilotsite'));
             getActivities(window.sessionStorage.getItem('pilotsite'), function (result, status) {
 
                 var list = JSON.parse(result);
