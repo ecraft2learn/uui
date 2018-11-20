@@ -1351,8 +1351,14 @@
 					function HandleLoginCallback(phpResponse){
 						handleSelectUserResponse(phpResponse);
 						if(window.sessionStorage.getItem("errorStatus")=="fail"){
+
+							var sessionId = $('#manual-session').val();
+
+							if (! sessionId || sessionId.trim() === '')
 							//TODO: I am assuming that the new user IS a group user. Later we should ask the user and act accordingly
-							addUser($("#username").val(), $("#pilotsite").val(), 1);
+								addUser($("#username").val(), $("#pilotsite").val(), 1);
+							else
+								addUser($("#username").val(), sessionId, 1);
 							location.reload();
 						}
 						else{
