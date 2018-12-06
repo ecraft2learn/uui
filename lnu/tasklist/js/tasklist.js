@@ -149,7 +149,7 @@ function renderTask(according_element,task,status) {
 
         //Completed button
         var completBtn = document.createElement("button");
-        completBtn.innerHTML='<span class="mif-checkmark"></span> Complete task';
+        completBtn.innerHTML='<span class="mif-checkmark"></span> Complete action';
         completBtn.classList.add("button", "primary", "float-right", "task-complete-btn");
         completBtn.setAttribute("data-role","hint");
         completBtn.setAttribute("data-hint-text","Mark task as completed");
@@ -209,7 +209,7 @@ function renderTask(according_element,task,status) {
 
         //Remove button
         var removeBtn = document.createElement("button");
-        removeBtn.innerHTML='<span class="mif-cross"></span>  Remove task';
+        removeBtn.innerHTML='<span class="mif-cross"></span>  Remove action';
         removeBtn.classList.add("button", "link", "float-left","fg-white", "task-remove-btn");
         removeBtn.addEventListener("click", removeTaskElement);
 
@@ -281,7 +281,7 @@ function markTaskCompleted(event) {
 	removeBtn.appendChild(removeIcon);
 
 	undoBtn.innerHTML += " Undo";
-	removeBtn.innerHTML += " Remove task";
+	removeBtn.innerHTML += " Remove action";
 
 	event.target.parentNode.appendChild(removeBtn);
 	event.target.parentNode.appendChild(undoBtn);
@@ -315,7 +315,7 @@ function markTaskUncompleted(event) {
 	completeBtn.dataset.clsHint = "bg-cyan fg-white drop-shadow";
 
 	completeBtn.appendChild(completeIcon);
-	completeBtn.innerHTML += " Complete task";
+	completeBtn.innerHTML += " Complete action";
 
 	completeBtn.addEventListener("click", markTaskCompleted);
 

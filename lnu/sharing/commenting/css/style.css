@@ -12,6 +12,7 @@
 
 .send-button{
     margin-left: 2px; !important;
+    margin-top: 2px !important;
     background-color: #00A2E8 !important;;
     color: white !important;;
     height: 35px !important;;
@@ -24,8 +25,22 @@
 
 .comment{
     font-size: 12px;
+    margin-top: -1px;
 }
 
 .list-header{
     text-decoration: underline !important;
+}
+
+
+.commentSelect{
+    margin-top: 2px;
+    width: 300px !important;
+
+}
+.input-control{
+    width: 300px !important;
+}
+#rating{
+    margin-left: 35px;
 }

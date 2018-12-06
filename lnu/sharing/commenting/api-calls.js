@@ -44,11 +44,11 @@ function getCommentsByFileId(fileId,callback) {
  * @param toolId - tool id
  * @param callback
  */
-function sendCommentAPI(fileId,comment,username,userId,pilotsite,callback){
+function sendCommentAPI(fileId,comment,username,userId,pilotsite,rating,callback){
 
     var func = "addComment";
 
-    var data = {"fileId":fileId,"pilotsite":pilotsite,"userId":userId,"comment":comment,"username":username,"func":func};
+    var data = {"fileId":fileId,"pilotsite":pilotsite,"userId":userId,"comment":comment,"username":username,"rating":rating,"func":func};
 
     postAjaxRequest(SERVER_URL,data,callback);
 

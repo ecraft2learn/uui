@@ -193,6 +193,7 @@ function openCommentingDialog(fileName,fileId) {
             content: createCommentingForm(result["DATA"]),
             options: {
                 closeButton:true
+
             }
         });
 
