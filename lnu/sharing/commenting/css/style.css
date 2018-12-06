@@ -1,0 +1,179 @@
+/**
+ * This file contains styles for the commenting/feedback feature
+ */
+
+
+/*-----------------------------------------------------------
+ * General styles for the iframe
+ *----------------------------------------------------------*/
+
+html {
+    height:100%;
+}
+
+body {
+    height:100%;
+    margin: 0;
+    padding: 0px;
+    font-family: "Segoe UI", "Open Sans", sans-serif, serif;
+    /*color: white;*/
+    background: white;
+}
+
+
+/*-----------------------------------------------------------
+ * Tabcontrols
+ *----------------------------------------------------------*/
+
+.frame {
+    background-color: white !important;
+}
+
+
+#uui-feedback{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+
+/*-----------------------------------------------------------
+ * Feedback form
+ *----------------------------------------------------------*/
+
+#feedback-form{
+    padding: 5px;
+    /*height: 120px;*/
+}
+
+/*-----------------------------------------------------------
+ * Feedback styles
+ *----------------------------------------------------------*/
+
+.feedback-template {
+    width: 100%;
+    min-height: 100%;
+    align-items: stretch;
+}
+
+.feedback-component {
+    /* margin-bottom: 15px; */
+    display:block;
+    min-height: 100%;
+}
+
+.feedback-component-title {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.feedback-icon {
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+    right: 5px;
+}
+/*-----------------------------------------------------------
+ * Feedback sentence dropdown
+ *----------------------------------------------------------*/
+
+#sentence-select {
+    width: 100%;
+    height: 40px;
+    /* margin-bottom: 10px; */
+}
+
+#sentence-select option {
+    font-size: 15px;
+}
+
+/*-----------------------------------------------------------
+ * Feedback ratings styles
+ *----------------------------------------------------------*/
+
+#feedback-ratings {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+#feedback-ratings input[type="radio"] {
+    margin-right:auto;
+}
+
+#feedback-ratings label {
+    flex-grow:1;
+    padding: 5px 0;
+
+}
+
+
+/*-----------------------------------------------------------
+ * Feedback post button styles
+ *----------------------------------------------------------*/
+
+#feedback-btn {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    background: rgb(23, 119, 179);
+    /*color: white;*/
+    /*background: hsla(136, 43%, 35%, 0.5);*/
+    border: none;
+    margin-top: 10px;
+    padding: 10px;
+    margin: none;
+    color: white;
+}
+
+#feedback-btn:hover {
+    cursor:pointer;
+    /*background: hsla(136, 43%, 35%, 0.5);*/
+}
+
+/*-----------------------------------------------------------
+ * Feedback textarea styles
+ *----------------------------------------------------------*/
+#feedback-freetext{
+    width: 100%;
+    height: 115px;
+}
+
+
+
+
+/*-----------------------------------------------------------
+ * Commenting post button styles
+ *----------------------------------------------------------*/
+
+#commenting-btn {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    /*background: hsla(0, 0%, 30%, 0.5);*/
+    /*color: white;*/
+    /*background: #1ba1e2;*/
+    background: hsla(136, 43%, 35%, 0.5);
+    border: none;
+    margin-top: 10px;
+    padding: 10px;
+    margin: none;
+}
+
+#commenting-btn:hover {
+    cursor:pointer;
+    background: hsla(136, 43%, 35%, 0.5);
+}
+
+
+/*!*-----------------------------------------------------------*/
+ /** Feedback  success popup*/
+ /**----------------------------------------------------------*!*/
+
+/*.popover{*/
+    /*background: rgb(88, 154, 21) !important;*/
+    /*border-top: 1px white;*/
+    /*border-bottom: 1px white;*/
+/*}*/
