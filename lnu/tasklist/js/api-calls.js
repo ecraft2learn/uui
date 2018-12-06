@@ -27,7 +27,7 @@ function getTasks(callback){
         url: SERVER_URL,
         data: data,
         success: function (data,result) {
-            console.log(data);
+            //console.log(data);
             callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {
@@ -48,14 +48,14 @@ function updateTaskStatus(task){
 
     var data = {"taskId":task.id,"status":task.status,"timestamp": new Date().toISOString().slice(0, 19).replace('T', ' '), "userId":window.sessionStorage.getItem("userId"),"isVisible":task.isVisible,"func":"updateTaskStatus"};
 
-    console.log(data);
+    //console.log(data);
 
     $.ajax({
         type: "POST",
         url: SERVER_URL,
         data: data,
         success: function (data,result) {
-            console.log(data);
+            //console.log(data);
             //callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {

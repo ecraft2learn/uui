@@ -93,7 +93,7 @@ function renderTasks(tasks) {
                 document.getElementById("accordionRow").innerHTML = "";
                 $.each(tasks,function(index){
                         var status = 0;
-                        console.log(this["STATUS"]);
+                        //console.log(this["STATUS"]);
                         if (this["STATUS"]!=null && this["STUDENTID"]===window.sessionStorage.getItem("userId")){
                             status =this["STATUS"];
 
@@ -114,7 +114,7 @@ function renderTasks(tasks) {
  * 
  */
 function renderTask(according_element,task,status) {
-    console.log(task);
+    //console.log(task);
 	//not completed task
     if(status === 0 || status === "0"){
 

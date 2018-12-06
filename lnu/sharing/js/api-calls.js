@@ -54,7 +54,7 @@ function getProjects(callback) {
     }
     function handleGetProjectsResponse(phpResponse){
         var jsonData = JSON.parse(phpResponse);
-        console.log(jsonData);
+        //console.log(jsonData);
         callback(jsonData["DATA"]);
     }
 }
@@ -82,7 +82,7 @@ function getUserFilesAPI(callback) {
         type: 'post',
         async: false,
         success: function (php_script_response) {
-            console.log(php_script_response);
+            //console.log(php_script_response);
             callback(php_script_response);
         }
     });
@@ -96,7 +96,7 @@ function getUserFilesAPI(callback) {
 function shareLocalFile(callback) {
 
     var data = $('#sharingForm').serializeArray();
-    console.log($('#sharingForm').serializeArray());
+    //console.log($('#sharingForm').serializeArray());
     if(data.length>0){
 
 
@@ -130,7 +130,7 @@ function shareLocalFile(callback) {
                 type: 'post',
                 async: false,
                 success: function (php_script_response) {
-                    console.log(php_script_response);
+                    //console.log(php_script_response);
                     var fileId = JSON.parse(php_script_response)["DATA"]["ID"];
                     data.push({"name":"fileId","value":fileId});
                     saveSharing(data,callback);
@@ -192,7 +192,7 @@ function saveSharing(data,callback) {
             type: 'post',
             async: false,
             success: function (data,result) {
-                console.log(data);
+                //console.log(data);
                 callback("success");
             },
             error: function (jqXHR, exception) {
@@ -227,7 +227,7 @@ function getUsersSharedFiles(callback){
         type: 'post',
         async: false,
         success: function (data,result) {
-            console.log(data);
+            //console.log(data);
 
             callback(JSON.parse(data)["DATA"]);
         },
@@ -261,7 +261,7 @@ function getSharedFiles(callback) {
         type: 'post',
         async: false,
         success: function (data,result) {
-            console.log(data);
+            //console.log(data);
             callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {
@@ -290,7 +290,7 @@ function getNotSharedFiles(callback) {
         type: 'post',
         async: false,
         success: function (data,result) {
-            console.log(data);
+            //console.log(data);
             callback(JSON.parse(data)["DATA"]);
         },
         error: function (jqXHR, exception) {
@@ -333,7 +333,7 @@ function stopSharing(ID,callback) {
         type: 'post',
         async: false,
         success: function (data,result) {
-            console.log(data);
+            //console.log(data);
             callback("success");
         },
         error: function (jqXHR, exception) {

@@ -41,7 +41,8 @@ function initGridView2() {
             actionMenu: true,
             dataMapping: null,
             menuItems: [
-                { label: "Download",     icon: "mif-download", callback: downloadCallback }
+                { label: "Download",     icon: "mif-download", callback: downloadCallback },
+                { label: "Comment",     icon: "mif-bubbles", callback: commentPublicWorkCallback }
             ]
         }
     ];
@@ -63,7 +64,7 @@ function initGridView2() {
 function downloadCallback(event, fileid) {
     //console.log("downloadCallback", fileid);
 
-    var file = MYFILES.find(function (file) {
+    var file = PUBLICFILES.find(function (file) {
         return parseInt(file["FILEID"])===parseInt(fileid);
     });
 
@@ -72,3 +73,15 @@ function downloadCallback(event, fileid) {
     download(filename);
 }
 
+/**
+ * Open commenting window
+ * @param event
+ * @param fileid
+ */
+function commentPublicWorkCallback(event,fileid){
+    var file = PUBLICFILES.find(function (file) {
+        return parseInt(file["FILEID"])===parseInt(fileid);
+    });
+    //console.log(file);
+    openCommentingDialog(file["TITLE"],file["FILEID"])
+}

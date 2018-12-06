@@ -5,16 +5,13 @@
  */
 
 
-var feedbackWindows = {};
-
-
 /**
  * This function opens feedback window if it not open already
  * @param toolUrl: String
  * @param event
  */
 function openSmallWindow(toolUrl, title, event) {
-    console.log("here");
+
          openIframeWindowRightBottom(toolUrl, title,event);
 }
 
@@ -36,9 +33,9 @@ function openIframeWindowRightBottom(toolUrl,title,event) {
     var dialogTitle = title;
 
     var toolTile = $(event.srcElement).closest('[data-role], tile');
-    
+
     var bgColor = toolTile.css("background-color");
-    console.log(bgColor);
+
     //var bgColor = toolTile.css("background-color");
     //hsla(0, 0%, 30%, 0.15)
 
@@ -62,8 +59,6 @@ function openIframeWindowRightBottom(toolUrl,title,event) {
     activeWindow.data('winHeight', activeWindow.height());
     activeWindow.find('.window-caption').css("background-color", "rgb(23, 119, 179)");
 
-    //console.log(activeWindow.attr('id'));
-    //feedbackWindows[activeWindow.attr('id')] = toolName;
 
     return activeWindow;
 

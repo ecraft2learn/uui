@@ -44,7 +44,8 @@ function initGridView() {
             dataMapping: null,
             menuItems: [
                 { label: "Stop sharing", icon: "mif-cancel",   callback: cancelCallback   },
-                { label: "Download",     icon: "mif-download", callback: downloadCallback }
+                { label: "Download",     icon: "mif-download", callback: downloadCallback },
+                { label: "Comment",     icon: "mif-bubbles", callback: commentCallback }
             ]
         }
     ];
@@ -56,15 +57,6 @@ function initGridView() {
     });
 }
 
-
-/**
- * 
- * @param event 
- * @param fileid 
- */
-function shareCallback(event, fileid) {
-    // console.log("shareCallback", fileid);
-}
 
 
 /**
@@ -144,6 +136,20 @@ function downloadCallback(event, fileid) {
 }
 
 /**
+ * Open commenting window
+ * @param event
+ * @param fileid
+ */
+function commentCallback(event,fileid){
+    var file = MYFILES.find(function (file) {
+        return parseInt(file["FILEID"])===parseInt(fileid);
+    });
+    console.log(file);
+    openCommentingDialog(file["TITLE"],file["FILEID"])
+}
+
+
+/**
  * Stop sharing a file
  * @param id - record id in the table
  * @param message - feedback message
@@ -170,4 +176,37 @@ function stopSharingDialog(id,message) {
               });
          }
     });
+}
+
+/**
+ * Generate commenting dialog
+ * @param fileName
+ * @param fileId
+ */
+function openCommentingDialog(fileName,fileId) {
+
+    getCommentsByFileId(fileId,function(result){
+
+
+        var commentDialog = metroDialog.create({
+            title: 'Commenting "' + fileName + '" work',
+            content: createCommentingForm(result["DATA"]),
+            options: {
+                closeButton:true
+            }
+        });
+
+        $('.dialog-close-button').click(function (el) {
+            // $(el).data('dialog').close();
+            commentDialog.data('dialog').close();
+        });
+
+        $("#sendCommentBtn").click(function(){
+            sendComment(fileId)
+        });
+
+    });
+
+
+
 }
