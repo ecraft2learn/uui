@@ -7,9 +7,11 @@
  *
  */
 
+
+var SERVER_URL = "https://cs.uef.fi/~ec2l/lnu.php";
+
 //var SERVER_URL   = "https://localhost/lnu.php";
 //var SERVER_URL_2 = "https://localhost/fileman.php";
- var SERVER_URL   = "https://cs.uef.fi/~ec2l/lnu.php";
 // var SERVER_URL_2 = "https://cs.uef.fi/~ec2l/fileman.php";
 
 
@@ -18,15 +20,15 @@
  * This function gets list of tasks by pilotsite or session id
  * @param callback - return array of tasks
  */
-function getTasks(callback){
+function getTasks(callback) {
     //console.log(window.sessionStorage.getItem("userId"));
-    var data = {"userID":window.sessionStorage.getItem("userId"),"func":"getTasks"};
+    var data = { "userID": window.sessionStorage.getItem("userId"), "func": "getTasks" };
 
     $.ajax({
         type: "POST",
         url: SERVER_URL,
         data: data,
-        success: function (data,result) {
+        success: function (data, result) {
             //console.log(data);
             callback(JSON.parse(data)["DATA"]);
         },
@@ -44,9 +46,9 @@ function getTasks(callback){
 /**
  * This function updates task status
  */
-function updateTaskStatus(task){
+function updateTaskStatus(task) {
 
-    var data = {"taskId":task.id,"status":task.status,"timestamp": new Date().toISOString().slice(0, 19).replace('T', ' '), "userId":window.sessionStorage.getItem("userId"),"isVisible":task.isVisible,"func":"updateTaskStatus"};
+    var data = { "taskId": task.id, "status": task.status, "timestamp": new Date().toISOString().slice(0, 19).replace('T', ' '), "userId": window.sessionStorage.getItem("userId"), "isVisible": task.isVisible, "func": "updateTaskStatus" };
 
     //console.log(data);
 
@@ -54,7 +56,7 @@ function updateTaskStatus(task){
         type: "POST",
         url: SERVER_URL,
         data: data,
-        success: function (data,result) {
+        success: function (data, result) {
             //console.log(data);
             //callback(JSON.parse(data)["DATA"]);
         },

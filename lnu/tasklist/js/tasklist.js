@@ -3,55 +3,21 @@
  * This file is responsible for the task list interactions
  */
 
-
-//-----------------------------------------------------------
-// Tasklist init
-//-----------------------------------------------------------
 window.addEventListener("load", function(){
-    //dynamicallyLoadScript("lnu/tasklist/js/api-calls.js");
 	taskListInit();
 });
-
-
-//-----------------------------------------------------------
-// Tasklist methods
-//-----------------------------------------------------------
-
 
 /**
  * Initializes the tasklist
  */
 function taskListInit() {
-
     loadTasks();
-
 	document.getElementById("tasklist-refresh").addEventListener("click", refreshTaskList);
-
-	// var removeBtns   = document.getElementsByClassName("task-remove-btn");
-	// var undoBtns     = document.getElementsByClassName("task-undo-btn");
-	// var completeBtns = document.getElementsByClassName("task-complete-btn");
-    //
-	// addEvt(removeBtns, removeTaskElement);
-	// addEvt(undoBtns, markTaskUncompleted);
-	// addEvt(completeBtns, markTaskCompleted);
 }
 
 
 /**
- * Helper function, adds eventlisteners to buttons.
- * @param els : HTMLCollection - List of elements to apply the callback function as click event on
- * @param callback : function - The function that will be called on click
- */
-function addEvt(els, callback) {
-	for (var i = 0; i < els.length; i++) {
-		els[i].addEventListener("click", callback);
-
-	}
-}
-
-
-/**
- * 
+ * Callback on refresh icon press
  */
 function refreshTaskList(event) {
 	document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.toggle("ani-spin");
@@ -65,47 +31,43 @@ function loadTasks(){
 
     getTasks(function(tasks){
         renderTasks(tasks);
+        
+        // This makes the refresh icon stop spinning once retrieving of tasks have been attempted.
+        document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.remove("ani-spin");
     });
 }
+
 
 /**
  * 
  */
 function renderTasks(tasks) {
-
+    
     if(tasks != undefined){
+        
+        //create accordion
+        var tasklist_accordion_content = document.createElement("div");
+        tasklist_accordion_content.setAttribute("id","tasklist-accordion-content");
+        tasklist_accordion_content.setAttribute("data-role","accordion");
 
+        if (tasks.length > 0) {
+            document.getElementById("accordionRow").innerHTML = "";
+            $.each(tasks,function(index){
+                var status = 0;
+                if (this["STATUS"]!=null && this["STUDENTID"]===window.sessionStorage.getItem("userId")){
+                    status =this["STATUS"];
 
-            //clear the task list
-            /*var $container = $('#tasklist-accordion-content'),
-                $noRemove = $container.find('#sampleNewTask,#sampleDoneTask');
-            $container.html($noRemove);*/
+                }
 
-            // This makes the refresh icon stop spinning once retrieving of tasks have been attempted.
-            document.getElementById("tasklist-refresh").getElementsByTagName("span")[0].classList.remove("ani-spin");
+                if(this["IS_VISIBLE"]==="1"){
+                    renderTask(tasklist_accordion_content,this,status);
+                }
+            });
 
-            //create according
-            var tasklist_accordion_content = document.createElement("div");
-            tasklist_accordion_content.setAttribute("id","tasklist-accordion-content");
-            tasklist_accordion_content.setAttribute("data-role","accordion");
-
-            if (tasks.length > 0) {
-                document.getElementById("accordionRow").innerHTML = "";
-                $.each(tasks,function(index){
-                        var status = 0;
-                        //console.log(this["STATUS"]);
-                        if (this["STATUS"]!=null && this["STUDENTID"]===window.sessionStorage.getItem("userId")){
-                            status =this["STATUS"];
-
-                        }
-
-                        if(this["IS_VISIBLE"]==="1"){
-                            renderTask(tasklist_accordion_content,this,status);
-                        }
-                    });
-
-                    var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
-            }
+            var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
+            updateDependecies();
+            parseTaskDependence();
+        }
     }
 }
 
@@ -113,15 +75,16 @@ function renderTasks(tasks) {
 /**
  * 
  */
-function renderTask(according_element,task,status) {
-    //console.log(task);
-	//not completed task
+function renderTask(accordion_element,task,status) {
     if(status === 0 || status === "0"){
-
         var taskItem =  document.createElement("div");
         taskItem.setAttribute("id",task["ID"]);
         taskItem.setAttribute("data-task-id",task["ID"]);
         taskItem.classList.add("frame");
+
+        if(task["SUBTITLE"]!=""){
+            taskItem.setAttribute("data-dependent-on-task", task["TASK_DEPENDENT_ID"]);
+        }
 
         var taskHeading = document.createElement("div");
         taskHeading.innerHTML= task["TITLE"]+ '<span class="task-icon float-right"></span>';
@@ -138,7 +101,7 @@ function renderTask(according_element,task,status) {
             taskDescription+="<p>Use this " + generateReflectionLink() + " to do reflection</p>";
         }
         if(task["SUBTITLE"]!=""){
-            taskDescription+="<p> " + task["SUBTITLE"] + " </p>";
+            taskDescription+="<p class='lnu-dependend-info'><span class='mif-info'></span> " + task["SUBTITLE"] + " </p>";
         }
 
         var taskContentP = document.createElement("div");
@@ -157,7 +120,7 @@ function renderTask(according_element,task,status) {
 
         completBtn.addEventListener("click", markTaskCompleted);
 
-        if(task["SUBTITLE"]!=""){
+        if(task["SUBTITLE"]!="" && task['TYPE'] == "1"){
             completBtn.disabled = true
         }
 
@@ -169,7 +132,7 @@ function renderTask(according_element,task,status) {
         taskItem.appendChild(taskHeading);
         taskItem.appendChild(taskContent);
 
-        according_element.appendChild(taskItem);
+        accordion_element.appendChild(taskItem);
 	}
 	else{
     	//completed task
@@ -177,6 +140,10 @@ function renderTask(according_element,task,status) {
         taskItem.setAttribute("id",task["ID"]);
         taskItem.setAttribute("data-task-id",task["ID"]);
         taskItem.classList.add("frame","task-completed");
+
+        if(task["SUBTITLE"]!=""){
+            taskItem.setAttribute("data-dependent-on-task", task["TASK_DEPENDENT_ID"]);
+        }
 
         var taskHeading = document.createElement("div");
         taskHeading.innerHTML= task["TITLE"]+ '<span class="task-icon mif-checkmark float-right"></span>';
@@ -193,18 +160,21 @@ function renderTask(according_element,task,status) {
             taskDescription+=" <p>Use this " + generateReflectionLink() + " to do reflection</p>";
         }
 
+        if(task["SUBTITLE"]!=""){
+            taskDescription+="<p class='lnu-dependend-info hidden'><span class='mif-info'></span> " + task["SUBTITLE"] + " </p>";
+        }
         var taskContentP = document.createElement("div");
         taskContentP.innerHTML=taskDescription;
         taskContentP.classList.add("p-2");
 
         //Undo button
-        var unduBtn = document.createElement("button");
-        unduBtn.innerHTML='<span class="mif-undo"></span>Undo';
-        unduBtn.classList.add("button", "secondary", "float-right", "task-undo-btn");
-        unduBtn.setAttribute("data-role","hint");
-        unduBtn.setAttribute("data-hint-text","Mark task as pending");
-        unduBtn.setAttribute("data-cls-hint","bg-cyan fg-white drop-shadow");
-        unduBtn.addEventListener("click", markTaskUncompleted);
+        var undoBtn = document.createElement("button");
+        undoBtn.innerHTML='<span class="mif-undo"></span> Undo';
+        undoBtn.classList.add("button", "secondary", "float-right", "task-undo-btn");
+        undoBtn.setAttribute("data-role","hint");
+        undoBtn.setAttribute("data-hint-text","Mark task as pending");
+        undoBtn.setAttribute("data-cls-hint","bg-cyan fg-white drop-shadow");
+        undoBtn.addEventListener("click", markTaskUncompleted);
 
 
         //Remove button
@@ -217,29 +187,22 @@ function renderTask(according_element,task,status) {
 
         taskContent.appendChild(taskContentP);
         taskContent.appendChild(removeBtn);
-        taskContent.appendChild(unduBtn);
+        taskContent.appendChild(undoBtn);
 
         taskItem.appendChild(taskHeading);
         taskItem.appendChild(taskContent);
 
-        according_element.appendChild(taskItem);
-
-
+        accordion_element.appendChild(taskItem);
 	}
 }
-
-function generateReflectionLink() {
-    var link = "<a href='#' onclick=\"openSmallWindow('./lnu/reflection/index.html','Reflection',event);\"> link </a>";
-    return link;
-}
-
 
 
 /**
  * 
  */
-function refreshTask(taskId) {
-
+function generateReflectionLink() {
+    var link = "<a href='#' onclick=\"openSmallWindow('./lnu/reflection/index.html','Reflection',event);\"> link </a>";
+    return link;
 }
 
 
@@ -249,7 +212,7 @@ function refreshTask(taskId) {
  */
 function markTaskCompleted(event) {
 
-
+    enableDependents(event.target.parentNode.parentNode);
 
     var task = {"id":event.target.parentNode.parentNode.dataset.taskId,"status":1,"isVisible":1};
     updateTaskStatus(task);
@@ -296,16 +259,15 @@ function markTaskCompleted(event) {
  * @param event : MouseEvent
  */
 function markTaskUncompleted(event) {
-
-
     var task = {"id":event.target.parentNode.parentNode.dataset.taskId,"status":0,"isVisible":1};
     updateTaskStatus(task);
-
+    disableDependants(task.id);
+    
 	event.target.parentNode.parentNode.classList.remove("task-completed");
 	event.target.parentNode.parentNode.getElementsByClassName("task-icon")[0].classList.remove("mif-checkmark");
 	event.target.removeEventListener("click", markTaskUncompleted);
 	var removeBtn = event.target.parentNode.getElementsByClassName("task-remove-btn")[0];
-
+    
 	var completeBtn = document.createElement("button");
 	var completeIcon = document.createElement("span");
 	completeIcon.classList.add("mif-checkmark");
@@ -313,16 +275,31 @@ function markTaskUncompleted(event) {
 	completeBtn.dataset.role = "hint";
 	completeBtn.dataset.hintText = "Mark task as completed";
 	completeBtn.dataset.clsHint = "bg-cyan fg-white drop-shadow";
-
+    
 	completeBtn.appendChild(completeIcon);
 	completeBtn.innerHTML += " Complete action";
-
+    
 	completeBtn.addEventListener("click", markTaskCompleted);
-
-	event.target.parentNode.appendChild(completeBtn);
-
+    
+    event.target.parentNode.appendChild(completeBtn);
 	event.target.parentNode.removeChild(removeBtn);
-	event.target.parentNode.removeChild(event.target);
+    event.target.parentNode.removeChild(event.target);
+
+    updateDependecies();
+}
+
+
+/**
+ * Disables all elements that depends on a specific task
+ * @param {*} taskId 
+ */
+function disableDependants(taskId) {
+    var depTasks = getTasksAndGroup()['dependentTasks'];
+    for (var i = 0; i < depTasks.length; i++) {
+        if (depTasks[i].dataset.dependentOnTask === taskId) {
+            toggleDependence(depTasks[i], 'disable');
+        }
+    }
 }
 
 
@@ -352,3 +329,112 @@ function removeAllTaskElements() {
 }
 
 
+/**
+ * This retrieves and groups all the tasks into either independentTasks or dependentTasks.
+ * This allows us to be easily retrieve the elements we need.
+ */
+function getTasksAndGroup() {
+    var taskElems = document.getElementById("tasklist-accordion-content").children;
+    var tasks = {}, independentTasks = [], dependentTasks = [];
+    for (let task of taskElems) {
+        task.dataset.dependentOnTask ? dependentTasks.push(task) : independentTasks.push(task);
+    }
+    tasks.independentTasks = independentTasks;
+    tasks.dependentTasks = dependentTasks;
+    return tasks;
+}
+
+
+/**
+ * This will get an elemenent that is a of a specific type, either 'independentTasks' or 'dependentTasks'.
+ * This enables us to get for example the exact independentTask that some other task depends on.
+ * @param {*} type either 'independentTasks' or 'dependentTasks'
+ * @param {*} taskId id of task to return
+ */
+function getTask(type, taskId) {
+    var tasks = getTasksAndGroup()[type];
+    for (let task of tasks) {
+        if (task.dataset.taskId === taskId) {
+            return task;
+        } else {
+            return null;
+        }
+    }
+}
+
+
+/**
+ * Adds an id to the data-attribute of specified element.
+ * @param {*} taskElem 
+ * @param {*} depTaskId 
+ */
+function addDependent(taskElem, depTaskId) {
+    if (taskElem) {
+        taskElem.dataset.dependents ? taskElem.dataset.dependents += ',' + depTaskId : taskElem.dataset.dependents = depTaskId;
+    }
+}
+
+
+/**
+ * Will take all dependent tasks and add their ids to the element they depend on.
+ * This will att a data-attribute called dependents to the element they depend on,
+ * this enables us to more easily access independent and dependent tasks that are related.
+ */
+function parseTaskDependence() {
+    var dependentTasks = getTasksAndGroup()['dependentTasks'];
+    for (let depTask of dependentTasks) {
+        addDependent(getTask('independentTasks', depTask.dataset.dependentOnTask), depTask.dataset.taskId);
+    }
+}
+
+
+/**
+ * Enables dependent tasks to be completed once the masterTask/task they depend on, have been completed
+ * @param {*} masterTask 
+ */
+function enableDependents(masterTask) {
+    if (masterTask.dataset.dependents) {
+        var dependents = masterTask.dataset.dependents.split(',');
+        var dependentTasks = getTasksAndGroup()['dependentTasks'];
+
+        for (var i = 0; i < dependents.length; i++) {
+            for (var j = 0; j < dependentTasks.length; j++) {
+                if (dependents[i] === dependentTasks[j].dataset.taskId) {
+                    toggleDependence(dependentTasks[j], 'enable');
+                }
+            }
+        }
+    }
+}
+
+
+/**
+ * Takes a task element and toggles info/button shown/enabled or hidden/disabled.
+ * @param {*} taskElem 
+ * @param {*} action 
+ */
+function toggleDependence(taskElem, action) {
+    if (action == 'enable') {
+        taskElem.getElementsByTagName('button')[0].disabled = false;
+        taskElem.getElementsByClassName('p-2')[0].getElementsByClassName('lnu-dependend-info')[0].classList.add('hidden');
+    } else if (action == 'disable') {
+        taskElem.getElementsByTagName('button')[0].disabled = true;
+        taskElem.getElementsByClassName('lnu-dependend-info')[0].classList.remove('hidden');
+    }
+}
+
+
+/**
+ * Handles special cases where a tasklist might be loaded where an independent task
+ * is marked as completed and the dependent task should then be enabled to be completed.
+ */
+function updateDependecies() {
+    var depTasks = getTasksAndGroup()['dependentTasks'];
+    for (task of depTasks) {
+        if (getTask('independentTasks', task.dataset.dependentOnTask).classList.contains('task-completed')) {
+            toggleDependence(task, 'enable');
+        } else {
+            toggleDependence(task, 'disable');
+        }
+    }
+}
