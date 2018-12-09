@@ -51,6 +51,7 @@ function renderTasks(tasks) {
         tasklist_accordion_content.setAttribute("data-role","accordion");
 
         if (tasks.length > 0) {
+            document.getElementById("tasklist-empty-state").classList.add("hidden");
             document.getElementById("accordionRow").innerHTML = "";
             $.each(tasks,function(index){
                 var status = 0;
@@ -67,6 +68,8 @@ function renderTasks(tasks) {
             var accordion = document.getElementById("accordionRow").appendChild(tasklist_accordion_content);
             updateDependecies();
             parseTaskDependence();
+        } else if(tasks.length <= 0) {
+            document.getElementById("tasklist-empty-state").classList.remove("hidden");
         }
     }
 }
@@ -211,16 +214,17 @@ function generateReflectionLink() {
  * @param event : MouseEvent
  */
 function markTaskCompleted(event) {
+    var button = event.target.closest('.task-complete-btn');
+    var task = button.parentNode.parentNode;
 
-    enableDependents(event.target.parentNode.parentNode);
+    enableDependents(task);
 
-    var task = {"id":event.target.parentNode.parentNode.dataset.taskId,"status":1,"isVisible":1};
-    updateTaskStatus(task);
+    updateTaskStatus({"id":task.dataset.taskId,"status":1,"isVisible":1});
 
-	event.target.parentNode.parentNode.classList.add("task-completed");
-	event.target.removeEventListener("click", markTaskCompleted);
+	task.classList.add("task-completed");
+	button.removeEventListener("click", markTaskCompleted);
 
-	event.target.parentNode.parentNode.getElementsByClassName("task-icon")[0].classList.add("mif-checkmark");
+	task.getElementsByClassName("task-icon")[0].classList.add("mif-checkmark");
 
 	var removeBtn  = document.createElement("button");
 	var removeIcon = document.createElement("span");
@@ -246,11 +250,9 @@ function markTaskCompleted(event) {
 	undoBtn.innerHTML += " Undo";
 	removeBtn.innerHTML += " Remove action";
 
-	event.target.parentNode.appendChild(removeBtn);
-	event.target.parentNode.appendChild(undoBtn);
-	event.target.parentNode.removeChild(event.target);
-
-	//var task = {"id":event.target}
+	button.parentNode.appendChild(removeBtn);
+	button.parentNode.appendChild(undoBtn);
+	button.parentNode.removeChild(button);
 }
 
 
@@ -259,15 +261,17 @@ function markTaskCompleted(event) {
  * @param event : MouseEvent
  */
 function markTaskUncompleted(event) {
-    var task = {"id":event.target.parentNode.parentNode.dataset.taskId,"status":0,"isVisible":1};
-    updateTaskStatus(task);
-    disableDependants(task.id);
+    var button = event.target.closest('.task-undo-btn');
+    var task = button.parentNode.parentNode;
+
+    updateTaskStatus({"id":task.dataset.taskId,"status":0,"isVisible":1});
+    disableDependants(task.dataset.taskId);
     
-	event.target.parentNode.parentNode.classList.remove("task-completed");
-	event.target.parentNode.parentNode.getElementsByClassName("task-icon")[0].classList.remove("mif-checkmark");
-	event.target.removeEventListener("click", markTaskUncompleted);
-	var removeBtn = event.target.parentNode.getElementsByClassName("task-remove-btn")[0];
+	task.classList.remove("task-completed");
+	task.getElementsByClassName("task-icon")[0].classList.remove("mif-checkmark");
+    button.removeEventListener("click", markTaskUncompleted);
     
+	var removeBtn = button.parentNode.getElementsByClassName("task-remove-btn")[0];
 	var completeBtn = document.createElement("button");
 	var completeIcon = document.createElement("span");
 	completeIcon.classList.add("mif-checkmark");
@@ -281,9 +285,9 @@ function markTaskUncompleted(event) {
     
 	completeBtn.addEventListener("click", markTaskCompleted);
     
-    event.target.parentNode.appendChild(completeBtn);
-	event.target.parentNode.removeChild(removeBtn);
-    event.target.parentNode.removeChild(event.target);
+    button.parentNode.appendChild(completeBtn);
+	button.parentNode.removeChild(removeBtn);
+    button.parentNode.removeChild(button);
 
     updateDependecies();
 }
@@ -308,16 +312,18 @@ function disableDependants(taskId) {
  * @param event: MouseEvent
  */
 function removeTaskElement(event) {
-    var task = {"id":event.target.parentNode.parentNode.dataset.taskId,"status":1,"isVisible":0};
-    updateTaskStatus(task);
-
-	var taskId = event.target.parentNode.parentNode.dataset.taskId;
+    var button = event.target.closest('.task-remove-btn');
+    var task = button.parentNode.parentNode;
+    updateTaskStatus({"id":task.dataset.taskId,"status":1,"isVisible":0});    
 	var tasks = document.getElementById("tasklist-accordion-content").children;
 	for (var i = 0; i < tasks.length; i++) {
-		if (tasks[i].dataset.taskId == String(taskId) && tasks[i].dataset.taskId != undefined) {
+		if (tasks[i].dataset.taskId == String(task.dataset.taskId) && tasks[i].dataset.taskId != undefined) {
 			tasks[i].parentNode.removeChild(tasks[i]);
 		}
-	}
+    }
+    if (tasks.length <= 0) {
+        document.getElementById("tasklist-empty-state").classList.remove("hidden");
+    }
 }
 
 
