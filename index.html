@@ -518,7 +518,7 @@
 			hideApps();
 		});
 		function hideApps() {
-			var SERVER_URL = "./pilottools-api.php";
+			var SERVER_URL = "https://cs.uef.fi/~ec2l/pilottools-api.php";
 			var data = new FormData();
 			data.append("func", "pilottools-get-tools");
 			data.append("pilotid", window.sessionStorage.getItem('pilotsite'));
