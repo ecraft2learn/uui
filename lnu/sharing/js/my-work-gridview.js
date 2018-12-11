@@ -206,6 +206,14 @@ function openCommentingDialog(fileName,fileId) {
             sendComment(fileId)
         });
 
+        $("#commentSelect").on('change', function() {
+
+            $("#rating").rating('value', this.value);
+
+
+        });
+
+
     });
 
 

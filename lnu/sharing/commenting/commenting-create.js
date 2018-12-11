@@ -3,7 +3,19 @@
  * This file creates commenting form
  */
 
-var options = ["Select a comment", "sentence1", "sentence2", "sentence3", "sentence4"];
+var options = [ {text:"Select a comment",value:0},
+                {text:"This looks smashing, awesome job",value:5},
+                {text:"Looking really good, excellent job",value:4},
+                {text:"Way to go! Good job",value:3},
+                {text:"Nice job, keep on trying for more",value:2},
+                {text:"Nice try, ok",value:1}];
+
+// ������= awesome job
+// ����= looking really good, excellent job
+// ����=  good job, keep on trying for more
+//     ��=nice try, ok
+
+
 function createCommentingForm(comments) {
 
     var mainDiv = document.createElement("DIV");
@@ -26,11 +38,12 @@ function createCommentingForm(comments) {
 
     for (var i = 0; i < options.length; i++) {
         var option = document.createElement("option");
-        option.innerHTML = options[i];
-        option.value = options[i];
+        option.innerHTML = options[i].text;
+        option.value = options[i].value;
         commentSelect.appendChild(option);
     }
     selectDiv.appendChild(commentSelect);
+
 
     var ratingDiv = document.createElement("div");
     ratingDiv.setAttribute("class", "rating small");
@@ -38,6 +51,7 @@ function createCommentingForm(comments) {
     ratingDiv.setAttribute("data-size", "small");
     ratingDiv.setAttribute("data-score-title", "Rate:");
     ratingDiv.setAttribute("id", "rating");
+    ratingDiv.setAttribute("data-static", true);
 
     var sendCommentBtn = document.createElement("button");
     sendCommentBtn.setAttribute("class", "button send-button");
@@ -194,30 +208,33 @@ function createCommentingForm(comments) {
 
 
 function sendComment(fileId) {
-
-    var comment = $("#commentSelect").val();
-    var rating = $("#rating").data('rating').value();
-    var username = window.sessionStorage.getItem("username");
-    var userId = window.sessionStorage.getItem("userId");
-    var pilotsite = window.sessionStorage.getItem("pilotsite");
-
-    //clear rating and comment
-    $("#rating").data('rating').value(0);
-    $("#commentSelect").val("Select a comment");
+    if($("#rating").data('rating').value()>0){
 
 
-    sendCommentAPI(fileId, comment, username, userId, pilotsite, rating, function (result) {
+        var comment = $("#commentSelect").find("option:selected").text();
+        var rating = $("#rating").data('rating').value();
+        var username = window.sessionStorage.getItem("username");
+        var userId = window.sessionStorage.getItem("userId");
+        var pilotsite = window.sessionStorage.getItem("pilotsite");
 
-        if (result["RESULT"] === "SUCCESS") {
-            insertComment(comment, rating, username);
+        //clear rating and comment
+        $("#rating").data('rating').value(0);
+        $("#commentSelect").val(0);
 
-            showNotification(true, "Your comment has been saved", "Thank you for your feedback");
-        }
-        else {
-            showNotification(false, "Please try again later.", "Something went wrong");
-        }
-    })
 
+        sendCommentAPI(fileId, comment, username, userId, pilotsite, rating, function (result) {
+
+            if (result["RESULT"] === "SUCCESS") {
+                insertComment(comment, rating, username);
+
+                showNotification(true, "Your comment has been saved", "Thank you for your feedback");
+            }
+            else {
+                showNotification(false, "Please try again later.", "Something went wrong");
+            }
+        })
+
+    }
     /*var comment = document.getElementById("comment").value;
 
     if(comment!==""){
