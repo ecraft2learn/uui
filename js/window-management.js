@@ -157,8 +157,11 @@ function openIframeWindow(toolUrl, toolName, event) {
 
 	var toolTile = $(event.srcElement).closest('[data-role], tile');
 	var bgColor = toolTile.css("background-color");
-	var tIcon = $(event.srcElement).closest('.tile').find('.slide-front').find('.icon').attr('src');
-	if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
+	var tIcon = $(event.srcElement).closest('.tile').find('.slide-front').find('.icon').attr('src') || $('.achievement-icon').attr('src');
+	console.log(tIcon);
+	if(toolName=='Achievements')
+		bgColor="rgb(255,150,30)";
+	else if(bgColor=="rgba(0, 0, 0, 0)" || bgColor=="rgb(255, 255, 255)")
 		bgColor="rgb(64,64,64)";
 
 	Metro.window.create({
