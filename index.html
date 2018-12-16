@@ -888,7 +888,7 @@
 									var list = JSON.parse(result);
 									var html = "";
 									
-									html += "<div style='font-size:20px;margin-left:-2px;margin-top:-0.5em;' onclick=\"tileClick('./SelfEvaluation/index.html?p='+(new Date()).getTime() ,'Achievements', event);\"><img class=\"achievement-icon icon ml-2\" src=\"./images/white-star-icon-32.png\" style=\"left:0px;min-width:20.82px;min-height:19.78px;max-width:20.82px;max-height:19.78px;margin-top:-0.25em;\"><span>Achievements</span></div>";
+									html += "<div class=\"title-link\" style='font-size:20px;margin-left:-2px;margin-top:-0.5em;' onclick=\"tileClick('./SelfEvaluation/index.html?p='+(new Date()).getTime() ,'Achievements', event);\"><img class=\"achievement-icon icon ml-2\" src=\"./images/white-star-icon-32.png\" style=\"left:0px;min-width:20.82px;min-height:19.78px;max-width:20.82px;max-height:19.78px;margin-top:-0.25em;\"><span>Achievements</span></div>";
 									for (i = 0; i < list.DATA.length; i++) {
 										var riga = list.DATA[i];
 										
