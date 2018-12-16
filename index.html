@@ -535,7 +535,7 @@
 					console.log(obj);
 					$('.tile').each(function(){
 						console.log(obj.find(o => o.TOOLID == $(this).attr('toolid')));
-						if(obj.find(o => o.TOOLID == $(this).attr('toolid')) == undefined && $(this).attr('toolid') > 0) {
+						if(obj.find(o => o.TOOLID == $(this).attr('toolid'))) {
 							$(this).addClass('always-hidden');
 						}
 					});
