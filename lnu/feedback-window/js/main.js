@@ -28,7 +28,25 @@ function getToolId(toolname, callback) {
     var toolname = toolname;
     var func = "getToolId";
     var data = {"toolname":toolname,"func":func};
-    postAjaxRequest("https://cs.uef.fi/~ec2l/lnu.php",data,callback);
+
+
+    $.ajax({
+        type: "POST",
+        url: "https://cs.uef.fi/~ec2l/lnu.php",
+        data: data,
+        success: function (data,result) {
+            //console.log(data);
+            callback(JSON.parse(data),result);
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            console.log(exception);
+            callback("error");
+        }
+
+    });
+
+
 }
 
 

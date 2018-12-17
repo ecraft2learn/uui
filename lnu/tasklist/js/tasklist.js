@@ -204,7 +204,7 @@ function renderTask(accordion_element,task,status) {
  * 
  */
 function generateReflectionLink() {
-    var link = "<a href='#' onclick=\"openSmallWindow('./lnu/reflection/index.html','Reflection',event);\"> link </a>";
+    var link = "<a href='#' onclick=\"openSmallWindow('./lnu/reflection/index.html','Reflection','none',event);\"> link </a>";
     return link;
 }
 

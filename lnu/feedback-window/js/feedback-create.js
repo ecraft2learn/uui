@@ -82,12 +82,12 @@ function onSendFeedback(event) {
 
 
 
-    var userID = parseInt(window.sessionStorage.getItem('userId')) || 1;
-    var pilotsite = parseInt(window.sessionStorage.getItem('pilotsite'));
+    var userID = parseInt(window.sessionStorage.getItem('userId')) || -1;
+    var pilotsite = parseInt(window.sessionStorage.getItem('pilotsite'))||-1;
     var rating = parseInt($('input[name=rating]:checked').val());
     var free_text = $('#feedback-freetext').val();
     var func = "addFeedback";
-    var projectID = parseInt(window.sessionStorage.getItem('projectId')) || 1;
+    var projectID = parseInt(window.sessionStorage.getItem('projectId')) || -1;
     var timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
 
@@ -101,7 +101,7 @@ function onSendFeedback(event) {
                     var toolID = parseInt(result["DATA"][0]["TOOLID"]);
                     var data = {"toolID":toolID,"userID":userID,"pilotsite":pilotsite,"feedback":1,"rating":rating,"func":func,"projectID":projectID,"timestamp":timestamp,"free_input":free_text};
 
-                    postAjaxRequest("https://cs.uef.fi/~ec2l/lnu.php",data,function(data,result){
+                    sendFeedback("https://cs.uef.fi/~ec2l/lnu.php",data,function(data,result){
 
                         var formId = $(event.target).closest("form").attr('id');
                         clearForm(formId);
@@ -123,4 +123,22 @@ function onSendFeedback(event) {
             console.log("ERROR,could not find tool name, could not send feedback");
         }
     }
+}
+
+function sendFeedback(url,data,callback) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function (data,result) {
+            //console.log(data);
+            callback(JSON.parse(data),result);
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            console.log(exception);
+            callback("error");
+        }
+
+    });
 }

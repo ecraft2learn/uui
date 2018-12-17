@@ -96,7 +96,7 @@ function getUserFilesAPI(callback) {
 function shareLocalFile(callback) {
 
     var data = $('#sharingForm').serializeArray();
-    //console.log($('#sharingForm').serializeArray());
+
     if(data.length>0){
 
 
@@ -108,8 +108,11 @@ function shareLocalFile(callback) {
             return field.name ==="toolId";
         });
 
-        if(projectId === undefined){
-            projectId = {name:"projectId",value:0};
+        if(projectId === undefined || projectId.value ===""){
+            projectId = {name:"projectId",value:-1};
+        }
+        if(toolId === undefined || toolId.value===""){
+            toolId = {name:"toolId",value:-1};
         }
 
 
@@ -119,6 +122,7 @@ function shareLocalFile(callback) {
             formData.append("projectId",projectId.value);
             formData.append("toolId",toolId.value);
             formData.append("func","uploadFile");
+
             //upload file to the server
             $.ajax({
                 //url: 'https://cs.uef.fi/~ec2l/fileman.php',
@@ -130,10 +134,25 @@ function shareLocalFile(callback) {
                 type: 'post',
                 async: false,
                 success: function (php_script_response) {
-                    //console.log(php_script_response);
-                    var fileId = JSON.parse(php_script_response)["DATA"]["ID"];
-                    data.push({"name":"fileId","value":fileId});
-                    saveSharing(data,callback);
+                    console.log(JSON.parse(php_script_response)["DATA"]);
+                    var result = JSON.parse(php_script_response)["DATA"];
+                    if(result!=undefined){
+                        var fileId = JSON.parse(php_script_response)["DATA"]["ID"];
+                        data.push({"name":"fileId","value":fileId});
+                        var userId = window.sessionStorage.getItem("userId");
+                        if(projectId===undefined || toolId === undefined){
+                            userId=-1;
+                        }
+                        saveSharing(data,userId,callback);
+                    }
+                    else{
+                        $.Notify({
+                            caption: 'Error',
+                            content: 'File upload failed, please try again later',
+                            type:    'alert'
+                        });
+                    }
+
                 }
             });
 
@@ -148,13 +167,14 @@ function shareLocalFile(callback) {
  * @param data
  * @param callback - success or error
  */
-function saveSharing(data,callback) {
+function saveSharing(data,userId,callback) {
 
     var formData = new FormData();
-    formData.append("userId",window.sessionStorage.getItem("userId"));
+    formData.append("userId",userId);
     formData.append("pilotsite",window.sessionStorage.getItem("pilotsite"));
 
     if(data.length>0){
+
 
 
         var title = data.find(function (field) {

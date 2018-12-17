@@ -5,14 +5,16 @@
  */
 
 
+var feedbackWindows = {};
+
 /**
  * This function opens feedback window if it not open already
  * @param toolUrl: String
  * @param event
  */
-function openSmallWindow(toolUrl, title, event) {
+function openSmallWindow(toolUrl, title, toolName, event) {
 
-         openIframeWindowRightBottom(toolUrl, title,event);
+         openIframeWindowRightBottom(toolUrl, title,toolName,event);
 }
 
 
@@ -24,7 +26,7 @@ function openSmallWindow(toolUrl, title, event) {
  * @param event
  * @returns {*}
  */
-function openIframeWindowRightBottom(toolUrl,title,event) {
+function openIframeWindowRightBottom(toolUrl,title,toolName,event) {
 
     docWidth = 360;
 
@@ -59,7 +61,7 @@ function openIframeWindowRightBottom(toolUrl,title,event) {
     activeWindow.data('winHeight', activeWindow.height());
     activeWindow.find('.window-caption').css("background-color", "rgb(23, 119, 179)");
 
-
+    feedbackWindows[activeWindow.attr('id')] = toolName;
     return activeWindow;
 
 
