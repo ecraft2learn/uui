@@ -17,7 +17,7 @@ function postAjaxRequest(url,data, callback) {
         url: url,
         data: data,
         success: function (data,result) {
-            console.log(data);
+            //console.log(data);
             callback(JSON.parse(data),result);
         },
         error: function (jqXHR, exception) {
