@@ -11,7 +11,7 @@ function setActivityCategories(result, status) {
 
             var html = "<div id=\"category_" + riga.CategoryId + "\" class=\"category grid form-horizontal\" style='border: 1px solid " + riga.StarsColor + ";'>";
             html += "<div class=\"row category-header\">    <div class=\"categoryTitle cell\">";
-            html += "<h3>" + riga.CategoryName + "</h3>    </div> </div> <div class=\"row category-body\">";
+            html += "<h3>" + riga.CategoryName + "</h3>    </div> </div> <div class=\"row category-body ml-1\">";
 
             //category criteria
             html += "<div id=\"category_" + riga.CategoryId + "-criterias\" class=\"cell-sm-6 cell-md-5\" style=\"padding-left: 0px; padding-right:opx;\"> </div>";
