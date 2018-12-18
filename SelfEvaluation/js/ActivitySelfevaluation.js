@@ -17,15 +17,15 @@ function setActivityCategories(result, status) {
             html += "<div id=\"category_" + riga.CategoryId + "-criterias\" class=\"col-sm-6 col-md-5\" style=\"padding-left: 0px; padding-right:opx;\"> </div>";
 
             //students remarks
-            html += "<div class=\"col-sm-4 col-md-5 form-group\" > <h4><label for=\"category_" + riga.CategoryId + "_remark\">Students remarks:</label><h4>  <textarea name=\"remark\" id=\"category_" + riga.CategoryId + "_remark\" rows=\"5\" class=\"form-control\" placeholder=\"Students remarks\"></textarea>    </div>";
+            html += "<div class=\"col-sm-4 col-md-5 form-group\" > <h4><label for=\"category_" + riga.CategoryId + "_remark\">Students remarks:</label><h4>  <textarea name=\"remark\" id=\"category_" + riga.CategoryId + "_remark\" rows=\"5\" style=\"width:100%;\" placeholder=\"Students remarks\" data-role=\"textarea\"></textarea>    </div>";
 
             //self-evaluation
-            html += "<div class=\"col-sm-2 form-group\"> <h4> <label for=\"category_" + riga.CategoryId + "_selfEvaluation\">Self-evaluation:</label></h4> <select name=\"selfEvaluation\" class=\"form-control selfevaluation\" id=\"category_" + riga.CategoryId + "_selfEvaluation\" placeholder=\"self-evaluation\" required='true'><option value=''></option> <option value='1'>1</option> <option value='2'>2</option> <option value='3'>3</option> <option value='4'>4</option> <option value='5'>5</option> </select>";
+            html += "<div class=\"col-sm-2 form-group\"> <h4> <label for=\"category_" + riga.CategoryId + "_selfEvaluation\">Self-evaluation:</label></h4> <select name=\"selfEvaluation\" class=\"selfevaluation\" id=\"category_" + riga.CategoryId + "_selfEvaluation\" placeholder=\"self-evaluation\" required='true' data-role=\"select\" style=\"width:100%;\"><option value=''></option> <option value='1'>1</option> <option value='2'>2</option> <option value='3'>3</option> <option value='4'>4</option> <option value='5'>5</option> </select>";
             html += "</div> </div>";
 
             //teacher evaluation
             html += "<div class=\"row-fluid container-fluid category-footer\">    <div class=\"col-md-2 container-fluid\">        <span><strong>Teacher's evaluation: </strong></span>        <span>";
-            html += "<label id=\"category_" + riga.CategoryId + "-teacherEvaluation\" class=\"form-control\" style=\"text-align:center;\" disabled> </label>        </span>    </div>";
+            html += "<label id=\"category_" + riga.CategoryId + "-teacherEvaluation\" class=\"form-control\" style=\"text-align:center;width:100%;\" disabled> </label>        </span>    </div>";
 
             //teacher remark
             html += "<div class=\"col-md-10\" style=\"text-align: justify; text-justify: inter-word;\">        <p id=\"category_" + riga.CategoryId + "-teacherNote\">            <strong> Teacher's note: </strong></p>    </div></div></div>";
@@ -70,7 +70,7 @@ function addCriterias(result, status) {
     $.each(gruppedCriterias, function (index, criteria) {
         html += "<div class=\"row-fluid container-fluid form-group\" style=\"width: 100%; padding-bottom: 5px; padding-right: 0px; padding-left: 0px; margin:0px; \">";
         //html += "<div class=\"col-md-8\">" + criteria.Name + "</div>  <div class=\"col-md-4\">  <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "-value\" class=\"form-control\"> <option value=\"\">-</option>";
-        html += "<h4><label for=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "_value\">" + criteria.Name + "</label> </h4> <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "_value\" name=\"criteria\" class=\"form-control\"> <option value=\"\">-</option>";
+        html += "<h4><label for=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "_value\">" + criteria.Name + "</label> </h4> <select id=\"category_" + criteria.Category + "-criteria_" + criteria.CritId + "_value\" name=\"criteria\"  data-role=\"select\" style=\"width:100%;\"> <option value=\"\">-</option>";
 
         for (i = 0; i < criteria.CritValues.length; i++) {
             html += "<option value=\"" + criteria.CritValues[i] + "\">" + criteria.CritValues[i] + "</option>";

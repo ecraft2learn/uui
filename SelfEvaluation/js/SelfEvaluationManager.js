@@ -20,7 +20,7 @@ function getActivityCategories(activityId, responseHandler) {
 
     formData.append("func", "getActivityCategories");
     formData.append("activity", activityId);
-    formData.append("pilotSite", window.sessionStorage.getItem('pilotsite'));
+    formData.append("pilotSite", 10);
 
     makeAjaxCall(formData, responseHandler);
 }
