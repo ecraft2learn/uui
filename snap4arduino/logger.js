@@ -21,7 +21,7 @@ setInterval(function() {
 	var sessionId = window.sessionStorage.getItem('pilotsite');
         var users = window.sessionStorage.getItem('username');
 
-	var fileName = users + '_' + sessionId + '_' + window.counterIncrease();
+	var fileName = users + '_' + sessionId;
 
 	var currentTab = ide.currentTab;
 	var currentCategory = ide.currentCategory;
@@ -58,7 +58,7 @@ setInterval(function() {
         var sessionId = window.sessionStorage.getItem('pilotsite');
         var users = window.sessionStorage.getItem('username');
 
-        var fileName = users + '_save_' + sessionId + '_' + window.counterIncrease();
+        var fileName = users + '_save_' + sessionId;
 
         ide.rawSaveProject(fileName);
 
