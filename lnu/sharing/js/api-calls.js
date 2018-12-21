@@ -141,7 +141,7 @@ function shareLocalFile(callback) {
                         data.push({"name":"fileId","value":fileId});
                         var userId = window.sessionStorage.getItem("userId");
                         if(projectId===undefined || toolId === undefined){
-                            userId=-1;
+                            userId=-userId;
                         }
                         saveSharing(data,userId,callback);
                     }

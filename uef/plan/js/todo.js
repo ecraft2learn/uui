@@ -241,7 +241,6 @@ saveDataToCloud(data, 'eCraft Todo', 'eCraft Todo');
 	getProjectFiles(window.sessionStorage.getItem('currentProjectId'));
 	var storage = window.sessionStorage.getItem('projectFiles');
 	var arr = JSON.parse(storage);
-
 	if (arr && arr.DATA && arr.DATA.length) {
 	
 		for(let i = 0; i < arr.DATA.length; ++i) {
