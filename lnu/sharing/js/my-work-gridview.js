@@ -44,14 +44,16 @@ function initGridView() {
             dataMapping: null,
             menuItems: [
                 { label: "Stop sharing", icon: "mif-cancel",   callback: cancelCallback   },
-                { label: "Download",     icon: "mif-download", callback: downloadCallback },
+                { label: "Download",     icon: "mif-download", callback: downloadCallbackMyWork },
                 { label: "Comment",     icon: "mif-bubbles", callback: commentCallback }
             ]
         }
     ];
 
     getUsersSharedFiles(function(data) {
+        console.log(data);
         MYFILES = data;
+        //console.log(MYFILES);
         var gv = new Gridview(columns, data, document.getElementById("myWorkTable"));
         var table = $('#myWorkTable').DataTable();
     });
@@ -65,7 +67,7 @@ function initGridView() {
  * @param fileid 
  */
 function cancelCallback(event, fileid) {
-    // console.log("cancelCallback", fileid);
+     console.log("cancelCallback", fileid);
 
     var file = MYFILES.find(function (file) {
         return parseInt(file["FILEID"])===parseInt(fileid);
@@ -123,8 +125,9 @@ function removeRow(fileid){
  * @param event 
  * @param fileid - file id
  */
-function downloadCallback(event, fileid) {
-    //console.log("downloadCallback", fileid);
+function downloadCallbackMyWork(event, fileid) {
+    console.log("downloadCallback", fileid);
+    console.log(MYFILES);
 
     var file = MYFILES.find(function (file) {
        return parseInt(file["FILEID"])===parseInt(fileid);
