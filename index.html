@@ -655,21 +655,24 @@
 		}
 
 		function tileClickTinkerCad(toolUrl, winTitle, event){
-			// need to check if because user is not logged in a 403 error occurs
-			let xhr = new XMLHttpRequest();
-			let error_loading = false;
-			xhr.open('GET', toolUrl);
-  		    xhr.onerror = function(error) {
-  		    	error_loading = true;
-				alert("TinkerCad tools only work if you are logged in. Please log in first (and register if needed).");
-				gotoTileDestination("https://www.tinkercad.com/");
-			};
-			xhr.onloadend = function() {
-                if (!error_loading) {
-                	tileClick(toolUrl, winTitle, event);
-                }
-			};
-			xhr.send();
+			// need to check because user is not logged in a 403 error occurs
+			// but this didn't work since the only error received was a ProgressEvent and that
+			// was received whether or not TinkerCad was reporting a 403 or all was well.
+			tileClick(toolUrl, winTitle, event);
+// 			let xhr = new XMLHttpRequest();
+// 			let error_loading = false;
+// 			xhr.open('GET', toolUrl);
+//   		    xhr.onerror = function(error) {
+//   		    	error_loading = true;
+// 				alert("TinkerCad tools only work if you are logged in. Please log in first (and register if needed).");
+// 				gotoTileDestination("https://www.tinkercad.com/");
+// 			};
+// 			xhr.onloadend = function() {
+//                 if (!error_loading) {
+//                 	tileClick(toolUrl, winTitle, event);
+//                 }
+// 			};
+// 			xhr.send();
 		}
 
 		function tileClick(toolUrl, winTitle, event){
