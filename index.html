@@ -326,6 +326,10 @@
 			#eCraftMotto {
 				font-size: 0.8rem;
 			}
+			
+			.achievement-tiles-grid {
+				margin-top: 60px !important;
+			}
         }
 
 		.login-form {
@@ -650,6 +654,28 @@
 			}
 		}
 
+		function tileClickTinkerCad(toolUrl, winTitle, event){
+			// need to check because user is not logged in a 403 error occurs
+			// but this didn't work since the only error received was a ProgressEvent and that
+			// was received whether or not TinkerCad was reporting a 403 or all was well.
+			alert("TinkerCad tools only work if you are logged in. If you see an error page then log in at tinkercad.com.");
+			tileClick(toolUrl, winTitle, event);
+// 			let xhr = new XMLHttpRequest();
+// 			let error_loading = false;
+// 			xhr.open('GET', toolUrl);
+//   		    xhr.onerror = function(error) {
+//   		    	error_loading = true;
+// 				alert("TinkerCad tools only work if you are logged in. Please log in first (and register if needed).");
+// 				gotoTileDestination("https://www.tinkercad.com/");
+// 			};
+// 			xhr.onloadend = function() {
+//                 if (!error_loading) {
+//                 	tileClick(toolUrl, winTitle, event);
+//                 }
+// 			};
+// 			xhr.send();
+		}
+
 		function tileClick(toolUrl, winTitle, event){
 			var analyticField;
 
@@ -770,9 +796,9 @@
 					</div>
 					<div id="eCraftMotto" class="mt-0">
 						Digital Fabrication and Maker Movement in Education <!--(<a href="./help/troubleshooting/" target="_blank">Trouble shooting help</a>)-->
-						<p class="text-small mt-0 fg-gray">
+<!-- 						<p class="text-small mt-0 fg-gray">
 							This is a work in progress and some experimental components might not perform as expected.
-						</p>
+						</p> -->
 					</div>
 					
 				</div>
@@ -1034,11 +1060,11 @@
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/tinkercad-3d-design-help.html', '#TinkerCad3DDesignDialog');"></span>
 								</div>
 
-								<div class="slide-front" onclick="tileClick('https://www.tinkercad.com/#/?type=tinkercad&collection=designs', 'TinkerCad 3D Design', event);">
+								<div class="slide-front" onclick="tileClickTinkerCad('https://www.tinkercad.com/#/?type=tinkercad&collection=designs', 'TinkerCad 3D Design', event);">
 									<img class="icon" src="./images/tinkercad-logo.png">
 									<span class="branding-bar">3D Design</span>
 								</div>
-								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('https://www.tinkercad.com/dashboard?type=tinkercad&collection=designs', 'TinkerCad 3D Design', event);">
+								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClickTinkerCad('https://www.tinkercad.com/dashboard?type=tinkercad&collection=designs', 'TinkerCad 3D Design', event);">
 									TinkerCad is a 3D modelling application
 								</div>
 							</div>
@@ -1049,12 +1075,12 @@
 									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','TinkerCad Circuits',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/tinkercad-circuit-design-help.html', '#TinkerCadCircuitDesignDialog');"></span>
 								</div>
-								<div class="slide-front" onclick="tileClick('https://www.tinkercad.com/dashboard?type=tinkercad&collection=designs', 'TinkerCad Circuit Design', event);">
+								<div class="slide-front" onclick="tileClickTinkerCad('https://www.tinkercad.com/dashboard?type=tinkercad&collection=designs', 'TinkerCad Circuit Design', event);">
 
 									<img class="icon" src="./images/tinkercad-logo.png">
 									<span class="branding-bar">Circuit Design</span>
 								</div>
-								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('https://www.tinkercad.com/dashboard?type=circuits&collection=designs', 'TinkerCad Circuit Design', event);">
+								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClickTinkerCad('https://www.tinkercad.com/dashboard?type=circuits&collection=designs', 'TinkerCad Circuit Design', event);">
 									TinkerCad includes a circuit design and simulation application
 								</div>
 							</div>
@@ -1417,7 +1443,7 @@
 							</div> <!-- End of Task List tile -->
 							
 							<!--Achievements tile-->
-							<div class="tiles-grid tiles-group size-1 fg-white  mb-15" data-group-title="Achievements">
+							<div class="tiles-grid tiles-group size-1 fg-white  mb-15 achievement-tiles-grid" data-group-title="Achievements">
 								<div data-role="tile" data-size="medium" class="tile bg-selfevaluation fg-white" data-effect="hover-slide-up">
 									<div class="badge-medium-top">
 										<span class="mif-question badge-medium-top-inner m-0 p-0 bg-transparent" onclick="infoClick('./about/selfevaluation-help.html', '#SelfEvaluationDialog');"></span>

@@ -5,7 +5,7 @@
  */
 
 //global variables
-var PUBLICFILES; //array of my work files
+var PUBLICFILES=[]; //array of my work files
 
 function initGridView2() {
     var columns = [
@@ -49,7 +49,8 @@ function initGridView2() {
 
     getSharedFiles(function(data) {
         PUBLICFILES = data;
-        // console.log(PUBLICFILES);
+
+
         var gv = new Gridview(columns, data, document.getElementById("publicWorkTable"));
         var table = $('#publicWorkTable').DataTable();
     });
@@ -62,7 +63,7 @@ function initGridView2() {
  * @param fileid - file id
  */
 function downloadCallback(event, fileid) {
-    //console.log("downloadCallback", fileid);
+    console.log("downloadCallback", fileid);
 
     var file = PUBLICFILES.find(function (file) {
         return parseInt(file["FILEID"])===parseInt(fileid);

@@ -137,7 +137,7 @@ function searchData(event) {
 
         }
                                         
-        getRequest(val);
+        //getRequest(val);
 
 	$.ajax({
 
