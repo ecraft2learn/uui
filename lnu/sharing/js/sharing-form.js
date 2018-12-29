@@ -50,7 +50,7 @@ function generateHtmlLocalFile() {
             shareLocalFileButton.classList.add("success");
             shareLocalFileButton.textContent = "Share";
             shareLocalFileButton.addEventListener("click", function (event) {
-                //event.preventDefault();
+                event.preventDefault();
                 //event.parent.preventDefault();
                 shareLocalFile(function (result) {
                     if(result === "success"){
@@ -67,6 +67,7 @@ function generateHtmlLocalFile() {
                             type:    'alert'
                         });
                     }
+                    initGridView();
                     metroDialog.close('#sharing-dialog');
                 })
             });
@@ -122,12 +123,12 @@ function generateProjectSelect(labelText,callback) {
             divEl.classList.add("input-control");
             divEl.classList.add("select");
             divEl.classList.add("full-size");
-            divEl.classList.add("required");
+            //divEl.classList.add("required");
             divEl.setAttribute("data-role","input");
 
             var selectEl = document.createElement("select");
 
-            selectEl.setAttribute("data-validate-func","required");
+            //selectEl.setAttribute("data-validate-func","required");
             selectEl.setAttribute("name","projectId");
 
             var option = document.createElement("option");
@@ -166,11 +167,11 @@ function generateToolSelect(callback){
             divEl.classList.add("input-control");
             divEl.classList.add("select");
             divEl.classList.add("full-size");
-            divEl.classList.add("required");
+            //divEl.classList.add("required");
             divEl.setAttribute("data-role", "input");
 
             var selectEl = document.createElement("select");
-            selectEl.setAttribute("data-validate-func", "required");
+            //selectEl.setAttribute("data-validate-func", "required");
             selectEl.setAttribute("name", "toolId");
 
             var option = document.createElement("option");

@@ -88,12 +88,15 @@
 
 
 	<!--LNU CODE START-->
-	<script src="lnu/commenting/js/small-window-managment.js"></script>
+	<script src="lnu/feedback-window/js/small-window-managment.js"></script>
 	<!--LNU CODE END-->
 
 	<!--<script src="SelfEvaluation/js/SelfEvaluationManager.js"></script>-->
 
 	<style>
+		.title-link {
+			cursor: pointer;
+		}
 		.always-hidden {
 			pointer-events: none;
 			-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
@@ -323,6 +326,10 @@
 			#eCraftMotto {
 				font-size: 0.8rem;
 			}
+			
+			.achievement-tiles-grid {
+				margin-top: 60px !important;
+			}
         }
 
 		.login-form {
@@ -535,7 +542,7 @@
 					console.log(obj);
 					$('.tile').each(function(){
 						console.log(obj.find(o => o.TOOLID == $(this).attr('toolid')));
-						if(obj.find(o => o.TOOLID == $(this).attr('toolid')) == undefined && $(this).attr('toolid') > 0) {
+						if(obj.find(o => o.TOOLID == $(this).attr('toolid'))) {
 							$(this).addClass('always-hidden');
 						}
 					});
@@ -645,6 +652,31 @@
 					}
 				}
 			}
+		}
+
+		function tileClickTinkerCad(toolUrl, winTitle, event){
+			// need to check because user is not logged in a 403 error occurs
+			// but this didn't work since the only error received was a ProgressEvent and that
+			// was received whether or not TinkerCad was reporting a 403 or all was well.
+			if (typeof window.tinkercad_warning_given === 'undefined') {
+			    alert("TinkerCad tools only work if you are logged in. If you see an error page then log in at tinkercad.com.");
+			    window.tinkercad_warning_given = true;	
+			}
+			tileClick(toolUrl, winTitle, event);
+// 			let xhr = new XMLHttpRequest();
+// 			let error_loading = false;
+// 			xhr.open('GET', toolUrl);
+//   		    xhr.onerror = function(error) {
+//   		    	error_loading = true;
+// 				alert("TinkerCad tools only work if you are logged in. Please log in first (and register if needed).");
+// 				gotoTileDestination("https://www.tinkercad.com/");
+// 			};
+// 			xhr.onloadend = function() {
+//                 if (!error_loading) {
+//                 	tileClick(toolUrl, winTitle, event);
+//                 }
+// 			};
+// 			xhr.send();
 		}
 
 		function tileClick(toolUrl, winTitle, event){
@@ -767,9 +799,9 @@
 					</div>
 					<div id="eCraftMotto" class="mt-0">
 						Digital Fabrication and Maker Movement in Education <!--(<a href="./help/troubleshooting/" target="_blank">Trouble shooting help</a>)-->
-						<p class="text-small mt-0 fg-gray">
+<!-- 						<p class="text-small mt-0 fg-gray">
 							This is a work in progress and some experimental components might not perform as expected.
-						</p>
+						</p> -->
 					</div>
 					
 				</div>
@@ -859,14 +891,6 @@
 								</div>
 							</div>
 						</div>
-						<!--<div class="row">-->
-							<!--<div class="cell">-->
-								<!--<button class="image-button button fg-white bg-transparent large-text mt-0" oncliopenSmallWindowndow('./lnu/commenting/index.html');">-->
-									<!--<span class="mif-pencil icon"></span>-->
-									<!--<span class="caption">Commenting</span>-->
-								<!--</button>-->
-							<!--</div>-->
-						<!--</div>-->
 
 
 
@@ -885,6 +909,7 @@
 									var list = JSON.parse(result);
 									var html = "";
 									
+									html += "<div class=\"title-link\" style='font-size:20px;margin-left:-0.6em;margin-top:-0.5em;' onclick=\"tileClick('./SelfEvaluation/index.html?p='+(new Date()).getTime() ,'Achievements', event);\"><img class=\"achievement-icon icon ml-2\" src=\"./images/white-star-icon-32.png\" style=\"left:0px;min-width:20.82px;min-height:19.78px;max-width:20.82px;max-height:19.78px;margin-top:-0.25em;\"><span>Achievements</span></div>";
 									for (i = 0; i < list.DATA.length; i++) {
 										var riga = list.DATA[i];
 										
@@ -947,11 +972,13 @@
 						<div class="tiles-grid tiles-group size-1 fg-white mb-15" data-group-title="Imagine">
 							<!-- UEF Tools -->
 							<!--UEF Ideation-->
+
 							<div data-role="tile" class="tile bg-ideation fg-white" toolid="2" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','eCraft Search',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/ecraft-search-help.html', '#eCraftSearchDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('./uef/search/index.html', 'eCraft Search', event);">
 									<img class="icon" src="./images/google-drive-logo-flat.png">
 									<span class="branding-bar">eCraft Search</span>
@@ -960,11 +987,13 @@
 									Use this to search for help from Maker web sites
 								</div>
 							</div>
+
 							<div data-role="tile" class="tile bg-ideation fg-white no-mobile"  toolid="24" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Inspiratorium',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/inspiratorium-help.html', '#inspiratoriumDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('https://ecraft.zsi.at/', 'inspiratorium', event);">
 									<img class="icon" src="./images/inspiratorium_logo.png">
 									<span class="branding-bar">Inspiratorium</span>
@@ -977,11 +1006,13 @@
 						<!-- PLAN GROUP -->
 						<div class="tiles-grid tiles-group size-2 fg-white  mb-15" data-group-title="Plan">
 							<!--UEF Ideation-->
+
 							<div data-role="tile" class="tile bg-plan fg-white" toolid="3" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','eCraft Plan',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/ecraft-idea-help.html', '#eCraftIdeaDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('./uef/ideation/index.html', 'eCraft Plan', event);">
 									<img class="icon" src="./images/google-drive-logo-flat.png">
 									<span class="branding-bar">eCraft Plan</span>
@@ -991,11 +1022,13 @@
 								</div>
 							</div>
 							<!-- eCraft TODO -->
+
 							<div data-role="tile" data-size="medium" class="tile bg-plan fg-white" toolid="20" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','eCraft TODO',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/plan.html', '#eCraftTodoDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('./uef/plan/index.html', 'eCraft Todo', event);">
 									<img class="icon" src="./images/google-drive-logo-flat.png">
 									<span class="branding-bar">eCraft TODO</span>
@@ -1005,11 +1038,13 @@
 								</div>
 							</div>
 							<!-- Trello -->
+
 							<div data-role="tile" data-size="small" class="tile bg-plan fg-white no-mobile" toolid="4" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Trello',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/trello-help.html', '#TrelloDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('https://trello.com/', undefined, event);">
 									<img class="icon" width="50%" src="./images/trello-logo.png">
 								</div>
@@ -1021,39 +1056,45 @@
 						<!-- CREATE GROUP -->
 						<div class="tiles-grid tiles-group size-2 fg-white  mb-15" data-group-title="Create">
 							<!-- TinkerCad 3D Design -->
+
 							<div data-role="tile" class="tile bg-create fg-white no-mobile" toolid="5" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','TinkerCad 3D Design',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/tinkercad-3d-design-help.html', '#TinkerCad3DDesignDialog');"></span>
 								</div>
-								<div class="slide-front" onclick="tileClick('https://www.tinkercad.com/#/?type=tinkercad&collection=designs', 'TinkerCad 3D Design', event);">
+
+								<div class="slide-front" onclick="tileClickTinkerCad('https://www.tinkercad.com/#/?type=tinkercad&collection=designs', 'TinkerCad 3D Design', event);">
 									<img class="icon" src="./images/tinkercad-logo.png">
 									<span class="branding-bar">3D Design</span>
 								</div>
-								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('https://www.tinkercad.com/dashboard?type=tinkercad&collection=designs', 'TinkerCad 3D Design', event);">
+								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClickTinkerCad('https://www.tinkercad.com/dashboard?type=tinkercad&collection=designs', 'TinkerCad 3D Design', event);">
 									TinkerCad is a 3D modelling application
 								</div>
 							</div>
 							<!-- TinkerCad Circuit Design -->
+
 							<div data-role="tile" class="tile bg-create fg-white no-mobile" toolid="6" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','TinkerCad Circuits',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/tinkercad-circuit-design-help.html', '#TinkerCadCircuitDesignDialog');"></span>
 								</div>
-								<div class="slide-front" onclick="tileClick('https://www.tinkercad.com/dashboard?type=tinkercad&collection=designs', 'TinkerCad Circuit Design', event);">
+								<div class="slide-front" onclick="tileClickTinkerCad('https://www.tinkercad.com/dashboard?type=tinkercad&collection=designs', 'TinkerCad Circuit Design', event);">
+
 									<img class="icon" src="./images/tinkercad-logo.png">
 									<span class="branding-bar">Circuit Design</span>
 								</div>
-								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('https://www.tinkercad.com/dashboard?type=circuits&collection=designs', 'TinkerCad Circuit Design', event);">
+								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClickTinkerCad('https://www.tinkercad.com/dashboard?type=circuits&collection=designs', 'TinkerCad Circuit Design', event);">
 									TinkerCad includes a circuit design and simulation application
 								</div>
 							</div>
 							<!-- Beetle Blocks -->
+
 							<div data-role="tile" class="tile bg-create fg-white no-mobile" toolid="7" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Beetle Blocks',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/beetleblocks-help.html', '#BeetleBloxDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('./beetleblocks/', 'beetleblocks', event);">
 									<img class="icon" src="./images/beetle-blocks.png">
 									<span class="branding-bar">Beetle Blocks</span>
@@ -1063,11 +1104,13 @@
 								</div>
 							</div>
 							<!-- 3D slincing -->
+
 							<div data-role="tile" class="tile bg-create fg-white no-mobile" toolid="21" data-effect="hover-slide-up">
 									<div class="badge-medium-top">
-										<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+										<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','3D Modelling',event);"></span>
 										<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/3d-slice-help.html', 'Slicer', event);"></span>
 									</div>
+
 									<div class="slide-front" onclick="tileClick('./uef/3Dmodelling/three.js/editor/index.html', '3D modelling', event);">
 											<img class="icon" src="./images/slice.png">
 											<span class="branding-bar">3D modelling and slicing</span>
@@ -1077,11 +1120,13 @@
 									</div>
 							</div>
 							<!-- 3D Slah -->
+
 							<div data-role="tile" data-size="small" class="tile bg-create fg-white no-mobile" toolid="8" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','3D Slash',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/3d-slash-help.html', '#3DSlashDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('https://www.3dslash.net/slash.php', '3D Slash', event);">
 									<img class="icon" width="50%" src="./images/3d-slash-logo.png">
 								</div>
@@ -1090,11 +1135,13 @@
 								</div>
 							</div>
 							<!-- Cura -->
+
 							<div data-role="tile" data-size="small" class="tile bg-create fg-white no-mobile" toolid="9" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Cura',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/cura-help.html', '#CuraDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="infoClick('./about/cura-help.html', '#CuraDialog');">
 									<img class="icon" width="50%" src="./images/cura-logo.png">
 								</div>
@@ -1106,11 +1153,13 @@
 						<!-- PROGRAM GROUP -->
 						<div class="tiles-grid tiles-group size-2 fg-white mb-15" data-group-title="Program">
 							<!-- SNAP -->
+
 							<div data-role="tile" class="tile bg-ardu-pi fg-white no-mobile" toolid="10" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Snap',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/snap-help.html', '#SnapDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('./snap/snap.html','Snap!', event);">
 									<img class="icon" src="./images/snap_logo-110.png">
 									<span class="branding-bar">Snap!</span>
@@ -1120,11 +1169,13 @@
 								</div>
 							</div>
 							<!-- SNAP4ARDUINO -->
+
 							<div data-role="tile" class="tile bg-arduino fg-white no-mobile" toolid="11" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Snap4Arduino',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/snap4arduino-help.html', '#Snap4ArduinoDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('./snap4arduino/index.html','Snap4Arduino', event);">
 									<img class="icon" src="./images/snap_logo-110.png">
 									<span class="branding-bar">Snap4Arduino</span>
@@ -1134,9 +1185,10 @@
 								</div>
 							</div>
 							<!-- ARDUBLOCK -->
+
 							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white no-mobile" toolid="12" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Ardublock',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/ardublock-help.html', '#ArdublockDialog');"></span>
 								</div>
 								<div class="slide-front" onclick="tileClick('http://blog.ardublock.com/', undefined, event);">
@@ -1147,12 +1199,14 @@
 								</div>
 							</div>
 							<!-- SCRATCH 4 RPi -->
+
 							<div data-role="tile" data-size="small" class="tile bg-raspberry fg-white no-mobile" toolid="13" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Scratch for RPi',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/scratch-4-raspberry-pi.html', '#Scratch4RPiDialog');"></span>
 								</div>
 								<div class="slide-front" onclick="tileClick('https://www.raspberrypi.org/documentation/usage/gpio/scratch2/README.md', undefined, event);">
+
 									<img class="icon" src="./images/scratch-logo-small.png">
 								</div>
 								<div class="slide-back text-extra-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('https://www.raspberrypi.org/documentation/usage/gpio/scratch2/README.md', undefined, event);">
@@ -1160,11 +1214,13 @@
 								</div>
 							</div>
 							<!-- SCRATCH 4 ARDUINO -->
+
 							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white no-mobile" toolid="14" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Scratch for Arduino',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/scratch-4-arduino.html', '#Scratch4ArduDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('http://s4a.cat/', undefined, event);">
 									<img class="icon" src="./images/scratch-logo-small.png">
 								</div>
@@ -1173,11 +1229,13 @@
 								</div>
 							</div>
 							<!-- APP INVENTOR -->
+
 							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white no-mobile" toolid="15" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','MIT App Inventor',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/app-inventor-help.html', '#AppInventorDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('http://ai2.appinventor.mit.edu/', undefined, event);">
 									<img class="icon" src="./images/app-inventor-allwhite.png">
 								</div>
@@ -1186,11 +1244,13 @@
 								</div>
 							</div>
 							<!-- POCKET CODE -->
+
 							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white no-mobile" toolid="16" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Pocket Code',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/pocket-code-help.html', '#PocketCodeDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('https://www.catrobat.org/intro/', undefined, event);">
 									<img class="icon" src="./images/pocket-code-allwhite.png">
 								</div>
@@ -1199,11 +1259,13 @@
 								</div>
 							</div>
 							<!-- NETSBLOX -->
+
 							<div data-role="tile" data-size="small" class="tile bg-ardu-pi fg-white no-mobile" toolid="17" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','NetsBlox',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/netsblox-help.html', '#NetsBloxDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('https://editor.netsblox.org/','NetsBlox', event);">
 									<img class="icon" src="./images/netsblox.png">
 								</div>
@@ -1212,11 +1274,13 @@
 								</div>
 							</div>
 							<!-- ARDUINO IDE -->
+
 							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white no-mobile" toolid="18" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Arduino IDE',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/arduino-ide-help.html', '#ArduinoIdeDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('https://create.arduino.cc/editor', undefined, event);">
 									<img class="icon" src="./images/arduino-ide.png">
 								</div>
@@ -1225,11 +1289,13 @@
 								</div>
 							</div>
 							<!-- ARDUINOBOT -->
+
 							<div data-role="tile" data-size="small" class="tile bg-arduino fg-white no-mobile" toolid="22" data-effect="hover-slide-up">
 								<div class="badge-small-top">
-									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Craftbot for Arduino',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/arduinobot-help.html', '#Arduinobot', event);"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('./about/arduinobot-login.html', undefined, event);">
 									<img class="icon" src="./images/arduinobot-only.png">
 								</div>
@@ -1241,11 +1307,13 @@
 						<!-- SHARE GROUP -->
 						<div class="tiles-grid tiles-group size-1 fg-white  mb-15" data-group-title="Share">
 							<!--Thingiverse-->
+
 							<div data-role="tile" class="tile bg-share fg-white no-mobile" toolid="19" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Thingiverse',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/thingiverse-help.html', '#ThingiverseDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('https://www.thingiverse.com/','Thingiverse', event);">
 									<img class="icon" src="./images/thingiverse-logo.png">
 									<span class="branding-bar">Thingiverse</span>
@@ -1255,17 +1323,19 @@
 								</div>
 							</div>
 							<!--My Work-->
+
 							<div data-role="tile" class="tile bg-share fg-white" toolid="23" data-effect="hover-slide-up">
 								<div class="badge-medium-top">
-									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/commenting/index.html','Feedback',event);"></span>
+									<span class="mif-bubble badge-medium-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Share my Work',event);"></span>
 									<span class="mif-question badge-medium-top-inner bg-transparent" onclick="infoClick('./about/share-my-work-help.html', '#ShareMyWorkDialog');"></span>
 								</div>
+
 								<div class="slide-front" onclick="tileClick('./lnu/sharing/index.html','Sharing', event);">
 									<img class="icon" src="./lnu/sharing/images/share-tool-icon.png">
 									<span class="branding-bar">Share My Work</span>
 								</div>
 								<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./lnu/sharing/index.html','Sharing', event);">
-									Share you work here
+									Use this to share your work with your peers
 								</div>
 							</div>
 						</div> <!--End of group tiles-->
@@ -1353,33 +1423,37 @@
 								<div class="grid">
 									<div class="row">
 										<div class="cell">
-											<p class="pb-5">Task List</p>
+											<p class="pb-5">Action List</p>
 										</div>
 										<div class="cell">
 											<div id="tasklist-refresh">
-												<span class="mif-loop2 float-right" data-role="hint" data-hint-text="Refresh the task list" data-hint-position="bottom" data-cls-hint="bg-cyan fg-white drop-shadow"></span>
+												<span class="mif-loop2 float-right" data-role="hint" data-hint-text="Refresh the action list" data-hint-position="bottom" data-cls-hint="bg-cyan fg-white drop-shadow"></span>
 											</div>
 
 										</div>
 									</div>
-									<div class="row" id="accordionRow">
+									<div class="row">
 										<div class="cell" id="tasklist-empty-state">
 											<img src="lnu/tasklist/img/no-tasks.png">
-											<h4>No tasks</h4>
-											<p>There are currently no tasks available.</p>
+											<h4>No actions</h4>
+											<p>There are currently no actions available.</p>
 										</div>
+									</div>
+									<div class="row" id="accordionRow">
 									</div>
 								</div>
 							</div> <!-- End of Task List tile -->
 							
 							<!--Achievements tile-->
-							<div class="tiles-grid tiles-group size-1 fg-white  mb-15" data-group-title="Achievements">
-								<div data-role="tile" data-size="small" class="tile bg-selfevaluation fg-white" data-effect="hover-slide-up">
-									<span class="mif-question badge-small-top m-0 p-0 bg-transparent" onclick="infoClick('./about/selfevaluation-help.html', '#SelfEvaluationDialog');"></span>
-									<div class="slide-front" onclick="tileClick('https://create.arduino.cc/editor', undefined, event);">
+							<div class="tiles-grid tiles-group size-1 fg-white  mb-15 achievement-tiles-grid" data-group-title="Achievements">
+								<div data-role="tile" data-size="medium" class="tile bg-selfevaluation fg-white" data-effect="hover-slide-up">
+									<div class="badge-medium-top">
+										<span class="mif-question badge-medium-top-inner m-0 p-0 bg-transparent" onclick="infoClick('./about/selfevaluation-help.html', '#SelfEvaluationDialog');"></span>
+									</div>
+									<div class="slide-front" onclick="tileClick('./SelfEvaluation/index.html?p='+(new Date()).getTime() ,'Achievements', event);">
 										<img class="icon" src="./images/white-star-icon-32.png">
 									</div>
-									<div class="slide-back text-extra-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./SelfEvaluation/index.html?p='+(new Date()).getTime() ,'Achievements', event);">
+									<div class="slide-back text-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('./SelfEvaluation/index.html?p='+(new Date()).getTime() ,'Achievements', event);">
 										Self evaluation
 									</div>
 								</div>

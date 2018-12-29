@@ -157,6 +157,7 @@ class Gridview {
      * @param options  : Object - The options for the action menu object
      */
     m_createActionMenu(fullData, options) {
+
         var el     = document.createElement("div");
         var button = document.createElement("button");
         var span   = document.createElement("span");

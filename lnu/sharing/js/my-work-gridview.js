@@ -44,27 +44,21 @@ function initGridView() {
             dataMapping: null,
             menuItems: [
                 { label: "Stop sharing", icon: "mif-cancel",   callback: cancelCallback   },
-                { label: "Download",     icon: "mif-download", callback: downloadCallback }
+                { label: "Download",     icon: "mif-download", callback: downloadCallbackMyWork },
+                { label: "Comment",     icon: "mif-bubbles", callback: commentCallback }
             ]
         }
     ];
 
     getUsersSharedFiles(function(data) {
+        console.log(data);
         MYFILES = data;
+        //console.log(MYFILES);
         var gv = new Gridview(columns, data, document.getElementById("myWorkTable"));
         var table = $('#myWorkTable').DataTable();
     });
 }
 
-
-/**
- * 
- * @param event 
- * @param fileid 
- */
-function shareCallback(event, fileid) {
-    // console.log("shareCallback", fileid);
-}
 
 
 /**
@@ -73,7 +67,7 @@ function shareCallback(event, fileid) {
  * @param fileid 
  */
 function cancelCallback(event, fileid) {
-    // console.log("cancelCallback", fileid);
+     console.log("cancelCallback", fileid);
 
     var file = MYFILES.find(function (file) {
         return parseInt(file["FILEID"])===parseInt(fileid);
@@ -131,8 +125,9 @@ function removeRow(fileid){
  * @param event 
  * @param fileid - file id
  */
-function downloadCallback(event, fileid) {
-    //console.log("downloadCallback", fileid);
+function downloadCallbackMyWork(event, fileid) {
+    console.log("downloadCallback", fileid);
+    console.log(MYFILES);
 
     var file = MYFILES.find(function (file) {
        return parseInt(file["FILEID"])===parseInt(fileid);
@@ -142,6 +137,20 @@ function downloadCallback(event, fileid) {
 
     download(filename);
 }
+
+/**
+ * Open commenting window
+ * @param event
+ * @param fileid
+ */
+function commentCallback(event,fileid){
+    var file = MYFILES.find(function (file) {
+        return parseInt(file["FILEID"])===parseInt(fileid);
+    });
+    console.log(file);
+    openCommentingDialog(file["TITLE"],file["FILEID"])
+}
+
 
 /**
  * Stop sharing a file
@@ -170,4 +179,46 @@ function stopSharingDialog(id,message) {
               });
          }
     });
+}
+
+/**
+ * Generate commenting dialog
+ * @param fileName
+ * @param fileId
+ */
+function openCommentingDialog(fileName,fileId) {
+
+    getCommentsByFileId(fileId,function(result){
+
+
+        var commentDialog = metroDialog.create({
+            title: 'Commenting "' + fileName + '" work',
+            content: createCommentingForm(result["DATA"]),
+            options: {
+                closeButton:true
+
+            }
+        });
+
+        $('.dialog-close-button').click(function (el) {
+            // $(el).data('dialog').close();
+            commentDialog.data('dialog').close();
+        });
+
+        $("#sendCommentBtn").click(function(){
+            sendComment(fileId)
+        });
+
+        $("#commentSelect").on('change', function() {
+
+            $("#rating").rating('value', this.value);
+
+
+        });
+
+
+    });
+
+
+
 }
