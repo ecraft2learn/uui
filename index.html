@@ -1365,7 +1365,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="cell"id="tileProjects">
+										<div class="cell" id="tileProjects">
 											<script>
 												var userId = window.sessionStorage.getItem("userId");
 												if(userId!=undefined && userId!=-1){
@@ -1381,7 +1381,7 @@
 														var spanLink = $("<div>").css("width","100%").css("border", "0px").addClass("project m-0 p-0").attr("id", "spanPrj_" + prjId);
 														var alink = $("<a>").addClass("whiteLink").prop("href","#").data('PROJECTID',prjId).click(SelectProject).html(jsonData.DATA[i].PRJ_NAME);
 														if(window.sessionStorage.getItem("currentProjectId")==prjId)
-															spanLink.addClass("bg-darkCobalt");
+															spanLink.addClass("bg-black");
 														spanLink.append(alink);
 														$("#tileProjects").append(spanLink);//.append("<br/>");
 													}
@@ -1403,9 +1403,9 @@
 														$('#activeProj').text('none');
 													var newSelectedDiv = $("#spanPrj_" + prjId);
 													if(curSelectedDiv!=null)
-														curSelectedDiv.removeClass("bg-darkCobalt");
+														curSelectedDiv.removeClass("bg-black");
 													if(newSelectedDiv!=null && newSelectedDiv!=undefined)
-														newSelectedDiv.addClass("bg-darkCobalt");
+														newSelectedDiv.addClass("bg-black");
 													getProjectFiles(prjId);
 												}
 												$(document).on('click', '.project-tile', function(){
