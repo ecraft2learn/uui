@@ -658,7 +658,10 @@
 			// need to check because user is not logged in a 403 error occurs
 			// but this didn't work since the only error received was a ProgressEvent and that
 			// was received whether or not TinkerCad was reporting a 403 or all was well.
-			alert("TinkerCad tools only work if you are logged in. If you see an error page then log in at tinkercad.com.");
+			if (typeof window.tinkercad_warning_given === 'undefined') {
+			    alert("TinkerCad tools only work if you are logged in. If you see an error page then log in at tinkercad.com.");
+			    window.tinkercad_warning_given = true;	
+			}
 			tileClick(toolUrl, winTitle, event);
 // 			let xhr = new XMLHttpRequest();
 // 			let error_loading = false;
@@ -1188,8 +1191,7 @@
 									<span class="mif-bubble badge-small-top-inner bg-transparent" onclick="openSmallWindow('./lnu/feedback-window/index.html','Feedback','Ardublock',event);"></span>
 									<span class="mif-question badge-small-top-inner bg-transparent" onclick="infoClick('./about/ardublock-help.html', '#ArdublockDialog');"></span>
 								</div>
-
-								<div class="slide-front" onclick="infoClick('./about/cura-help.html', '#ArdublockDialog');">
+								<div class="slide-front" onclick="tileClick('http://blog.ardublock.com/', undefined, event);">
 									<span class="tile-image icon"><span class='notranslate' translate='no'>A</span></span>
 								</div>
 								<div class="slide-back text-extra2-small d-flex flex-justify-center flex-align-center p-3" onclick="tileClick('http://blog.ardublock.com/', undefined, event);">
