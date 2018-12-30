@@ -188,7 +188,9 @@ function getActivityId() {
 
 function save() {
 
-    if (validateInput()) {
+	console.log('jaa');
+
+//    if (validateInput()) {
         var selfEvaluation = {
             Activity: getActivityId(),
             WhatWeKnow: $('#whatWeKnow').val(),
@@ -204,6 +206,9 @@ function save() {
             category = category.split("_")[1];
             var remark = $('#category_' + category + '_remark').val();
             var categoryEvaluation = $('#category_' + category + '_selfEvaluation').val();
+
+		console.log(remark);
+		console.log(categoryEvaluation);
 
             selfEvaluation.Categories.push({
                 Category: category,
@@ -224,8 +229,9 @@ function save() {
             });
 
         });
+	console.log(selfEvaluation);
         saveSelfEvaluation(selfEvaluation, succesfullSave);
-    }
+  //  }
 
 }
 

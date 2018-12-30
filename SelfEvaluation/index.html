@@ -102,10 +102,14 @@
 
         $(document).ready(function () {
             $("#activityLoadingAnimation").show();
-		console.log(window.sessionStorage.getItem('pilotsite'));
             getActivities(window.sessionStorage.getItem('pilotsite'), function (result, status) {
 
+		$('#tileGrid').html('<h4>No activities from the teacher yet</h4>');
+
                 var list = JSON.parse(result);
+
+		if (list.DATA.length)
+			$('#tileGrid').html('');
 
                 for (i = 0; i < list.DATA.length; i++) {
                     var riga = list.DATA[i];
