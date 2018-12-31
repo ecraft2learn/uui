@@ -188,8 +188,6 @@ function getActivityId() {
 
 function save() {
 
-	console.log('jaa');
-
 //    if (validateInput()) {
         var selfEvaluation = {
             Activity: getActivityId(),
@@ -217,16 +215,23 @@ function save() {
                 Criterias: []
             });
 
-            $.each($('#category_' + category + '-criterias > .form-group > select'), function (index, criteria) {
+	    let selects = $('#category_' + category + '-criterias').find('select');
+
+	    for (let j = 0; j < selects.length; j++) {
+            //$.each($('#category_' + category + '-criterias > .form-group > select'), function (index, criteria) {
+	        let criteria = selects[j];
                 var criteriaId = criteria.id;
                 criteriaId = criteriaId.split("_")[2];
+
+		console.log(criteria.id);
+		console.log(criteria.value);
 
                 selfEvaluation.Categories[i].Criterias.push({
                     Criteria: criteriaId,
                     Value: criteria.value
                 });
 
-            });
+            }
 
         });
 	console.log(selfEvaluation);
