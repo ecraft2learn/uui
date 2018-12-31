@@ -28,7 +28,7 @@ function setActivityCategories(result, status) {
  //           html += "<label id=\"category_" + riga.CategoryId + "-teacherEvaluation\" class=\"form-control\" style=\"text-align:center;width:100%;\" disabled> </label>        </span>    </div>";
 
             //teacher remark
-            html += "<div class=\"cell-md-10\" style=\"text-align: justify; text-justify: inter-word;\">        <p id=\"category_" + riga.CategoryId + "-teacherNote\">            <strong> Teacher's note: </strong></p>    </div></div></div>";
+//            html += "<div class=\"cell-md-10\" style=\"text-align: justify; text-justify: inter-word;\">        <p id=\"category_" + riga.CategoryId + "-teacherNote\">            <strong> Teacher's note: </strong></p>    </div></div></div>";
 
             $('#categoryContainer').append(html);
 
@@ -52,6 +52,9 @@ function setSelfEvaluation(result, status) {
         var list = JSON.parse(result);
 
         if (list.DATA.length > 0) {
+	    $('#categoryContainer').html('<h2>Self-evaluated and waiting for teacher\'s evaluation.</h2>');
+            $('#self-eval-reflect').html('');
+            $('#self-eval-btns').html('');
             $('#whatWeKnow').val(list.DATA[0].WhatWeKnow);
             $('#notClear').val(list.DATA[0].NotClear);
         }
@@ -102,10 +105,17 @@ function setCategorySelfEvaluation(result, status) {
             //alert("setting eval criterias");
             var gruppedEvaluations = groupEvaluations(list.DATA);
 
-	    $('#categoryContainer').html('<h2>Evaluated</h2>');
+	    $('#categoryContainer').html('<h2>Self-evaluated and waiting for teacher\'s evaluation.</h2>');
 	    $('#self-eval-reflect').html('');
 	    $('#self-eval-btns').html('');
 
+
+	    if (gruppedEvaluations.TeacherNote) {
+		$('#categoryContainer').html('');
+	        for (let i = 0; i < list.DATA.length; i++)
+	    		$('#categoryContainer').append('<h4>Teacher\'s notes</h4><p>' + list.DATA[i].TeacherNote + '</p>');
+	    	$('#categoryContainer').append('<h5>Achievements unlocked</h5>');
+	    }
             //$('#category_' + gruppedEvaluations.Category + '_remark').val(gruppedEvaluations.Remark);
             //$('#category_' + gruppedEvaluations.Category + '_selfEvaluation').val(gruppedEvaluations.SelfEvaluation);
             //$('#category_' + gruppedEvaluations.Category + '-teacherEvaluation').append(gruppedEvaluations.TeacherEvaluation);
@@ -120,8 +130,8 @@ function setCategorySelfEvaluation(result, status) {
 
             });
 
-            if (gruppedEvaluations.TeacherEvaluation)
-                $('#saveBtn').prop("disabled", true);
+            //if (gruppedEvaluations.TeacherEvaluation)
+            //    $('#saveBtn').prop("disabled", true);
         }
     }
 
@@ -192,7 +202,7 @@ function getActivityId() {
 
 function save() {
 
-//    if (validateInput()) {
+    if (validateInput()) {
         var selfEvaluation = {
             Activity: getActivityId(),
             WhatWeKnow: $('#whatWeKnow').val(),
@@ -209,9 +219,6 @@ function save() {
             var remark = $('#category_' + category + '_remark').val();
             var categoryEvaluation = $('#category_' + category + '_selfEvaluation').val();
 
-		console.log(remark);
-		console.log(categoryEvaluation);
-
             selfEvaluation.Categories.push({
                 Category: category,
                 Remark: remark,
@@ -227,9 +234,6 @@ function save() {
                 var criteriaId = criteria.id;
                 criteriaId = criteriaId.split("_")[2];
 
-		console.log(criteria.id);
-		console.log(criteria.value);
-
                 selfEvaluation.Categories[i].Criterias.push({
                     Criteria: criteriaId,
                     Value: criteria.value
@@ -238,14 +242,14 @@ function save() {
             }
 
         });
-	console.log(selfEvaluation);
         saveSelfEvaluation(selfEvaluation, succesfullSave);
-  //  }
+    }
 
 }
 
 function validateInput() {
 
+    /*
     var result = true;
 
     $.each($(".selfevaluation"), function (index, select) {
@@ -254,6 +258,8 @@ function validateInput() {
     });
 
     return result;
+    */
+    return $('#whatWeKnow').val().trim() !== '' && $('#notClear').val().trim() !== '';
 }
 
 function succesfullSave(result, status) {
