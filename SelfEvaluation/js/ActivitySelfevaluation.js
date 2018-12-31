@@ -24,8 +24,8 @@ function setActivityCategories(result, status) {
             html += "</div> </div>";
 
             //teacher evaluation
-            html += "<div class=\"row category-footer\">    <div class=\"cell-md-2\">        <span><strong>Teacher's evaluation: </strong></span>        <span>";
-            html += "<label id=\"category_" + riga.CategoryId + "-teacherEvaluation\" class=\"form-control\" style=\"text-align:center;width:100%;\" disabled> </label>        </span>    </div>";
+//            html += "<div class=\"row category-footer\">    <div class=\"cell-md-2\">        <span><strong>Teacher's evaluation: </strong></span>        <span>";
+ //           html += "<label id=\"category_" + riga.CategoryId + "-teacherEvaluation\" class=\"form-control\" style=\"text-align:center;width:100%;\" disabled> </label>        </span>    </div>";
 
             //teacher remark
             html += "<div class=\"cell-md-10\" style=\"text-align: justify; text-justify: inter-word;\">        <p id=\"category_" + riga.CategoryId + "-teacherNote\">            <strong> Teacher's note: </strong></p>    </div></div></div>";
@@ -102,10 +102,14 @@ function setCategorySelfEvaluation(result, status) {
             //alert("setting eval criterias");
             var gruppedEvaluations = groupEvaluations(list.DATA);
 
-            $('#category_' + gruppedEvaluations.Category + '_remark').val(gruppedEvaluations.Remark);
-            $('#category_' + gruppedEvaluations.Category + '_selfEvaluation').val(gruppedEvaluations.SelfEvaluation);
-            $('#category_' + gruppedEvaluations.Category + '-teacherEvaluation').append(gruppedEvaluations.TeacherEvaluation);
-            $('#category_' + gruppedEvaluations.Category + '-teacherNote').append(gruppedEvaluations.TeacherNote);
+	    $('#categoryContainer').html('<h2>Evaluated</h2>');
+	    $('#self-eval-reflect').html('');
+	    $('#self-eval-btns').html('');
+
+            //$('#category_' + gruppedEvaluations.Category + '_remark').val(gruppedEvaluations.Remark);
+            //$('#category_' + gruppedEvaluations.Category + '_selfEvaluation').val(gruppedEvaluations.SelfEvaluation);
+            //$('#category_' + gruppedEvaluations.Category + '-teacherEvaluation').append(gruppedEvaluations.TeacherEvaluation);
+            //$('#category_' + gruppedEvaluations.Category + '-teacherNote').append(gruppedEvaluations.TeacherNote);
 
             $.each(gruppedEvaluations.Criterias, function (index, critEval) {
 
