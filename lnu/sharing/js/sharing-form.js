@@ -174,11 +174,7 @@ function generateToolSelect(callback){
             //selectEl.setAttribute("data-validate-func", "required");
             selectEl.setAttribute("name", "toolId");
 
-            var option = document.createElement("option");
-            option.textContent = "None";
-            option.setAttribute("selected", "selected");
-            option.setAttribute("value", "");
-            selectEl.appendChild(option);
+
 
             for (var i = 0; i < tools.length; i++) {
                 var option = document.createElement("option");
