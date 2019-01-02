@@ -1710,9 +1710,22 @@
             }
 
             textHandler.blinkCursor();
-            textHandler.blinkCursorInterval = setInterval(textHandler.blinkCursor, 700);
-
+            textHandler.blinkCursorInterval = setInterval(textHandler.blinkCursor, 700);			
+			
             this.showTextTools();
+			var myEle = document.getElementById("texta");
+			if(!myEle) {
+				myEle = document.createElement("input");
+				myEle.setAttribute("type", "text");
+				myEle.setAttribute("id", "texta");
+				myEle.setAttribute("style", "position:absolute;top:0;z-index:-9999;");
+				document.body.appendChild(myEle);
+				myEle.oninput = function(e) {
+				    textHandler.text = this.value;
+				};
+			}
+			myEle.value = "";
+			myEle.focus();
         },
         mouseup: function(e) {},
         mousemove: function(e) {},
