@@ -85,7 +85,6 @@ $(document).on('keypress', '#search-input', function(e){
 
 function searchData(event) {
 	event.preventDefault();
-	console.log('a');
 	if (event.type === 'keyup' &&
 	  	event.keyCode !== 27)
 		return;
@@ -97,7 +96,33 @@ function searchData(event) {
 
 	if (val.trim() === '')
 		return;
-                                        
+
+	let canSearch = true;
+       
+	$.ajax({
+
+		async: false,
+		url: 'profane.json',
+		dataType: 'json',
+		success: (data) => {
+
+			let lowerCase = val.toLowerCase();
+	
+			if (data[lowerCase]) {
+
+				alert('Cannot use such a profane search term.');
+				canSearch = false;	
+
+			}
+
+		}
+
+	});
+
+	if (! canSearch)
+		return;        
+
+ 
         function getRequest(searchTerm) {
                                 
         	var url = 'https://www.googleapis.com/youtube/v3/search';
