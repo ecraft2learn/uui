@@ -107,14 +107,19 @@ function searchData(event) {
 		success: (data) => {
 
 			let lowerCase = val.toLowerCase();
-	
-			if (data[lowerCase]) {
 
-				alert('Cannot use such a profane search term.');
-				canSearch = false;	
+			for (let word in data) {
+
+				if (lowerCase.indexOf(word) > -1) {
+
+					alert('Cannot use such a profane search term. You have a word ' + word + ' in your query');
+					canSearch = false;
+					break;
+
+				}
 
 			}
-
+	
 		}
 
 	});
