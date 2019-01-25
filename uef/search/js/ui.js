@@ -110,7 +110,7 @@ function searchData(event) {
 
 			for (let word in data) {
 
-				if (lowerCase.indexOf(word) > -1) {
+				if (lowerCase.indexOf(word) > -1 && word.length > 1) {
 
 					alert('Cannot use such a profane search term. You have a word ' + word + ' in your query');
 					canSearch = false;
