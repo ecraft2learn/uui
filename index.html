@@ -1795,12 +1795,15 @@
 
 	(() => {
 
+		var lastId;
+		
 		setInterval(() => {
 
 			var user = window.sessionStorage.getItem('username');
 			var sessionId = window.sessionStorage.getItem('pilotsite');
 
-			var lastId = window.localStorage.getItem('lastMessageId');
+			//var lastId = window.localStorage.getItem('lastMessageId');
+
 
 			if (! lastId)
 				lastId = 0;
@@ -1845,9 +1848,8 @@
 							}
 
 							id++;
-
-							window.localStorage.setItem('lastMessageId', id);
-
+							lastId = id;
+						
 						}
 
 					},

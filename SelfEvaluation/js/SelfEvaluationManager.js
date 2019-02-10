@@ -32,7 +32,7 @@ function getCategoryCriterias(activityId, categoryId, responseHandler) {
     formData.append("category", categoryId);
     formData.append("activity", activityId);
 
-    makeAjaxCall(formData, responseHandler);
+    makeAjaxCall(formData, responseHandler, categoryId);
 }
 
 function getSelfEvaluation(activityId, responseHandler) {
@@ -78,7 +78,7 @@ function ping(handler) {
 var url ="https://cs.uef.fi/~ec2l/selfEvaluationManager.php";
 //var url = "http://localhost/php/selfEvaluationManager.php";
 //var url='https://cs.uef.fi/~ec2l/WebDocs/SelfEvaluationManger.php'
-function makeAjaxCall(formData, handler, async = true) {
+function makeAjaxCall(formData, handler, additional, async = true) {
     $.ajax({
         url: url,
         dataType: 'text',
@@ -89,7 +89,7 @@ function makeAjaxCall(formData, handler, async = true) {
         type: 'post',
         async: async,
         success: function (php_script_response) {
-            handler(php_script_response);
+            handler(php_script_response, additional);
         }
     });
 }
