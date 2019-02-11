@@ -506,7 +506,7 @@ Cloud.prototype.getProjectList = function (type, onSuccess, onError, withThumbna
 			onError.call(null, 'Could not fetch projects');
 	} else {
 		if(window.sessionStorage.getItem("errorStatus") == "success")
-			onSuccess.call(null, 'No files found.');
+			onSuccess.call(null, response.message || response);
 		else
 			onError.call(null, 'Could not fetch projects');
 	}

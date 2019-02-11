@@ -258,7 +258,7 @@ function generateHtmlProjectFile() {
             //event.parent.preventDefault();
             var data = $('#sharingForm').serializeArray();
             //console.log(data);
-            saveSharing(data,function (result) {
+            saveSharing(data,window.sessionStorage.getItem("userId"),function (result) {
                 if(result === "success"){
                     $.Notify({
                         caption: 'Success',
