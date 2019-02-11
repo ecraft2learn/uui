@@ -51,7 +51,7 @@ function setSelfEvaluation(result, status) {
     if (result) {
         var list = JSON.parse(result);
 
-	//console.log(list);
+	console.log(list);
 
         if (list.DATA.length > 0) {
 
@@ -63,12 +63,11 @@ function setSelfEvaluation(result, status) {
 		//console.log('jaa');
 	   	for (let i = 0; i < list.DATA.length; i++) {
 	
-			console.log(list.DATA[i].name);
-			console.log(list.DATA[i].TeacherNote);
-			console.log(list.DATA[i].TeacherEvaluation);	
 			str += '<h5>' + list.DATA[i].name + '</h5>';
 			str += '<p>Teacher\'s notes: ' + list.DATA[i].TeacherNote + '</p>';
 			str += '<p>Teacher\'s evaluation: ' + list.DATA[i].TeacherEvaluation + '</p>';
+			str += '<p>Your notes: ' + list.DATA[i].Remark + '</p>';
+			str += '<p>Your self-evaluation: ' + list.DATA[i].SelfEvaluation + '</p>';
 			str += '<hr>';
 
 	   	}
