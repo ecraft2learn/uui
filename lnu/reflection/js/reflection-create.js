@@ -62,7 +62,17 @@ function onSendReflection(event) {
 
     if (answer!=""){
 
+	saveReflection(question, answer, null, function(results) {
 
+		if (results !== 'error') {
+			alert('The self-reflection was sent');
+			$('#reflection').val('')
+		} else
+			alert('Error while processing the request');
+
+	});
+
+	/*
         //clear the form
         var formId = $(event.target).closest("form").attr('id');
         clearForm(formId);
@@ -84,11 +94,11 @@ function onSendReflection(event) {
                 });
             }
         });
-
+	*/
 
     }
     else{
-        showNotification(false,"Please provide some reflection text.");
-    }
+    		alert('Please, provide a reflection text');
+	}
 
 }
