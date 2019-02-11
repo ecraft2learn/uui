@@ -1443,6 +1443,14 @@
 									</div>
 								</div>
 							</div> <!-- End of Task List tile -->
+
+							<div id="sent-reflection" data-role="tile" data-size="large" class="bg-darkBlue fg-white p-5 task-list-tile" style='overflow-y: scroll !important;'>
+                                                                <div class="grid">
+									<p>Sent self-reflection</p>
+                                                                        <div class="row" id='sent-reflection-row'>
+                                                                        </div>
+                                                                </div>
+                                                        </div> <!-- End of Task List tile -->	
 							
 							<!--Achievements tile-->
 							<div class="tiles-grid tiles-group size-1 fg-white  mb-15 achievement-tiles-grid" data-group-title="Achievements">
@@ -1467,8 +1475,49 @@
 			</div>
 		</div>
 	</div><!--End of Main Content Container-->
-	
 
+	<script>
+	
+		setInterval(function() {
+
+			var userId = window.sessionStorage.getItem("userId");
+    			var pilotsite = window.sessionStorage.getItem("pilotsite");
+
+			$.ajax({
+
+				type: 'POST',
+				url: 'https://cs.uef.fi/~tapanit/ecraft2learn/api/pilot_2/get_student_reflection_for_students.php',
+				data: 'sessionId=' + pilotsite + '&user=' + userId,
+				success: function(data) {
+
+					let parsed = JSON.parse(data);
+					let str = '';
+
+					for (let i = 0; i < parsed.length; i++) {
+			
+						str += '<div class=\'well\'>';
+						str += '<small style=\'color: black !important;\'>' + parsed[i].TIME_STAMP + '</small><br>';
+						str += '<h7 style=\'color: black !important;\'>' + parsed[i].REF_QUESTION + '</h7>';
+						str += '<p style=\'color: black !important;\'>' + parsed[i].ANSWER + '</p>';
+						str += '</div>';	
+
+					}
+
+					$('#sent-reflection-row').html(str);
+					
+
+				},
+				error: function(error) {
+
+					console.log(error);
+
+				}
+
+			});
+
+		}, 10000);
+		
+	</script>
 	<!--Login Box and Hidden Data-->
 	<form  id="loginForm" class="login-form p-3 mx-auto border db-default win-shadow" style="z-index:2; height: 450px;" data-overlay="true">
         <!--<form>-->
@@ -1528,6 +1577,7 @@
 
 						} else
 							selectUser($("#username").val(), $("#pilotsite").val(), HandleLoginCallback);
+
 					}
 					function HandleLoginCallback(phpResponse){
 						handleSelectUserResponse(phpResponse);

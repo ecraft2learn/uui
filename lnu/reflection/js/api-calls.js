@@ -43,6 +43,5 @@ function saveReflection(question,answer,toolId,callback) {
     var timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     //console.log(userId);
     var data = {"toolId":toolId,"pilotsite":pilotsite,"userId":userId,"answer":answer,"question":question,"timestamp":timestamp,"func":func};
-    console.log(data);
     postAjaxRequest(SERVER_URL,data,callback);
 }
