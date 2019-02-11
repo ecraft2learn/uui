@@ -72,7 +72,6 @@ function setSelfEvaluation(result, status) {
 
 	   	}
 
-		console.log(str);
 
 	   } else
 		str = '<h3>Self-evaluated and waiting for teacher\'s evaluation</h3>';
