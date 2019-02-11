@@ -249,7 +249,7 @@ function generateHtmlProjectFile() {
             //event.parent.preventDefault();
             var data = $('#sharingForm').serializeArray();
             //console.log(data);
-            saveSharing(data,function (result) {
+            saveSharing(data,window.sessionStorage.getItem("userId"),function (result) {
                 if(result === "success"){
                     Metro.toast.create("File was uploaded and shared successfully", null, null, "success");
 

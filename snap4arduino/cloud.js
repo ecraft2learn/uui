@@ -436,24 +436,28 @@ Cloud.prototype.getProjectList = function (type, onSuccess, onError, withThumbna
 	else 
 		var data = getAllProjectFilesJSON();
 
-	for(var i = 0; i < data.DATA.length; ++i) {
-		if(data.DATA[i]['TOOLID'] != 11)
-			continue;
-		var proj = {};
-		proj.projectname = data.DATA[i]['ORIG_NAME'];
-		proj.notes = '';
-		proj.lastupdated = '';
-		proj.id = data.DATA[i]['ID'];
-		proj.ispublic = false;
-		proj.ispublished = false;
-		proj.username = window.sessionStorage.getItem("userId");
-		response.projects.push(proj);
-	}
+	if(data.DATA != undefined) {
+		for(var i = 0; i < data.DATA.length; ++i) {
+			if(data.DATA[i]['TOOLID'] != 11)
+				continue;
+			var proj = {};
+			proj.projectname = data.DATA[i]['ORIG_NAME'];
+			proj.notes = '';
+			proj.lastupdated = '';
+			proj.id = data.DATA[i]['ID'];
+			proj.ispublic = false;
+			proj.ispublished = false;
+			proj.username = window.sessionStorage.getItem("userId");
+			response.projects.push(proj);
+		}
 
-	if(window.sessionStorage.getItem("errorStatus") == "success")
+		if(window.sessionStorage.getItem("errorStatus") == "success")
+			onSuccess.call(null, response.message || response);
+		else
+			onError.call(null, 'Could not fetch projects');
+	} else {
 		onSuccess.call(null, response.message || response);
-	else
-		onError.call(null, 'Could not fetch projects');
+	}
     /*var path = '/projects/%username?updatingnotes=true';
 
     if (withThumbnail) {
