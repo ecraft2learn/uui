@@ -51,13 +51,42 @@ function setSelfEvaluation(result, status) {
     if (result) {
         var list = JSON.parse(result);
 
+	//console.log(list);
+
         if (list.DATA.length > 0) {
-	    $('#categoryContainer').html('<h2>Self-evaluated and waiting for teacher\'s evaluation.</h2>');
+
+	   let str = '<h3>Teacher\' evaluation</h3>';
+
+	   if (list.DATA[0].TeacherNote) {
+
+		//console.log(list.DATA);
+		//console.log('jaa');
+	   	for (let i = 0; i < list.DATA.length; i++) {
+	
+			console.log(list.DATA[i].name);
+			console.log(list.DATA[i].TeacherNote);
+			console.log(list.DATA[i].TeacherEvaluation);	
+			str += '<h5>' + list.DATA[i].name + '</h5>';
+			str += '<p>Teacher\'s notes: ' + list.DATA[i].TeacherNote + '</p>';
+			str += '<p>Teacher\'s evaluation: ' + list.DATA[i].TeacherEvaluation + '</p>';
+			str += '<hr>';
+
+	   	}
+
+		console.log(str);
+
+	   } else
+		str = '<h3>Self-evaluated and waiting for teacher\'s evaluation</h3>';
+
+	    //$('#categoryContainer').html('<h2>Self-evaluated and waiting for teacher\'s evaluation.</h2>');
             $('#self-eval-reflect').html('');
             $('#self-eval-btns').html('');
-            $('#whatWeKnow').val(list.DATA[0].WhatWeKnow);
-            $('#notClear').val(list.DATA[0].NotClear);
-        }
+            //$('#whatWeKnow').val(list.DATA[0].WhatWeKnow);
+            //$('#notClear').val(list.DATA[0].NotClear);
+        
+           $('#categoryContainer').html(str);
+
+	}
     }
 }
 
@@ -105,16 +134,16 @@ function setCategorySelfEvaluation(result, status) {
             //alert("setting eval criterias");
             var gruppedEvaluations = groupEvaluations(list.DATA);
 
-	    $('#categoryContainer').html('<h2>Self-evaluated and waiting for teacher\'s evaluation.</h2>');
+	    //$('#categoryContainer').html('<h2>Self-evaluated and waiting for teacher\'s evaluation.</h2>');
 	    $('#self-eval-reflect').html('');
 	    $('#self-eval-btns').html('');
 
 
 	    if (gruppedEvaluations.TeacherNote) {
-		$('#categoryContainer').html('');
-	        for (let i = 0; i < list.DATA.length; i++)
-	    		$('#categoryContainer').append('<h4>Teacher\'s notes</h4><p>' + list.DATA[i].TeacherNote + '</p>');
-	    	$('#categoryContainer').append('<h5>Achievements unlocked</h5>');
+		//$('#categoryContainer').html('');
+	        //for (let i = 0; i < list.DATA.length; i++)
+	    	//	$('#categoryContainer').append('<h4>Teacher\'s notes</h4><p>' + list.DATA[i].TeacherNote + '</p>');
+	    	//$('#categoryContainer').append('<h5>Achievements unlocked</h5>');
 	    }
             //$('#category_' + gruppedEvaluations.Category + '_remark').val(gruppedEvaluations.Remark);
             //$('#category_' + gruppedEvaluations.Category + '_selfEvaluation').val(gruppedEvaluations.SelfEvaluation);
