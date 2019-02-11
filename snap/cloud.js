@@ -505,7 +505,10 @@ Cloud.prototype.getProjectList = function (type, onSuccess, onError, withThumbna
 		else
 			onError.call(null, 'Could not fetch projects');
 	} else {
-		onError.call(null, 'No files found.');
+		if(window.sessionStorage.getItem("errorStatus") == "success")
+			onSuccess.call(null, 'No files found.');
+		else
+			onError.call(null, 'Could not fetch projects');
 	}
 	
     /*var path = '/projects/%username?updatingnotes=true';
